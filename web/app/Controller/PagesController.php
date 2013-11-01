@@ -47,6 +47,8 @@ class PagesController extends AppController {
  *	or MissingViewException in debug mode.
  */
 	public function display() {
+		$this->setPageIcon('dashboard');
+		
 		$path = func_get_args();
 		
 		$this->enableWoodWrapper();

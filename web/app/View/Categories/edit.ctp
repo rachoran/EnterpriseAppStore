@@ -6,7 +6,7 @@ $id = (int)$category['Category']['id'];
 	<div class="widget-content-white glossed">
 		<div class="padded">
 			<form action="<?php echo $this->Html->url(array("controller" => "categories", "action" => "edit", $category['Category']['id'], $category['Category']['name'])); ?>" method="post" role="form" class="form-horizontal">
-				<h3 class="form-title form-title-first"><i class="icon-th-list"></i><?php echo $id ? 'Edit category "'.$category['Category']['name'].'"' : 'Create category'; ?></h3>
+				<h3 class="form-title form-title-first"><i class="icon-list-ul"></i> <?php echo $id ? 'Edit category "'.$category['Category']['name'].'"' : 'Create category'; ?></h3>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Name</label>
 					<div class="col-md-8">

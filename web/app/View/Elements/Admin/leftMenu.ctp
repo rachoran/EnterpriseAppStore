@@ -30,7 +30,7 @@ function checkMenu($name, $t) {
 					<a href="<?php echo $this->Html->url('/applications', true); ?>"> <span class="badge pull-right">12</span> <i class="icon-briefcase"></i> Applications </a>
 				</li>
 				<li<?php echo checkMenu('users', $this); ?>>
-					<a href="<?php echo $this->Html->url('/users', true); ?>"> <span class="badge pull-right">12</span> <i class="icon-user"></i> Users </a>
+					<a href="<?php echo $this->Html->url('/users', true); ?>"> <span class="badge pull-right"><?php echo ($menuCounts['users'] + 1); ?></span> <i class="icon-user"></i> Users </a>
 				</li>
 				<li<?php echo checkMenu('groups', $this); ?>>
 					<a href="<?php echo $this->Html->url('/groups', true); ?>"> <span class="badge pull-right"><?php echo ($menuCounts['groups'] + 1); ?></span> <i class="icon-group"></i> Groups </a>

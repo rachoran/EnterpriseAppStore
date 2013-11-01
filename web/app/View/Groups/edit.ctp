@@ -6,7 +6,7 @@ $id = (int)$group['Group']['id'];
 	<div class="widget-content-white glossed">
 		<div class="padded">
 			<form action="<?php echo $this->Html->url(array("controller" => "groups", "action" => "edit", $group['Group']['id'], $group['Group']['name'])); ?>" method="post" role="form" class="form-horizontal">
-				<h3 class="form-title form-title-first"><i class="icon-th-list"></i><?php echo $id ? 'Edit group "'.$group['Group']['name'].'"' : 'Create group'; ?></h3>
+				<h3 class="form-title form-title-first"><i class="icon-group"></i> <?php echo $id ? 'Edit group "'.$group['Group']['name'].'"' : 'Create group'; ?></h3>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Name</label>
 					<div class="col-md-8">

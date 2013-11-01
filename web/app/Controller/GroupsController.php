@@ -5,6 +5,7 @@ class GroupsController extends AppController {
 	var $uses = array('Group');
 	
 	public function index() {
+		$this->setPageIcon('group');
 		$this->enablePageClass('basic-edit');
 		$this->setAdditionalCssFiles(array('basic-edit'));
 		$this->set('labelType', 'warning');
@@ -12,6 +13,7 @@ class GroupsController extends AppController {
 	}
 	
 	public function edit($id=0) {
+		$this->setPageIcon('group');
 		$this->enablePageClass('basic-edit');
 		$this->setAdditionalCssFiles(array('basic-edit'));
 		$this->set('group', $this->Group->getOne($id));
@@ -33,10 +35,12 @@ class GroupsController extends AppController {
 	}
 	
 	public function view($id) {
+		$this->setPageIcon('group');
 		$this->set('group', $this->Group->getOne($id));
 	}
 	
 	public function delete($id) {
+		$this->setPageIcon('group');
 		$this->Group->delete((int)$id);
 		return $this->redirect(array('action' => 'index'));
 	}

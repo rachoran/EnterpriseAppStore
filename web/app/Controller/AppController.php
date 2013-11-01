@@ -33,12 +33,16 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 	
-	var $uses = array('Category', 'Group');
+	var $uses = array('Category', 'Group', 'User');
 
 	public function enableWoodWrapper() {
 		$this->set('woodWrapper', ' wood-wrapper');
 	}
-
+	
+	public function setPageIcon($pageIcon) {
+		$this->set('pageIcon', $pageIcon);
+	}
+	
 	public function enablePageClass($className) {
 		$this->set('pageClass', ' '.$className);
 	}
@@ -53,7 +57,8 @@ class AppController extends Controller {
 	
 	public function beforeFilter() {
 		$counts = array();
-		$counts['groups'] = $this->Group->countAll();
+		$counts['users'] = $this->User->countAll();
+        $counts['groups'] = $this->Group->countAll();
         $counts['categories'] = $this->Category->countAll();
         $this->set('menuCounts', $counts);
     }

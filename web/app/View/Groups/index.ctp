@@ -13,7 +13,7 @@
 		<tr>
 	        <td class="icon"><span class="label label-<?php echo $labelType; ?>">230</span></td>
 	        <td class="name">
-	            <?php echo $this->Html->link('Every user', array('controller' => 'categories', 'action' => 'view', 0)); ?><br />
+	            <?php echo $this->Html->link('Every user', array('controller' => 'groups', 'action' => 'view', 0)); ?><br />
 	            <small>(Define apps for all users)</small>
 	        </td>
 	        <td class="edit">
@@ -24,7 +24,7 @@
 	    <tr>
 	        <td class="icon"><span class="label label-default">13</span></td>
 	        <td class="name">
-	            <?php echo $this->Html->link($group['Group']['name'], array('controller' => 'categories', 'action' => 'view', $group['Group']['id'])); ?><br />
+	            <?php echo $this->Html->link($group['Group']['name'], array('controller' => 'groups', 'action' => 'view', $group['Group']['id'])); ?><br />
 	            <small><?php if (strlen($group['Group']['description']) > 2) echo '('.$group['Group']['description'].')'; ?></small>
 	        </td>
 	        <td class="edit">
@@ -39,7 +39,7 @@
 	    </tr>
 	    <?php
 	    }
-	    unset($categories);
+	    unset($groups);
 	    ?>
 	</tbody>
 </table>

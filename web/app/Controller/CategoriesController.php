@@ -5,12 +5,14 @@ class CategoriesController extends AppController {
 	var $uses = array('Category');
 	
 	public function index() {
+		$this->setPageIcon('list-ul');
 		$this->enablePageClass('basic-edit');
 		$this->setAdditionalCssFiles(array('basic-edit'));
 		$this->set('categories', $this->Category->getAll());
 	}
 	
 	public function edit($id=0) {
+		$this->setPageIcon('list-ul');
 		$this->enablePageClass('basic-edit');
 		$this->setAdditionalCssFiles(array('basic-edit'));
 		$this->set('category', $this->Category->getOne($id));
@@ -32,6 +34,7 @@ class CategoriesController extends AppController {
 	}
 	
 	public function view($id) {
+		$this->setPageIcon('list-ul');
 		$this->set('category', $this->Category->getOne($id));
 	}
 	

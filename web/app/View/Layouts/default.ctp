@@ -74,7 +74,7 @@ ga('send', 'pageview');
 				<div class="content-inner">
 					<div class="page-header">
 						<div class="header-links hidden-xs"> <a href="notifications.html"><i class="icon-comments"></i> User Alerts</a> <a href="<?php echo $this->Html->url('/users/myaccount', true); ?>"><i class="icon-cog"></i> My Account</a> <a href="<?php echo $this->Html->url('/users/logout', true); ?>"><i class="icon-signout"></i> Logout</a> </div>
-						<h1><i class="icon-bar-chart"></i> <?php echo $title_for_layout; ?></h1>
+						<h1><i class="icon-<?php echo (isset($pageIcon)) ? $pageIcon : 'exclamation-sign';  ?>"></i> <?php echo $title_for_layout; ?></h1>
 					</div>
 					<ol class="breadcrumb">
 						<li><a href="#">Home</a></li>

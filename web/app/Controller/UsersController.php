@@ -5,12 +5,14 @@ class UsersController extends AppController {
 	var $uses = array('User');
 	
 	public function index() {
+		$this->setPageIcon('user');
 		$this->enablePageClass('basic-edit');
 		$this->setAdditionalCssFiles(array('basic-edit'));
 		$this->set('users', $this->User->getAll());
 	}
 	
 	public function edit($id=0) {
+		$this->setPageIcon('user');
 		$this->enablePageClass('basic-edit');
 		$this->setAdditionalCssFiles(array('basic-edit'));
 		$this->set('user', $this->User->getOne($id));
@@ -32,11 +34,16 @@ class UsersController extends AppController {
 	}
 	
 	public function view($id) {
+		$this->setPageIcon('user');
 		$this->set('user', $this->User->getOne($id));
 	}
 	
 	public function delete($id) {
-		$this->User->delete((int)$id);
+		$this->setPageIcon('user');
+		$user = $this->User->getOne($id);
+		if ($user['User']['role'] != 'owner') {
+			$this->User->delete((int)$id);
+		}
 		return $this->redirect(array('action' => 'index'));
 	}
 	

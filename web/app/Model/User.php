@@ -51,13 +51,25 @@ class User extends AppModel {
 	    return true;
 	}
 	
-	public function getUserWithId($id) {
+	public function getOne($id) {
 		$this->id = $id;
         $data = $this->read(null, $id);
         unset($data['User']['password']);	
         unset($data['User']['password_token']);
-        $data['User']['gravatar_url'] = 'http://www.gravatar.com/avatar/'.md5($data['User']['email']).'.jpg';
+        if (isset($data['User'])) $data['User']['gravatar_url'] = 'http://www.gravatar.com/avatar/'.md5($data['User']['email']).'.jpg';
         return $data;
+	}
+	
+	public function getAll() {
+		$data =  $this->find('all', array('order' => array('User.fullname' => 'ASC')));
+		foreach ($data as $key=>$user) {
+			$data[$key]['User']['gravatar_url'] = 'http://www.gravatar.com/avatar/'.md5($user['User']['email']).'.jpg';
+		}
+		return $data;
+	}
+	
+	public function countAll() {
+		return $this->find('count');
 	}
 	
 }
