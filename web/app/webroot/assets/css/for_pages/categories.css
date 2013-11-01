@@ -1,0 +1,28 @@
+.content-wrapper.categories {
+}
+.content-wrapper.categories table th {
+	text-align: center;
+}
+.content-wrapper.categories table th.icon {
+	width: 56px;
+}
+.content-wrapper.categories table th.name {
+}
+.content-wrapper.categories table th.edit {
+	width: 100px;
+}
+.content-wrapper.categories table td.icon {
+	text-align: center;
+	vertical-align: middle;
+}
+.content-wrapper.categories table td.icon i {
+	font-size: 26px;
+}
+.content-wrapper.categories table td.name {
+	padding-left: 22px;
+	vertical-align: middle;
+}
+.content-wrapper.categories table td.edit {
+}
+.content-wrapper.categories table {
+}

@@ -63,7 +63,7 @@
 				</li>
 				<li> <a href="<?php echo $this->Html->url('/calendar', true); ?>"> <span class="badge pull-right">11</span> <i class="icon-calendar"></i> Upload calendar </a> </li>
 				<li> <a href="<?php echo $this->Html->url('/ideas', true); ?>"> <span class="badge pull-right"></span> <i class="icon-comment"></i> Ideas </a> </li>
-				<li> <a href="<?php echo $this->Html->url('/users/logout', true); ?>"> <span class="badge pull-right"></span> <i class="icon-signin"></i> Logout </a> </li>
+				<li> <a href="<?php echo $this->Html->url('/users/logout', true); ?>"> <span class="badge pull-right"></span> <i class="icon-signout"></i> Logout </a> </li>
 			</ul>
 		</div>
 	</div>

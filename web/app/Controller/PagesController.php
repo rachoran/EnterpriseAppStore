@@ -50,6 +50,7 @@ class PagesController extends AppController {
 		$path = func_get_args();
 		
 		$this->enableWoodWrapper();
+		$this->setAdditionalJavascriptFiles(array('dashboard'));
 
 		$count = count($path);
 		if (!$count) {

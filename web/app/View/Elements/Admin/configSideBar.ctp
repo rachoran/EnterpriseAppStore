@@ -4,7 +4,7 @@
 	<h3>Color Settings</h3>
 	<label for="wood-wrapper-checkbox" class="checkbox-w">
 		<input type="checkbox" id="wood-wrapper-checkbox">
-		<span class="wood-checkbox"></span> Wrap in Wood </label>
+		<span class="wood-checkbox"></span> Wrap in Wood</label>
 	<h3>Background</h3>
 	<div class="color-settings-w" data-replace-element="body" data-leave-class="">
 		<div class="color-box color-box-dark-blue color-tooltip" data-toggle="tooltip" data-placement="top" title="Solid Dark Blue" data-replace-with="body-dark-blue"></div>

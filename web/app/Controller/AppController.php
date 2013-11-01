@@ -40,5 +40,13 @@ class AppController extends Controller {
 	public function enablePageClass($className) {
 		$this->set('pageClass', ' '.$className);
 	}
+	
+	public function setAdditionalJavascriptFiles($files) {
+		$this->set('jsFiles', $files);
+	}
+
+	public function setAdditionalCssFiles($files) {
+		$this->set('cssFiles', $files);
+	}
 
 }

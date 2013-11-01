@@ -27,17 +27,22 @@ setInterval(function(){
   }catch(e){}
 }, 1000)
 </script>
-<!-- /Hammer reload -->
+<!-- Hammer reload -->
 
-<link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/fullcalendar.css'>
-<link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/datatables/datatables.css'>
-<link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/datatables/bootstrap.datatables.css'>
-<link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/scss/chosen.css'>
-<link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/scss/font-awesome/font-awesome.css'>
-<link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/app.css'>
-<link href='http://fonts.googleapis.com/css?family=Oswald:300,400,700|Open+Sans:400,700,300' rel='stylesheet' type='text/css'>
-<link href="<?php echo $this->Html->url('/', true); ?>assets/favicon.ico" rel="shortcut icon">
-<link href="<?php echo $this->Html->url('/', true); ?>assets/apple-touch-icon.png" rel="apple-touch-icon">
+<link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/fullcalendar.css' />
+<link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/datatables/datatables.css' />
+<link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/datatables/bootstrap.datatables.css' />
+<link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/scss/chosen.css' />
+<link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/scss/font-awesome/font-awesome.css' />
+<link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/app.css' />
+<link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/cake.css' />
+<?php
+if (isset($cssFiles)) foreach ($cssFiles as $file) { ?>
+<link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/for_pages/<?php echo $file; ?>.css' />
+<?php } ?>
+<link href='http://fonts.googleapis.com/css?family=Oswald:300,400,700|Open+Sans:400,700,300' rel='stylesheet' type='text/css' />
+<link href="<?php echo $this->Html->url('/', true); ?>assets/favicon.ico" rel="shortcut icon" />
+<link href="<?php echo $this->Html->url('/', true); ?>assets/apple-touch-icon.png" rel="apple-touch-icon" />
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 @javascript html5shiv respond.min
@@ -51,7 +56,7 @@ setInterval(function(){
 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'UA-42863888-3', 'pinsupreme.com');
+ga('create', 'UA-45380708-1', 'ridiculous-innovations.com');
 ga('send', 'pageview');
 -->
 </script>
@@ -67,7 +72,7 @@ ga('send', 'pageview');
 			<div class="content-wrapper<?php if (isset($woodWrapper)) echo $woodWrapper; if (isset($pageClass)) echo $pageClass; ?>">
 				<div class="content-inner">
 					<div class="page-header">
-						<div class="header-links hidden-xs"> <a href="notifications.html"><i class="icon-comments"></i> User Alerts</a> <a href="#"><i class="icon-cog"></i> My Account</a> <a href="#"><i class="icon-signout"></i> Logout</a> </div>
+						<div class="header-links hidden-xs"> <a href="notifications.html"><i class="icon-comments"></i> User Alerts</a> <a href="<?php echo $this->Html->url('/users/myaccount', true); ?>"><i class="icon-cog"></i> My Account</a> <a href="<?php echo $this->Html->url('/users/logout', true); ?>"><i class="icon-signout"></i> Logout</a> </div>
 						<h1><i class="icon-bar-chart"></i> <?php echo $title_for_layout; ?></h1>
 					</div>
 					<ol class="breadcrumb">
@@ -86,6 +91,9 @@ ga('send', 'pageview');
 						<!-- Begin content -->
 						<?php echo $this->fetch('content'); ?>
 						<!-- End content -->
+						<div class="widget cake-sql-log">
+							<?php echo $this->element('sql_dump'); ?>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -109,7 +117,10 @@ ga('send', 'pageview');
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/raphael-min.js'></script> 
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/morris-0.4.3.min.js'></script> 
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/for_pages/color_settings.js'></script> 
-<script src='<?php echo $this->Html->url('/', true); ?>assets/js/application.js'></script> 
-<script src='<?php echo $this->Html->url('/', true); ?>assets/js/for_pages/dashboard.js'></script>
+<script src='<?php echo $this->Html->url('/', true); ?>assets/js/application.js'></script>
+<?php
+if (isset($jsFiles)) foreach ($jsFiles as $file) { ?>
+<script src='<?php echo $this->Html->url('/', true); ?>assets/js/for_pages/<?php echo $file; ?>.js'></script>
+<?php } ?>
 </body>
 </html>
