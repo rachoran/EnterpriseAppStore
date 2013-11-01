@@ -32,6 +32,8 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+	
+	var $uses = array('Category', 'Group');
 
 	public function enableWoodWrapper() {
 		$this->set('woodWrapper', ' wood-wrapper');
@@ -48,5 +50,12 @@ class AppController extends Controller {
 	public function setAdditionalCssFiles($files) {
 		$this->set('cssFiles', $files);
 	}
+	
+	public function beforeFilter() {
+		$counts = array();
+		$counts['groups'] = $this->Group->countAll();
+        $counts['categories'] = $this->Category->countAll();
+        $this->set('menuCounts', $counts);
+    }
 
 }

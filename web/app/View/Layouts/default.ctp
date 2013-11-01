@@ -1,5 +1,5 @@
 <?php
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+$cakeDescription = __d('cake_dev', 'Enterprise AppStore');
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,6 +36,7 @@ setInterval(function(){
 <link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/scss/font-awesome/font-awesome.css' />
 <link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/app.css' />
 <link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/cake.css' />
+<link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/styles.css' />
 <?php
 if (isset($cssFiles)) foreach ($cssFiles as $file) { ?>
 <link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/for_pages/<?php echo $file; ?>.css' />
@@ -81,6 +82,15 @@ ga('send', 'pageview');
 						<li><a href="#">Crumbs</a></li>
 						<li class="active">Example</li>
 					</ol>
+					<?php
+/*
+					echo $this->Html->getCrumbs(' > ', array(
+						'text' => $this->Html->image('home.png'),
+						'url' => array('controller'=>'pages', 'action'=>'display', 'home'),
+						'escape' => false
+					));
+*/
+					?>
 					<div class="main-content">
 						<div class="widget">
 							<div class="alert alert-warning alert-dismissable">
@@ -118,6 +128,7 @@ ga('send', 'pageview');
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/morris-0.4.3.min.js'></script> 
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/for_pages/color_settings.js'></script> 
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/application.js'></script>
+<script src='<?php echo $this->Html->url('/', true); ?>assets/js/methods.js'></script>
 <?php
 if (isset($jsFiles)) foreach ($jsFiles as $file) { ?>
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/for_pages/<?php echo $file; ?>.js'></script>

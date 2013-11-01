@@ -1,3 +1,6 @@
+<p>
+	<a href="<?php echo $this->Html->url(array('controller' => 'categories', 'action' => 'edit', 'new')); ?>" class="btn btn-primary pull-right new">New category <i class="fa icon-plus"></i></a>
+</p>
 <table class="table table-striped table-bordered table-hover">
 	<thead>
 	    <tr>
@@ -11,14 +14,15 @@
 	    <tr>
 	        <td class="icon"><i class="fa <?php echo $category['Category']['icon']; ?>"></i></td>
 	        <td class="name">
-	            <?php echo $this->Html->link($category['Category']['name'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id'])); ?>
+	            <?php echo $this->Html->link($category['Category']['name'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id'])); ?><br />
+	            <small><?php if (strlen($category['Category']['description']) > 2) echo '('.$category['Category']['description'].')'; ?></small>
 	        </td>
 	        <td class="edit">
-	        	<a href="<?php echo $this->Html->url(array("controller" => "categories", "action" => "edit", $category['Category']['id'])); ?>">
+	        	<a href="<?php echo $this->Html->url(array("controller" => "categories", "action" => "edit", $category['Category']['id'], $category['Category']['name'])); ?>">
 	        		<i class="fa icon-edit"><span> Edit</span></i>
 	        	</a>
 	        	<br />
-	        	<a href="<?php echo $this->Html->url(array("controller" => "categories", "action" => "view", $category['Category']['id'])); ?>">
+	        	<a href="<?php echo $this->Html->url(array("controller" => "categories", "action" => "delete", $category['Category']['id'], $category['Category']['name'])); ?>" onclick="return confirmation('Are you sure you want to delete category <?php echo $category['Category']['name']; ?>?');">
 	        		<i class="fa icon-ban-circle"><span> Delete</span></i>
 	        	</a>
 	        </td>

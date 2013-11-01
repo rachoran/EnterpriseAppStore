@@ -1,0 +1,248 @@
+2013-11-01 18:17:39 Error: [MissingControllerException] Controller class Charts.htmlController could not be found.
+Exception Attributes: array (
+  'class' => 'Charts.htmlController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/charts.html
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-01 18:28:34 Error: Fatal Error (1): Using $this when not in object context in [/Projects/Web/EnterpriseAppStore/web/app/View/Elements/Admin/leftMenu.ctp, line 4]
+2013-11-01 18:28:34 Error: [FatalErrorException] Using $this when not in object context
+Request URL: /EnterpriseAppStore/web/calendar
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Error/ErrorHandler.php(205): ErrorHandler::handleFatalError(1, 'Using $this whe...', '/Projects/Web/E...', 4)
+#1 [internal function]: ErrorHandler::handleError(1, 'Using $this whe...', '/Projects/Web/E...', 4, Array)
+#2 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 1, 'Using $this whe...', '/Projects/Web/E...', 4, Array)
+#3 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-11-01 18:29:08 Error: [MissingActionException] Action ApplicationsController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'ApplicationsController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/applications
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(ApplicationsController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 18:29:57 Error: [MissingActionException] Action ApplicationsController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'ApplicationsController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/applications
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(ApplicationsController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 18:29:59 Error: [MissingActionException] Action UsersController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/users
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 18:30:00 Error: [MissingActionException] Action GroupsController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'GroupsController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/groups
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(GroupsController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 18:30:18 Error: [MissingActionException] Action ApplicationsController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'ApplicationsController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/applications
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(ApplicationsController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 18:31:34 Error: [MissingActionException] Action NotificationsController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'NotificationsController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/notifications
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(NotificationsController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 18:32:08 Error: [MissingActionException] Action NotificationsController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'NotificationsController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/notifications
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(NotificationsController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 18:37:24 Error: [MissingActionException] Action ApplicationsController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'ApplicationsController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/applications
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(ApplicationsController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 18:37:25 Error: [MissingActionException] Action UsersController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/users
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 18:37:26 Error: [MissingActionException] Action ApplicationsController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'ApplicationsController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/applications
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(ApplicationsController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 18:37:30 Error: [MissingActionException] Action NotificationsController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'NotificationsController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/notifications
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(NotificationsController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 18:38:00 Error: [MissingActionException] Action NotificationsController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'NotificationsController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/notifications
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(NotificationsController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 19:21:55 Error: [MissingControllerException] Controller class Charts.htmlController could not be found.
+Exception Attributes: array (
+  'class' => 'Charts.htmlController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/charts.html
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-01 19:36:56 Error: [MissingActionException] Action NotificationsController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'NotificationsController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/notifications
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(NotificationsController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 19:55:06 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'name' cannot be null
+Request URL: /EnterpriseAppStore/web/categories/edit/0
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `en...', Array)
+#2 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `en...')
+#3 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Model/Model.php(1827): DboSource->create(Object(Category), Array, Array)
+#4 /Projects/Web/EnterpriseAppStore/web/app/Model/Category.php(24): Model->save()
+#5 /Projects/Web/EnterpriseAppStore/web/app/Controller/CategoriesController.php(20): Category->saveCategory(NULL, NULL, NULL)
+#6 [internal function]: CategoriesController->edit('0')
+#7 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(CategoriesController), Array)
+#8 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#9 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(CategoriesController), Object(CakeRequest), Object(CakeResponse))
+#10 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-11-01 20:04:38 Error: [MissingControllerException] Controller class EnterpriseAppStoreController could not be found.
+Exception Attributes: array (
+  'class' => 'EnterpriseAppStoreController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/EnterpriseAppStore/web/categories/edit/7/Finance%203
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-01 20:54:10 Error: [MissingActionException] Action GroupsController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'GroupsController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/groups
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(GroupsController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 20:59:58 Error: [MissingActionException] Action GroupsController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'GroupsController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/groups
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(GroupsController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 21:05:11 Error: [MissingControllerException] Controller class ImgController could not be found.
+Exception Attributes: array (
+  'class' => 'ImgController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/img/home.png
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-01 21:19:41 Error: [MissingActionException] Action UsersController::myaccount() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'myaccount',
+)
+Request URL: /EnterpriseAppStore/web/users/myaccount
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-01 21:53:46 Error: [MissingActionException] Action UsersController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'UsersController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/users
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(UsersController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(110): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}

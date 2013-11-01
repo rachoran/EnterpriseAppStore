@@ -1,16 +1,15 @@
 <?php
 
 ?><div class="widget">
-	<div class="widget-controls pull-right"> <a href="#" class="widget-link-remove"><i class="icon-minus-sign"></i></a> <a href="#" class="widget-link-remove"><i class="icon-remove-sign"></i></a> </div>
 	<h3 class="section-title first-title"><i class="icon-tasks"></i> Statistics</h3>
 	<div class="row">
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<div class="widget-content-blue-wrapper changed-up">
 				<div class="widget-content-blue-inner padded">
-					<div class="pre-value-block"><i class="icon-dashboard"></i> Total Visits</div>
+					<div class="pre-value-block"><i class="icon-dashboard"></i> Total Apps</div>
 					<div class="value-block">
-						<div class="value-self">10,520</div>
-						<div class="value-sub">This Week</div>
+						<div class="value-self">6</div>
+						<div class="value-sub">iOS &amp; Android</div>
 					</div>
 					<span class="dynamicsparkline">Loading..</span> </div>
 			</div>
@@ -18,7 +17,7 @@
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<div class="widget-content-blue-wrapper changed-up">
 				<div class="widget-content-blue-inner padded">
-					<div class="pre-value-block"><i class="icon-user"></i> New Users</div>
+					<div class="pre-value-block"><i class="icon-user"></i> Downloads</div>
 					<div class="value-block">
 						<div class="value-self">1,120</div>
 						<div class="value-sub">This Month</div>
@@ -29,10 +28,10 @@
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center hidden-md">
 			<div class="widget-content-blue-wrapper changed-up">
 				<div class="widget-content-blue-inner padded">
-					<div class="pre-value-block"><i class="icon-signin"></i> Sold Items</div>
+					<div class="pre-value-block"><i class="icon-signin"></i> Downloads</div>
 					<div class="value-block">
-						<div class="value-self">275</div>
-						<div class="value-sub">This Week</div>
+						<div class="value-self">15,896</div>
+						<div class="value-sub">Total</div>
 					</div>
 					<span class="dynamicsparkline">Loading..</span> </div>
 			</div>
@@ -40,10 +39,10 @@
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<div class="widget-content-blue-wrapper changed-up">
 				<div class="widget-content-blue-inner padded">
-					<div class="pre-value-block"><i class="icon-money"></i> Net Profit</div>
+					<div class="pre-value-block"><i class="icon-money"></i> Registered</div>
 					<div class="value-block">
-						<div class="value-self">$9,240</div>
-						<div class="value-sub">Yesterday</div>
+						<div class="value-self">12</div>
+						<div class="value-sub">Users</div>
 					</div>
 					<span class="dynamicbars">Loading..</span> </div>
 			</div>
@@ -51,7 +50,6 @@
 	</div>
 </div>
 <div class="widget">
-	<div class="widget-controls pull-right"> <a href="#" class="widget-link-remove"><i class="icon-minus-sign"></i></a> <a href="#" class="widget-link-remove"><i class="icon-remove-sign"></i></a> </div>
 	<h3 class="section-title"><i class="icon-bar-chart"></i> Profit Chart</h3>
 	<ul class="nav nav-pills">
 		<li class="active"><a href="#">Hour</a></li>
@@ -96,7 +94,6 @@
 	</div>
 </div>
 <div class="widget">
-	<div class="widget-controls pull-right"> <a href="#" class="widget-link-remove"><i class="icon-minus-sign"></i></a> <a href="#" class="widget-link-remove"><i class="icon-remove-sign"></i></a> </div>
 	<h3 class="section-title bottom-margin"><i class="icon-bullseye"></i> Circular Charts</h3>
 	<div class="row bottom-margin">
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
@@ -116,7 +113,7 @@
 <div class="row">
 	<div class="col-md-8">
 		<ul class="nav nav-tabs">
-			<li class="active"><a href="#tab_pie_chart" data-toggle="tab"><i class="icon-bullseye"></i> Pie Chart</a></li>
+			<li class="active"><a href="#tab_pie_chart" data-toggle="tab"><i class="icon-bullseye"></i> Devices</a></li>
 			<li><a href="#tab_bar_chart" data-toggle="tab"><i class="icon-bar-chart"></i> Bar Alert</a></li>
 			<li class="hidden-md hidden-xs"><a href="#tab_table" data-toggle="tab"><i class="icon-table"></i> Table</a></li>
 		</ul>
@@ -247,43 +244,42 @@
 	</div>
 	<div class="col-md-4">
 		<div class="widget">
-			<div class="widget-controls pull-right hidden-md"> <a href="#" class="widget-link-remove"><i class="icon-minus-sign"></i></a> <a href="#" class="widget-link-remove"><i class="icon-remove-sign"></i></a> </div>
-			<h3 class="section-title first-title"><i class="icon-table"></i> Top Sellers</h3>
+			<h3 class="section-title first-title"><i class="icon-table"></i> Top Apps</h3>
 			<div class="widget-content-white padded glossed">
 				<div id="topsellers_barchart"></div>
 				<table class="table" id="topsellers_table">
 					<thead>
 						<tr>
 							<th>Product</th>
-							<th>Qty</th>
-							<th>Price</th>
+							<th>Platform</th>
+							<th>Downloads</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>Floor Lamp</td>
-							<td>2</td>
-							<td>3</td>
+							<td>iJenkins</td>
+							<td style="text-align: center;"><i class="fa icon-apple"></i></td>
+							<td>3985</td>
 						</tr>
 						<tr>
-							<td>Coffee Mug</td>
-							<td>4</td>
-							<td>7</td>
+							<td>iDeviant</td>
+							<td style="text-align: center;"><i class="fa icon-apple"></i></td>
+							<td>789</td>
 						</tr>
 						<tr>
-							<td>Television</td>
-							<td>1</td>
-							<td>3</td>
+							<td>Toyota 86 AR</td>
+							<td style="text-align: center;"><i class="fa icon-apple"></i></td>
+							<td>356</td>
 						</tr>
 						<tr>
-							<td>Red Carpet</td>
-							<td>6</td>
-							<td>5</td>
+							<td>iDeviant</td>
+							<td style="text-align: center;"><i class="fa icon-android"></i></td>
+							<td>225</td>
 						</tr>
 						<tr>
-							<td>Laptop</td>
-							<td>3</td>
-							<td>6</td>
+							<td>JackWills</td>
+							<td style="text-align: center;"><i class="fa icon-apple"></i></td>
+							<td>66</td>
 						</tr>
 					</tbody>
 				</table>
