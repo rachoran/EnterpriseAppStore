@@ -24,26 +24,30 @@ class Idea extends AppModel {
     );
 	
 	public function getAll() {
-		return $this->find('all', array('order' => array('Group.name' => 'ASC')));
+		return $this->find('all', array('order' => array('Idea.created' => 'DESC')));
 	}
 	
 	public function getOne($id) {
 		$id = (int)$id;
-		return $this->find('first', array('conditions' => array('Group.id' => $id)));
+		return $this->find('first', array('conditions' => array('Idea.id' => $id)));
 	}
 	
-	public function saveGroup($id, $name, $description) {
-		$id = (int)$id;
+	public function saveIdea($idea) {
+		$id = isset($idea['id']) ? (int)$idea['id'] : 0;
 		if ($id) {
 			$this->id = $id;
 		}
 		else {
 			$this->create();
 		}
-		$this->set('name', $name);
-		$this->set('description', $description);
+		$this->set('fullname', $idea['fullname']);
+		$this->set('email', $idea['email']);
+		$this->set('area', $idea['area']);
+		$this->set('message', $idea['message']);
 		$this->save();
-		return $this;
+		
+		$idea['id'] = $this->id;
+		return $idea;
 	}
 	
 	public function countAll() {

@@ -37,6 +37,9 @@
 	color: #bababa;
 	font-size: 10px;
 }
+.content-wrapper.basic-edit table td.name span {
+	margin-left: 12px;
+}
 .content-wrapper.basic-edit table td.edit {
 	vertical-align: middle;
 }
@@ -54,10 +57,10 @@
 .content-wrapper.basic-edit form input.icon {
 	width: 90%;
 }
-.content-wrapper.basic-edit form input.description {
+.content-wrapper.basic-edit form textarea.description {
 	height: 60px;
 }
-.content-wrapper.basic-edit form input.description.large {
+.content-wrapper.basic-edit form textarea.description.large {
 	height: 160px;
 }
 .content-wrapper.basic-edit form i.icon-preview {

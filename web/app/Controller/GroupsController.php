@@ -2,7 +2,7 @@
 
 class GroupsController extends AppController {
 	
-	var $uses = array('Group');
+	var $uses = array('Group', 'User', 'Application');
 	
 	public function index() {
 		$this->setPageIcon('group');
@@ -17,6 +17,9 @@ class GroupsController extends AppController {
 		$this->enablePageClass('basic-edit');
 		$this->setAdditionalCssFiles(array('basic-edit'));
 		$this->set('group', $this->Group->getOne($id));
+		
+		$this->set('usersList', $this->User->getAllWithGroupInfo($id));
+		$this->set('applicationsList', $this->Application->getAllWithGroupInfo($id));
 		
 		$isEdit = true;
 		if ($this->request->is('post')) {

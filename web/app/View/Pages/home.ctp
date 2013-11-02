@@ -17,7 +17,7 @@
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<div class="widget-content-blue-wrapper changed-up">
 				<div class="widget-content-blue-inner padded">
-					<div class="pre-value-block"><i class="icon-user"></i> Downloads</div>
+					<div class="pre-value-block"><i class="icon-cloud-download"></i> Downloads</div>
 					<div class="value-block">
 						<div class="value-self">1,120</div>
 						<div class="value-sub">This Month</div>
@@ -28,7 +28,7 @@
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center hidden-md">
 			<div class="widget-content-blue-wrapper changed-up">
 				<div class="widget-content-blue-inner padded">
-					<div class="pre-value-block"><i class="icon-signin"></i> Downloads</div>
+					<div class="pre-value-block"><i class="icon-cloud-download"></i> Downloads</div>
 					<div class="value-block">
 						<div class="value-self">15,896</div>
 						<div class="value-sub">Total</div>

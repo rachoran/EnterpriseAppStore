@@ -7,3 +7,9 @@ function confirmation(message) {
 		return false;
 	}
 }
+
+function toggleAllCheckBoxes(selector, masterCheckbox) {
+	var isOn = $(masterCheckbox).is(':checked');
+	selector = '#' + selector + ' td input[type=checkbox]';
+	$(selector).prop('checked', isOn);
+}

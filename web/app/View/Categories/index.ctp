@@ -10,11 +10,25 @@
 	    </tr>
 	</thead>
 	<tbody>
+	    <tr>
+	        <td class="icon"><i class="fa icon-sort-by-attributes"></i></td>
+	        <td class="name">
+	            <?php echo $this->Html->link('Uncategorised apps', array('controller' => 'categories', 'action' => 'view', 0)); ?>
+	            <span class="label label-default"><?php echo 23; ?></span>
+	            <br />
+	            <small></small>
+	        </td>
+	        <td class="edit">
+	        	&nbsp;
+	        </td>
+	    </tr>
 	    <?php foreach ($categories as $category) { ?>
 	    <tr>
 	        <td class="icon"><i class="fa <?php echo $category['Category']['icon']; ?>"></i></td>
 	        <td class="name">
-	            <?php echo $this->Html->link($category['Category']['name'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id'])); ?><br />
+	            <?php echo $this->Html->link($category['Category']['name'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id'])); ?>
+	             <span class="label label-default"><?php echo 12; ?></span>
+	            <br />
 	            <small><?php if (strlen($category['Category']['description']) > 2) echo '('.$category['Category']['description'].')'; ?></small>
 	        </td>
 	        <td class="edit">

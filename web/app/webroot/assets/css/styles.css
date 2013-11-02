@@ -1,3 +1,7 @@
+.center {
+	text-align: center;
+}
+
 a.new {
 	margin-bottom: 6px;
 }
@@ -14,4 +18,20 @@ a[target="_blank"]:after {
   display: inline-block;
   text-decoration: inherit;
   padding-left: 3px;
+}
+
+table.selector-table {
+}
+table.selector-table th {
+}
+table.selector-table td {
+}
+table.selector-table td small {
+	display: inline !important;
+	font-size: 10px;
+	color: #CCC;
+}
+table.selector-table td img.icon {
+	width: 34px;
+	height: 34px;
 }

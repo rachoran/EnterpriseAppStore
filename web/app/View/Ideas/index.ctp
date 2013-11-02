@@ -1,5 +1,5 @@
 <?php
-// TODO: Pre-fill data from logged in user
+
 ?><div class="widget">
 	<div class="widget-content-white glossed">
 		<div class="padded">
@@ -8,30 +8,28 @@
 				<div class="form-group">
 					<label class="col-md-4 control-label">Full Name</label>
 					<div class="col-md-8">
-						<input type="text" name="idea[fullname]" class="form-control" placeholder="John Doe" value="<?php //echo $user['User']['fullname']; ?>" />
+						<input type="text" name="idea[fullname]" class="form-control" placeholder="John Doe" value="<?php echo $idea['fullname']; ?>" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Email</label>
 					<div class="col-md-8">
-						<input type="text" name="idea[email]" class="form-control" placeholder="john.doe@example.com" value="<?php //echo $user['User']['email']; ?>" />
+						<input type="text" name="idea[email]" class="form-control" placeholder="john.doe@example.com" value="<?php echo $idea['email']; ?>" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Area of suggestions</label>
 					<div class="col-md-8">
-						<select class="form-control" name="idea[area]">
-							<option value="0">Usability improvement</option>
-							<option value="1">HTML &amp; CSS</option>
-							<option value="2">PHP</option>
-							<option value="3">Other</option>
-						</select>
+						<?php
+						$options = array(1=>'Usability improvement', 2=>'HTML & CSS', 3=>'PHP', 4=>'Other');
+						echo $this->Form->input('idea[area]', array('name'=>'idea[area]', 'label' => false, 'options' => $options, 'class'=>'form-control', 'empty' => '(choose one)', 'value'=>(int)$idea['area']));
+						?>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Description</label>
+					<label class="col-md-4 control-label">Message</label>
 					<div class="col-md-8">
-						<textarea type="text" name="idea[message]" class="form-control description large" placeholder="It would be great if this site could make me a coffee"><?php //echo $group['Group']['description']; ?></textarea>
+						<textarea type="text" name="idea[message]" class="form-control description large" placeholder="It would be great if this site could make me a coffee"><?php echo $idea['message']; ?></textarea>
 					</div>
 				</div>
 				<div class="form-group">

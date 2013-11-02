@@ -20,6 +20,27 @@ $id = (int)$group['Group']['id'];
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-md-4 control-label">Group users</label>
+					<div class="col-md-8">
+					    <ul class="nav nav-tabs">
+					        <li class="active"><a href="#tab_users" data-toggle="tab">Users</a></li>
+					        <li><a href="#tab_applications" data-toggle="tab">Applications</a></li>
+					    </ul>
+					    <div class="tab-content bottom-margin">
+							<div class="tab-pane active" id="tab_users">
+								<!-- Begin user selector -->
+								<?php echo $this->element('DB/userSelector', array('tableName'=>'selectedUsers')); ?>
+								<!-- End user selector -->
+							</div>
+							<div class="tab-pane" id="tab_applications">
+								<!-- Begin user selector -->
+								<?php echo $this->element('DB/applicationSelector', array('tableName'=>'selectedTables')); ?>
+								<!-- End user selector -->
+							</div>
+					    </div>
+					</div>
+				</div>
+				<div class="form-group">
 					<div class="col-md-offset-4 col-md-8">
 						<input type="hidden" name="id" value="<?php echo $id; ?>" />
 						<a href="<?php echo $this->Html->url('/groups', true); ?>" class="btn btn-default">Cancel</a>
