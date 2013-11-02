@@ -9,6 +9,9 @@ a.new i {
 	margin-left: 6px;
 }
 
+textarea.large {
+	height: 120px;
+}
 
 a[target="_blank"]:after {
   content: "\f08e";
@@ -37,4 +40,23 @@ table.selector-table td img.icon {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-radius: 3px;
+}
+
+/* Colapsibles */
+div.accordion {
+}
+div.accordion button.save {
+	margin-top: 6px;
+	margin-bottom: 6px;
+}
+div.accordion div.accordion-group {
+	margin-bottom: 12px;
+}
+div.accordion div.padded {
+}
+div.accordion div.padded img.logo {
+	width: 100%;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }

@@ -61,14 +61,13 @@ function checkMenu($name, $t) {
 					<ul>
 						<li> <a href="<?php echo $this->Html->url('/settings#company-information', true); ?>"> <i class="icon-list-alt"></i> Company Information </a> </li>
 						<li> <a href="<?php echo $this->Html->url('/settings#invitation-message', true); ?>"> <i class="icon-table"></i> Invitation Message </a> </li>
-						<li> <a href="<?php echo $this->Html->url('/settings#drn', true); ?>"> <i class="icon-table"></i> Device Registration Notification </a> </li>
-						<li> <a href="<?php echo $this->Html->url('/settings#device-management', true); ?>"> <i class="icon-table"></i> Device Management </a> </li>
-						<li> <a href="<?php echo $this->Html->url('/settings#timezone', true); ?>"> <i class="icon-table"></i> Timezone </a> </li>
-						<li> <a href="<?php echo $this->Html->url('/settings#signing-credentials', true); ?>"> <i class="icon-table"></i> Signing Credentials </a> </li>
+						<!--<li> <a href="<?php echo $this->Html->url('/settings#device-management', true); ?>"> <i class="icon-table"></i> Device Management </a> </li>
+						<li> <a href="<?php echo $this->Html->url('/settings#timezone', true); ?>"> <i class="icon-table"></i> Timezone </a> </li>-->
+						<!--<li> <a href="<?php echo $this->Html->url('/settings#signing-credentials', true); ?>"> <i class="icon-table"></i> Signing Credentials </a> </li>
 						<li> <a href="<?php echo $this->Html->url('/settings#download-app-catalog', true); ?>"> <i class="icon-table"></i> Download App Catalog </a> </li>
-						<li> <a href="<?php echo $this->Html->url('/settings#authentication', true); ?>"> <i class="icon-table"></i> Authentication </a> </li>
+						<li> <a href="<?php echo $this->Html->url('/settings#authentication', true); ?>"> <i class="icon-table"></i> Authentication </a> </li>-->
 						<li> <a href="<?php echo $this->Html->url('/settings#user-self-registration', true); ?>"> <i class="icon-table"></i> User Self-Registration </a> </li>
-						<li> <a href="<?php echo $this->Html->url('/settings#corporate-email-profile', true); ?>"> <i class="icon-table"></i> Corporate Email Profile </a> </li>
+						<!--<li> <a href="<?php echo $this->Html->url('/settings#corporate-email-profile', true); ?>"> <i class="icon-table"></i> Corporate Email Profile </a> </li>-->
 					</ul>
 				</li>
 				<li<?php echo checkMenu('analytics', $this); ?>>
@@ -82,6 +81,9 @@ function checkMenu($name, $t) {
 				</li>
 				<li<?php echo checkMenu('calendar', $this); ?>>
 					<a href="<?php echo $this->Html->url('/calendar', true); ?>"> <span class="badge pull-right">11</span> <i class="icon-calendar"></i> Upload calendar </a>
+				</li>
+				<li<?php echo checkMenu('signing', $this); ?>>
+					<a href="<?php echo $this->Html->url('/signing', true); ?>"> <span class="badge pull-right">0</span> <i class="icon-calendar"></i> Application signing </a>
 				</li>
 				<li<?php echo checkMenu('ideas', $this); ?>>
 					<a href="<?php echo $this->Html->url('/ideas', true); ?>"> <span class="badge pull-right"></span> <i class="icon-comment"></i> Ideas </a>
