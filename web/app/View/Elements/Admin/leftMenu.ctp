@@ -57,7 +57,7 @@ function checkMenu($name, $t) {
 					</ul>
 				</li>
 				<li<?php echo checkMenu('settings', $this); ?>>
-					<a href="<?php echo $this->Html->url('/settings', true); ?>" class="is-dropdown-menu"> <span class="badge pull-right">24</span> <i class="icon-cogs"></i> Settings </a>
+					<a href="<?php echo $this->Html->url('/settings', true); ?>" class="is-dropdown-menu"> <i class="icon-cogs"></i> Settings </a>
 					<ul>
 						<li> <a href="<?php echo $this->Html->url('/settings#company-information', true); ?>"> <i class="icon-list-alt"></i> Company Information </a> </li>
 						<li> <a href="<?php echo $this->Html->url('/settings#invitation-message', true); ?>"> <i class="icon-table"></i> Invitation Message </a> </li>

@@ -34,19 +34,19 @@ function verValCh($key, $settings) {
 							<div class="form-group">
 								<label class="col-md-3 control-label">Logo</label>
 								<div class="col-md-7">
-									<input type="file" name="file[logo]" class="form-control" accept="image/png"  />
+									<input type="file" name="file[logo]" class="form-control" accept="image/*"  />
 								</div>
 								<div class="col-md-2">
-									<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Settings/Images/Logo.png" alt="Company logo" class="logo" />
+									<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Settings/Images/Logo.png?time=<?php echo time(); ?>" alt="Company logo" class="logo" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-3 control-label">Touch icon</label>
 								<div class="col-md-8">
-									<input type="file" name="file[icon]" class="form-control" accept="image/png"  />
+									<input type="file" name="file[icon]" class="form-control" accept="image/*"  />
 								</div>
 								<div class="col-md-1">
-									<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon.png" alt="Company logo" class="logo" />
+									<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon.png?time=<?php echo time(); ?>" alt="Company logo" class="logo" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -114,7 +114,7 @@ function verValCh($key, $settings) {
 								<label class="col-md-3 control-label">Email Domain Whitelist</label>
 								<div class="col-md-9">
 									<textarea type="text" name="settings[sefRegDomains]" id="sefRegDomains" class="form-control description" placeholder="my-company.co.uk"><?php echo verVal('sefRegDomains', $s); ?></textarea>
-									<small>Place multiple domain entries each on a separate line</small>
+									<small>Place multiple domain entries each on a separate line, leave empty to keep this feature disabled</small>
 								</div>
 							</div>
 						</div>
