@@ -1,12 +1,13 @@
 <?php
 
-?><table id="<?php echo $tableName; ?>" class="table table-striped table-bordered table-hover">
+?><table id="<?php echo $tableName; ?>" class="table table-striped table-bordered table-hover selector-table">
 	<thead>
 		<tr>
 			<th width="28">
-				<input type="checkbox" onchange="toggleAllCheckBoxes('<?php echo $tableName; ?>', this);" />
+				<input type="checkbox" onchange="env.toggleAllCheckBoxes('<?php echo $tableName; ?>', this);" />
 			</th>
 			<th>User name</th>
+			<th width="46">&nbsp;</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -16,9 +17,12 @@
 		?>
 		<tr>
 			<td>
-				<input type="checkbox" name="<?php echo $tableName.'['.$user['User']['id'].']'; ?>"<?php echo $checked ? ' checked="checked"' : ''; ?> />
+				<input type="checkbox" name="user[<?php echo $user['User']['id']; ?>]"<?php echo $checked ? ' checked="checked"' : ''; ?> />
 			</td>
-			<td><?php echo $user['User']['fullname']; ?></td>
+			<td><?php echo (empty($user['User']['fullname']) ? $user['User']['username'] : $user['User']['fullname'].' <small>('.$user['User']['username'].')</small>'); ?></td>
+			<td class="center">
+				<img src="<?php echo $user['User']['gravatar_url']; ?>?s=68" alt="<?php echo $user['User']['fullname']; ?>" class="icon" />
+			</td>
 		</tr>
 		<?php
 		}

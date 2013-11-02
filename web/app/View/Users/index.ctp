@@ -27,7 +27,7 @@
 	        	if ($user['User']['role'] != 'owner') {
 	        	?>
 	        	<br />
-	        	<a href="<?php echo $this->Html->url(array("controller" => 'users', 'action' => 'delete', $user['User']['id'], $user['User']['fullname'])); ?>" onclick="return confirmation('Are you sure you want to delete user <?php echo $user['User']['fullname']; ?>?');">
+	        	<a href="<?php echo $this->Html->url(array("controller" => 'users', 'action' => 'delete', $user['User']['id'], $user['User']['fullname'])); ?>" onclick="return env.confirmation('Are you sure you want to delete user <?php echo $user['User']['fullname']; ?>?');">
 	        		<i class="fa icon-ban-circle"><span> Delete</span></i>
 	        	</a>
 	        	<?php

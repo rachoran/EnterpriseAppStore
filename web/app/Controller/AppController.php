@@ -33,7 +33,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 	
-	var $uses = array('Category', 'Group', 'User');
+	var $uses = array('Category', 'Group', 'User', 'Application');
 
 	public function enableWoodWrapper() {
 		$this->set('woodWrapper', ' wood-wrapper');
@@ -55,9 +55,23 @@ class AppController extends Controller {
 		$this->set('cssFiles', $files);
 	}
 	
+	public function outputApi($data, $format=true, $errors=NULL) {
+		$this->layout = 'ajax';
+		if ($format) {
+			$data = array_map('reset', $data);
+			$this->set(compact('data'));
+		}
+		else {
+			$this->set('data', $data);
+		}
+		$this->set('errors', $errors);
+		$this->render('/Api/output');
+	}
+
 	public function beforeFilter() {
 		$counts = array();
-		$counts['users'] = $this->User->countAll();
+		$counts['applications'] = $this->Application->countAll();
+        $counts['users'] = $this->User->countAll();
         $counts['groups'] = $this->Group->countAll();
         $counts['categories'] = $this->Category->countAll();
         $this->set('menuCounts', $counts);

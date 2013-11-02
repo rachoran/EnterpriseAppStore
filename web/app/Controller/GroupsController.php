@@ -2,14 +2,14 @@
 
 class GroupsController extends AppController {
 	
-	var $uses = array('Group', 'User', 'Application');
+	var $uses = array('Group', 'ApplicationsGroup', 'User', 'UsersGroup', 'Application');
 	
 	public function index() {
 		$this->setPageIcon('group');
 		$this->enablePageClass('basic-edit');
 		$this->setAdditionalCssFiles(array('basic-edit'));
 		$this->set('labelType', 'warning');
-		$this->set('groups', $this->Group->getAll());
+		$this->set('groups', $this->Group->getAllWithInfo());
 	}
 	
 	public function edit($id=0) {
@@ -23,7 +23,19 @@ class GroupsController extends AppController {
 		
 		$isEdit = true;
 		if ($this->request->is('post')) {
-			$this->Group->saveGroup($this->request->data['id'], $this->request->data['name'], $this->request->data['description']);
+			$group = $this->Group->saveGroup($this->request->data['id'], $this->request->data['name'], $this->request->data['description']);
+			
+			// Saving users
+			if (!isset($this->request->data['user']) || empty($this->request->data['user'])) {
+				$this->UsersGroup->deleteAllWithGroup($group->id);
+			}
+			else $this->UsersGroup->saveUsersForGroup($this->request->data['user'], $group->id);
+			
+			// Saving applications
+			if (!isset($this->request->data['application']) || empty($this->request->data['application'])) {
+				$this->ApplicationsGroup->deleteAllWithGroup($group->id);
+			}
+			else $this->ApplicationsGroup->saveAppsForGroup($this->request->data['application'], $group->id);
 		}
 		else $isEdit = false;
 		

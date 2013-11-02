@@ -60,11 +60,16 @@ class User extends AppModel {
         return $data;
 	}
 	
-	public function getAll() {
-		$data =  $this->find('all', array('order' => array('User.fullname' => 'ASC')));
+	private function addGravatars($data) {
 		foreach ($data as $key=>$user) {
 			$data[$key]['User']['gravatar_url'] = 'http://www.gravatar.com/avatar/'.md5($user['User']['email']).'.jpg';
 		}
+		return $data;
+	}
+	
+	public function getAll() {
+		$data =  $this->find('all', array('order' => array('User.fullname' => 'ASC')));
+		$data = $this->addGravatars($data);
 		return $data;
 	}
 	
@@ -74,7 +79,7 @@ class User extends AppModel {
 	
 	public function getAllWithGroupInfo($groupId) {
 		$options = array();
-		$options['fields'] = array('User.id', 'GroupJoin.group_id', 'User.email', 'User.role', 'User.fullname');
+		$options['fields'] = array('User.id', 'GroupJoin.group_id', 'User.email', 'User.role', 'User.fullname', 'User.username');
         
 		$options['joins'] = array(
 		    array('table' => 'users_groups',
@@ -87,7 +92,9 @@ class User extends AppModel {
 		    )
 		);
 		$options['order'] = array('User.fullname' => 'ASC');
-		return $this->find('all', $options);
+		$data = $this->find('all', $options);
+		$data = $this->addGravatars($data);
+		return $data;
 	}
 		
 	public function getUsersWithGroupId($groupId) {
@@ -104,7 +111,9 @@ class User extends AppModel {
 		    'GroupJoin.group_id' => (int)$groupId
 		);
 		$options['order'] = array('User.fullname' => 'ASC');
-		return $this->find('all', $options);
+		$data = $this->find('all', $options);
+		$data = $this->addGravatars($data);
+		return $data;
 	}
 	
 }

@@ -1,58 +1,31 @@
 <?php
-/**
- * Static content controller.
- *
- * This file will render views from views/pages/
- *
- * PHP 5
- *
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       app.Controller
- * @since         CakePHP(tm) v 0.2.9
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
+
 App::uses('AppController', 'Controller');
 
-/**
- * Static content controller
- *
- * Override this controller by placing a copy in controllers directory of an application
- *
- * @package       app.Controller
- * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
- */
 class PagesController extends AppController {
 
-/**
- * This controller does not use a model
- *
- * @var array
- */
-	public $uses = array();
+	public $uses = array('Download', 'Application');
 
-/**
- * Displays a view
- *
- * @param mixed What page to display
- * @return void
- * @throws NotFoundException When the view file could not be found
- *	or MissingViewException in debug mode.
- */
 	public function display() {
 		$this->setPageIcon('dashboard');
 		
 		$path = func_get_args();
 		
 		$this->enableWoodWrapper();
+		$this->setAdditionalCssFiles(array('dashboard'));
 		$this->setAdditionalJavascriptFiles(array('dashboard'));
+		
+		$this->set('averageDownloads', $this->Download->averageNumberOfDownloadsPerNumberOfDays());
+		$this->set('downloadsYesterday', $this->Download->numberOfDownloadsYesterday());
+		$this->set('thirtyDayDownloads', $this->Download->countAllForLastNumberOfDays(2));
+		$this->set('allDownloads', $this->Download->countAll());
+		
+		$appsPerPlatform = array();
+		$appsPerPlatform['iOS'] = $this->Application->countAppsForPlatforms(array(0, 1, 2));
+		$appsPerPlatform['Android'] = $this->Application->countAppsForPlatforms(array(3, 4, 5));
+		$appsPerPlatform['Windows8'] = $this->Application->countAppsForPlatforms(array(6, 7));
+		$appsPerPlatform['WebClip'] = $this->Application->countAppsForPlatforms(array(8));
+		$this->set('appsPerPlatform', $appsPerPlatform);
 
 		$count = count($path);
 		if (!$count) {
@@ -80,4 +53,5 @@ class PagesController extends AppController {
 			throw new NotFoundException();
 		}
 	}
+	
 }

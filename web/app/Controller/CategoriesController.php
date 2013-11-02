@@ -8,7 +8,7 @@ class CategoriesController extends AppController {
 		$this->setPageIcon('list-ul');
 		$this->enablePageClass('basic-edit');
 		$this->setAdditionalCssFiles(array('basic-edit'));
-		$this->set('categories', $this->Category->getAll());
+		$this->set('categories', $this->Category->getAllWithInfo());
 	}
 	
 	public function edit($id=0) {

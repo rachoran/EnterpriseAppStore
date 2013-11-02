@@ -27,10 +27,10 @@ function checkMenu($name, $t) {
 					<a href="<?php echo $this->Html->url('/', true); ?>"> <span class="badge pull-right">17</span> <i class="icon-dashboard"></i> Dashboard </a>
 				</li>
 				<li<?php echo checkMenu('applications', $this); ?>>
-					<a href="<?php echo $this->Html->url('/applications', true); ?>"> <span class="badge pull-right">12</span> <i class="icon-briefcase"></i> Applications </a>
+					<a href="<?php echo $this->Html->url('/applications', true); ?>"> <span class="badge pull-right"><?php echo $menuCounts['applications']; ?></span> <i class="icon-briefcase"></i> Applications </a>
 				</li>
 				<li<?php echo checkMenu('users', $this); ?>>
-					<a href="<?php echo $this->Html->url('/users', true); ?>"> <span class="badge pull-right"><?php echo ($menuCounts['users'] + 1); ?></span> <i class="icon-user"></i> Users </a>
+					<a href="<?php echo $this->Html->url('/users', true); ?>"> <span class="badge pull-right"><?php echo $menuCounts['users']; ?></span> <i class="icon-user"></i> Users </a>
 				</li>
 				<li<?php echo checkMenu('groups', $this); ?>>
 					<a href="<?php echo $this->Html->url('/groups', true); ?>"> <span class="badge pull-right"><?php echo ($menuCounts['groups'] + 1); ?></span> <i class="icon-group"></i> Groups </a>
@@ -59,16 +59,16 @@ function checkMenu($name, $t) {
 				<li<?php echo checkMenu('settings', $this); ?>>
 					<a href="<?php echo $this->Html->url('/settings', true); ?>" class="is-dropdown-menu"> <span class="badge pull-right">24</span> <i class="icon-cogs"></i> Settings </a>
 					<ul>
-						<li> <a href="xxxxxxxxx"> <i class="icon-list-alt"></i> Company Information </a> </li>
-						<li> <a href="xxxxxxxxx"> <i class="icon-table"></i> Invitation Message </a> </li>
-						<li> <a href="xxxxxxxxx"> <i class="icon-table"></i> Device Registration Notification </a> </li>
-						<li> <a href="xxxxxxxxx"> <i class="icon-table"></i> Device Management </a> </li>
-						<li> <a href="xxxxxxxxx"> <i class="icon-table"></i> Timezone </a> </li>
-						<li> <a href="xxxxxxxxx"> <i class="icon-table"></i> Signing Credentials </a> </li>
-						<li> <a href="xxxxxxxxx"> <i class="icon-table"></i> Download App Catalog </a> </li>
-						<li> <a href="xxxxxxxxx"> <i class="icon-table"></i> Authentication </a> </li>
-						<li> <a href="xxxxxxxxx"> <i class="icon-table"></i> User Self-Registration </a> </li>
-						<li> <a href="xxxxxxxxx"> <i class="icon-table"></i> Corporate Email Profile </a> </li>
+						<li> <a href="<?php echo $this->Html->url('/settings#company-information', true); ?>"> <i class="icon-list-alt"></i> Company Information </a> </li>
+						<li> <a href="<?php echo $this->Html->url('/settings#invitation-message', true); ?>"> <i class="icon-table"></i> Invitation Message </a> </li>
+						<li> <a href="<?php echo $this->Html->url('/settings#drn', true); ?>"> <i class="icon-table"></i> Device Registration Notification </a> </li>
+						<li> <a href="<?php echo $this->Html->url('/settings#device-management', true); ?>"> <i class="icon-table"></i> Device Management </a> </li>
+						<li> <a href="<?php echo $this->Html->url('/settings#timezone', true); ?>"> <i class="icon-table"></i> Timezone </a> </li>
+						<li> <a href="<?php echo $this->Html->url('/settings#signing-credentials', true); ?>"> <i class="icon-table"></i> Signing Credentials </a> </li>
+						<li> <a href="<?php echo $this->Html->url('/settings#download-app-catalog', true); ?>"> <i class="icon-table"></i> Download App Catalog </a> </li>
+						<li> <a href="<?php echo $this->Html->url('/settings#authentication', true); ?>"> <i class="icon-table"></i> Authentication </a> </li>
+						<li> <a href="<?php echo $this->Html->url('/settings#user-self-registration', true); ?>"> <i class="icon-table"></i> User Self-Registration </a> </li>
+						<li> <a href="<?php echo $this->Html->url('/settings#corporate-email-profile', true); ?>"> <i class="icon-table"></i> Corporate Email Profile </a> </li>
 					</ul>
 				</li>
 				<li<?php echo checkMenu('analytics', $this); ?>>

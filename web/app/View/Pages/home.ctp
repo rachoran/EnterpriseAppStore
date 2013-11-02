@@ -1,15 +1,15 @@
 <?php
 
 ?><div class="widget">
-	<h3 class="section-title first-title"><i class="icon-tasks"></i> Statistics</h3>
+	<h3 class="section-title first-title"><i class="icon-tasks"></i> Overview</h3>
 	<div class="row">
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<div class="widget-content-blue-wrapper changed-up">
 				<div class="widget-content-blue-inner padded">
 					<div class="pre-value-block"><i class="icon-dashboard"></i> Total Apps</div>
 					<div class="value-block">
-						<div class="value-self">6</div>
-						<div class="value-sub">iOS &amp; Android</div>
+						<div class="value-self"><?php echo $menuCounts['applications']; ?></div>
+						<div class="value-sub">Mobile, Desktop &amp; Web</div>
 					</div>
 					<span class="dynamicsparkline">Loading..</span> </div>
 			</div>
@@ -19,10 +19,10 @@
 				<div class="widget-content-blue-inner padded">
 					<div class="pre-value-block"><i class="icon-cloud-download"></i> Downloads</div>
 					<div class="value-block">
-						<div class="value-self">1,120</div>
-						<div class="value-sub">This Month</div>
+						<div class="value-self"><?php echo $thirtyDayDownloads; ?></div>
+						<div class="value-sub">Last 30 days</div>
 					</div>
-					<span class="dynamicsparkline">Loading..</span> </div>
+					<span class="dynamicbars">Loading..</span> </div>
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center hidden-md">
@@ -30,7 +30,7 @@
 				<div class="widget-content-blue-inner padded">
 					<div class="pre-value-block"><i class="icon-cloud-download"></i> Downloads</div>
 					<div class="value-block">
-						<div class="value-self">15,896</div>
+						<div class="value-self"><?php echo $allDownloads; ?></div>
 						<div class="value-sub">Total</div>
 					</div>
 					<span class="dynamicsparkline">Loading..</span> </div>
@@ -39,7 +39,7 @@
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<div class="widget-content-blue-wrapper changed-up">
 				<div class="widget-content-blue-inner padded">
-					<div class="pre-value-block"><i class="icon-money"></i> Registered</div>
+					<div class="pre-value-block"><i class="icon-user"></i> Registered</div>
 					<div class="value-block">
 						<div class="value-self">12</div>
 						<div class="value-sub">Users</div>
@@ -50,63 +50,53 @@
 	</div>
 </div>
 <div class="widget">
-	<h3 class="section-title"><i class="icon-bar-chart"></i> Profit Chart</h3>
-	<ul class="nav nav-pills">
-		<li class="active"><a href="#">Hour</a></li>
-		<li><a href="#">Day</a></li>
-		<li><a href="#">Month</a></li>
-		<li class="hidden-xs"><a href="#">Year</a></li>
-	</ul>
+	<h3 class="section-title"><i class="icon-bar-chart"></i> Downloads</h3>
 	<div class="widget-content-white">
 		<div class="shadowed-bottom bottom-margin">
 			<div class="row">
 				<div class="col-lg-4 col-md-5 col-sm-6 bordered">
 					<div class="value-block value-bigger changed-up some-left-padding">
-						<div class="value-self"> $5,450 <span class="changed-icon"><i class="icon-caret-up"></i></span> <span class="changed-value">+5.00%</span> </div>
-						<div class="value-sub">Average of $450.35 Per Day</div>
+						<div class="value-self"> <?php echo $downloadsYesterday; ?> <!-- <span class="changed-icon"><i class="icon-caret-up"></i></span> <span class="changed-value">+5.00%</span>  --></div>
+						<div class="value-sub">Downloads Yesterday</div>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-3 visible-md visible-lg bordered">
 					<div class="value-block text-center">
-						<div class="value-self">520</div>
-						<div class="value-sub">Total Sales</div>
+						<div class="value-self"><?php echo round($averageDownloads, 1); ?></div>
+						<div class="value-sub">Average Per Day</div>
 					</div>
 				</div>
-				<div class="col-lg-2 bordered visible-lg">
+				<div class="col-lg-2 col-md-3 visible-md visible-lg bordered">
 					<div class="value-block text-center">
-						<div class="value-self">1,120</div>
-						<div class="value-sub">Total Visitors</div>
+						<div class="value-self"><?php echo round($averageDownloads, 1); ?></div>
+						<div class="value-sub">Average Per Day</div>
 					</div>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-6">
-					<form class="form-inline form-period-selector">
-						<label class="control-label">Time Period:</label>
-						<br>
-						<input type="text" placeholder="01/12/2011" class="form-control input-sm">
-						<input type="text" placeholder="01/12/2011" class="form-control input-sm">
-					</form>
 				</div>
 			</div>
 		</div>
 		<div class="padded">
-			<div id="areachart" style="height: 250px;"></div>
+			<div id="areachart" style="height: 250px;"><p><i class="fa icon-refresh icon-spin"></i> Loading ...</p></div>
 		</div>
 	</div>
 </div>
 <div class="widget">
-	<h3 class="section-title bottom-margin"><i class="icon-bullseye"></i> Circular Charts</h3>
-	<div class="row bottom-margin">
+	<h3 class="section-title bottom-margin"><i class="icon-bullseye"></i> Apps per platform</h3>
+	<div class="row bottom-margin per-platform-charts">
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
-			<input type="text" value="75" class="knob" data-fgColor="#df6064" data-linecap="round" data-width="150">
+			<input type="text" value="<?php echo $appsPerPlatform['iOS']; ?>" data-max="<?php echo $menuCounts['applications']; ?>" class="knob" data-fgColor="#61a9dc" data-linecap="round" data-width="150" />
+			<p>iOS</p>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
+			<input type="text" value="<?php echo $appsPerPlatform['Android']; ?>" data-max="<?php echo $menuCounts['applications']; ?>" class="knob" data-fgColor="#71c280" data-linecap="round" data-width="150" />
+			<p>Android</p>
+		</div>
+		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
+			<input type="text" value="<?php echo $appsPerPlatform['Windows8']; ?>" data-max="<?php echo $menuCounts['applications']; ?>" class="knob" data-fgColor="#df6064" data-linecap="round" data-width="150" />
+			<p>Windows 8</p>
 		</div>
 		<div class="col-lg-3 hidden-md col-sm-6 text-center">
-			<input type="text" value="65" class="knob" data-fgColor="#8963ac" data-linecap="round" data-width="150">
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
-			<input type="text" value="85" class="knob" data-fgColor="#61a9dc" data-linecap="round" data-width="150">
-		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
-			<input type="text" value="68" class="knob" data-fgColor="#71c280" data-linecap="round" data-width="150">
+			<input type="text" value="<?php echo $appsPerPlatform['WebClip']; ?>" data-max="<?php echo $menuCounts['applications']; ?>" class="knob" data-fgColor="#8963ac" data-linecap="round" data-width="150" />
+			<p>Web clips</p>
 		</div>
 	</div>
 </div>
@@ -124,22 +114,14 @@
 						<div class="col-lg-3 col-md-4 col-sm-3 bordered">
 							<div class="value-block padded-left text-center">
 								<div class="value-self">520</div>
-								<div class="value-sub">Total Sales</div>
+								<div class="value-sub">Total Devices</div>
 							</div>
 						</div>
 						<div class="col-lg-3 col-sm-3 bordered hidden-md">
 							<div class="value-block text-center">
 								<div class="value-self">1,120</div>
-								<div class="value-sub">Total Visitors</div>
+								<div class="value-sub">Per User</div>
 							</div>
-						</div>
-						<div class="col-lg-6 col-md-8 col-sm-6">
-							<form class="form-inline form-period-selector">
-								<label class="control-label">Time Period:</label>
-								<br>
-								<input type="text" placeholder="01/12/2011" class="form-control input-sm">
-								<input type="text" placeholder="01/12/2011" class="form-control input-sm">
-							</form>
 						</div>
 					</div>
 				</div>

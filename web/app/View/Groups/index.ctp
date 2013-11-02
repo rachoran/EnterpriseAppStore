@@ -5,13 +5,15 @@
 	<thead>
 	    <tr>
 	        <th class="icon">Users</th>
+	        <th class="icon">Apps</th>
 	        <th class="name">Name</th>
 	        <th class="edit">Edit</th>
 	    </tr>
 	</thead>
 	<tbody>
 		<tr>
-	        <td class="icon"><span class="label label-<?php echo $labelType; ?>">230</span></td>
+	        <td class="icon"><span class="label label-<?php echo $labelType; ?>"><?php echo $menuCounts['users']; ?></span></td>
+	        <td class="icon"><span class="label label-<?php echo $labelType; ?>"><?php echo $menuCounts['applications']; ?></span></td>
 	        <td class="name">
 	            <?php echo $this->Html->link('Every user', array('controller' => 'groups', 'action' => 'view', 0)); ?><br />
 	            <small>(Define apps for all users)</small>
@@ -22,7 +24,8 @@
 	    </tr>
 	    <?php foreach ($groups as $group) { ?>
 	    <tr>
-	        <td class="icon"><span class="label label-default">13</span></td>
+	        <td class="icon"><span class="label label-default"><?php echo $group[0]['userCount']; ?></span></td>
+	        <td class="icon"><span class="label label-default"><?php echo $group[0]['appsCount']; ?></span></td>
 	        <td class="name">
 	            <?php echo $this->Html->link($group['Group']['name'], array('controller' => 'groups', 'action' => 'view', $group['Group']['id'])); ?><br />
 	            <small><?php if (strlen($group['Group']['description']) > 2) echo '('.$group['Group']['description'].')'; ?></small>
@@ -32,7 +35,7 @@
 	        		<i class="fa icon-edit"><span> Edit</span></i>
 	        	</a>
 	        	<br />
-	        	<a href="<?php echo $this->Html->url(array("controller" => 'groups', "action" => "delete", $group['Group']['id'], $group['Group']['name'])); ?>" onclick="return confirmation('Are you sure you want to delete group <?php echo $group['Group']['name']; ?>?');">
+	        	<a href="<?php echo $this->Html->url(array("controller" => 'groups', "action" => "delete", $group['Group']['id'], $group['Group']['name'])); ?>" onclick="return env.confirmation('Are you sure you want to delete group <?php echo $group['Group']['name']; ?>?');">
 	        		<i class="fa icon-ban-circle"><span> Delete</span></i>
 	        	</a>
 	        </td>

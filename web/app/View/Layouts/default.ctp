@@ -92,17 +92,17 @@ ga('send', 'pageview');
 */
 					?>
 					<div class="main-content">
-						<div class="widget">
+						<!--<div class="widget">
 							<div class="alert alert-warning alert-dismissable">
 								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 								<i class="icon-exclamation-sign"></i> <strong>Welcome!</strong> This is a dashboard of the powerful admin template.
 							</div>
-						</div>
+						</div>-->
 						<!-- Begin content -->
 						<?php echo $this->fetch('content'); ?>
 						<!-- End content -->
 						<div class="widget cake-sql-log">
-							<?php echo $this->element('sql_dump'); ?>
+							<?php //echo $this->element('sql_dump'); ?>
 						</div>
 					</div>
 				</div>
@@ -113,6 +113,7 @@ ga('send', 'pageview');
 <?php echo $this->element('Admin/configSideBar'); ?>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
+<script src='<?php echo $this->Html->url('/', true); ?>assets/js/jquery.cookie.js'></script>
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/jquery.sparkline.min.js'></script> 
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/bootstrap/tab.js'></script> 
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/bootstrap/dropdown.js'></script> 
@@ -128,7 +129,7 @@ ga('send', 'pageview');
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/morris-0.4.3.min.js'></script> 
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/for_pages/color_settings.js'></script> 
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/application.js'></script>
-<script src='<?php echo $this->Html->url('/', true); ?>assets/js/methods.js'></script>
+<script src='<?php echo $this->Html->url('/', true); ?>assets/js/environment.js'></script>
 <?php
 if (isset($jsFiles)) foreach ($jsFiles as $file) { ?>
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/for_pages/<?php echo $file; ?>.js'></script>

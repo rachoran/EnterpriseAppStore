@@ -27,7 +27,7 @@
 	        <td class="icon"><i class="fa <?php echo $category['Category']['icon']; ?>"></i></td>
 	        <td class="name">
 	            <?php echo $this->Html->link($category['Category']['name'], array('controller' => 'categories', 'action' => 'view', $category['Category']['id'])); ?>
-	             <span class="label label-default"><?php echo 12; ?></span>
+	             <span class="label label-default"><?php echo $category[0]['appsCount']; ?></span>
 	            <br />
 	            <small><?php if (strlen($category['Category']['description']) > 2) echo '('.$category['Category']['description'].')'; ?></small>
 	        </td>
@@ -36,7 +36,7 @@
 	        		<i class="fa icon-edit"><span> Edit</span></i>
 	        	</a>
 	        	<br />
-	        	<a href="<?php echo $this->Html->url(array("controller" => "categories", "action" => "delete", $category['Category']['id'], $category['Category']['name'])); ?>" onclick="return confirmation('Are you sure you want to delete category <?php echo $category['Category']['name']; ?>?');">
+	        	<a href="<?php echo $this->Html->url(array("controller" => "categories", "action" => "delete", $category['Category']['id'], $category['Category']['name'])); ?>" onclick="return env.confirmation('Are you sure you want to delete category <?php echo $category['Category']['name']; ?>?');">
 	        		<i class="fa icon-ban-circle"><span> Delete</span></i>
 	        	</a>
 	        </td>

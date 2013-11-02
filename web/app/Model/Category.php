@@ -18,7 +18,27 @@ class Category extends AppModel {
     );
 	
 	public function getAll() {
-		return $this->find('all', array('order' => array('Category.name' => 'asc')));
+		$options = array();
+		$options['order'] = array('Category.name' => 'asc');
+		return $this->find('all', $options);
+	}
+	
+	public function getAllWithInfo() {
+		$options = array();
+		$options['fields'] = array('*', 'count(ApplicationsJoin.application_id) AS appsCount');
+		$options['joins'] = array(
+			array(
+				'table' => 'applications_categories',
+				'alias' => 'ApplicationsJoin',
+				'type' => 'LEFT',
+				'conditions' => array(
+					'Category.id = ApplicationsJoin.application_id'
+				)
+			) 
+		);
+		$options['group'] = array('Category.id');
+		$options['order'] = array('Category.name' => 'asc');
+		return $this->find('all', $options);
 	}
 	
 	public function getOne($id) {
