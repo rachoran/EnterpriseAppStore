@@ -127,6 +127,10 @@ ga('send', 'pageview');
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/for_pages/color_settings.js'></script> 
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/application.js'></script>
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/environment.js'></script>
+
+<script type="text/javascript">
+env.baseUrl = '<?php echo $this->Html->url('/', true); ?>';
+</script>
 <?php
 if (isset($jsFiles)) foreach ($jsFiles as $file) { ?>
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/for_pages/<?php echo $file; ?>.js'></script>

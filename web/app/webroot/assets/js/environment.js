@@ -1,4 +1,6 @@
 function environment() {
+
+	this.baseUrl = null;
 	
 	// Confirmations
 	this.confirmation = function(message) {
