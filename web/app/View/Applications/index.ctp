@@ -52,20 +52,22 @@ $this->Html->addCrumb('Applications', null);
 				        	</a>
 				        </td>
 				        <td class="name">
-				            <i class="icon-<?= $icon ?>"></i>
-				            <?php echo $this->Html->link($item['Application']['name'], array('controller' => 'users', 'action' => 'view', $item['Application']['id'])); ?>
+				            <i class="icon-<?= $icon ?>" style="margin-right: 6px;"></i>
+				            <?php echo $this->Html->link($item[0]['name'], array('controller' => 'users', 'action' => 'view', $item['Application']['id'])); ?>
+				            <small>(Latest: <?= $item[0]['version']; ?>)</small>
 				            <br />
-				            <small class="col-md-5">
-				            	<?php
-				            	if ($ext) {
-				            	?>
+			            	<?php
+			            	if ($ext) {
+			            	?>
+				            <small style="margin-right: 12px;">
 				            	<strong>Download: </strong>
 				            	<a href="" title="Download app">
 				            		<?= $ext; ?>
 				            		<i class="fa icon-cloud-download"></i>
 				            	</a>
-				            	<?php } ?>
 				            </small>
+				            <small style="margin-right: 12px;"><strong>Builds:</strong> <?= $item[0]['count']; ?> </small>
+			            	<?php } ?>
 				        </td>
 				        <td class="edit">
 				        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $item['Application']['id'], $item['Application']['name'])); ?>">

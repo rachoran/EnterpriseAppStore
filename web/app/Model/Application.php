@@ -26,13 +26,29 @@ class Application extends AppModel {
         return $data;
 	}
 	
+	public function basicOptions() {
+		$options = array();
+		$whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Application.platform ORDER BY created DESC LIMIT 1';
+		$latestName = '(SELECT name FROM applications '.$whereAndOrder.') AS name';
+		$latestVersion = '(SELECT version FROM applications '.$whereAndOrder.') AS version';
+		$latestCreated = '(SELECT created FROM applications '.$whereAndOrder.') AS created';
+		$options['fields'] = array('*', 'COUNT(Application.id) AS count', $latestName, $latestVersion, $latestCreated);
+		$options['order'] = array('Application.name' => 'ASC', 'Application.created');
+		$options['group'] = array('Application.identifier', 'Application.platform');
+		return $options;
+	}
+	
 	public function getAll() {
-		$data =  $this->find('all', array('order' => array('Application.name' => 'ASC')));
+		$options = $this->basicOptions();
+		$data =  $this->find('all', $options);
+		//die(json_encode($data));
 		return $data;
 	}
 	
 	public function searchFor($term) {
-		$data =  $this->find('all', array('order' => array('Application.name' => 'ASC'), 'conditions' => array('Application.name LIKE \'%'.$term.'%\'')));
+		$options = $this->basicOptions();
+		$options['conditions'] = array('Application.name LIKE \'%'.$term.'%\'');
+		$data =  $this->find('all', $options);
 		return $data;
 	}
 	
@@ -41,7 +57,7 @@ class Application extends AppModel {
 	}
 	
 	public function countAppsForPlatforms($platforms) {
-		$options = array();
+		$options = $this->basicOptions();
 		$options['conditions'] = array();
 		$options['conditions']['Application.platform'] = $platforms;
 		return $this->find('count', $options);
