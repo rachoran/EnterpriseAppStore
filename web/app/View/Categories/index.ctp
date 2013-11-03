@@ -1,4 +1,9 @@
-<p>
+<?php
+
+// Breadcrumbs
+$this->Html->addCrumb('Categories', '/categories');
+
+?><p>
 	<a href="<?php echo $this->Html->url(array('controller' => 'categories', 'action' => 'edit', 'new')); ?>" class="btn btn-primary pull-right new">New category <i class="fa icon-plus"></i></a>
 </p>
 <table class="table table-striped table-bordered table-hover">

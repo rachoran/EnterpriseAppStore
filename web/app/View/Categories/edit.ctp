@@ -1,4 +1,9 @@
 <?php
+
+// Breadcrumbs
+$this->Html->addCrumb('Categories', '/categories');
+$this->Html->addCrumb('Editing '.$category['Category']['name'].' Category', '/categories/edit/'.$category['Category']['id'].'/'.$category['Category']['name']);
+
 if (!isset($category['Category'])) $category['Category'] = array('id'=>0, 'name'=>'', 'description'=>'', 'icon'=>'');
 $id = (int)$category['Category']['id'];
 

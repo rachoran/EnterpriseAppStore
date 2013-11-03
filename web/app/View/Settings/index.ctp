@@ -1,5 +1,8 @@
 <?php
 
+// Breadcrumbs
+$this->Html->addCrumb('Settings', '/settings');
+
 $s = isset($settings) ? $settings : NULL;
 
 function verVal($key, $settings) {

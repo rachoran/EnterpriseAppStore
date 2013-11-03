@@ -76,20 +76,17 @@ ga('send', 'pageview');
 						<div class="header-links hidden-xs"> <a href="notifications.html"><i class="icon-comments"></i> User Alerts</a> <a href="<?php echo $this->Html->url('/users/myaccount', true); ?>"><i class="icon-cog"></i> My Account</a> <a href="<?php echo $this->Html->url('/users/logout', true); ?>"><i class="icon-signout"></i> Logout</a> </div>
 						<h1><i class="icon-<?php echo (isset($pageIcon)) ? $pageIcon : 'exclamation-sign';  ?>"></i> <?php echo $title_for_layout; ?></h1>
 					</div>
-					<ol class="breadcrumb">
+					<!--<ol class="breadcrumb">
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Bread</a></li>
 						<li><a href="#">Crumbs</a></li>
 						<li class="active">Example</li>
-					</ol>
+					</ol>-->
 					<?php
-/*
-					echo $this->Html->getCrumbs(' > ', array(
-						'text' => $this->Html->image('home.png'),
-						'url' => array('controller'=>'pages', 'action'=>'display', 'home'),
-						'escape' => false
-					));
-*/
+					$options = array();
+					$options['class'] = 'breadcrumb';
+					$options['lastClass'] = 'active';
+					echo $this->Html->getCrumbList($options, 'Home');
 					?>
 					<div class="main-content">
 						<!--<div class="widget">
