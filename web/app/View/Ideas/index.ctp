@@ -1,5 +1,9 @@
 <?php
 
+// Breadcrumbs
+$this->Html->addCrumb('Ideas', '/ideas');
+
+
 ?><div class="widget">
 	<div class="widget-content-white glossed">
 		<div class="padded">

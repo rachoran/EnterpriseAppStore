@@ -1,4 +1,10 @@
 <?php
+
+// Breadcrumbs
+$this->Html->addCrumb('Users', '/users');
+$this->Html->addCrumb($user['User']['fullname'], '/categories/edit/'.$user['User']['id'].'/'.$user['User']['username']);
+
+
 if (!isset($user['User'])) $user['User'] = array('id'=>0, 'username'=>'', 'fullname'=>'', 'password'=>'', 'email'=>'', 'role'=>'user');
 $id = (int)$user['User']['id'];
 
