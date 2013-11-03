@@ -31,6 +31,11 @@ class Application extends AppModel {
 		return $data;
 	}
 	
+	public function searchFor($term) {
+		$data =  $this->find('all', array('order' => array('Application.name' => 'ASC'), 'conditions' => array('Application.name LIKE \'%'.$term.'%\'')));
+		return $data;
+	}
+	
 	public function countAll() {
 		return $this->find('count');
 	}

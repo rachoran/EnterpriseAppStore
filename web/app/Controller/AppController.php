@@ -33,7 +33,7 @@ App::uses('Controller', 'Controller');
  */
 class AppController extends Controller {
 	
-	var $uses = array('Category', 'Group', 'User', 'Application', 'Settings');
+	var $uses = array('Category', 'Group', 'User', 'Application', 'Settings', 'Signing');
 
 	public function enableWoodWrapper() {
 		$this->set('woodWrapper', ' wood-wrapper');
@@ -74,6 +74,7 @@ class AppController extends Controller {
         $counts['users'] = $this->User->countAll();
         $counts['groups'] = $this->Group->countAll();
         $counts['categories'] = $this->Category->countAll();
+        $counts['signing'] = $this->Signing->countAll();
         $this->set('menuCounts', $counts);
         
         $siteName = $this->Settings->get('companyServerName');

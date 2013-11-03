@@ -1,6 +1,6 @@
 <?php
 
 // Breadcrumbs
-$this->Html->addCrumb('Categories', '/categories');
+$this->Html->addCrumb('Categories', null);
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 // Breadcrumbs
-$this->Html->addCrumb('Settings', '/settings');
+$this->Html->addCrumb('Settings', null);
 
 $s = isset($settings) ? $settings : NULL;
 

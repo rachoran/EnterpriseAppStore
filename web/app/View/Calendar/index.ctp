@@ -1,7 +1,7 @@
 <?php
 
 // Breadcrumbs
-$this->Html->addCrumb('Calendar', '/calendar');
+$this->Html->addCrumb('Calendar', null);
 
 ?><div class="main-content">
 	<div class="widget">

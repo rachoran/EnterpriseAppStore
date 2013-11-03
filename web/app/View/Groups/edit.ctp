@@ -1,11 +1,11 @@
 <?php
 
-// Breadcrumbs
-$this->Html->addCrumb('Groups', '/groups');
-$this->Html->addCrumb($group['Group']['name'], '/groups/edit/'.$group['Group']['id'].'/'.$group['Group']['name']);
-
 if (!isset($group['Group'])) $group['Group'] = array('id'=>0, 'name'=>'', 'description'=>'', 'icon'=>'');
 $id = (int)$group['Group']['id'];
+
+// Breadcrumbs
+$this->Html->addCrumb('Groups', '/groups');
+$this->Html->addCrumb((empty($group['Group']['name']) ? 'Create group' : $group['Group']['name']), null);
 
 ?><div class="widget">
 	<div class="widget-content-white glossed">

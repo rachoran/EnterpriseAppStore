@@ -1,11 +1,11 @@
 <?php
 
-// Breadcrumbs
-$this->Html->addCrumb('Categories', '/categories');
-$this->Html->addCrumb('Editing '.$category['Category']['name'].' Category', '/categories/edit/'.$category['Category']['id'].'/'.$category['Category']['name']);
-
 if (!isset($category['Category'])) $category['Category'] = array('id'=>0, 'name'=>'', 'description'=>'', 'icon'=>'');
 $id = (int)$category['Category']['id'];
+
+// Breadcrumbs
+$this->Html->addCrumb('Categories', '/categories');
+$this->Html->addCrumb((empty($category['Category']['name']) ? 'Create category' : $category['Category']['name']), null);
 
 ?><div class="widget">
 	<div class="widget-content-white glossed">

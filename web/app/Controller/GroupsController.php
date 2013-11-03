@@ -55,7 +55,6 @@ class GroupsController extends AppController {
 	}
 	
 	public function delete($id) {
-		$this->setPageIcon('group');
 		$this->Group->delete((int)$id);
 		return $this->redirect(array('action' => 'index'));
 	}
