@@ -2,7 +2,7 @@
 
 class CategoriesController extends AppController {
 
-	var $uses = array('Category');
+	var $uses = array('Category', 'Application');
 	
 	public function index() {
 		$this->setPageIcon('list-ul');
@@ -34,8 +34,13 @@ class CategoriesController extends AppController {
 	}
 	
 	public function view($id) {
-		$this->setPageIcon('list-ul');
-		$this->set('category', $this->Category->getOne($id));
+		$cat = $this->Category->getOne($id);
+		$this->set('category', $cat);
+		$this->setPageIcon(eregi_replace('icon-', '', $cat['Category']['icon']));
+		$this->enablePageClass('basic-edit');
+		$this->setAdditionalCssFiles(array('basic-edit'));
+		$this->setAdditionalJavascriptFiles(array('application-list'));
+		$this->set('data', $this->Application->getAll());
 	}
 	
 	public function delete($id) {

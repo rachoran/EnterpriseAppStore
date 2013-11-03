@@ -18,6 +18,12 @@ textarea.large {
 	height: 120px;
 }
 
+ul.breadcrumb {
+}
+ul.breadcrumb li {
+	margin-right: 12px;
+}
+
 a[target="_blank"]:after {
   content: "\f08e";
   font-family: FontAwesome;
