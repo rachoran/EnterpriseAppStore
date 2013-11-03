@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 02, 2013 at 07:55 PM
+-- Generation Time: Nov 03, 2013 at 02:25 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -40067,23 +40067,25 @@ INSERT INTO `ideas` (`id`, `fullname`, `email`, `area`, `message`, `created`, `m
 -- --------------------------------------------------------
 
 --
--- Table structure for table `signing`
+-- Table structure for table `signings`
 --
 
-DROP TABLE IF EXISTS `signing`;
-CREATE TABLE `signing` (
+DROP TABLE IF EXISTS `signings`;
+CREATE TABLE `signings` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   `certificate` varchar(250) NOT NULL,
   `password` varchar(150) NOT NULL,
   `provisioning` varchar(250) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `signing`
+-- Dumping data for table `signings`
 --
 
+INSERT INTO `signings` (`id`, `name`, `certificate`, `password`, `provisioning`) VALUES
+(1, 'Fuerte Enterprise', '', 'aaaaaa', '');
 
 -- --------------------------------------------------------
 
