@@ -26,7 +26,13 @@ function verValCh($key, $settings) {
 					<div id="company-information" class="accordion-body collapse in">
 						<div class="accordion-inner">
 							<div class="form-group">
-								<label class="col-md-3 control-label">Server / Company name</label>
+								<label class="col-md-3 control-label">Server name</label>
+								<div class="col-md-9">
+									<input type="text" name="settings[companyServerName]" class="form-control" placeholder="Name of this site / app" value="<?php echo verVal('companyServerName', $s); ?>" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label">Company name</label>
 								<div class="col-md-9">
 									<input type="text" name="settings[companyName]" class="form-control" placeholder="Company name" value="<?php echo verVal('companyName', $s); ?>" />
 								</div>
@@ -37,7 +43,7 @@ function verValCh($key, $settings) {
 									<input type="file" name="file[logo]" class="form-control" accept="image/*"  />
 								</div>
 								<div class="col-md-2">
-									<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Settings/Images/Logo.png?time=<?php echo time(); ?>" alt="Company logo" class="logo" />
+									<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Settings/Images/Logo?time=<?php echo time(); ?>" alt="Company logo" class="logo" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -46,7 +52,7 @@ function verValCh($key, $settings) {
 									<input type="file" name="file[icon]" class="form-control" accept="image/*"  />
 								</div>
 								<div class="col-md-1">
-									<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon.png?time=<?php echo time(); ?>" alt="Company logo" class="logo" />
+									<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?php echo time(); ?>" alt="Company logo" class="logo" />
 								</div>
 							</div>
 							<div class="form-group">

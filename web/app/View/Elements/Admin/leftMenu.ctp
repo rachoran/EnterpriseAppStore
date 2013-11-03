@@ -11,7 +11,9 @@ function checkMenu($name, $t) {
 	</div>
 	<div class="side-bar-wrapper collapse navbar-collapse navbar-ex1-collapse">
 		<a href="<?php echo $this->Html->url('/', true); ?>" class="logo hidden-sm hidden-xs">
-			<i class="icon-cloud-download"></i> <span>AppStore</span>
+			<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Settings/Images/Logo?time=<?php echo time(); ?>" alt="Go to Dashboard" class="logo" />
+			<!-- <i class="icon-cloud-download"></i> -->
+			<span><?php echo $siteName; ?></span>
 		</a>
 		<div class="search-box">
 			<input type="text" placeholder="SEARCH APPS" class="form-control" />
@@ -24,7 +26,7 @@ function checkMenu($name, $t) {
 		<div class="relative-w">
 			<ul class="side-menu">
 				<li<?php echo checkMenu('pages', $this); ?>>
-					<a href="<?php echo $this->Html->url('/', true); ?>"> <span class="badge pull-right">17</span> <i class="icon-dashboard"></i> Dashboard </a>
+					<a href="<?php echo $this->Html->url('/', true); ?>"> <i class="icon-dashboard"></i> Dashboard </a>
 				</li>
 				<li<?php echo checkMenu('applications', $this); ?>>
 					<a href="<?php echo $this->Html->url('/applications', true); ?>"> <span class="badge pull-right"><?php echo $menuCounts['applications']; ?></span> <i class="icon-briefcase"></i> Applications </a>
@@ -80,10 +82,10 @@ function checkMenu($name, $t) {
 					</ul>
 				</li>
 				<li<?php echo checkMenu('calendar', $this); ?>>
-					<a href="<?php echo $this->Html->url('/calendar', true); ?>"> <span class="badge pull-right">11</span> <i class="icon-calendar"></i> Upload calendar </a>
+					<a href="<?php echo $this->Html->url('/calendar', true); ?>"> <span class="badge pull-right">11</span> <i class="icon-calendar"></i> Calendar </a>
 				</li>
 				<li<?php echo checkMenu('signing', $this); ?>>
-					<a href="<?php echo $this->Html->url('/signing', true); ?>"> <span class="badge pull-right">0</span> <i class="icon-calendar"></i> Application signing </a>
+					<a href="<?php echo $this->Html->url('/signing', true); ?>"> <span class="badge pull-right">0</span> <i class="icon-certificate"></i> Signing </a>
 				</li>
 				<li<?php echo checkMenu('ideas', $this); ?>>
 					<a href="<?php echo $this->Html->url('/ideas', true); ?>"> <span class="badge pull-right"></span> <i class="icon-comment"></i> Ideas </a>

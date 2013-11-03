@@ -43,13 +43,13 @@ if (isset($cssFiles)) foreach ($cssFiles as $file) { ?>
 <?php } ?>
 <link href='http://fonts.googleapis.com/css?family=Oswald:300,400,700|Open+Sans:400,700,300' rel='stylesheet' type='text/css' />
 <link href="<?php echo $this->Html->url('/', true); ?>assets/favicon.ico" rel="shortcut icon" />
-<link href="<?php echo $this->Html->url('/', true); ?>assets/apple-touch-icon.png" rel="apple-touch-icon" />
+<link href="<?php echo $this->Html->url('/', true); ?>Userfiles/Settings/Images/Logo" rel="apple-touch-icon" />
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 @javascript html5shiv respond.min
 <![endif]-->
 
-<title><?php echo $cakeDescription ?>: <?php echo $title_for_layout; ?></title>
+<title><?php echo $siteName; ?>: <?php echo $title_for_layout; ?></title>
 <script>
 <!--
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

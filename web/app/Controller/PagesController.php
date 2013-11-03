@@ -4,7 +4,7 @@ App::uses('AppController', 'Controller');
 
 class PagesController extends AppController {
 
-	public $uses = array('Download', 'Application');
+	public $uses = array('Download', 'Application', 'Settings');
 
 	public function display() {
 		$this->setPageIcon('dashboard');
