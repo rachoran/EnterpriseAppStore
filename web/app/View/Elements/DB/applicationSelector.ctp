@@ -4,7 +4,7 @@
 	<thead>
 		<tr>
 			<th width="28">
-				<input type="checkbox" onchange="env.toggleAllCheckBoxes('<?php echo $tableName; ?>', this);" />
+				<input type="checkbox" onchange="env.toggleAllCheckBoxes('<?php echo $tableName; ?>', this);" class="form-control" />
 			</th>
 			<th>Application name</th>
 			<th width="46">&nbsp;</th>
@@ -17,7 +17,7 @@
 		?>
 		<tr>
 			<td>
-				<input type="checkbox" name="application[<?php echo $user['Application']['id']; ?>]"<?php echo $checked ? ' checked="checked"' : ''; ?> value="1" />
+				<input type="checkbox" name="application[<?php echo $user['Application']['id']; ?>]"<?php echo $checked ? ' checked="checked"' : ''; ?> value="1" class="form-control" />
 			</td>
 			<td><?php echo $user['Application']['name']; ?> <small>(<?php echo $user['Application']['version']; ?>)</small></td>
 			<td class="center">

@@ -4,7 +4,7 @@
 	<thead>
 		<tr>
 			<th width="28">
-				<input type="checkbox" onchange="env.toggleAllCheckBoxes('<?php echo $tableName; ?>', this);" />
+				<input type="checkbox" onchange="env.toggleAllCheckBoxes('<?php echo $tableName; ?>', this);" class="form-control" />
 			</th>
 			<th>Group name</th>
 		</tr>
@@ -17,7 +17,7 @@
 		?>
 		<tr>
 			<td>
-				<input type="checkbox" name="user[<?php echo $item['Group']['id']; ?>]"<?php echo $checked ? ' checked="checked"' : ''; ?> />
+				<input type="checkbox" name="user[<?php echo $item['Group']['id']; ?>]"<?php echo $checked ? ' checked="checked"' : ''; ?> class="form-control" />
 			</td>
 			<td><?= $item['Group']['name']; ?></td>
 		</tr>

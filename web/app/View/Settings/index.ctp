@@ -17,7 +17,7 @@ function verValCh($key, $settings) {
 <div class="widget">
 	<form action="<?php echo $this->Html->url(array("controller" => "settings", "action" => "index")); ?>" method="post" enctype="multipart/form-data" role="form" class="form-horizontal">
 		<div class="accordion" id="accordion2">
-			<button type="submit" name="save" class="btn btn-primary pull-right save">Save</button>
+			<!-- <button type="submit" name="save" class="btn btn-primary pull-right save">Save</button> -->
 			<div class="accordion-group widget-content-white glossed" style="clear:both;">
 				<div class="padded">
 					
@@ -62,7 +62,12 @@ function verValCh($key, $settings) {
 								<label class="col-md-3 control-label">Support email</label>
 								<div class="col-md-9">
 									<input type="text" name="settings[companySupportEmail]" class="form-control" placeholder="support@my-company.com" value="<?php echo verVal('companySupportEmail', $s); ?>" />
-									<input type="checkbox" name="settings[companySupportEmailSendDeviceNotifications]"<?php echo verValCh('companySupportEmailSendDeviceNotifications', $s); ?> /> <span>Send email to this email address when a new device is registered</span>
+								</div>
+								<div class="col-md-offset-3 col-md-1">
+									<input type="checkbox" name="settings[companySupportEmailSendDeviceNotifications]"<?php echo verValCh('companySupportEmailSendDeviceNotifications', $s); ?> class="form-control" />
+								</div>
+								<div class="col-md-8">
+									<span>Send email to this email address when a new device is registered</span>
 								</div>
 							</div>
 							<div class="form-group">
@@ -115,8 +120,11 @@ function verValCh($key, $settings) {
 						<div class="accordion-inner">
 							<div class="form-group">
 								<label class="col-md-3 control-label">Allow user registrations</label>
-								<div class="col-md-9">
-									<input type="checkbox" name="settings[sefRegAllow]"<?php echo verValCh('sefRegAllow', $s); ?> /> <span>Allow users to register without an invitation</span>
+								<div class="col-md-1">
+									<input type="checkbox" name="settings[sefRegAllow]"<?php echo verValCh('sefRegAllow', $s); ?> class="form-control" />
+								</div>
+								<div class="col-md-6">
+									<span>Allow users to register without an invitation</span>
 								</div>
 							</div>
 							<div class="form-group">
@@ -130,7 +138,7 @@ function verValCh($key, $settings) {
 					</div>
 				</div>
 			</div>
-			
+			<button type="reset" name="save" class="btn btn-default">Reset</button>			
 			<button type="submit" name="save" class="btn btn-primary pull-right save">Save</button>			
 		</div>
 	</form>
