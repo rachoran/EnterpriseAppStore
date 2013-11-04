@@ -78,7 +78,7 @@ div.accordion div.accordion-group {
 }
 div.accordion div.padded {
 }
-div.accordion div.padded img.logo {
+div.accordion div.padded img.logo, div.tab-pane div.padded img.logo {
 	width: 100%;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;

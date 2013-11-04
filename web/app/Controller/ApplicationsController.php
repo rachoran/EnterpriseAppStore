@@ -2,7 +2,7 @@
 
 class ApplicationsController extends AppController {
 	
-	var $uses = array('Application');
+	var $uses = array('Application', 'Category', 'Group');
 	
 	public function index() {
 		$this->setPageIcon('puzzle-piece');
@@ -17,6 +17,20 @@ class ApplicationsController extends AppController {
 		else {
 			$this->set('data', $this->Application->getAll());
 		}
+	}
+	
+	public function view() {
+		$this->setPageIcon('puzzle-piece');
+		
+	}
+	
+	public function edit() {
+		$this->setPageIcon('puzzle-piece');
+		$this->enablePageClass('basic-edit');
+		$this->setAdditionalCssFiles(array('basic-edit'));
+		
+		$this->set('categoriesList', $this->Category->getAll());
+		$this->set('groupsList', $this->Group->getAll());
 	}
 	
 }

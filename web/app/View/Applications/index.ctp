@@ -7,7 +7,7 @@ $this->Html->addCrumb('Applications', null);
 	<div class="widget-content-white glossed">
 		<div class="padded">
 			<p>
-				<a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'edit', 'new')); ?>" class="btn btn-primary pull-right new">New application <i class="fa icon-plus"></i></a>
+				<a href="<?php echo $this->Html->url(array('controller' => 'applications', 'action' => 'edit', 'new')); ?>" class="btn btn-primary pull-right new">New application <i class="fa icon-plus"></i></a>
 				<ul id="appTablePills" class="nav nav-pills">
 					<li class="active"><a href="#all" data-toggle="pill">All</a></li>
 					<li><a href="#apple" data-toggle="pill">iOS</a></li>
