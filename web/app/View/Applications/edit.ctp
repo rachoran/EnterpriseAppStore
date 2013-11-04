@@ -22,10 +22,10 @@ function verValCh($key, $data) {
 	<div class="widget">
 	    <ul class="nav nav-tabs">
 	        <li class="active"><a href="#tab_application_basic" data-toggle="tab">Basic info</a></li>
-	        <li><a href="#tab_application_screenshots" data-toggle="tab">Screenshots</a></li>
-	        <li><a href="#tab_application_groupncats" data-toggle="tab">Groups &amp; Categories</a></li>
-	        <li><a href="#tab_application_attachments" data-toggle="tab">Attachments</a></li>
-	        <li><a href="#tab_application_other" data-toggle="tab">Other</a></li>
+	        <li class="disabled"><a href="#tab_application_screenshots" data-toggle="tab">Screenshots</a></li>
+	        <li class="disabled"><a href="#tab_application_groupncats" data-toggle="tab">Groups &amp; Categories</a></li>
+	        <li class="disabled"><a href="#tab_application_attachments" data-toggle="tab">Attachments</a></li>
+	        <li class="disabled"><a href="#tab_application_other" data-toggle="tab">Other</a></li>
 	    </ul>
 	    <div class="tab-content bottom-margin">
 			<div class="tab-pane active" id="tab_application_basic">
@@ -85,8 +85,58 @@ function verValCh($key, $data) {
 					</div>
 				</div>
 			</div>
-			<div class="tab-pane" id="tab_application_screenshots">
+			<div class="tab-pane scrnsht" id="tab_application_screenshots">
 				<div class="padded">
+					<div class="screenshots">
+						<div class="image">
+							<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Applications/test/screen.png?time=<?php echo time(); ?>" alt="Screenshot 1" />
+						</div>
+						<div class="image">
+							<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Applications/test/screen.png?time=<?php echo time(); ?>" alt="Screenshot 1" />
+						</div>
+						<div class="image">
+							<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Applications/test/screen.png?time=<?php echo time(); ?>" alt="Screenshot 1" />
+						</div>
+						<div class="image">
+							<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Applications/test/screen.png?time=<?php echo time(); ?>" alt="Screenshot 1" />
+						</div>
+						<div class="image">
+							<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Applications/test/screen.png?time=<?php echo time(); ?>" alt="Screenshot 1" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Screenshot 1</label>
+						<div class="col-md-7">
+							<input type="file" name="formFile[name]" class="form-control" />
+						</div>
+						<div class="col-md-1">
+							<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Applications/test/screen.png?time=<?php echo time(); ?>" alt="Screenshot 1" class="logo" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Screenshot 2</label>
+						<div class="col-md-7">
+							<input type="file" name="formFile[name]" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Screenshot 3</label>
+						<div class="col-md-7">
+							<input type="file" name="formFile[name]" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Screenshot 4</label>
+						<div class="col-md-7">
+							<input type="file" name="formFile[name]" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Screenshot 5</label>
+						<div class="col-md-7">
+							<input type="file" name="formFile[name]" class="form-control" />
+						</div>
+					</div>
 					<div class="form-group">
 						<div class="col-md-offset-4 col-md-8">
 							<a href="<?php echo $this->Html->url('/applications', true); ?>" class="btn btn-default">Cancel</a>
