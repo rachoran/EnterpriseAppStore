@@ -5,6 +5,10 @@ class SigningController extends AppController {
 	var $uses = array('Signing');
 	
 	public function index() {
+        $ex = shell_exec('which codesign');
+        if (empty($ex)) {
+            $this->Session->setFlash('This machine doesn\'t unfortunately support codesigning yet.');
+        }
 		$this->setPageIcon('certificate');
 		$this->set('signings', $this->Signing->getAll());
 	}

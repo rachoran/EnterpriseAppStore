@@ -43,6 +43,10 @@ class AppController extends Controller {
 		$this->set('pageIcon', $pageIcon);
 	}
 	
+	public function enableAjaxFileUpload() {
+		$this->set('ajaxFileUpload', true);
+	}
+	
 	public function enablePageClass($className) {
 		$this->set('pageClass', ' '.$className);
 	}

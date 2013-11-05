@@ -37,10 +37,21 @@ setInterval(function(){
 <link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/app.css' />
 <link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/cake.css' />
 <link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/styles.css' />
+
 <?php
 if (isset($cssFiles)) foreach ($cssFiles as $file) { ?>
 <link rel='stylesheet' href='<?php echo $this->Html->url('/', true); ?>assets/css/for_pages/<?php echo $file; ?>.css' />
 <?php } ?>
+
+<?php
+if (isset($ajaxFileUpload)) {
+?>
+<link rel="stylesheet" href="<?php echo $this->Html->url('/', true); ?>thirdparty/jQuery-File-Upload/css/jquery.fileupload.css" />
+<link rel="stylesheet" href="<?php echo $this->Html->url('/', true); ?>thirdparty/jQuery-File-Upload/css/jquery.fileupload-ui.css" />
+<?php	
+}
+?>
+
 <link href='http://fonts.googleapis.com/css?family=Oswald:300,400,700|Open+Sans:400,700,300' rel='stylesheet' type='text/css' />
 <link href="<?php echo $this->Html->url('/', true); ?>assets/favicon.ico" rel="shortcut icon" />
 <link href="<?php echo $this->Html->url('/', true); ?>Userfiles/Settings/Images/Logo" rel="apple-touch-icon" />
@@ -110,7 +121,8 @@ ga('send', 'pageview');
 <?php echo $this->element('Admin/configSideBar'); ?>
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> --> 
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/jquery.js'></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script> 
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>  -->
+<script src="<?php echo $this->Html->url('/', true); ?>assets/js/jquery-ui.min.js"></script> 
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/jquery.cookie.js'></script>
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/jquery.sparkline.min.js'></script> 
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/bootstrap/tab.js'></script> 
@@ -128,13 +140,23 @@ ga('send', 'pageview');
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/for_pages/color_settings.js'></script> 
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/application.js'></script>
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/environment.js'></script>
-
+<?php
+if (isset($ajaxFileUpload)) {
+?>
+<script src="<?php echo $this->Html->url('/', true); ?>thirdparty/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="<?php echo $this->Html->url('/', true); ?>thirdparty/jQuery-File-Upload/js/jquery.iframe-transport.js"></script>
+<script src="<?php echo $this->Html->url('/', true); ?>thirdparty/jQuery-File-Upload/js/jquery.fileupload.js"></script>
+<?php	
+}
+?>
 <script type="text/javascript">
 env.baseUrl = '<?php echo $this->Html->url('/', true); ?>';
 </script>
 <?php
 if (isset($jsFiles)) foreach ($jsFiles as $file) { ?>
 <script src='<?php echo $this->Html->url('/', true); ?>assets/js/for_pages/<?php echo $file; ?>.js'></script>
-<?php } ?>
+<?php
+}
+?>
 </body>
 </html>

@@ -99,8 +99,24 @@ class Application extends AppModel {
 		return $this->find('all', $options);
 	}
 	
-	public function numberOfAppsForPlatforms($platforms=array()) {
+	public function saveApp($appData, $confData, $files) {
+		$id = isset($appData['id']) ? (int)$appData['id'] : 0;
+		if ($id) {
+			$this->id = $id;
+		}
+		else {
+			$this->create();
+		}
+		$this->set('name', $appData['name']);
+		$this->set('identifier', $appData['identifier']);
+		$this->set('version', $appData['version']);
+		$this->set('sort', $appData['sort']);
+		$this->set('config', json_encode($confData));
+		$this->save();
 		
+		$appData['id'] = $this->id;
+		
+		return $this;
 	}
 
 	
