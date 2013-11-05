@@ -19,6 +19,15 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
+ 
+function debug($data) {
+	header('Content-type: text/plain');
+	if (!$data) {
+		$data = 'undefined';
+	}
+	print_r($data);
+	die();
+}
 
 /**
  * Use the DS to separate the directories in other defines

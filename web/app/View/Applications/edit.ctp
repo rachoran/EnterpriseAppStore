@@ -33,13 +33,13 @@ function verValCh($key, $data) {
 					<div class="form-group">
 						<label class="col-md-4 control-label">Application name</label>
 						<div class="col-md-8">
-							<input id="DADSFSADFDAF" type="text" name="appData[name]" class="form-control" placeholder="iApplication" value="<?= $data['Application']['name']; ?>" />
+							<input type="text" name="appData[name]" class="form-control disabled" placeholder="iApplication" value="<?= $data['Application']['name']; ?>" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-4 control-label">Application icon</label>
 						<div class="col-md-7">
-							<input type="file" name="formFile[name]" class="form-control" />
+							<input type="file" name="formFile[name]" class="form-control disabled" />
 						</div>
 						<div class="col-md-1">
 							<img src="<?= $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?= time(); ?>" alt="Company logo" class="logo" />
@@ -48,7 +48,7 @@ function verValCh($key, $data) {
 					<div class="form-group">
 						<label class="col-md-4 control-label">Application identifier</label>
 						<div class="col-md-8">
-							<input type="text" name="appData[identifier]" class="form-control" placeholder="com.example.myApp" value="<?= $data['Application']['identifier']; ?>" />
+							<input type="text" name="appData[identifier]" class="form-control disabled" placeholder="com.example.myApp" value="<?= $data['Application']['identifier']; ?>" />
 						</div>
 					</div>
 					<div class="form-group">
@@ -63,27 +63,27 @@ function verValCh($key, $data) {
 					<div class="form-group">
 						<label class="col-md-4 control-label">Version number</label>
 						<div class="col-md-8">
-							<input type="text" name="appData[version]" class="form-control" placeholder="1.2.3" value="<?= $data['Application']['version']; ?>" />
+							<input type="text" name="appData[version]" class="form-control disabled" placeholder="1.2.3" value="<?= $data['Application']['version']; ?>" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-4 control-label">Author</label>
 						<div class="col-md-8">
-							<input type="text" name="formData[author]" class="form-control" placeholder="My Company" value="<?= verVal('author', $s); ?>" />
+							<input type="text" name="formData[author]" class="form-control disabled" placeholder="My Company" value="<?= verVal('author', $s); ?>" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-4 control-label">Description</label>
 						<div class="col-md-8">
-							<textarea id="wqefcqwrfqrfq" type="text" name="formData[description]" class="form-control description" placeholder="App description"><?= verVal('description', $s); ?></textarea>
+							<textarea id="wqefcqwrfqrfq" type="text" name="formData[description]" class="form-control description disabled" placeholder="App description"><?= verVal('description', $s); ?></textarea>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-md-offset-4 col-md-8">
 							<input type="hidden" name="appData[id]" value="<?= $id; ?>" />
 							<a href="<?= $this->Html->url('/applications', true); ?>" class="btn btn-default">Cancel</a>
-							<button type="submit" name="save" class="btn btn-primary pull-right">Save &amp; close</button>
-							<button type="submit" name="apply" class="btn btn-primary pull-right">Apply</button>
+							<button type="submit" name="save" class="btn btn-primary pull-right disabled">Save &amp; close</button>
+							<button type="submit" name="apply" class="btn btn-primary pull-right disabled">Apply</button>
 						</div>
 					</div>
 				</div>

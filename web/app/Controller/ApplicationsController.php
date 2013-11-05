@@ -21,7 +21,6 @@ class ApplicationsController extends AppController {
 	
 	public function view() {
 		$this->setPageIcon('puzzle-piece');
-		
 	}
 	
 	public function edit($id=0) {
@@ -42,6 +41,50 @@ class ApplicationsController extends AppController {
 		$this->set('categoriesList', $this->Category->getAll());
 		$this->set('groupsList', $this->Group->getAll());
 		$this->set('attachmentsList', $this->Attachment->getAllForApp($app));
+	}
+	
+	public function uploadApp() {
+		App::uses('ExtractAndroid', 'Lib/AppExtraction');
+		App::uses('ExtractApple', 'Lib/AppExtraction');
+		
+		$file = $this->request->form['formFile'];
+		
+		$extract = null;
+		$errors = null;
+		
+		if (true) {
+			$file['name'] = 'iJenkins_Enterprise.ipa';
+			$file['type'] = 'application/octet-stream';
+			$file['tmp_name'] = null;
+			$file['size'] = 1234124;
+			$file['error'] = null;
+		}
+		
+		if ($file) {
+			$extract = new ExtractApple($file);
+			if ($extract->is()) {
+				
+			}
+			else {
+				$extract = new ExtractAndroid($file);
+				if ($extract->is()) {
+					
+				}
+				else {
+					die($extract);
+					$extract = null;
+					// TODO: Error message goes here!
+				}
+			}
+			if ($extract) {
+				$extract->process();
+				$errors = $extract->errors;
+			}
+		}
+		
+		$data = ($extract != null) ? $extract->data() : null;
+		
+		$this->outputApi($data, false);
 	}
 	
 }
