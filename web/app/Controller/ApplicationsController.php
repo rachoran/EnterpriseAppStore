@@ -101,6 +101,7 @@ class ApplicationsController extends AppController {
 				if ($extract->process()) {
 					$app = $this->Application->saveApp($extract->data, $extract->data, $extract->app, $extract->icon);
 					$extract->data['id'] = $app->id;
+					$extract->clean();
 				}
 				$errors = $extract->errors;
 			}

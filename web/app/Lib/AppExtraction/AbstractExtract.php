@@ -22,6 +22,7 @@ abstract class AbstractExtract {
     }
     
     protected function tempPath() {
+    	// TODO: Use user ID instead
     	$path = TMP.'1'.DS;
     	$dir = new Folder();
 		$dir->create($path);
@@ -36,6 +37,11 @@ abstract class AbstractExtract {
     
 	public function data() {
 		return array('app'=>$this->data, 'warnings'=>$this->warnings);
+	}
+	
+	public function clean() {
+		$dir = new Folder();
+		$dir->delete($this->tempPath());
 	}
 	
 	protected function raiseError($error) {

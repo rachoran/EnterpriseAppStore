@@ -165,11 +165,10 @@ class ExtractApple extends AbstractExtract {
 		// Processing values
 		$this->data = $arr;
 		$this->app = $archiveFile;
-		if (isset($largestIcon['file'])) $this->icon = $largestIcon['file'];
-		
-		// Removing cache stuff
-		$dir = new Folder();
-		$dir->delete($tempPath);
+		if (isset($largestIcon['file'])) {
+			copy($largestIcon['file'], $tempPath.'icon.png');
+		}
+		$this->icon = $tempPath.'icon.png';
 		
 		return true;
 	}

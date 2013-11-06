@@ -48,7 +48,7 @@ $this->Html->addCrumb('Applications', null);
 				    <tr class="<?= $icon; ?>">
 				        <td class="icon">
 				        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'view', $item['Application']['id'], $item['Application']['name'])); ?>">
-				        		<img src="http://www.apps.ie/assets/images/developer_images/lemonsplat/CPLjobs_Android_app_icon.png" alt="<?php echo $item['Application']['name']; ?>" />
+				        		<img src="<?= Storage::urlForIconForAppWithId($item['Application']['id']).'?t='.time(); ?>" alt="<?php echo $item['Application']['name']; ?>" />
 				        	</a>
 				        </td>
 				        <td class="name">

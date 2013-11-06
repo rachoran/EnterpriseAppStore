@@ -5,6 +5,8 @@ App::uses('File', 'Utility');
 
 class Settings {
 	
+	public static $settings;
+	
 	public function get($var) {
 		$data = $this->settings();
 		if (isset($data[$var])) {
@@ -14,8 +16,7 @@ class Settings {
 	}
 	
 	public function settings() {
-		App::import('Component', 'SessionComponent'); 
-		$data = SessionComponent::read('Settings.Data');
+		$data = Settings::$settings;
 		if ($data) {
 			return $data;
 		}
@@ -24,15 +25,14 @@ class Settings {
 		if ($file->exists()) {
 			$jsonData = $file->read();
 			$data = json_decode($jsonData, true);
-			SessionComponent::write('Settings.Data', $data);
+			Settings::$settings = $data;
 			return $data;
 		}
 		else return array();
 	}
 	
 	public function saveSettings($settings) {
-		App::import('Component', 'SessionComponent'); 
-		if (!empty($settings)) SessionComponent::write('Settings.Data', $settings);;
+		if (!empty($settings)) Settings::$settings = $data;
 		$folderPath = WWW_ROOT.'Userfiles/Settings/Data/';
 		$dir = new Folder();
 		$dir->create($folderPath);

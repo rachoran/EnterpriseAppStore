@@ -1,5 +1,7 @@
 <?php
 
+App::uses('Storage', 'Lib/Storage');
+
 class Application extends AppModel {
 
 	static public $iOSApp = array(0, 1);
@@ -107,11 +109,17 @@ class Application extends AppModel {
 		else {
 			$this->create();
 		}
+		
+		$confData['isIcon'] = ($icon) ? 1 : 0;
+		
 		$this->set('name', $appData['name']);
 		$this->set('identifier', $appData['identifier']);
 		$this->set('version', $appData['version']);
 		$this->set('sort', $appData['sort']);
 		$this->set('size', $appData['size']);
+		
+		$s = new Settings();
+		$this->set('location', ($s->get('s3Enable') ? 1 : 0));
 		
 		if (isset($confData['name'])) unset($confData['name']);
 		if (isset($confData['identifier'])) unset($confData['identifier']);
@@ -121,7 +129,26 @@ class Application extends AppModel {
 		$this->set('config', json_encode($confData));
 		
 		$this->save();
-		return $this;
+		
+		// Saving files
+		$ok = true;
+		if ($file && !empty($file)) {
+			if (!Storage::saveFile($file, 'Applications'.DS.$this->id, true)) {
+				$this->delete($this->id);
+				$ok = false;
+				// TODO: Display error
+			}
+		}
+		if ($ok) {
+			if (!file_exists($icon)) {
+				copy(WWW_ROOT.'Userfiles'.DS.'Settings'.DS.'Images'.DS.'Icon', $icon);
+			}
+			if (!Storage::saveFile($icon, 'Applications'.DS.$this->id, false)) {
+				// TODO: Display error
+			}
+		}
+		
+		return $ok ? $this : null;
 	}
 
 	

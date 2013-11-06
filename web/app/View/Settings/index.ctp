@@ -160,19 +160,19 @@ function verValCh($key, $settings) {
 							<div class="form-group">
 								<label class="col-md-3 control-label">Bucket</label>
 								<div class="col-md-9">
-									<input type="text" name="settings[s3Bucket]" class="form-control" placeholder="Company name" value="<?php echo verVal('s3Bucket', $s); ?>" />
+									<input type="text" name="settings[s3Bucket]" class="form-control" placeholder="Bucket name (" value="<?php echo verVal('s3Bucket', $s); ?>" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-3 control-label">Access Key</label>
 								<div class="col-md-9">
-									<input type="text" name="settings[s3AccessKey]" class="form-control" placeholder="Company name" value="<?php echo verVal('s3AccessKey', $s); ?>" />
+									<input type="text" name="settings[s3AccessKey]" class="form-control" placeholder="OTOSIASI472CWSRE33NA" value="<?php echo verVal('s3AccessKey', $s); ?>" />
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-md-3 control-label">Secret Key</label>
 								<div class="col-md-9">
-									<input type="text" name="settings[s3SecretKey]" class="form-control" placeholder="Company name" value="<?php echo verVal('s3SecretKey', $s); ?>" />
+									<input type="text" name="settings[s3SecretKey]" class="form-control" placeholder="!ziS35435DWHG$4OF5HOPfPccrXnxBBkdQYsdfQWRgoH" value="<?php echo verVal('s3SecretKey', $s); ?>" />
 								</div>
 							</div>
 						</div>
