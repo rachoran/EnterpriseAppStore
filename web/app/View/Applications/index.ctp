@@ -71,9 +71,22 @@ $this->Html->addCrumb('Applications', null);
 				        </td>
 				        <td class="edit">
 				        	<?php
-				        	if (true) {
-				        		echo $this->Html->link(__('Install latest'), array('controller' => 'users', 'action' => 'view', $item['Application']['id']), array('class'=>'btn btn-default'));
-				        	}
+				        	//Detect special conditions devices
+							$iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
+							$iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+							$iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
+							$Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
+							$webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
+							
+							if ($iPod || $iPhone || $iPad) {
+							    echo $this->Html->link(__('Install latest'), array('controller' => 'users', 'action' => 'view', $item['Application']['id']), array('class'=>'btn btn-default'));
+							}
+							elseif ($Android) {
+							    echo $this->Html->link(__('Install latest'), array('controller' => 'users', 'action' => 'view', $item['Application']['id']), array('class'=>'btn btn-default'));
+							}
+							else {
+								echo $this->Html->link(__('Download latest'), array('controller' => 'users', 'action' => 'view', $item['Application']['id']), array('class'=>'btn btn-default'));
+							}
 				        	?>
 				        	<!--
 <a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $item['Application']['id'], $item['Application']['name'])); ?>">

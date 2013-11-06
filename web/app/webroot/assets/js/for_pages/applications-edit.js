@@ -31,12 +31,12 @@ function checkFields(val) {
 		$('.type1, .type2').hide();
 		$('.type0').show();
 		
-		$('.nav.nav-tabs li').addClass('disabled');
-		$('#tab_application_basic .disabled').prop('disabled', true);
+		$('.nav.nav-tabs li, #mainAppForm button').addClass('disabled');
+		$('#mainAppForm input:not(#binaryUpload), textarea, button.disabled').prop('disabled', true);
 	}
 	else {
-		$('.nav.nav-tabs li').removeClass('disabled');
-		$('#tab_application_basic .disabled').prop('disabled', false);
+		$('#mainAppForm input, textarea, button.disabled').prop('disabled', false);
+		$('.nav.nav-tabs li, button.disabled').removeClass('disabled');
 		
 		if (val == 1) {
 			$('.type0, .type2').hide();

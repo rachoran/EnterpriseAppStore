@@ -138,6 +138,48 @@ function verValCh($key, $settings) {
 					</div>
 				</div>
 			</div>
+			
+			<div class="accordion-group widget-content-white glossed">
+				<div class="padded">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#user-self-registration">
+							<h3 class="form-title form-title-first"><i class="icon-archive"></i> Amazon S3 Hosting</h3>
+						</a>
+					</div>
+					<div id="user-self-registration" class="accordion-body collapse in">
+						<div class="accordion-inner">
+							<div class="form-group">
+								<label class="col-md-3 control-label">Enable Amazon S3</label>
+								<div class="col-md-1">
+									<input type="checkbox" name="settings[s3Enable]"<?php echo verValCh('s3Enable', $s); ?> class="form-control" />
+								</div>
+								<div class="col-md-6">
+									<span>Enable Amazon S3 hosting for app binaries to lower the cost of hosting and save space on this server</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label">Bucket</label>
+								<div class="col-md-9">
+									<input type="text" name="settings[s3Bucket]" class="form-control" placeholder="Company name" value="<?php echo verVal('s3Bucket', $s); ?>" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label">Access Key</label>
+								<div class="col-md-9">
+									<input type="text" name="settings[s3AccessKey]" class="form-control" placeholder="Company name" value="<?php echo verVal('s3AccessKey', $s); ?>" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label">Secret Key</label>
+								<div class="col-md-9">
+									<input type="text" name="settings[s3SecretKey]" class="form-control" placeholder="Company name" value="<?php echo verVal('s3SecretKey', $s); ?>" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 			<button type="reset" name="save" class="btn btn-default">Reset</button>			
 			<button type="submit" name="save" class="btn btn-primary pull-right save">Save</button>			
 		</div>
