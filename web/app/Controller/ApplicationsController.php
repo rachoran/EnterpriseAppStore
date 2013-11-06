@@ -47,17 +47,38 @@ class ApplicationsController extends AppController {
 		App::uses('ExtractAndroid', 'Lib/AppExtraction');
 		App::uses('ExtractApple', 'Lib/AppExtraction');
 		
-		$file = $this->request->form['formFile'];
+		$file = $this->request->form['appFile'];
 		
 		$extract = null;
 		$errors = null;
 		
-		if (true) {
-			$file['name'] = 'iJenkins_Enterprise.ipa';
-			$file['type'] = 'application/octet-stream';
-			$file['tmp_name'] = null;
-			$file['size'] = 1234124;
-			$file['error'] = null;
+		$debug = false; // 'i' for iPhone & 'a' for Android or false to disable
+		
+		if ($debug) {
+			if ($debug == 'i') {
+				$file['name'] = 'iJenkins_Enterprise.ipa';
+				$file['type'] = 'application/octet-stream';
+				$file['tmp_name'] = 'debug';
+				$file['path'] = APP.DS.'Dummy'.DS.'iJenkins_Enterprise.ipa';
+				$file['size'] = 1234124;
+				$file['error'] = null;
+			}
+			elseif ($debug == 'i2') {
+				$file['name'] = 'iDeviant_Enterprise.ipa';
+				$file['type'] = 'application/octet-stream';
+				$file['tmp_name'] = 'debug';
+				$file['path'] = APP.DS.'Dummy'.DS.'iDeviant_Enterprise.ipa';
+				$file['size'] = 1234124;
+				$file['error'] = null;
+			}
+			elseif ($debug == 'a') {
+				$file['name'] = 'iDeviant_Enterprise.apk';
+				$file['type'] = 'application/octet-stream';
+				$file['tmp_name'] = 'debug';
+				$file['path'] = APP.DS.'Dummy'.DS.'iJenkins_Enterprise.ipa';
+				$file['size'] = 1234124;
+				$file['error'] = null;
+			}
 		}
 		
 		if ($file) {
@@ -77,14 +98,31 @@ class ApplicationsController extends AppController {
 				}
 			}
 			if ($extract) {
-				$extract->process();
+				if ($extract->process()) {
+					$app = $this->Application->saveApp($extract->data, $extract->data, $extract->app, $extract->icon);
+					$extract->data['id'] = $app->id;
+				}
 				$errors = $extract->errors;
+			}
+			else {
+				$errors = array('Unable to process the app');
+			}
+		}
+		else {
+			$errors = array('No file has been processed');
+		}
+		
+		$data = null;
+		if ($extract != null) {
+			$data = $extract->data;
+		}
+		if (!$data) {
+			if (!$errors) {
+				$errors = array('No file has been processed');
 			}
 		}
 		
-		$data = ($extract != null) ? $extract->data() : null;
-		
-		$this->outputApi($data, false);
+		$this->outputApi($data, false, $errors);
 	}
 	
 }

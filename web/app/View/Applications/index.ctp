@@ -21,7 +21,7 @@ $this->Html->addCrumb('Applications', null);
 				    <tr>
 				        <th class="icon">&nbsp;</th>
 				        <th class="name">Application</th>
-				        <th class="edit">Edit</th>
+				        <th class="edit">Action</th>
 				    </tr>
 				</thead>
 				<tbody>
@@ -59,24 +59,31 @@ $this->Html->addCrumb('Applications', null);
 			            	<?php
 			            	if ($ext) {
 			            	?>
-				            <small style="margin-right: 12px;">
+				            <!--<small style="margin-right: 12px;">
 				            	<strong>Download: </strong>
 				            	<a href="" title="Download app">
 				            		<?= $ext; ?>
 				            		<i class="fa icon-cloud-download"></i>
 				            	</a>
-				            </small>
+				            </small>-->
 				            <small style="margin-right: 12px;"><strong>Builds:</strong> <?= $item[0]['count']; ?> </small>
 			            	<?php } ?>
 				        </td>
 				        <td class="edit">
-				        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $item['Application']['id'], $item['Application']['name'])); ?>">
+				        	<?php
+				        	if (true) {
+				        		echo $this->Html->link(__('Install latest'), array('controller' => 'users', 'action' => 'view', $item['Application']['id']), array('class'=>'btn btn-default'));
+				        	}
+				        	?>
+				        	<!--
+<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $item['Application']['id'], $item['Application']['name'])); ?>">
 				        		<i class="fa icon-edit"><span> Edit</span></i>
 				        	</a>
 				        	<br />
 				        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'delete', $item['Application']['id'], $item['Application']['name'])); ?>" onclick="return env.confirmation('Are you sure you want to delete user <?php echo $item['Application']['name']; ?>?');">
 				        		<i class="fa icon-ban-circle"><span> Delete</span></i>
 				        	</a>
+-->
 				        </td>
 				    </tr>
 				    <?php

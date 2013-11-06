@@ -21,6 +21,7 @@ class Attachment extends AppModel {
 	}
 	
 	public function getAllForApp($app) {
+		if (!$app) return null;
 		$options = array();
 		$options['fields'] = array('Attachment.*', 'FiletypesJoin.*');
 		$options['joins'] = array(

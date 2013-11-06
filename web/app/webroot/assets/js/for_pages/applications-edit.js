@@ -1,23 +1,22 @@
-function xinspect(o,i){
-    if(typeof i=='undefined')i='';
-    if(i.length>50)return '[MAX ITERATIONS]';
-    var r=[];
-    for(var p in o){
-        var t=typeof o[p];
-        r.push(i+'"'+p+'" ('+t+') => '+(t=='object' ? 'object:'+xinspect(o[p],i+'  ') : o[p]+''));
-    }
-    return r.join(i+'\n');
-}
+var didUploadAppBinary = false;
 
 $('#binaryUpload').fileupload({
     url: env.baseUrl + 'applications/uploadApp',
     dataType: 'json',
     done: function (e, data) {
-    	//alert(xinspect(data));
-    	//alert(data.files[0].name);
-    	$('.nav.nav-tabs li').removeClass('disabled');
-		$('#tab_application_basic .disabled').prop('disabled', false);
-		$('.nav.nav-tabs li a').unbind(".myclick");
+		if (data.result.data.id) {
+			didUploadAppBinary = true;
+	    	
+	    	$('#appName').val(data.result.data.name);
+	    	$('#appIdentifier').val(data.result.data.identifier);
+	    	$('#appVersion').val(data.result.data.version);
+	    	$('#appId').val(data.result.data.id);
+	    	
+	    	$('#tab_application_basic .disabled:not(.beforeUpload)').prop('disabled', true);
+			$('#tab_application_basic .disabled.beforeUpload, button.disabled').prop('disabled', false);
+			$('#binaryUploadWrapper, #applicationTypeWrapper').hide();
+			$('.nav.nav-tabs li, button.disabled').removeClass('disabled');
+		}
     },
     progressall: function (e, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
@@ -25,10 +24,47 @@ $('#binaryUpload').fileupload({
     }
 }).error(function (jqXHR, textStatus, errorThrown) {
 	alert(errorThrown);
-}).prop('disabled', !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : 'disabled');
+});
 
+function checkFields(val) {
+	if (val == 0) {
+		$('.type1, .type2').hide();
+		$('.type0').show();
+		
+		$('.nav.nav-tabs li').addClass('disabled');
+		$('#tab_application_basic .disabled').prop('disabled', true);
+	}
+	else {
+		$('.nav.nav-tabs li').removeClass('disabled');
+		$('#tab_application_basic .disabled').prop('disabled', false);
+		
+		if (val == 1) {
+			$('.type0, .type2').hide();
+			$('.type1').show();
+			$('#appUrl').attr('placeholder', 'https://itunes.apple.com/gb/app/ijenkins/id720123810?mt=8');
+		}
+		else if (val == 2) {
+			$('.type0, .type1').hide();
+			$('.type2').show();
+			$('#appUrl').attr('placeholder', 'https://m.example.com/mobile-site/');
+		}
+	}
+}
 
 $(function() {
-	$('.nav.nav-tabs li').addClass('disabled');
-	$('#tab_application_basic .disabled').prop('disabled', true);
+	checkFields(0);
+	
+	var id = $('#appId').val();
+	if (!id || id == 0) {
+		$.cookie('last_tab', '#tab_application_basic');
+		$('ul.nav-tabs').children().removeClass('active');
+		$('a[href='+ '#tab_application_basic' +']').parents('li:first').addClass('active');
+		$('div.tab-content').children().removeClass('active');
+		$('#tab_application_basic').addClass('active');
+	}
+	
+	$('#appTypeSwitch').change(function() {
+		var val = $(this).val();
+		checkFields(val);
+	});
 });

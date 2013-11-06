@@ -99,7 +99,7 @@ class Application extends AppModel {
 		return $this->find('all', $options);
 	}
 	
-	public function saveApp($appData, $confData, $files) {
+	public function saveApp($appData, $confData, $file, $icon) {
 		$id = isset($appData['id']) ? (int)$appData['id'] : 0;
 		if ($id) {
 			$this->id = $id;
@@ -111,11 +111,16 @@ class Application extends AppModel {
 		$this->set('identifier', $appData['identifier']);
 		$this->set('version', $appData['version']);
 		$this->set('sort', $appData['sort']);
+		$this->set('size', $appData['size']);
+		
+		if (isset($confData['name'])) unset($confData['name']);
+		if (isset($confData['identifier'])) unset($confData['identifier']);
+		if (isset($confData['version'])) unset($confData['version']);
+		if (isset($confData['sort'])) unset($confData['sort']);
+		if (isset($confData['size'])) unset($confData['size']);
 		$this->set('config', json_encode($confData));
+		
 		$this->save();
-		
-		$appData['id'] = $this->id;
-		
 		return $this;
 	}
 
