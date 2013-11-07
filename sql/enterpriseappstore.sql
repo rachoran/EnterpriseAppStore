@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 03, 2013 at 02:02 PM
+-- Generation Time: Nov 07, 2013 at 01:09 PM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -30,31 +30,31 @@ CREATE TABLE `applications` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `identifier` varchar(150) NOT NULL,
+  `url` text NOT NULL,
   `platform` tinyint(2) unsigned NOT NULL,
   `version` varchar(15) NOT NULL,
   `size` bigint(20) unsigned NOT NULL DEFAULT '0',
   `sort` int(5) unsigned NOT NULL DEFAULT '1000',
   `config` text NOT NULL,
+  `location` tinyint(2) unsigned NOT NULL DEFAULT '0',
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `name` (`name`,`identifier`,`platform`,`sort`),
   KEY `version` (`version`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `applications`
 --
 
-INSERT INTO `applications` (`id`, `name`, `identifier`, `platform`, `version`, `size`, `sort`, `config`, `created`, `modified`) VALUES
-(1, 'iJenkins', 'com.fuerteint.ijenkins', 0, '1.1', 1123423, 1000, '', '2013-11-02 11:30:08', '2013-11-02 11:30:12'),
-(2, 'iDeviant', 'com.fuerteint.ideviant', 1, '3.0', 134234, 1000, '', '2013-11-02 11:31:34', '2013-11-02 11:31:38'),
-(3, 'Fuerte Mobile Web', 'fuerteint.com', 8, '3.0', 0, 1000, '', '2013-11-02 17:55:34', '2013-11-02 17:55:34'),
-(4, 'Applytics', 'com.fuerteint.applytics', 7, '2.0', 134234, 1000, '', '2013-11-02 17:58:34', '2013-11-02 17:58:34'),
-(5, 'Ford', 'com.fuerteit.ford', 3, '2.0', 12341, 1000, '', '2013-11-02 11:38:34', '2013-11-02 11:38:34'),
-(6, 'StickerTag', 'com.fuerteint.stickertag', 4, '5.0', 12341242, 1000, '', '2013-11-02 14:38:34', '2013-11-02 14:38:34'),
-(7, 'Mustard', 'com.fuerteint.mustard', 2, '0.1', 1234, 1000, '', '2013-11-02 18:38:50', '2013-11-02 18:38:50'),
-(8, 'Flurrystics', 'com.uerteint.flurrystics', 6, '2.0', 3241, 1000, '', '2013-11-02 18:42:41', '2013-11-02 18:42:41');
+INSERT INTO `applications` (`id`, `name`, `identifier`, `url`, `platform`, `version`, `size`, `sort`, `config`, `location`, `created`, `modified`) VALUES
+(1, 'iDeviant', 'com.fuerteint.iDeviant', '', 0, '4.0', 1059411, 1000, '{"plist":{"CFBundleDisplayName":"iDeviant","CFBundleName":"iDeviant","DTXcode":"0501","DTSDKName":"iphoneos7.0","UISupportedInterfaceOrientations~ipad":["UIInterfaceOrientationPortrait","UIInterfaceOrientationPortraitUpsideDown","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleIcons~ipad":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["AppIcon29x29","AppIcon40x40","AppIcon60x60","AppIcon76x76"]}},"DTSDKBuild":"11B508","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"13A603","DTPlatformName":"iphoneos","CFBundleShortVersionString":"4.0","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"DTCompiler":"com.apple.compilers.llvm.clang.1_0","CFBundleExecutable":"iDeviant","UILaunchImages":[{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"LaunchImage-700-568h","UILaunchImageSize":"{320, 568}","UILaunchImageMinimumOSVersion":"7.0"}],"CFBundleResourceSpecification":"ResourceRules.plist","MinimumOSVersion":"7.0","UIDeviceFamily":[1],"UIViewControllerBasedStatusBarAppearance":false,"DTXcodeBuild":"5A2053","CFBundleIdentifier":"com.fuerteint.iDeviant","UIAppFonts":["FontAwesome.ttf"],"CFBundleSignature":"????","DTPlatformVersion":"7.0","CFBundleIcons":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["AppIcon29x29","AppIcon40x40","AppIcon60x60"]}},"LSRequiresIPhoneOS":true,"UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"DTPlatformBuild":"11B508"},"icons":["AppIcon29x29@2x.png","AppIcon29x29@2x~ipad.png","AppIcon29x29~ipad.png","AppIcon40x40@2x.png","AppIcon40x40@2x~ipad.png","AppIcon40x40~ipad.png","AppIcon60x60@2x.png"],"provisioning":"enterprise","isIcon":1}', 0, '2013-11-06 22:43:02', '2013-11-06 22:43:02'),
+(2, 'iJenkins', 'com.fuerteint.ijenkins', '', 0, '1.0', 301232, 1000, '{"plist":{"CFBundleName":"iJenkins","DTXcode":"0500","DTSDKName":"iphoneos7.0","DTSDKBuild":"11A4449b","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"12E55","DTPlatformName":"iphoneos","CFBundleShortVersionString":"1.0","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"CFBundleExecutable":"iJenkins","DTCompiler":"com.apple.compilers.llvm.clang.1_0","MinimumOSVersion":"6.1","CFBundleIdentifier":"com.fuerteint.ijenkins","UIAppFonts":["FontAwesome.ttf"],"DTPlatformVersion":"7.0","CFBundleIconFiles":["Icon114.png","Icon120.png"],"LSRequiresIPhoneOS":true,"CFBundleDisplayName":"iJenkins","UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleResourceSpecification":"ResourceRules.plist","CFBundleSignature":"????","DTXcodeBuild":"5A11386k","DTPlatformBuild":"11A4449b","UIDeviceFamily":[1]},"icons":[],"provisioning":"enterprise","isIcon":1}', 1, '2013-11-06 22:50:05', '2013-11-06 22:50:05'),
+(3, 'Pinpoint', 'com.fuerteint.Pinpoint', '', 0, '1.0', 65088, 1000, '{"plist":{"CFBundleName":"Pinpoint","DTXcode":"0500","DTSDKName":"iphoneos7.0","CFBundleIcons~ipad":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["AppIcon76x76"]}},"DTSDKBuild":"11A465","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"12F37","DTPlatformName":"iphoneos","CFBundleShortVersionString":"1.0","UIMainStoryboardFile":"Main","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"CFBundleExecutable":"Pinpoint","UILaunchImages":[{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"LaunchImage-700-568h","UILaunchImageSize":"{320, 568}","UILaunchImageMinimumOSVersion":"7.0"}],"UIViewControllerBasedStatusBarAppearance":false,"CFBundleIdentifier":"com.fuerteint.Pinpoint","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTPlatformVersion":"7.0","CFBundleSignature":"????","LSRequiresIPhoneOS":true,"UISupportedInterfaceOrientations":["UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleDisplayName":"Pinpoint","UISupportedInterfaceOrientations~ipad":["UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleResourceSpecification":"ResourceRules.plist","DTXcodeBuild":"5A1413","DTPlatformBuild":"11A465","MinimumOSVersion":"7.0","UIDeviceFamily":[1,2]},"icons":[],"provisioning":"enterprise","isIcon":1}', 1, '2013-11-06 22:59:05', '2013-11-06 22:59:05'),
+(4, 'iJenkins 2.0', 'com.fuerteint.ijenkins', '', 0, '2.0', 301232, 1000, '{"plist":{"CFBundleName":"iJenkins","DTXcode":"0500","DTSDKName":"iphoneos7.0","DTSDKBuild":"11A4449b","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"12E55","DTPlatformName":"iphoneos","CFBundleShortVersionString":"1.0","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"CFBundleExecutable":"iJenkins","DTCompiler":"com.apple.compilers.llvm.clang.1_0","MinimumOSVersion":"6.1","CFBundleIdentifier":"com.fuerteint.ijenkins","UIAppFonts":["FontAwesome.ttf"],"DTPlatformVersion":"7.0","CFBundleIconFiles":["Icon114.png","Icon120.png"],"LSRequiresIPhoneOS":true,"CFBundleDisplayName":"iJenkins","UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleResourceSpecification":"ResourceRules.plist","CFBundleSignature":"????","DTXcodeBuild":"5A11386k","DTPlatformBuild":"11A4449b","UIDeviceFamily":[1]},"icons":[],"provisioning":"enterprise","isIcon":1}', 1, '2013-11-06 23:04:18', '2013-11-06 23:04:18'),
+(5, 'GHUnit', 'com.fuerteint.unittest', '', 0, '1.0', 158259, 1000, '{"plist":{"CFBundleName":"GHUnit","DTXcode":"0463","DTSDKName":"iphoneos6.1","DTSDKBuild":"10B141","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"12E55","DTPlatformName":"iphoneos","TWITTER_CONSUMER_KEY":"qviFYtnlxu45G8mf1NuC6g","CFBundleShortVersionString":"1.0","TWITTER_CONSUMER_SECRET":"bc9Swfbv6mt8rKLwecYjSUUFsfgCYcxPYuKvRTrLous","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"CFBundleExecutable":"GHUnit","DTCompiler":"","UISupportedInterfaceOrientations~ipad":["UIInterfaceOrientationPortrait","UIInterfaceOrientationPortraitUpsideDown","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleIdentifier":"com.fuerteint.unittest","CFBundleResourceSpecification":"ResourceRules.plist","DTPlatformVersion":"6.1","CFBundleSignature":"????","LSRequiresIPhoneOS":true,"UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleDisplayName":"GHUnit","DTXcodeBuild":"4H1503","MinimumOSVersion":"6.1","UIDeviceFamily":[1,2],"DTPlatformBuild":"10B141"},"icons":[],"provisioning":"enterprise","isIcon":1}', 1, '2013-11-07 00:24:22', '2013-11-07 00:24:22'),
+(6, 'Chez Lucie', 'com.fuerteint.chezlucie.enterprise', '', 0, '1.0', 1299216, 1000, '{"plist":{"CFBundleName":"PublishTheNews","DTXcode":"0500","DTSDKName":"iphoneos7.0","DTSDKBuild":"11A465","CFBundleDevelopmentRegion":"en","CFBundleVersion":"b18","BuildMachineOSBuild":"13A584","UIStatusBarHidden":false,"CFBundleShortVersionString":"1.0","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"DTPlatformName":"iphoneos","CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"CFBundleExecutable":"PublishTheNews","DTCompiler":"com.apple.compilers.llvm.clang.1_0","UIViewControllerBasedStatusBarAppearance":false,"CFBundleIdentifier":"com.fuerteint.chezlucie.enterprise","CFBundleResourceSpecification":"ResourceRules.plist","DTPlatformVersion":"7.0","CFBundleSignature":"????","CFBundleIcons":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["Icon.png","Icon@2x.png"],"UIPrerenderedIcon":true}},"LSRequiresIPhoneOS":true,"UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleDisplayName":"Chez Lucie","DTXcodeBuild":"5A1413","MinimumOSVersion":"5.1","DTPlatformBuild":"11A465","UIDeviceFamily":[1]},"icons":[],"provisioning":"enterprise","isIcon":1}', 1, '2013-11-07 00:26:37', '2013-11-07 00:26:37');
 
 -- --------------------------------------------------------
 
@@ -111,7 +111,7 @@ CREATE TABLE `applications_groups` (
 
 INSERT INTO `applications_groups` (`application_id`, `group_id`) VALUES
 (1, 1),
-(1, 2);
+(8, 2);
 
 -- --------------------------------------------------------
 
@@ -122,20 +122,27 @@ INSERT INTO `applications_groups` (`application_id`, `group_id`) VALUES
 DROP TABLE IF EXISTS `attachments`;
 CREATE TABLE `attachments` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `application_id` bigint(20) unsigned NOT NULL,
+  `application_id` bigint(20) unsigned DEFAULT NULL,
+  `application_identifier` varchar(150) NOT NULL,
+  `application_platform` tinyint(2) unsigned DEFAULT NULL,
   `name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `filetype_id` int(11) unsigned NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `application_id` (`application_id`,`name`,`created`,`modified`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+  KEY `application_id` (`application_id`,`name`,`created`,`modified`),
+  KEY `application_identifier` (`application_identifier`),
+  KEY `application_platform` (`application_platform`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `attachments`
 --
 
+INSERT INTO `attachments` (`id`, `application_id`, `application_identifier`, `application_platform`, `name`, `description`, `filetype_id`, `created`, `modified`) VALUES
+(1, 13, '', NULL, 'How To', 'How to install this app', 1, '2013-11-04 18:20:57', '2013-11-04 18:20:57'),
+(2, 0, 'com.fuerteint.ijenkins', 0, 'User Guide', 'How to operate iJenkins app', 2, '2013-11-04 18:21:56', '2013-11-04 18:21:56');
 
 -- --------------------------------------------------------
 
@@ -39983,14 +39990,18 @@ CREATE TABLE `filetypes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `mime` varchar(25) NOT NULL,
   `allowed` tinyint(1) unsigned NOT NULL DEFAULT '1',
+  `icon` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `mime` (`mime`,`allowed`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `filetypes`
 --
 
+INSERT INTO `filetypes` (`id`, `mime`, `allowed`, `icon`) VALUES
+(1, 'pdf', 1, 'icon-edit'),
+(2, 'word', 1, 'icon-print');
 
 -- --------------------------------------------------------
 
@@ -40016,7 +40027,7 @@ CREATE TABLE `groups` (
 
 INSERT INTO `groups` (`id`, `name`, `description`, `all_versions_available`, `created`, `modified`) VALUES
 (1, 'Fuerte International', 'Lorem ipsum dolor sit amet', 1, '2013-11-01 19:22:49', '2013-11-02 14:15:32'),
-(2, 'Jack Morton', '', 1, '2013-11-01 19:15:44', '2013-11-02 14:15:02');
+(2, 'Jack Morton', '', 1, '2013-11-01 19:15:44', '2013-11-04 00:13:25');
 
 -- --------------------------------------------------------
 
@@ -40140,4 +40151,5 @@ CREATE TABLE `users_groups` (
 INSERT INTO `users_groups` (`user_id`, `group_id`) VALUES
 (2, 1),
 (2, 2),
-(4, 1);
+(4, 1),
+(4, 2);
