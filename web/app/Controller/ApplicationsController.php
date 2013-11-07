@@ -27,7 +27,14 @@ class ApplicationsController extends AppController {
 		$app = $this->Application->getOne($id);
 		$this->set('data', $app);
 		
-		//debug($app);
+		if ($app['Application']['platform'] <= 2) {
+			App::uses('InfoPlistTemplateParser', 'Lib/Parsing');
+			$parser = new InfoPlistTemplateParser();
+			$data = json_decode($app['Application']['config'], true);
+			$parsed = $parser->processArray($data['plist']);
+			$this->set('appSystemInfo', $parsed);
+		}
+		
 		$apps = $this->Application->getAllHistoryForApp($app['Application']['identifier'], $app['Application']['platform']);
 		$this->set('appsList', $apps);
 		
@@ -114,6 +121,7 @@ class ApplicationsController extends AppController {
 				if ($extract->process()) {
 					$app = $this->Application->saveApp($extract->data, $extract->data, $extract->app, $extract->icon);
 					$extract->data['id'] = $app->id;
+					debug($extract->data['plist']);
 					$extract->clean();
 				}
 				$errors = $extract->errors;

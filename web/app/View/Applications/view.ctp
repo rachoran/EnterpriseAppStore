@@ -16,11 +16,44 @@ $this->Html->addCrumb($data['Application']['name'], null);
     <div class="tab-content bottom-margin">
 		<div class="tab-pane active" id="tab_application_basic">
 			<div class="padded">
-				<div  class="col-md-10">
-				
+				<div class="row">
+					<div  class="col-md-10">
+					
+					</div>
+					<div  class="col-md-2">
+						<img src="<?= $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?= time(); ?>" alt="Application logo" class="logo" />
+					</div>
+					<p>&nbsp;</p>
 				</div>
-				<div  class="col-md-2">
-					<img src="<?= $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?= time(); ?>" alt="Application logo" class="logo" />
+				<div class="row">
+					<div class="col-md-12">
+						<table class="table table-striped table-bordered table-hover">
+							<tbody>
+								<?php
+								foreach ($appSystemInfo as $title=>$value) {
+								?>
+								<tr>
+									<td><?= $title; ?></td>
+									<td>
+										<?php
+										if (is_array($value)) {
+											$br = (count($value) > 1) ? '<br />' : '';
+											foreach ($value as $v) {
+												echo $v.$br;
+											}
+										}
+										else {
+											echo $value;
+										}
+										?>
+									</td>
+								</tr>
+								<?php
+								}
+								?>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -64,7 +97,7 @@ $this->Html->addCrumb($data['Application']['name'], null);
     </div>
 </div>
 <?php
-if (count($appsList) > 0) {
+if (count($appsList) > 1) {
 ?><div class="widget">
 	<div class="widget-content-white glossed">
 		<div class="padded">
