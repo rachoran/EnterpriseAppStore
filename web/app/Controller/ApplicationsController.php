@@ -50,6 +50,7 @@ class ApplicationsController extends AppController {
 			$parsed = $parser->processArray($data['plist']);
 			$this->set('appSystemInfo', $parsed);
 			
+			$basicInfo[__('Provisioning')] = '<strong>'.strtoupper($data['provisioning']).'</strong>';
 			$basicInfo[__('Minimum OS version')] = 'iOS '.$data['plist']['MinimumOSVersion'];
 			
 			if (($platform == 0 || $platform == 2) && isset($data['plist']['UISupportedInterfaceOrientations'])) {
