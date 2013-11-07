@@ -25,6 +25,7 @@ $this->Html->addCrumb($data['Application']['name'], null);
 					</div>
 					<p>&nbsp;</p>
 				</div>
+				<?php if (isset($appSystemInfo)) { ?>
 				<div class="row">
 					<div class="col-md-12">
 						<table class="table table-striped table-bordered table-hover">
@@ -55,6 +56,7 @@ $this->Html->addCrumb($data['Application']['name'], null);
 						</table>
 					</div>
 				</div>
+				<?php } ?>
 			</div>
 		</div>
 		<div class="tab-pane" id="tab_application_screenshots">
