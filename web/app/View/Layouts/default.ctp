@@ -110,7 +110,7 @@ ga('send', 'pageview');
 						<?php echo $this->fetch('content'); ?>
 						<!-- End content -->
 						<div class="widget cake-sql-log">
-							<?php //echo $this->element('sql_dump'); ?>
+							<?php echo $this->element('sql_dump'); ?>
 						</div>
 					</div>
 				</div>

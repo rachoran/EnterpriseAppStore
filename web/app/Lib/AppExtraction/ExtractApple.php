@@ -131,7 +131,7 @@ class ExtractApple extends AbstractExtract {
 				}
 			}
 			// Hunting for icons & deleting other files
-			if (!$this->isIcon($path, $arr['icons'])) {
+			if (!isset($arr['icons']) || !$this->isIcon($path, $arr['icons'])) {
 				$file = new File($path);
 				$file->delete();
 				unset($file);

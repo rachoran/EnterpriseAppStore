@@ -59,7 +59,7 @@ function verValCh($key, $data) {
 							<input type="file" name="formFile[icon]" class="form-control disabled beforeUpload" />
 						</div>
 						<div class="col-md-1">
-							<img src="<?= $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?= time(); ?>" alt="Company logo" class="logo" />
+							<img src="<?= $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?= time(); ?>" alt="Application logo" class="logo" />
 						</div>
 					</div>
 					<div class="form-group type0">

@@ -19,8 +19,21 @@ class ApplicationsController extends AppController {
 		}
 	}
 	
-	public function view() {
+	public function view($id) {
 		$this->setPageIcon('puzzle-piece');
+		$this->enablePageClass('basic-edit');
+		$this->setAdditionalCssFiles(array('basic-edit'));
+		
+		$app = $this->Application->getOne($id);
+		$this->set('data', $app);
+		
+		//debug($app);
+		$apps = $this->Application->getAllHistoryForApp($app['Application']['identifier'], $app['Application']['platform']);
+		$this->set('appsList', $apps);
+		
+		$this->set('categoriesList', $this->Category->getAll());
+		$this->set('groupsList', $this->Group->getAll());
+		$this->set('attachmentsList', $this->Attachment->getAllForApp($app));
 	}
 	
 	public function edit($id=0) {

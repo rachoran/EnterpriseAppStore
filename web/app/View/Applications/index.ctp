@@ -47,13 +47,31 @@ $this->Html->addCrumb('Applications', null);
 				    ?>
 				    <tr class="<?= $icon; ?>">
 				        <td class="icon">
-				        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'view', $item['Application']['id'], $item['Application']['name'])); ?>">
-				        		<img src="<?= Storage::urlForIconForAppWithId($item['Application']['id']).'?t='.time(); ?>" alt="<?php echo $item['Application']['name']; ?>" />
+				        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'view', $item[0]['id'], $item[0]['name'])); ?>">
+				        		<img src="<?= Storage::urlForIconForAppWithId($item[0]['id'], $item[0]['location']).'?t='.time(); ?>" alt="<?php echo $item[0]['name']; ?>" />
 				        	</a>
 				        </td>
 				        <td class="name">
+				        	<?php
+				        	//Detect special conditions devices
+							$iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
+							$iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+							$iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
+							$Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
+							$webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
+							
+							if ($iPod || $iPhone || $iPad) {
+							    echo $this->Html->link(__('Install latest'), array('controller' => 'users', 'action' => 'view', $item[0]['id']), array('class'=>'btn btn-default pull-right'));
+							}
+							elseif ($Android) {
+							    echo $this->Html->link(__('Install latest'), array('controller' => 'users', 'action' => 'view', $item[0]['id']), array('class'=>'btn btn-default pull-right'));
+							}
+							else {
+								echo $this->Html->link(__('Download latest'), array('controller' => 'users', 'action' => 'view', $item[0]['id']), array('class'=>'btn btn-default pull-right'));
+							}
+				        	?>
 				            <i class="icon-<?= $icon ?>" style="margin-right: 6px;"></i>
-				            <?php echo $this->Html->link($item[0]['name'], array('controller' => 'users', 'action' => 'view', $item['Application']['id'])); ?>
+				            <?php echo $this->Html->link($item[0]['name'], array('controller' => 'applications', 'action' => 'view', $item[0]['id'])); ?>
 				            <small>(Latest: <?= $item[0]['version']; ?>)</small>
 				            <br />
 			            	<?php
@@ -70,33 +88,9 @@ $this->Html->addCrumb('Applications', null);
 			            	<?php } ?>
 				        </td>
 				        <td class="edit">
-				        	<?php
-				        	//Detect special conditions devices
-							$iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
-							$iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
-							$iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
-							$Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
-							$webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
-							
-							if ($iPod || $iPhone || $iPad) {
-							    echo $this->Html->link(__('Install latest'), array('controller' => 'users', 'action' => 'view', $item['Application']['id']), array('class'=>'btn btn-default'));
-							}
-							elseif ($Android) {
-							    echo $this->Html->link(__('Install latest'), array('controller' => 'users', 'action' => 'view', $item['Application']['id']), array('class'=>'btn btn-default'));
-							}
-							else {
-								echo $this->Html->link(__('Download latest'), array('controller' => 'users', 'action' => 'view', $item['Application']['id']), array('class'=>'btn btn-default'));
-							}
-				        	?>
-				        	<!--
-<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $item['Application']['id'], $item['Application']['name'])); ?>">
-				        		<i class="fa icon-edit"><span> Edit</span></i>
+				        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'delete', $item['Application']['id'], $item['Application']['name'])); ?>" onclick="return env.confirmation('Are you sure you want to delete all builds for <?php echo $item['Application']['name']; ?>?');">
+				        		<i class="fa icon-ban-circle"><span> Delete all</span></i>
 				        	</a>
-				        	<br />
-				        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'delete', $item['Application']['id'], $item['Application']['name'])); ?>" onclick="return env.confirmation('Are you sure you want to delete user <?php echo $item['Application']['name']; ?>?');">
-				        		<i class="fa icon-ban-circle"><span> Delete</span></i>
-				        	</a>
--->
 				        </td>
 				    </tr>
 				    <?php

@@ -32,7 +32,7 @@ class Settings {
 	}
 	
 	public function saveSettings($settings) {
-		if (!empty($settings)) Settings::$settings = $data;
+		if (!empty($settings)) Settings::$settings = $settings;
 		$folderPath = WWW_ROOT.'Userfiles/Settings/Data/';
 		$dir = new Folder();
 		$dir->create($folderPath);

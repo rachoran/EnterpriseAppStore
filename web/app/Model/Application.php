@@ -30,11 +30,14 @@ class Application extends AppModel {
 	
 	public function basicOptions() {
 		$options = array();
+		// TODO: Optimize
 		$whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Application.platform ORDER BY created DESC LIMIT 1';
+		$latestId = '(SELECT id FROM applications '.$whereAndOrder.') AS id';
+		$latestLocation = '(SELECT location FROM applications '.$whereAndOrder.') AS location';
 		$latestName = '(SELECT name FROM applications '.$whereAndOrder.') AS name';
 		$latestVersion = '(SELECT version FROM applications '.$whereAndOrder.') AS version';
 		$latestCreated = '(SELECT created FROM applications '.$whereAndOrder.') AS created';
-		$options['fields'] = array('*', 'COUNT(Application.id) AS count', $latestName, $latestVersion, $latestCreated);
+		$options['fields'] = array('*', 'COUNT(Application.id) AS count', $latestId, $latestLocation, $latestName, $latestVersion, $latestCreated);
 		$options['order'] = array('Application.name' => 'ASC', 'Application.created');
 		$options['group'] = array('Application.identifier', 'Application.platform');
 		return $options;
@@ -42,6 +45,15 @@ class Application extends AppModel {
 	
 	public function getAll() {
 		$options = $this->basicOptions();
+		$data =  $this->find('all', $options);
+		//die(json_encode($data));
+		return $data;
+	}
+	
+	public function getAllHistoryForApp($identifier, $platform) {
+		$options = array();
+		$options['order'] = array('Application.created' => 'DESC');
+		$options['conditions'] = array('Application.identifier' => $identifier, 'Application.platform' => (int)$platform);
 		$data =  $this->find('all', $options);
 		//die(json_encode($data));
 		return $data;
@@ -55,13 +67,16 @@ class Application extends AppModel {
 	}
 	
 	public function countAll() {
-		return $this->find('count');
+		$options = array();
+		$options['group'] = array('Application.identifier', 'Application.platform');
+		return $this->find('count', $options);
 	}
 	
 	public function countAppsForPlatforms($platforms) {
 		$options = $this->basicOptions();
 		$options['conditions'] = array();
 		$options['conditions']['Application.platform'] = $platforms;
+		$options['group'] = array('Application.identifier', 'Application.platform');
 		return $this->find('count', $options);
 	}
 	
@@ -98,6 +113,7 @@ class Application extends AppModel {
 		    'GroupJoin.group_id' => (int)$groupId
 		);
 		$options['order'] = array('Application.name' => 'ASC');
+		$options['group'] = array('Application.identifier', 'Application.platform');
 		return $this->find('all', $options);
 	}
 	
