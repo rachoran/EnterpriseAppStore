@@ -127,12 +127,12 @@ class Application extends AppModel {
 		}
 		
 		$confData['isIcon'] = ($icon) ? 1 : 0;
-		
 		$this->set('name', $appData['name']);
 		$this->set('identifier', $appData['identifier']);
 		$this->set('version', $appData['version']);
 		$this->set('sort', $appData['sort']);
 		$this->set('size', $appData['size']);
+		$this->set('platform', $confData['platform']);
 		
 		$s = new Settings();
 		$this->set('location', ($s->get('s3Enable') ? 1 : 0));
@@ -142,6 +142,7 @@ class Application extends AppModel {
 		if (isset($confData['version'])) unset($confData['version']);
 		if (isset($confData['sort'])) unset($confData['sort']);
 		if (isset($confData['size'])) unset($confData['size']);
+		if (isset($confData['platform'])) unset($confData['platform']);
 		$this->set('config', json_encode($confData));
 		
 		$this->save();

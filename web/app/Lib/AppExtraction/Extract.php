@@ -1,6 +1,6 @@
 <?php
 
-abstract class AbstractExtract {
+abstract class Extract {
 
 	protected $file = null;
 	public $data = null;

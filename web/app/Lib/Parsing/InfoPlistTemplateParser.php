@@ -20,7 +20,10 @@ class InfoPlistTemplateParser extends PlistTemplateParser {
 				'name' => 'Require iPhone OS',
 				'boolean' => true
 			),
-			'DTXcode' => array('name' => 'XCode version'),
+			'DTXcode' => array(
+				'name' => 'XCode version',
+				'fourversion' => true
+			),
 			'DTSDKName' => array('name' => 'SDK name'),
 			'DTSDKBuild' => array('name' => 'SDK build'),
 			'BuildMachineOSBuild' => array('name' => 'Build machine build'),

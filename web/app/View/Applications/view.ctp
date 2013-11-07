@@ -18,17 +18,92 @@ $this->Html->addCrumb($data['Application']['name'], null);
 			<div class="padded">
 				<div class="row">
 					<div  class="col-md-10">
-					
+						<table class="table table-striped table-bordered table-hover">
+							<tbody>
+								<tr>
+									<td colspan="2">
+										<h1>
+											<?php
+											
+											$p = $data['Application']['platform'];
+										    if ($p == 0 || $p == 1 || $p == 2) {
+											    $icon = 'apple';
+											    $ext = '.ipa';
+											}
+											elseif ($p == 3 || $p == 4 || $p == 5) {
+											    $icon = 'android';
+											    $ext = '.apk';
+											}
+											elseif ($p == 6 || $p == 7) {
+											    $icon = 'windows';
+											    $ext = '.xap';
+											}
+											elseif ($p == 8) {
+											    $icon = 'globe';
+											    $ext = null;
+											}
+											?>
+											<i class="icon-<?= $icon; ?>" style="margin-left:12px; margin-right:24px;"></i>
+											<?= $data['Application']['name']; ?>
+											<?php
+											$iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
+											$iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+											$iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
+											$Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
+											$webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
+											
+											if ($iPod || $iPhone || $iPad) {
+											    echo $this->Html->link(__('Install').' '.$ext, array('controller' => 'users', 'action' => 'view', $data['Application']['id']), array('class'=>'btn btn-default pull-right'));
+											}
+											elseif ($Android) {
+											    echo $this->Html->link(__('Install').' '.$ext, array('controller' => 'users', 'action' => 'view', $data['Application']['id']), array('class'=>'btn btn-default pull-right'));
+											}
+											else {
+												echo $this->Html->link(__('Download').' '.$ext, array('controller' => 'users', 'action' => 'view', $data['Application']['id']), array('class'=>'btn btn-default pull-right'));
+											}
+											?>
+										</h1>
+									</td>
+								</tr>
+								<?php
+								foreach ($basicInfo as $title=>$value) {
+								?>
+								<tr>
+									<td><strong><?= $title; ?></strong></td>
+									<td>
+										<?php
+										if (is_array($value)) {
+											$br = (count($value) > 1) ? '<br />' : '';
+											foreach ($value as $v) {
+												echo $v.$br;
+											}
+										}
+										else {
+											echo $value;
+										}
+										?>
+									</td>
+								</tr>
+								<?php
+								}
+								?>
+							</tbody>
+						</table>
+						<p>&nbsp;</p>
 					</div>
 					<div  class="col-md-2">
 						<img src="<?= $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?= time(); ?>" alt="Application logo" class="logo" />
 					</div>
-					<p>&nbsp;</p>
 				</div>
 				<?php if (isset($appSystemInfo)) { ?>
 				<div class="row">
 					<div class="col-md-12">
 						<table class="table table-striped table-bordered table-hover">
+							<thead>
+								<tr>
+									<th colspan="2">System info</th>
+								</tr>
+							</thead>
 							<tbody>
 								<?php
 								foreach ($appSystemInfo as $title=>$value) {
@@ -52,6 +127,10 @@ $this->Html->addCrumb($data['Application']['name'], null);
 								<?php
 								}
 								?>
+								<tr>
+									<td>Hosted on</td>
+									<td><?= ($data['Application']['location'] == 0) ? __('Local server') : __('Amazon S3'); ?></td>
+								</tr>
 							</tbody>
 						</table>
 					</div>

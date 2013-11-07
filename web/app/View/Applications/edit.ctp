@@ -23,7 +23,7 @@ function verValCh($key, $data) {
 	    <ul class="nav nav-tabs">
 	        <li class="active"><a href="#tab_application_basic" data-toggle="tab">Basic info</a></li>
 	        <li><a href="#tab_application_screenshots" data-toggle="tab">Screenshots</a></li>
-	        <li><a href="#tab_application_groupncats" data-toggle="tab">Groups &amp; Categories</a></li>
+	        <li><a href="#tab_application_groupncats" data-toggle="tab">Permissions</a></li>
 	        <li><a href="#tab_application_attachments" data-toggle="tab">Attachments</a></li>
 	        <li><a href="#tab_application_other" data-toggle="tab">Other</a></li>
 	    </ul>

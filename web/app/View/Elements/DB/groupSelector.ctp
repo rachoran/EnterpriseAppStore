@@ -1,6 +1,4 @@
-<?php
-
-?><table id="<?php echo $tableName; ?>" class="table table-striped table-bordered table-hover selector-table">
+<table id="<?php echo $tableName; ?>" class="table table-striped table-bordered table-hover selector-table">
 	<thead>
 		<tr>
 			<th width="28">

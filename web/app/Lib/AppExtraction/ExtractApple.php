@@ -1,10 +1,10 @@
 <?php
 
-App::uses('AbstractExtract', 'Lib/AppExtraction');
+App::uses('Extract', 'Lib/AppExtraction');
 App::uses('CFPropertyList', 'Vendor/PlistReader');
 
 
-class ExtractApple extends AbstractExtract {
+class ExtractApple extends Extract {
 	
 	protected function isMyFile($fileExtension) {
 		return ($fileExtension == 'ipa');
@@ -16,15 +16,16 @@ class ExtractApple extends AbstractExtract {
 			$fileExtension = strtolower($fileInfo['extension']);
 			if ($fileExtension == 'png') {
 				if (preg_match('/icon/i', $fileInfo['filename'])) {
-					//return true;
+					//debug($fileInfo['filename']);
+					return true;
 				}
 				if (isset($icons['app'])) foreach ($icons['app'] as $icon) {
-					if (preg_match('/'.$icon.'/i', $fileInfo['filename'])) {
+					if (preg_match('/'.$icon.'/i', $fileInfo['basename'])) {
 						return true;
 					}
 				}
 				if (isset($icons['newsstand']['CFBundleIconFiles'])) foreach ($icons['newsstand']['CFBundleIconFiles'] as $icon) {
-					if (preg_match('/'.$icon.'/i', $fileInfo['filename'])) {
+					if (preg_match('/'.$icon.'/i', $fileInfo['basename'])) {
 						return true;
 					}
 				}
@@ -83,6 +84,13 @@ class ExtractApple extends AbstractExtract {
 			if (empty($arr['version'])) $arr['version']	= isset($data['CFBundleVersion']) ? $data['CFBundleVersion'] : '';
 			$arr['identifier'] = isset($data['CFBundleIdentifier']) ? $data['CFBundleIdentifier'] : '';
 			$arr['name'] = isset($data['CFBundleDisplayName']) ? $data['CFBundleDisplayName'] : '';
+			
+			if (count($data['UIDeviceFamily']) == 2) {
+				$arr['platform'] = 2;
+			}
+			else {
+				$arr['platform'] = ((int)$data['UIDeviceFamily'] - 1);
+			}
 			
 			// Getting info about icons
 			$icons = array();
@@ -156,9 +164,11 @@ class ExtractApple extends AbstractExtract {
 		$largestIcon = array();
 		foreach ($iconPaths as $icon) {
 			$size = getimagesize($icon);
-			if (!$largestIcon || $largestIcon['w'] < $size[0]) {
-				$largestIcon['w'] = $size[0];
-				$largestIcon['file'] = $icon;
+			if ($size[0] == $size[1]) {
+				if (!$largestIcon || $largestIcon['w'] < $size[0]) {
+					$largestIcon['w'] = $size[0];
+					$largestIcon['file'] = $icon;
+				}
 			}
 		}
 		

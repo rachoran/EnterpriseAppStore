@@ -62,6 +62,13 @@ $changePassword = ($id) ? 'Change ' : '';
 				?>
 				<div class="form-group">
 					<div class="col-md-offset-4 col-md-8">
+						<!-- Begin user selector -->
+						<?php echo $this->element('DB/groupSelector', array('tableName'=>'selectedGroups')); ?>
+						<!-- End user selector -->
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-offset-4 col-md-8">
 						<input type="hidden" name="userData[id]" value="<?php echo $id; ?>" />
 						<a href="<?php echo $this->Html->url('/users', true); ?>" class="btn btn-default">Cancel</a>
 						<button type="submit" name="save" class="btn btn-primary pull-right">Save &amp; close</button>

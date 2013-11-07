@@ -1,9 +1,9 @@
 <?php
 
-App::uses('AbstractExtract', 'Lib/AppExtraction');
+App::uses('Extract', 'Lib/AppExtraction');
 
 
-class ExtractAndroid extends AbstractExtract {
+class ExtractAndroid extends Extract {
 	
 	protected function isMyFile($fileExtension) {
 		return ($fileExtension == 'apk');

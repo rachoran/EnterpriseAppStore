@@ -25,6 +25,10 @@ abstract class PlistTemplateParser {
 					if (isset($temp[$k]['boolean']) && $temp[$k]['boolean']) {
 						$v = ($v) ? 'Yes' : 'No';
 					}
+					if (isset($temp[$k]['fourversion']) && $temp[$k]['fourversion']) {
+						$v = (string)(int)$v;
+						$v = $v[0].'.'.$v[1].'.'.$v[2];
+					}
 				}
 				$key = $temp[$k]['name'];
 				$new[$key] = $v;
