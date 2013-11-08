@@ -92,7 +92,7 @@ $this->Html->addCrumb($data['Application']['name'], null);
 						<p>&nbsp;</p>
 					</div>
 					<div  class="col-md-2">
-						<img src="<?= $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?= time(); ?>" alt="Application logo" class="logo" />
+						<img src="<?= Storage::urlForIconForAppWithId($data['Application']['id'], $data['Application']['location']).'?t='.time(); ?>" alt="<?php echo $data['Application']['name']; ?>" class="logo" />
 					</div>
 				</div>
 				<?php if (isset($appSystemInfo)) { ?>

@@ -60,6 +60,7 @@ function verValCh($key, $data) {
 						</div>
 						<div class="col-md-1">
 							<img src="<?= $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?= time(); ?>" alt="Application logo" class="logo" />
+							<!-- <img src="<?= Storage::urlForIconForAppWithId($item['Application']['id'], $item['Application']['location']).'?t='.time(); ?>" alt="<?php echo $item['Application']['name']; ?>" class="logo" /> -->
 						</div>
 					</div>
 					<div class="form-group type0">
