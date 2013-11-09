@@ -192,7 +192,9 @@ class DBTables {
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;',
 				'data' => ''
 			),
+			
 			/*
+			// Xxxxxx
 			'xxxx' => array(
 				'table' => '',
 				'data' => ''
