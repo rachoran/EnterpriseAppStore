@@ -32,13 +32,14 @@ class Category extends AppModel {
 				'alias' => 'ApplicationsJoin',
 				'type' => 'LEFT',
 				'conditions' => array(
-					'Category.id = ApplicationsJoin.application_id'
+					'Category.id = ApplicationsJoin.category_id'
 				)
 			) 
 		);
 		$options['group'] = array('Category.id');
 		$options['order'] = array('Category.name' => 'asc');
-		return $this->find('all', $options);
+		$data = $this->find('all', $options);
+		return $data;
 	}
 	
 	public function getOne($id) {
@@ -65,4 +66,23 @@ class Category extends AppModel {
 		return $this->find('count');
 	}
 	
+	public function getAllForApp($appId) {
+		$options = array();
+		$options['fields'] = array('*');
+		$options['joins'] = array(
+			array(
+				'table' => 'applications_categories',
+				'alias' => 'ApplicationsJoin',
+				'type' => 'LEFT',
+				'conditions' => array(
+					'Category.id = ApplicationsJoin.category_id',
+					'ApplicationsJoin.application_id' => (int)$appId
+				)
+			) 
+		);
+		//$options['group'] = array('Category.id');
+		$options['order'] = array('Category.name' => 'ASC');
+		return $this->find('all', $options);
+	}
+		
 }

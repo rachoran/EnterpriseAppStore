@@ -4,7 +4,7 @@ App::uses('Platforms', 'Lib/Platform');
 
 class ApplicationsController extends AppController {
 	
-	var $uses = array('Application', 'ApplicationsGroup', 'Category', 'Group', 'Attachment');
+	var $uses = array('Application', 'ApplicationsGroup', 'Category', 'ApplicationsCategory', 'Group', 'Attachment');
 	
 	public function index() {
 		$this->setPageIcon('puzzle-piece');
@@ -114,13 +114,14 @@ class ApplicationsController extends AppController {
 			$app = $this->Application->saveApp($this->request->data['appData'], $this->request->data['formData'], null, null);
 			$groups = isset($this->request->data['group']) ? $this->request->data['group'] : array();
 			$this->ApplicationsGroup->saveAppToGroups($app->id, $groups);
+			$categories = isset($this->request->data['category']) ? $this->request->data['category'] : array();
+			$this->ApplicationsCategory->saveAppToCategories($app->id, $categories);
 			return $this->redirect(array('action' => 'edit', $app->id));
 		}	
 		$app = $this->Application->getOne($id);
 		$this->set('data', $app);
 		
-		$this->set('categoriesList', $this->Category->getAll());
-		//debug($this->Group->getAllForApp($id));
+		$this->set('categoriesList', $this->Category->getAllForApp($id));
 		$this->set('groupsList', $this->Group->getAllForApp($id));
 		$this->set('attachmentsList', $this->Attachment->getAllForApp($app));
 	}

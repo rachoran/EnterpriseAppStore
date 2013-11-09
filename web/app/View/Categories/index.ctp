@@ -18,7 +18,7 @@ $this->Html->addCrumb('Categories', null);
 				    </tr>
 				</thead>
 				<tbody>
-				    <tr>
+				    <!--<tr>
 				        <td class="icon"><i class="fa icon-sort-by-attributes"></i></td>
 				        <td class="name">
 				            <?php echo $this->Html->link('Uncategorised apps', array('controller' => 'categories', 'action' => 'view', 0)); ?>
@@ -29,7 +29,7 @@ $this->Html->addCrumb('Categories', null);
 				        <td class="edit">
 				        	&nbsp;
 				        </td>
-				    </tr>
+				    </tr>-->
 				    <?php foreach ($categories as $category) { ?>
 				    <tr>
 				        <td class="icon"><i class="fa <?php echo $category['Category']['icon']; ?>"></i></td>

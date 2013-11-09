@@ -4,7 +4,8 @@ App::uses('Storage', 'Lib/Storage');
 
 class Application extends AppModel {
 
-	static public $iOSApp = array(0, 1);
+	/*
+static public $iOSApp = array(0, 1);
 	static public $iPhoneApp = array(0);
 	static public $iPadApp = array(1);
 	static public $AndroidApp = array(2, 3);
@@ -12,6 +13,24 @@ class Application extends AppModel {
 	static public $AndroidTabletApp = array(3);
 	static public $Windows8App = array(4);
 	static public $WebApp = array(5);
+*/
+	
+	public $hasAndBelongsToMany = array(
+        'Group' => array(
+			'className' => 'Group',
+			'joinTable' => 'applications_groups',
+			'foreignKey' => 'application_id',
+			'associationForeignKey' => 'group_id',
+			'unique' => 'keepExisting',
+	    ),
+        'Category' => array(
+			'className' => 'Category',
+			'joinTable' => 'applications_categories',
+			'foreignKey' => 'application_id',
+			'associationForeignKey' => 'category_id',
+			'unique' => 'keepExisting',
+	    )
+    );
 
 	public $validate = array(
         'name' => array(
@@ -31,13 +50,16 @@ class Application extends AppModel {
 	public function basicOptions() {
 		$options = array();
 		// TODO: Optimize
-		$whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Application.platform ORDER BY created DESC LIMIT 1';
+		//*
+$whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Application.platform ORDER BY created DESC LIMIT 1';
 		$latestId = '(SELECT id FROM applications '.$whereAndOrder.') AS id';
 		$latestLocation = '(SELECT location FROM applications '.$whereAndOrder.') AS location';
 		$latestName = '(SELECT name FROM applications '.$whereAndOrder.') AS name';
 		$latestVersion = '(SELECT version FROM applications '.$whereAndOrder.') AS version';
 		$latestCreated = '(SELECT created FROM applications '.$whereAndOrder.') AS created';
 		$options['fields'] = array('*', 'COUNT(Application.id) AS count', $latestId, $latestLocation, $latestName, $latestVersion, $latestCreated);
+		//*/
+		//$options['fields'] = array('*', 'COUNT(Application.id) AS count');
 		$options['order'] = array('Application.name' => 'ASC', 'Application.created');
 		$options['group'] = array('Application.identifier', 'Application.platform');
 		return $options;
@@ -46,7 +68,6 @@ class Application extends AppModel {
 	public function getAll() {
 		$options = $this->basicOptions();
 		$data =  $this->find('all', $options);
-		//die(json_encode($data));
 		return $data;
 	}
 	
@@ -55,7 +76,6 @@ class Application extends AppModel {
 		$options['order'] = array('Application.created' => 'DESC');
 		$options['conditions'] = array('Application.identifier' => $identifier, 'Application.platform' => (int)$platform);
 		$data =  $this->find('all', $options);
-		//die(json_encode($data));
 		return $data;
 	}
 	
@@ -117,6 +137,23 @@ class Application extends AppModel {
 		return $this->find('all', $options);
 	}
 	
+	public function getAllForCategory($catId) {
+		$options = $this->basicOptions();
+		$options['joins'] = array(
+			array(
+				'table' => 'applications_categories',
+				'alias' => 'ApplicationsJoin',
+				'type' => 'INNER',
+				'conditions' => array(
+					'Application.id = ApplicationsJoin.application_id',
+				)
+			) 
+		);
+		$options['ApplicationsJoin.category_id'] = (int)$catId;
+		$data = $this->find('all', $options);
+		return $data;
+	}
+
 	public function saveApp($appData, $confData, $file, $icon) {
 		$id = isset($appData['id']) ? (int)$appData['id'] : 0;
 		$modify = false;

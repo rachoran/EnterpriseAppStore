@@ -13,6 +13,15 @@ class Platforms {
 	const AppStoreLink = 9;
 	const WebClip = 9;
 	
+	public static function count($data) {
+		$arr = array();
+		foreach ($data as $item) {
+			$icon = self::iconForPlatform($item['Application']['platform']);
+			if (!isset($arr[$icon])) $arr[$icon] = self::nameForIconKey($icon);
+		}
+		return $arr;
+	}
+	
 	public static function platformToString($platform) {
 		switch($platform) {
 			case 0:
@@ -75,6 +84,26 @@ class Platforms {
 		}
 		else {
 			return 'globe';
+		}
+	}
+	
+	public static function nameForIconKey($iconKey) {
+		switch ($iconKey) {
+			case 'apple':
+				return 'Apple';
+				break;
+			case 'android':
+				return 'Android';
+				break;
+			case 'windows':
+				return 'Windows 8';
+				break;
+			case 'globe':
+				return 'Web';
+				break;
+			default:
+				return 'Other';
+				break;
 		}
 	}
 	

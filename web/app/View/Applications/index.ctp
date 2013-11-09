@@ -9,11 +9,9 @@ $this->Html->addCrumb('Applications', null);
 			<p>
 				<a href="<?php echo $this->Html->url(array('controller' => 'applications', 'action' => 'edit', 'new')); ?>" class="btn btn-primary pull-right new">New application <i class="fa icon-plus"></i></a>
 				<ul id="appTablePills" class="nav nav-pills">
-					<li class="active"><a href="#all" data-toggle="pill">All</a></li>
-					<li><a href="#apple" data-toggle="pill">iOS</a></li>
-					<li><a href="#android" data-toggle="pill">Android</a></li>
-					<li><a href="#windows" data-toggle="pill">Windows 8</a></li>
-					<li><a href="#globe" data-toggle="pill">Web</a></li>
+					<!-- Begin pill selector -->
+					<?= $this->element('DB/platformPillSelector'); ?>
+					<!-- End pill selector -->
 				</ul>
 			</p>
 			<table id="appTable" class="table table-striped table-bordered table-hover selector-table">

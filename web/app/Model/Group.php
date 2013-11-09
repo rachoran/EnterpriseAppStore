@@ -2,7 +2,6 @@
 
 class Group extends AppModel {
 	
-	/*
 	public $hasAndBelongsToMany = array(
         'Application' => array(
 			'className' => 'Application',
@@ -10,9 +9,15 @@ class Group extends AppModel {
 			'foreignKey' => 'group_id',
 			'associationForeignKey' => 'application_id',
 			'unique' => 'keepExisting',
+	    ),
+        'User' => array(
+			'className' => 'User',
+			'joinTable' => 'users_groups',
+			'foreignKey' => 'group_id',
+			'associationForeignKey' => 'user_id',
+			'unique' => 'keepExisting',
 	    )
     );
-    //*/
     
     public $validate = array(
         'name' => array(
@@ -24,7 +29,9 @@ class Group extends AppModel {
     );
 	
 	public function getAll() {
-		return $this->find('all', array('order' => array('Group.name' => 'ASC')));
+		$options = array('order' => array('Group.name' => 'ASC'));
+		$data = $this->find('all', $options);
+		return $data;
 	}
 	
 	public function getOne($id) {
@@ -42,9 +49,7 @@ class Group extends AppModel {
 		}
 		$this->set('name', $name);
 		$this->set('description', $description);
-		
 		$this->save();
-		
 		return $this;
 	}
 	
@@ -54,27 +59,11 @@ class Group extends AppModel {
 	
 	public function getAllWithInfo() {
 		$options = array();
-		$options['fields'] = array('*', 'count(UsersJoin.group_id) AS userCount', 'count(ApplicationsJoin.group_id) AS appsCount');
-		$options['joins'] = array(
-			array(
-				'table' => 'users_groups',
-				'alias' => 'UsersJoin',
-				'type' => 'LEFT',
-				'conditions' => array(
-					'Group.id = UsersJoin.group_id'
-				)
-			),
-			array(
-				'table' => 'applications_groups',
-				'alias' => 'ApplicationsJoin',
-				'type' => 'LEFT',
-				'conditions' => array(
-					'Group.id = ApplicationsJoin.group_id'
-				)
-			) 
-		);
+		$options['fields'] = array('*');
 		$options['group'] = array('Group.id');
-		return $this->find('all', $options);
+		$options['order'] = array('Group.name' => 'ASC');
+		$data = $this->find('all', $options);
+		return $data;
 	}
 
 	public function getAllForApp($appId) {
@@ -92,6 +81,7 @@ class Group extends AppModel {
 			) 
 		);
 		$options['group'] = array('Group.id');
+		$options['order'] = array('Group.name' => 'ASC');
 		return $this->find('all', $options);
 	}
 

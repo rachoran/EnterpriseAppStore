@@ -32,8 +32,8 @@ $this->Html->addCrumb('Groups', null);
 				    </tr>
 				    <?php foreach ($groups as $group) { ?>
 				    <tr>
-				        <td class="icon"><span class="label label-default"><?php echo $group[0]['userCount']; ?></span></td>
-				        <td class="icon"><span class="label label-default"><?php echo $group[0]['appsCount']; ?></span></td>
+				        <td class="icon"><span class="label label-default"><?php echo count($group['User']); ?></span></td>
+				        <td class="icon"><span class="label label-default"><?php echo count($group['Application']); ?></span></td>
 				        <td class="name">
 				            <?php echo $this->Html->link($group['Group']['name'], array('controller' => 'groups', 'action' => 'view', $group['Group']['id'])); ?><br />
 				            <small><?php if (strlen($group['Group']['description']) > 2) echo '('.$group['Group']['description'].')'; ?></small>

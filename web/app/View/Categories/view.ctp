@@ -10,11 +10,9 @@ $this->Html->addCrumb($category['Category']['name'], null);
 			<h3 class="form-title form-title-first"><i class="<?= $category['Category']['icon']; ?>"></i> <?= $category['Category']['name']; ?></h3>
 			<p>
 				<ul id="appTablePills" class="nav nav-pills">
-					<li class="active"><a href="#all" data-toggle="pill">All</a></li>
-					<li><a href="#apple" data-toggle="pill">iOS</a></li>
-					<li><a href="#android" data-toggle="pill">Android</a></li>
-					<li><a href="#windows" data-toggle="pill">Windows 8</a></li>
-					<li><a href="#globe" data-toggle="pill">Web</a></li>
+					<!-- Begin pill selector -->
+					<?= $this->element('DB/platformPillSelector'); ?>
+					<!-- End pill selector -->
 				</ul>
 			</p>
 			<table id="appTable" class="table table-striped table-bordered table-hover selector-table">

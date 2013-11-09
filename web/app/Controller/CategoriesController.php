@@ -1,5 +1,7 @@
 <?php
 
+App::uses('Platforms', 'Lib/Platform');
+
 class CategoriesController extends AppController {
 
 	var $uses = array('Category', 'Application');
@@ -40,7 +42,7 @@ class CategoriesController extends AppController {
 		$this->enablePageClass('basic-edit');
 		$this->setAdditionalCssFiles(array('basic-edit'));
 		$this->setAdditionalJavascriptFiles(array('application-list'));
-		$this->set('data', $this->Application->getAll());
+		$this->set('data', $this->Application->getAllForCategory($cat['Category']['id']));
 	}
 	
 	public function delete($id) {
