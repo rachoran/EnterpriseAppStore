@@ -27,24 +27,8 @@ $this->Html->addCrumb($data['Application']['name'], null);
 									<td colspan="2">
 										<h1>
 											<?php
-											
-											$p = $data['Application']['platform'];
-										    if ($p == 0 || $p == 1 || $p == 2) {
-											    $icon = 'apple';
-											    $ext = '.ipa';
-											}
-											elseif ($p == 3 || $p == 4 || $p == 5) {
-											    $icon = 'android';
-											    $ext = '.apk';
-											}
-											elseif ($p == 6 || $p == 7) {
-											    $icon = 'windows';
-											    $ext = '.xap';
-											}
-											elseif ($p == 8) {
-											    $icon = 'globe';
-											    $ext = null;
-											}
+											$icon = Platforms::iconForPlatform($data['Application']['platform']);
+											$ext = Platforms::extensionForPlatform($data['Application']['platform']);
 											?>
 											<i class="icon-<?= $icon; ?>" style="margin-left:12px; margin-right:24px;"></i>
 											<?= $data['Application']['name']; ?>

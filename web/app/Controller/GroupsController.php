@@ -50,6 +50,7 @@ class GroupsController extends AppController {
 	}
 	
 	public function view($id) {
+		App::uses('Platforms', 'Lib/Platform');
 		$this->setPageIcon('group');
 		$this->set('group', $this->Group->getOne($id));
 	}

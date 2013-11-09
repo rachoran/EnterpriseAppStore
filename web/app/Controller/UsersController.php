@@ -2,7 +2,7 @@
 
 class UsersController extends AppController {
 	
-	var $uses = array('User', 'Group');
+	var $uses = array('User', 'Group', 'Application');
 	
 	public function index() {
 		$this->setPageIcon('user');
@@ -12,11 +12,15 @@ class UsersController extends AppController {
 	}
 	
 	public function edit($id=0) {
+		if ($id == 'new') {
+			$id = 0;
+		}
+		else $id = (int)$id;
 		$this->setPageIcon('user');
 		$this->enablePageClass('basic-edit');
 		$this->setAdditionalCssFiles(array('basic-edit'));
 		$this->set('user', $this->User->getOne($id));
-		$this->set('groupsList', $this->Group->getAll());
+		$this->set('groupsList', $this->Group->getGroupsForUser($id));
 		
 		$isEdit = true;
 		if ($this->request->is('post')) {
@@ -35,8 +39,19 @@ class UsersController extends AppController {
 	}
 	
 	public function view($id) {
+		App::uses('Platforms', 'Lib/Platform');
 		$this->setPageIcon('user');
+		$this->enablePageClass('basic-edit');
+		$this->setAdditionalCssFiles(array('basic-edit'));
+		$this->setAdditionalJavascriptFiles(array('application-list'));
+		
 		$this->set('user', $this->User->getOne($id));
+		$ids = array();
+		$groups = $this->Group->getGroupsForUser($id, false);
+		foreach ($groups as $group) {
+			$ids[] = $group['Group']['id'];
+		}
+		$this->set('data', $this->Application->getApplicationsWithGroupIds($ids));
 	}
 	
 	public function delete($id) {

@@ -66,6 +66,31 @@ class Group extends AppModel {
 		return $data;
 	}
 
+	public function getGroupsForUser($userId, $fullData=true) {
+		$options = array();
+		if (!$fullData) {
+			$this->unbindModel(
+				array('hasAndBelongsToMany' => array('User', 'Application'))
+			);
+		}
+		$options['fields'] = array('id');
+		$options['joins'] = array(
+			array(
+				'table' => 'users_groups',
+				'alias' => 'UsersJoin',
+				'type' => 'INNER',
+				'conditions' => array(
+					'Group.id = UsersJoin.group_id',
+					'UsersJoin.user_id' => (int)$userId
+				)
+			) 
+		);
+		$options['group'] = array('Group.id');
+		$options['order'] = array('Group.name' => 'ASC');
+		$data = $this->find('all', $options);
+		return $data;
+	}
+	
 	public function getAllForApp($appId) {
 		$options = array();
 		$options['fields'] = array('*');

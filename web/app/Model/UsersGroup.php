@@ -8,6 +8,7 @@ class UsersGroup extends AppModel {
 	}
 	
 	public function saveUsersForGroup($users, $groupId=0) {
+		die(':)');
 		$this->deleteAllWithGroup($groupId);
 		$data = array();
 		foreach ($users as $id=>$user) {

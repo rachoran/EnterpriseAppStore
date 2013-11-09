@@ -15,63 +15,9 @@ $this->Html->addCrumb($category['Category']['name'], null);
 					<!-- End pill selector -->
 				</ul>
 			</p>
-			<table id="appTable" class="table table-striped table-bordered table-hover selector-table">
-				<thead>
-				    <tr>
-				        <th class="icon">&nbsp;</th>
-				        <th class="name">Application</th>
-				    </tr>
-				</thead>
-				<tbody>
-				    <?php
-				    foreach ($data as $item) {
-				    	$p = $item['Application']['platform'];
-					    if ($p == 0 || $p == 1 || $p == 2) {
-						    $icon = 'apple';
-						    $ext = '.ipa';
-						}
-						elseif ($p == 3 || $p == 4 || $p == 5) {
-						    $icon = 'android';
-						    $ext = '.apk';
-						}
-						elseif ($p == 6 || $p == 7) {
-						    $icon = 'windows';
-						    $ext = '.xap';
-						}
-						elseif ($p == 8) {
-						    $icon = 'globe';
-						    $ext = null;
-						}
-				    ?>
-				    <tr class="<?= $icon; ?>">
-				        <td class="icon">
-				        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'view', $item['Application']['id'], $item['Application']['name'])); ?>">
-				        		<img src="http://www.apps.ie/assets/images/developer_images/lemonsplat/CPLjobs_Android_app_icon.png" alt="<?php echo $item['Application']['name']; ?>" />
-				        	</a>
-				        </td>
-				        <td class="name">
-				            <i class="icon-<?= $icon ?>"></i>
-				            <?php echo $this->Html->link($item['Application']['name'], array('controller' => 'users', 'action' => 'view', $item['Application']['id'])); ?>
-				            <br />
-				            <small class="col-md-5">
-				            	<?php
-				            	if ($ext) {
-				            	?>
-				            	<strong>Download: </strong>
-				            	<a href="" title="Download app">
-				            		<?= $ext; ?>
-				            		<i class="fa icon-cloud-download"></i>
-				            	</a>
-				            	<?php } ?>
-				            </small>
-				        </td>
-				    </tr>
-				    <?php
-				    }
-				    unset($items);
-				    ?>
-				</tbody>
-			</table>
+			<!-- Begin pill selector -->
+			<?= $this->element('DB/applicationTable'); ?>
+			<!-- End pill selector -->
 		</div>
 	</div>
 </div>

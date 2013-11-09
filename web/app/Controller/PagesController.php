@@ -7,9 +7,14 @@ class PagesController extends AppController {
 	public $uses = array('Download', 'Application');
 
 	public function display() {
-		$this->setPageIcon('dashboard');
-		
 		$path = func_get_args();
+		$count = count($path);
+		if (!$count) {
+			return $this->redirect('/');
+		}
+		
+		
+		$this->setPageIcon('dashboard');
 		
 		$this->enableWoodWrapper();
 		$this->setAdditionalCssFiles(array('dashboard'));
@@ -29,12 +34,8 @@ class PagesController extends AppController {
 		$appsPerPlatform['WebClip'] = $this->Application->countAppsForPlatforms(array(8));
 		$this->set('appsPerPlatform', $appsPerPlatform);
 
-		$count = count($path);
-		if (!$count) {
-			return $this->redirect('/');
-		}
 		$page = $subpage = $title_for_layout = null;
-
+		
 		if (!empty($path[0])) {
 			$page = $path[0];
 		}

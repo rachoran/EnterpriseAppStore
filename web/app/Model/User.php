@@ -4,44 +4,23 @@ App::uses('AuthComponent', 'Controller/Component');
 
 class User extends AppModel {
     
+	public $hasAndBelongsToMany = array(
+        'Group' => array(
+			'className' => 'Group',
+			'joinTable' => 'users_groups',
+			'foreignKey' => 'group_id',
+			'associationForeignKey' => 'user_id',
+			'unique' => 'keepExisting',
+	    )
+    );
+    
     public $validate = array(
         'username' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => 'A username is required'
             )
-        ),
-        /*
-        'email' => array(
-            'required' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'A username is required'
-            )
-        ),
-        //*/
-	/*
-        'password' => array(
-            'required' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'A password is required'
-            )
-        ),
-	*/  
-      /*
-        'fullname' => array(
-            'required' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'A full name is required'
-            )
-        ),
-        'role' => array(
-            'valid' => array(
-                'rule' => array('inList', array('admin', 'editor', 'publisher')),
-                'message' => 'Please enter a valid role',
-                'allowEmpty' => false
-            )
         )
-        //*/
     );
     
     public function beforeSave($options = array()) {

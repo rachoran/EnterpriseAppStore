@@ -3,17 +3,6 @@
 App::uses('Storage', 'Lib/Storage');
 
 class Application extends AppModel {
-
-	/*
-static public $iOSApp = array(0, 1);
-	static public $iPhoneApp = array(0);
-	static public $iPadApp = array(1);
-	static public $AndroidApp = array(2, 3);
-	static public $AndroidPhoneApp = array(2);
-	static public $AndroidTabletApp = array(3);
-	static public $Windows8App = array(4);
-	static public $WebApp = array(5);
-*/
 	
 	public $hasAndBelongsToMany = array(
         'Group' => array(
@@ -101,9 +90,7 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 	}
 	
 	public function getAllWithGroupInfo($groupId) {
-		$options = array();
-		$options['fields'] = array('*', 'GroupJoin.group_id');
-        
+		$options = $this->basicOptions();
 		$options['joins'] = array(
 		    array('table' => 'applications_groups',
 		        'alias' => 'GroupJoin',
@@ -114,12 +101,11 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 		        )
 		    )
 		);
-		$options['order'] = array('Application.name' => 'ASC');
 		return $this->find('all', $options);
 	}
-		
-	public function getApplicationsWithGroupId($groupId) {
-		$options = array();
+
+	public function getApplicationsWithGroupIds($groupIds) {
+		$options = $this->basicOptions();
 		$options['joins'] = array(
 		    array('table' => 'applications_groups',
 		        'alias' => 'GroupJoin',
@@ -129,11 +115,15 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 		        )
 		    )
 		);
-		$options['conditions'] = array(
-		    'GroupJoin.group_id' => (int)$groupId
-		);
-		$options['order'] = array('Application.name' => 'ASC');
-		$options['group'] = array('Application.identifier', 'Application.platform');
+		// If one sigle id has been served
+		if (is_int($groupIds) || is_array($groupIds)) {
+			$options['conditions'] = array(
+			    'GroupJoin.group_id' => $groupIds
+			);
+		}
+		else  {
+			return array();
+		}
 		return $this->find('all', $options);
 	}
 	
