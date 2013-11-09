@@ -119,31 +119,41 @@ class Application extends AppModel {
 	
 	public function saveApp($appData, $confData, $file, $icon) {
 		$id = isset($appData['id']) ? (int)$appData['id'] : 0;
+		$modify = false;
 		if ($id) {
 			$this->id = $id;
+			$app = $this->getOne($id);
+			$cd = json_decode($app['Application']['config'], true);
+			$confData = array_merge($cd, $confData);
+			$modify = true;
 		}
 		else {
 			$this->create();
 		}
 		
 		$confData['isIcon'] = ($icon) ? 1 : 0;
-		$this->set('name', $appData['name']);
-		$this->set('identifier', $appData['identifier']);
-		$this->set('version', $appData['version']);
-		$this->set('sort', $appData['sort']);
-		$this->set('size', $appData['size']);
-		$this->set('platform', $confData['platform']);
+		if (!$modify) $this->set('name', $appData['name']);
+		if (isset($appData['url'])) $this->set('url', $appData['url']);
+		if (!$modify) $this->set('identifier', $appData['identifier']);
+		if (!$modify) $this->set('version', $appData['version']);
+		if (isset($appData['sort'])) $this->set('sort', $appData['sort']);
+		if (!$modify) $this->set('size', $appData['size']);
+		if (!$modify) $this->set('platform', $confData['platform']);
 		
-		$s = new Settings();
-		$this->set('location', ($s->get('s3Enable') ? 1 : 0));
+		if (!$modify) {
+			$s = new Settings();
+			$this->set('location', ($s->get('s3Enable') ? 1 : 0));
+		}
 		
 		if (isset($confData['name'])) unset($confData['name']);
+		if (isset($confData['url'])) unset($confData['url']);
 		if (isset($confData['identifier'])) unset($confData['identifier']);
 		if (isset($confData['version'])) unset($confData['version']);
 		if (isset($confData['sort'])) unset($confData['sort']);
 		if (isset($confData['size'])) unset($confData['size']);
 		if (isset($confData['platform'])) unset($confData['platform']);
 		$this->set('config', json_encode($confData));
+		
 		
 		$this->save();
 		
@@ -156,7 +166,7 @@ class Application extends AppModel {
 				// TODO: Display error
 			}
 		}
-		if ($ok) {
+		if ($ok && !$modify) {
 			if (!file_exists($icon)) {
 				copy(WWW_ROOT.'Userfiles'.DS.'Settings'.DS.'Images'.DS.'Icon', $icon);
 			}
@@ -164,6 +174,9 @@ class Application extends AppModel {
 				// TODO: Display error
 			}
 		}
+		
+		// TODO: Improve logic
+		if ($modify) return $this;
 		
 		return $ok ? $this : null;
 	}

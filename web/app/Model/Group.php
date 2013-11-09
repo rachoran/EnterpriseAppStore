@@ -2,7 +2,19 @@
 
 class Group extends AppModel {
 	
-	public $validate = array(
+	/*
+	public $hasAndBelongsToMany = array(
+        'Application' => array(
+			'className' => 'Application',
+			'joinTable' => 'applications_groups',
+			'foreignKey' => 'group_id',
+			'associationForeignKey' => 'application_id',
+			'unique' => 'keepExisting',
+	    )
+    );
+    //*/
+    
+    public $validate = array(
         'name' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
@@ -64,4 +76,23 @@ class Group extends AppModel {
 		$options['group'] = array('Group.id');
 		return $this->find('all', $options);
 	}
+
+	public function getAllForApp($appId) {
+		$options = array();
+		$options['fields'] = array('*');
+		$options['joins'] = array(
+			array(
+				'table' => 'applications_groups',
+				'alias' => 'ApplicationsJoin',
+				'type' => 'LEFT',
+				'conditions' => array(
+					'Group.id = ApplicationsJoin.group_id',
+					'ApplicationsJoin.application_id' => (int)$appId
+				)
+			) 
+		);
+		$options['group'] = array('Group.id');
+		return $this->find('all', $options);
+	}
+
 }

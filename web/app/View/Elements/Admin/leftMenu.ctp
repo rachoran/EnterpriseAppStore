@@ -18,11 +18,11 @@ function checkMenu($name, $t) {
 		<form action="<?= $this->Html->url('/applications', true); ?>" method="post" class="search-box">
 			<input type="text" placeholder="SEARCH APPS" name="search" value="<?= isset($searchTerm) ? $searchTerm : ''; ?>" class="form-control" />
 		</form>
-		<ul class="side-menu">
+		<!-- <ul class="side-menu">
 			<li<?= checkMenu('notifications', $this); ?>>
 				<a href="<?= $this->Html->url('/notifications', true); ?>"> <span class="badge badge-notifications pull-right alert-animated">5</span> <i class="icon-flag"></i> Notifications </a>
 			</li>
-		</ul>
+		</ul> -->
 		<div class="relative-w">
 			<ul class="side-menu">
 				<li<?= checkMenu('pages', $this); ?>>
@@ -40,7 +40,7 @@ function checkMenu($name, $t) {
 				<li<?= checkMenu('categories', $this); ?>>
 					<a href="<?= $this->Html->url('/categories', true); ?>"> <span class="badge pull-right"><?= $menuCounts['categories']; ?></span> <i class="icon-list-ul"></i> Categories </a>
 				</li>
-				<li<?= checkMenu('policies', $this); ?>>
+				<!-- <li<?= checkMenu('policies', $this); ?>>
 					<a href="<?= $this->Html->url('/policies', true); ?>" class="is-dropdown-menu"> <span class="badge pull-right"></span> <i class="icon-shield"></i> Policies </a>
 					<ul>
 						<li> <a href="xxxxxxxxx"> <i class="icon-beaker"></i> App Usage </a> </li>
@@ -57,11 +57,11 @@ function checkMenu($name, $t) {
 						<li> <a href="xxxxxxxxx"> <i class="icon-table"></i> Location Masking </a> </li>
 						<li> <a href="xxxxxxxxx"> <i class="icon-table"></i> Lockout Recovery </a> </li>
 					</ul>
-				</li>
+				</li> -->
 				<li<?= checkMenu('settings', $this); ?>>
 					<a href="<?= $this->Html->url('/settings', true); ?>"> <i class="icon-cogs"></i> Settings </a>
 				</li>
-				<li<?= checkMenu('analytics', $this); ?>>
+				<!-- <li<?= checkMenu('analytics', $this); ?>>
 					<a href="<?= $this->Html->url('/analytics', true); ?>" class="is-dropdown-menu"> <span class="badge pull-right"></span> <i class="icon-bar-chart"></i> Analytics </a>
 					<ul>
 						<li> <a href="charts.html#area_chart_anchor"> <i class="icon-random"></i> Area Chart </a> </li>
@@ -69,7 +69,7 @@ function checkMenu($name, $t) {
 						<li> <a href="charts.html#bar_chart_anchor"> <i class="icon-signal"></i> Bar Chart </a> </li>
 						<li> <a href="charts.html#line_chart_anchor"> <i class="icon-bar-chart"></i> Line Chart </a> </li>
 					</ul>
-				</li>
+				</li> -->
 				<li<?= checkMenu('calendar', $this); ?>>
 					<a href="<?= $this->Html->url('/calendar', true); ?>"> <span class="badge pull-right">11</span> <i class="icon-calendar"></i> Calendar </a>
 				</li>

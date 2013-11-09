@@ -3,3 +3,5 @@
 /web/app/tmp/logs/error.log
 
 .DS_Store
+
+/web/app/Userfiles/Applications/

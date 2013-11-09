@@ -1,8 +1,10 @@
 <?php
 
+App::uses('Platforms', 'Lib/Platform');
+
 class ApplicationsController extends AppController {
 	
-	var $uses = array('Application', 'Category', 'Group', 'Attachment');
+	var $uses = array('Application', 'ApplicationsGroup', 'Category', 'Group', 'Attachment');
 	
 	public function index() {
 		$this->setPageIcon('puzzle-piece');
@@ -42,7 +44,7 @@ class ApplicationsController extends AppController {
 		
 		// Parsing system files
 		$platform = $app['Application']['platform'];
-		if ($platform <= 2) {
+		if ($platform <= Platforms::iOSUniversal) {
 			// iOS
 			App::uses('InfoPlistTemplateParser', 'Lib/Parsing');
 			$parser = new InfoPlistTemplateParser();
@@ -109,14 +111,17 @@ class ApplicationsController extends AppController {
 		$this->enableAjaxFileUpload();
 		
 		if ($this->request->is('post')) {
-			$app = $this->Application->saveApp($this->request->data['appData'], $this->request->data['formData'], null);
+			$app = $this->Application->saveApp($this->request->data['appData'], $this->request->data['formData'], null, null);
+			$groups = isset($this->request->data['group']) ? $this->request->data['group'] : array();
+			$this->ApplicationsGroup->saveAppToGroups($app->id, $groups);
 			return $this->redirect(array('action' => 'edit', $app->id));
 		}	
 		$app = $this->Application->getOne($id);
 		$this->set('data', $app);
 		
 		$this->set('categoriesList', $this->Category->getAll());
-		$this->set('groupsList', $this->Group->getAll());
+		//debug($this->Group->getAllForApp($id));
+		$this->set('groupsList', $this->Group->getAllForApp($id));
 		$this->set('attachmentsList', $this->Attachment->getAllForApp($app));
 	}
 	

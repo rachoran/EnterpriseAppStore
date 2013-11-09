@@ -30,7 +30,7 @@ function environment() {
 			
 			// Activate latest tab, if it exists:
 			var lastTab = $.cookie('last_tab');
-			if (lastTab) {
+			if (lastTab && $(lastTab)) {
 				$('ul.nav-tabs').children().removeClass('active');
 				$('a[href='+ lastTab +']').parents('li:first').addClass('active');
 				$('div.tab-content').children().removeClass('active');

@@ -12,8 +12,8 @@ $('#binaryUpload').fileupload({
 	    	$('#appVersion').val(data.result.data.version);
 	    	$('#appId').val(data.result.data.id);
 	    	
-	    	$('#tab_application_basic .disabled:not(.beforeUpload)').prop('disabled', true);
-			$('#tab_application_basic .disabled.beforeUpload, button.disabled').prop('disabled', false);
+	    	$('#tab_application_basic .disabled:not(.beforeUpload)').prop('readonly', true);
+			$('#tab_application_basic .disabled.beforeUpload, button.disabled').prop('readonly', false);
 			$('#binaryUploadWrapper, #applicationTypeWrapper').hide();
 			$('.nav.nav-tabs li, button.disabled').removeClass('disabled');
 		}
@@ -32,10 +32,10 @@ function checkFields(val) {
 		$('.type0').show();
 		
 		$('.nav.nav-tabs li, #mainAppForm button').addClass('disabled');
-		$('#mainAppForm input:not(#binaryUpload), textarea, button.disabled').prop('disabled', true);
+		$('#mainAppForm input:not(#binaryUpload), textarea, button.disabled').prop('readonly', true);
 	}
 	else {
-		$('#mainAppForm input, textarea, button.disabled').prop('disabled', false);
+		$('#mainAppForm input, textarea, button.disabled').prop('readonly', false);
 		$('.nav.nav-tabs li, button.disabled').removeClass('disabled');
 		
 		if (val == 1) {
@@ -48,6 +48,12 @@ function checkFields(val) {
 			$('.type2').show();
 			$('#appUrl').attr('placeholder', 'https://m.example.com/mobile-site/');
 		}
+	}
+	if ($('#appName').val().length > 0) {
+		$('#mainAppForm input:not(.beforeUpload)').prop('readonly', true);
+		$('#mainAppForm input.beforeUpload, button.disabled, textarea.disabled, #selectedGroups input, #selectedCats input').prop('readonly', false);
+		$('#binaryUploadWrapper, #applicationTypeWrapper').hide();
+		$('.nav.nav-tabs li, button.disabled').removeClass('disabled');
 	}
 }
 

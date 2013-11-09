@@ -27,23 +27,8 @@ $this->Html->addCrumb('Applications', null);
 				<tbody>
 				    <?php
 				    foreach ($data as $item) {
-				    	$p = $item['Application']['platform'];
-					    if ($p == 0 || $p == 1 || $p == 2) {
-						    $icon = 'apple';
-						    $ext = '.ipa';
-						}
-						elseif ($p == 3 || $p == 4 || $p == 5) {
-						    $icon = 'android';
-						    $ext = '.apk';
-						}
-						elseif ($p == 6 || $p == 7) {
-						    $icon = 'windows';
-						    $ext = '.xap';
-						}
-						elseif ($p == 8) {
-						    $icon = 'globe';
-						    $ext = null;
-						}
+				    	$icon = Platforms::iconForPlatform($item['Application']['platform']);
+				    	$ext = Platforms::extensionForPlatform($item['Application']['platform']);
 				    ?>
 				    <tr class="<?= $icon; ?>">
 				        <td class="icon">
@@ -88,7 +73,10 @@ $this->Html->addCrumb('Applications', null);
 			            	<?php } ?>
 				        </td>
 				        <td class="edit">
-				        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'delete', $item['Application']['id'], $item['Application']['name'])); ?>" onclick="return env.confirmation('Are you sure you want to delete all builds for <?php echo $item['Application']['name']; ?>?');">
+				        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $item['Application']['id'], $item['Application']['name'])); ?>">
+				        		<i class="fa icon-edit"><span> Edit latest</span></i>
+				        	</a>
+				        	<br /><a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'delete', $item['Application']['id'], $item['Application']['name'])); ?>" onclick="return env.confirmation('Are you sure you want to delete all builds for <?php echo $item['Application']['name']; ?>?');">
 				        		<i class="fa icon-ban-circle"><span> Delete all</span></i>
 				        	</a>
 				        </td>

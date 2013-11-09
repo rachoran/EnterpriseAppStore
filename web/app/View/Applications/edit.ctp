@@ -22,9 +22,9 @@ function verValCh($key, $data) {
 	<div class="widget">
 	    <ul class="nav nav-tabs">
 	        <li class="active"><a href="#tab_application_basic" data-toggle="tab">Basic info</a></li>
-	        <li><a href="#tab_application_screenshots" data-toggle="tab">Screenshots</a></li>
-	        <li><a href="#tab_application_groupncats" data-toggle="tab">Permissions</a></li>
-	        <li><a href="#tab_application_attachments" data-toggle="tab">Attachments</a></li>
+	        <!-- <li><a href="#tab_application_screenshots" data-toggle="tab">Screenshots</a></li> -->
+	        <li><a href="#tab_application_permissions" data-toggle="tab">Permissions</a></li>
+	        <!-- <li><a href="#tab_application_attachments" data-toggle="tab">Attachments</a></li> -->
 	        <li><a href="#tab_application_other" data-toggle="tab">Other</a></li>
 	    </ul>
 	    <div class="tab-content bottom-margin">
@@ -59,8 +59,8 @@ function verValCh($key, $data) {
 							<input type="file" name="formFile[icon]" class="form-control disabled beforeUpload" />
 						</div>
 						<div class="col-md-1">
-							<img src="<?= $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?= time(); ?>" alt="Application logo" class="logo" />
-							<!-- <img src="<?= Storage::urlForIconForAppWithId($item['Application']['id'], $item['Application']['location']).'?t='.time(); ?>" alt="<?php echo $item['Application']['name']; ?>" class="logo" /> -->
+							<!--<img src="<?= $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?= time(); ?>" alt="Application logo" class="logo" />-->
+							<img src="<?= Storage::urlForIconForAppWithId($data['Application']['id'], $data['Application']['location']).'?t='.time(); ?>" alt="<?php echo $data['Application']['name']; ?>" class="logo" />
 						</div>
 					</div>
 					<div class="form-group type0">
@@ -167,7 +167,7 @@ function verValCh($key, $data) {
 					</div>
 				</div>
 			</div>
-			<div class="tab-pane" id="tab_application_groupncats">
+			<div class="tab-pane" id="tab_application_permissions">
 				<div class="padded">
 					<div class="form-group">
 						<div class="col-md-6">
@@ -182,6 +182,8 @@ function verValCh($key, $data) {
 							<?= $this->element('DB/categorySelector', array('tableName'=>'selectedCats')); ?>
 							<!-- End user selector -->
 						</div>
+					</div>
+					<div class="form-group">
 						<div class="col-md-12">
 							<a href="<?= $this->Html->url('/applications', true); ?>" class="btn btn-default">Cancel</a>
 							<button type="submit" name="save" class="btn btn-primary pull-right disabled">Save &amp; close</button>
@@ -237,34 +239,43 @@ function verValCh($key, $data) {
 					<div class="form-group">
 						<label class="col-md-4 control-label">Sort</label>
 						<div class="col-md-8">
-							<input type="text" name="appData[sort]" class="form-control" placeholder="Higher number = higher in the list, default 1000" value="<?= $data['Application']['sort']; ?>" />
+							<input type="text" name="appData[sort]" class="form-control disabled beforeUpload" placeholder="Higher number = higher in the list, default 1000" value="<?= $data['Application']['sort']; ?>" />
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-4 control-label">Application is enabled</label>
 						<div class="col-md-1">
-							<input type="checkbox" name="formData[enabled]" class="form-control"<?= verValCh('enabled', $s); ?> />
+							<input type="checkbox" name="formData[enabled]" class="form-control disabled beforeUpload"<?= verValCh('enabled', $s); ?> value="1" />
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-7">
 							<small style="color: #999;">Marking the app as enabled means that users will see it in their app catalog. Leave the Enabled checkbox empty if you want to update other app information before making it available to users.</small>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-4 control-label">Direct download</label>
 						<div class="col-md-1">
-							<input type="checkbox" name="formData[directDownload]" class="form-control"<?= verValCh('directDownload', $s); ?> />
+							<input type="checkbox" name="formData[directDownload]" class="form-control disabled beforeUpload"<?= verValCh('directDownload', $s); ?> value="1" />
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-7">
 							<small style="color: #999;">Enabling the app for direct download allows users to install it on their devices via a direct download URL. You can find this URL on the app details page. Anyone who knows the direct download URL will be able to download and install the application without having to log in to the app catalog. Do not enable this feature if you want to restrict installation of this app to authenticated users only. <br />Note that when users install via direct download, they are not notified when an app update is added to the <?= $siteName; ?>.</small>
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-md-4 control-label">Mandatory</label>
 						<div class="col-md-1">
-							<input type="checkbox" name="formData[mandatory]" class="form-control"<?= verValCh('mandatory', $s); ?> />
+							<input type="checkbox" name="formData[mandatory]" class="form-control disabled beforeUpload"<?= verValCh('mandatory', $s); ?> value="1" />
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-7">
 							<small style="color: #999;">Marking the app as mandatory means that users will be forced to install it when they launch an app catalog.</small>
+						</div>
+					</div>
+                    <div class="form-group">
+						<label class="col-md-4 control-label">Basic app</label>
+						<div class="col-md-1">
+							<input type="checkbox" name="formData[basicApp]" class="form-control disabled beforeUpload"<?= verValCh('basicApp', $s); ?> value="1" />
+						</div>
+						<div class="col-md-7">
+							<small style="color: #999;">This app will be available to every user.</small>
 						</div>
 					</div>
                     <p>&nbsp;</p>

@@ -10,12 +10,11 @@
 	<tbody>
 		<?php
 		foreach ($groupsList as $item) {
-			//$checked = (int)$item['CategoryJoin']['group_id'];
-			$checked = null;
+			$checked = (int)$item['ApplicationsJoin']['application_id'];
 		?>
 		<tr>
 			<td>
-				<input type="checkbox" name="user[<?php echo $item['Group']['id']; ?>]"<?php echo $checked ? ' checked="checked"' : ''; ?> class="form-control" />
+				<input type="checkbox" name="group[<?php echo $item['Group']['id']; ?>]"<?php echo $checked ? ' checked="checked"' : ''; ?> class="form-control" value="1" />
 			</td>
 			<td><?= $item['Group']['name']; ?></td>
 		</tr>

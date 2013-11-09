@@ -2,6 +2,7 @@
 
 App::uses('Extract', 'Lib/AppExtraction');
 App::uses('CFPropertyList', 'Vendor/PlistReader');
+App::uses('Platforms', 'Lib/Platform');
 
 
 class ExtractApple extends Extract {
@@ -86,10 +87,10 @@ class ExtractApple extends Extract {
 			$arr['name'] = isset($data['CFBundleDisplayName']) ? $data['CFBundleDisplayName'] : '';
 			
 			if (count($data['UIDeviceFamily']) == 2) {
-				$arr['platform'] = 2;
+				$arr['platform'] = Platforms::iOSUniversal;
 			}
 			else {
-				$arr['platform'] = ((int)$data['UIDeviceFamily'] - 1);
+				$arr['platform'] = ($data['UIDeviceFamily'][0] == 0) ? Platforms::iPhone : Platforms::iPad;
 			}
 			
 			// Getting info about icons
