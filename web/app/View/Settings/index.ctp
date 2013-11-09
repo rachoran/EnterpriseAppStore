@@ -180,6 +180,29 @@ function verValCh($key, $settings) {
 				</div>
 			</div>
 			
+			<div class="accordion-group widget-content-white glossed">
+				<div class="padded">
+					<div class="accordion-heading">
+						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#user-self-registration">
+							<h3 class="form-title form-title-first"><i class="icon-archive"></i> Development</h3>
+						</a>
+					</div>
+					<div id="user-self-registration" class="accordion-body collapse in">
+						<div class="accordion-inner">
+							<div class="form-group">
+								<label class="col-md-3 control-label">MySQL debugger</label>
+								<div class="col-md-1">
+									<input type="checkbox" name="settings[debugMySQL]"<?php echo verValCh('debugMySQL', $s); ?> class="form-control" />
+								</div>
+								<div class="col-md-6">
+									<span>Enable MySQL debugger on the bottom of each page</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
 			<button type="reset" name="save" class="btn btn-default">Reset</button>			
 			<button type="submit" name="save" class="btn btn-primary pull-right save">Save</button>			
 		</div>

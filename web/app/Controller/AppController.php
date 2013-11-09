@@ -74,13 +74,19 @@ class AppController extends Controller {
 
 	public function beforeFilter() {
 		$counts = array();
+		
+		// Counting items (primarily for the left menu but used elsewhere)
 		$counts['applications'] = $this->Application->countAll();
         $counts['users'] = $this->User->countAll();
         $counts['groups'] = $this->Group->countAll();
         $counts['categories'] = $this->Category->countAll();
         $counts['signing'] = $this->Signing->countAll();
         $this->set('menuCounts', $counts);
+		
+		// Debugging
+		$this->set('debugMySQL', $this->Settings->get('debugMySQL'));
         
+        // Global vars
         $siteName = $this->Settings->get('companyServerName');
         $this->set('siteName', (empty($siteName) ? __('AppStore') : $siteName));
     }

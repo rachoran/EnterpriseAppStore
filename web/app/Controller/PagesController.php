@@ -1,10 +1,10 @@
 <?php
 
-App::uses('AppController', 'Controller');
+App::uses('AppController', 'Controller', 'Settings');
 
 class PagesController extends AppController {
 
-	public $uses = array('Download', 'Application', 'Settings');
+	public $uses = array('Download', 'Application');
 
 	public function display() {
 		$this->setPageIcon('dashboard');
@@ -15,11 +15,13 @@ class PagesController extends AppController {
 		$this->setAdditionalCssFiles(array('dashboard'));
 		$this->setAdditionalJavascriptFiles(array('dashboard'));
 		
+		// Downloads
 		$this->set('averageDownloads', $this->Download->averageNumberOfDownloadsPerNumberOfDays());
 		$this->set('downloadsYesterday', $this->Download->numberOfDownloadsYesterday());
 		$this->set('thirtyDayDownloads', $this->Download->countAllForLastNumberOfDays(2));
 		$this->set('allDownloads', $this->Download->countAll());
 		
+		// Counting apps
 		$appsPerPlatform = array();
 		$appsPerPlatform['iOS'] = $this->Application->countAppsForPlatforms(array(0, 1, 2));
 		$appsPerPlatform['Android'] = $this->Application->countAppsForPlatforms(array(3, 4, 5));

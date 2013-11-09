@@ -113,9 +113,13 @@ ga('send', 'pageview');
 						<!-- Begin content -->
 						<?php echo $this->fetch('content'); ?>
 						<!-- End content -->
+						
+						<?php if ($debugMySQL) { ?>
 						<div class="widget cake-sql-log">
 							<?php echo $this->element('sql_dump'); ?>
 						</div>
+						<?php } ?>
+						
 					</div>
 				</div>
 			</div>
