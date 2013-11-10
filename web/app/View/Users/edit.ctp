@@ -1,12 +1,13 @@
 <?php
 
-$user = $this->request->data['User'];
+$user = isset($this->request->data['User']) ? $this->request->data['User'] : null;
+$id = isset($user['id']) ? (int)$user['id'] : 0;
+
 
 // Breadcrumbs
 $this->Html->addCrumb('Users', '/users');
-$this->Html->addCrumb((empty($user['fullname']) ? 'Add user' : $user['fullname']), null);
+$this->Html->addCrumb((empty($user['lastname']) ? __('Add user') : __('Edit').' '.$user['firstname'].' '.$user['lastname']), null);
 
-$id = isset($user['id']) ? (int)$user['id'] : 0;
 
 $changePassword = isset($id) ? 'Change ' : '';
 
@@ -19,7 +20,7 @@ $changePassword = isset($id) ? 'Change ' : '';
 				'class' => 'form-horizontal'
 			));
 			?>
-			<h3 class="form-title form-title-first"><i class="icon-user"></i> <?php echo isset($id) ? 'Edit user "'.$this->request->data['User']['fullname'].'"' : 'Create user'; ?></h3>
+			<h3 class="form-title form-title-first"><i class="icon-user"></i> <?php echo ((bool)$id) ? 'Edit user "'.$user['firstname'].' '.$user['lastname'].'"' : 'Create user'; ?></h3>
 			<div class="form-group">
 				<label class="col-md-4 control-label">User name</label>
 				<div class="col-md-8">
@@ -28,19 +29,32 @@ $changePassword = isset($id) ? 'Change ' : '';
 						'label' => false,
 						'class'=>'form-control',
 						'placeholder'=>'joedoe3330',
-						'autocomplete' => 'off'
+						'autocomplete' => 'off',
+						'readonly' => (bool)$id
 					));
 					?>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-md-4 control-label">Full Name</label>
+				<label class="col-md-4 control-label">First Name</label>
 				<div class="col-md-8">
 					<?php
-					echo $this->Form->input('fullname', array(
+					echo $this->Form->input('firstname', array(
 						'label' => false,
 						'class'=>'form-control',
-						'placeholder'=>'John Doe'
+						'placeholder'=>'John'
+					));
+					?>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-4 control-label">Last Name</label>
+				<div class="col-md-8">
+					<?php
+					echo $this->Form->input('lastname', array(
+						'label' => false,
+						'class'=>'form-control',
+						'placeholder'=>'Doe'
 					));
 					?>
 				</div>
@@ -53,6 +67,18 @@ $changePassword = isset($id) ? 'Change ' : '';
 						'label' => false,
 						'class'=>'form-control',
 						'placeholder'=>'john.doe@example.com'
+					));
+					?>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-4 control-label">Company</label>
+				<div class="col-md-8">
+					<?php
+					echo $this->Form->input('company', array(
+						'label' => false,
+						'class'=>'form-control',
+						'placeholder'=>'Joe\'s Sweets Delivery'
 					));
 					?>
 				</div>
@@ -71,7 +97,7 @@ $changePassword = isset($id) ? 'Change ' : '';
 				</div>
 			</div>
 			<?php
-			if ($this->request->data['User']['role'] == 'owner') {
+			if ($user['role'] == 'owner') {
 			?>
 			<div class="form-group">
 				<label class="col-md-4 control-label">Role</label>

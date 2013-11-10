@@ -7,7 +7,7 @@ $this->Html->addCrumb('Users', null);
 	<div class="widget-content-white glossed">
 		<div class="padded">
 			<p>
-				<a href="<?php echo $this->Html->url(array('controller' => 'users', 'action' => 'edit', 'new')); ?>" class="btn btn-primary pull-right new">New user <i class="fa icon-plus"></i></a>
+				<a href="<?= $this->Html->url(array('controller' => 'users', 'action' => 'edit', 'new')); ?>" class="btn btn-primary pull-right new">New user <i class="fa icon-plus"></i></a>
 			</p>
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
@@ -18,24 +18,27 @@ $this->Html->addCrumb('Users', null);
 				    </tr>
 				</thead>
 				<tbody>
-				    <?php foreach ($users as $user) { ?>
+				    <?php
+				    foreach ($users as $user) {
+				    	$user = $user['User'];
+				    ?>
 				    <tr>
 				        <td class="icon">
-					        <img src="<?php echo $user['User']['gravatar_url']; ?>?s=56" alt="<?php echo $user['User']['fullname']; ?>" />
+					        <img src="<?= $user['gravatar_url']; ?>?s=56" alt="<?= $user['lastname'].', '.$user['firstname']; ?>" />
 				        </td>
 				        <td class="name">
-				            <?php echo $this->Html->link($user['User']['fullname'], array('controller' => 'users', 'action' => 'view', $user['User']['id'], $user['User']['username'])); ?><br />
-				            <small>Email <?php if (strlen($user['User']['email']) > 2) echo '<a href="mailto:'.$user['User']['email'].'" title="Email user '.$user['User']['fullname'].'">'.$user['User']['email'].'</a>'; ?></small>
+				            <?= $this->Html->link($user['lastname'].', '.$user['firstname'], array('controller' => 'users', 'action' => 'view', $user['id'], $user['username'])); ?><br />
+				            <small>Email <?php if (strlen($user['email']) > 2) echo '<a href="mailto:'.$user['email'].'" title="Email user '.$user['firstname'].' '.$user['lastname'].'">'.$user['email'].'</a>'; ?></small>
 				        </td>
 				        <td class="edit">
-				        	<a href="<?php echo $this->Html->url(array("controller" => 'users', 'action' => 'edit', $user['User']['id'], $user['User']['username'])); ?>">
+				        	<a href="<?= $this->Html->url(array("controller" => 'users', 'action' => 'edit', $user['id'], $user['username'])); ?>">
 				        		<i class="fa icon-edit"><span> Edit</span></i>
 				        	</a>
 				        	<?php
-				        	if ($user['User']['role'] != 'owner') {
+				        	if ($user['role'] != 'owner') {
 				        	?>
 				        	<br />
-				        	<a href="<?php echo $this->Html->url(array("controller" => 'users', 'action' => 'delete', $user['User']['id'], $user['User']['username'])); ?>" onclick="return env.confirmation('Are you sure you want to delete user <?php echo $user['User']['fullname']; ?>?');">
+				        	<a href="<?= $this->Html->url(array("controller" => 'users', 'action' => 'delete', $user['id'], $user['username'])); ?>" onclick="return env.confirmation('Are you sure you want to delete user <?= $user['firstname'].' '.$user['lastname']; ?>?');">
 				        		<i class="fa icon-ban-circle"><span> Delete</span></i>
 				        	</a>
 				        	<?php

@@ -56,7 +56,7 @@ class User extends AppModel {
 	
 	public function getAllUsers() {
 		$this->unbindModel(array('hasAndBelongsToMany' => array('Group')));
-		$data =  $this->find('all', array('order' => array('User.fullname' => 'ASC')));
+		$data =  $this->find('all', array('order' => array('User.lastname' => 'ASC', 'User.firstname' => 'ASC')));
 		$data = $this->addGravatars($data);
 		return $data;
 	}
@@ -67,7 +67,7 @@ class User extends AppModel {
 	
 	public function getAllWithGroupInfo($groupId) {
 		$options = array();
-		$options['fields'] = array('User.id', 'GroupJoin.group_id', 'User.email', 'User.role', 'User.fullname', 'User.username');
+		$options['fields'] = array('User.id', 'GroupJoin.group_id', 'User.email', 'User.role', 'User.firstname', 'User.lastname', 'User.username', 'User.company');
         
 		$options['joins'] = array(
 		    array('table' => 'groups_users',
@@ -98,7 +98,7 @@ class User extends AppModel {
 		$options['conditions'] = array(
 		    'GroupJoin.group_id' => (int)$groupId
 		);
-		$options['order'] = array('User.fullname' => 'ASC');
+		$options['order'] = array('User.lastname' => 'ASC', 'User.firstname' => 'ASC');
 		$data = $this->find('all', $options);
 		$data = $this->addGravatars($data);
 		return $data;

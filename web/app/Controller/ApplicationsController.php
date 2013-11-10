@@ -110,6 +110,10 @@ class ApplicationsController extends AppController {
 		
 		$this->enableAjaxFileUpload();
 		
+		// Groups for the join subset
+		$list = $this->User->Group->find('list');
+		$this->set('groups', $list);
+		
 		if ($this->request->is('post')) {
 			$app = $this->Application->saveApp($this->request->data['appData'], $this->request->data['formData'], null, null);
 			$groups = isset($this->request->data['group']) ? $this->request->data['group'] : array();

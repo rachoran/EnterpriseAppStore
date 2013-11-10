@@ -8,7 +8,7 @@ class UsersController extends AppController {
 		$this->setPageIcon('user');
 		$this->enablePageClass('basic-edit');
 		$this->setAdditionalCssFiles(array('basic-edit'));
-		$this->set('users', $this->User->getAll());
+		$this->set('users', $this->User->getAllUsers());
 	}
 	
 	public function edit($id=0) {
@@ -53,7 +53,7 @@ class UsersController extends AppController {
 		
 		// Selected groups
 		$arr = array();
-		foreach ($this->request->data['Group'] as $group) {
+		if (isset($this->request->data['Group'])) foreach ($this->request->data['Group'] as $group) {
 			$arr[$group['id']] = 1;
 		}
 		$this->set('selectedGroups', $arr);

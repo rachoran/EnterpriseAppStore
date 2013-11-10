@@ -183,8 +183,8 @@ class DBTables {
 				'data' => ''
 			),
 			
-			// Users_groups
-			'users_groups' => array(
+			// Groups_users
+			'groups_users' => array(
 				'table' => 'CREATE TABLE `users_groups` (
   `user_id` int(11) unsigned NOT NULL,
   `group_id` int(11) unsigned NOT NULL,

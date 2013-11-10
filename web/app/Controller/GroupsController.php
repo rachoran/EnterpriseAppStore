@@ -37,7 +37,6 @@ class GroupsController extends AppController {
 		
 		// Applications for the join subset
 		$list = $this->Group->Application->getAllApplications();
-		debug($list);
 		$this->set('applicationsList', $list);
 		
 		if (empty($this->request->data)) {
