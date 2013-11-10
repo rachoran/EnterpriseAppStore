@@ -24,18 +24,18 @@ $this->Html->addCrumb('Users', null);
 					        <img src="<?php echo $user['User']['gravatar_url']; ?>?s=56" alt="<?php echo $user['User']['fullname']; ?>" />
 				        </td>
 				        <td class="name">
-				            <?php echo $this->Html->link($user['User']['fullname'], array('controller' => 'users', 'action' => 'view', $user['User']['id'])); ?><br />
+				            <?php echo $this->Html->link($user['User']['fullname'], array('controller' => 'users', 'action' => 'view', $user['User']['id'], $user['User']['username'])); ?><br />
 				            <small>Email <?php if (strlen($user['User']['email']) > 2) echo '<a href="mailto:'.$user['User']['email'].'" title="Email user '.$user['User']['fullname'].'">'.$user['User']['email'].'</a>'; ?></small>
 				        </td>
 				        <td class="edit">
-				        	<a href="<?php echo $this->Html->url(array("controller" => 'users', 'action' => 'edit', $user['User']['id'], $user['User']['fullname'])); ?>">
+				        	<a href="<?php echo $this->Html->url(array("controller" => 'users', 'action' => 'edit', $user['User']['id'], $user['User']['username'])); ?>">
 				        		<i class="fa icon-edit"><span> Edit</span></i>
 				        	</a>
 				        	<?php
 				        	if ($user['User']['role'] != 'owner') {
 				        	?>
 				        	<br />
-				        	<a href="<?php echo $this->Html->url(array("controller" => 'users', 'action' => 'delete', $user['User']['id'], $user['User']['fullname'])); ?>" onclick="return env.confirmation('Are you sure you want to delete user <?php echo $user['User']['fullname']; ?>?');">
+				        	<a href="<?php echo $this->Html->url(array("controller" => 'users', 'action' => 'delete', $user['User']['id'], $user['User']['username'])); ?>" onclick="return env.confirmation('Are you sure you want to delete user <?php echo $user['User']['fullname']; ?>?');">
 				        		<i class="fa icon-ban-circle"><span> Delete</span></i>
 				        	</a>
 				        	<?php

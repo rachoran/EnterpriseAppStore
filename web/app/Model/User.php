@@ -7,9 +7,9 @@ class User extends AppModel {
 	public $hasAndBelongsToMany = array(
         'Group' => array(
 			'className' => 'Group',
-			'joinTable' => 'users_groups',
-			'foreignKey' => 'group_id',
-			'associationForeignKey' => 'user_id',
+			'joinTable' => 'groups_users',
+			'foreignKey' => 'user_id',
+			'associationForeignKey' => 'group_id',
 			'unique' => 'keepExisting',
 	    )
     );
@@ -30,6 +30,14 @@ class User extends AppModel {
 	    return true;
 	}
 	
+	public static function roles() {
+		$arr = array();
+		$arr['user'] = __('User');
+		$arr['developer'] = __('Developer');
+		$arr['admin'] = __('Admin');
+		return $arr;
+	}
+	
 	public function getOne($id) {
 		$this->id = $id;
         $data = $this->read(null, $id);
@@ -46,7 +54,8 @@ class User extends AppModel {
 		return $data;
 	}
 	
-	public function getAll() {
+	public function getAllUsers() {
+		$this->unbindModel(array('hasAndBelongsToMany' => array('Group')));
 		$data =  $this->find('all', array('order' => array('User.fullname' => 'ASC')));
 		$data = $this->addGravatars($data);
 		return $data;
@@ -61,7 +70,7 @@ class User extends AppModel {
 		$options['fields'] = array('User.id', 'GroupJoin.group_id', 'User.email', 'User.role', 'User.fullname', 'User.username');
         
 		$options['joins'] = array(
-		    array('table' => 'users_groups',
+		    array('table' => 'groups_users',
 		        'alias' => 'GroupJoin',
 		        'type' => 'LEFT',
 		        'conditions' => array(
@@ -78,7 +87,7 @@ class User extends AppModel {
 		
 	public function getUsersWithGroupId($groupId) {
 		$options['joins'] = array(
-		    array('table' => 'users_groups',
+		    array('table' => 'groups_users',
 		        'alias' => 'GroupJoin',
 		        'type' => 'INNER',
 		        'conditions' => array(

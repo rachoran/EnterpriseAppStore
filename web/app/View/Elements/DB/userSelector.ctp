@@ -1,10 +1,8 @@
-<?php
-
-?><table id="<?php echo $tableName; ?>" class="table table-striped table-bordered table-hover selector-table">
+<table id="userTable" class="table table-striped table-bordered table-hover selector-table">
 	<thead>
 		<tr>
 			<th width="28">
-				<input type="checkbox" onchange="env.toggleAllCheckBoxes('<?php echo $tableName; ?>', this);" class="form-control" />
+				<input type="checkbox" onchange="env.toggleAllCheckBoxes('userTable', this);" class="form-control" />
 			</th>
 			<th>User name</th>
 			<th width="46">&nbsp;</th>
@@ -13,15 +11,16 @@
 	<tbody>
 		<?php
 		foreach ($usersList as $user) {
-			$checked = (int)$user['GroupJoin']['group_id'];
+			$idUser = $user['User']['id'];
+			$checked = isset($selectedUsers[$idUser]);
 		?>
 		<tr>
 			<td>
-				<input type="checkbox" name="user[<?php echo $user['User']['id']; ?>]"<?php echo $checked ? ' checked="checked"' : ''; ?> class="form-control" />
+				<input type="checkbox" name="data[User][User][]"<?= $checked ? ' checked="checked"' : ''; ?> id="UserUser<?= $idUser; ?>" class="form-control" value="<?= $idUser; ?>" />
 			</td>
-			<td><?php echo (empty($user['User']['fullname']) ? $user['User']['username'] : $user['User']['fullname'].' <small>('.$user['User']['username'].')</small>'); ?></td>
+			<td><?= (empty($user['User']['fullname']) ? $user['User']['username'] : $user['User']['fullname'].' <small>('.$user['User']['username'].')</small>'); ?></td>
 			<td class="center">
-				<img src="<?php echo $user['User']['gravatar_url']; ?>?s=68" alt="<?php echo $user['User']['fullname']; ?>" class="icon" />
+				<img src="<?= $user['User']['gravatar_url']; ?>?s=68" alt="<?= $user['User']['fullname']; ?>" class="icon" />
 			</td>
 		</tr>
 		<?php

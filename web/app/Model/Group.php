@@ -12,7 +12,7 @@ class Group extends AppModel {
 	    ),
         'User' => array(
 			'className' => 'User',
-			'joinTable' => 'users_groups',
+			'joinTable' => 'groups_users',
 			'foreignKey' => 'group_id',
 			'associationForeignKey' => 'user_id',
 			'unique' => 'keepExisting',
@@ -28,17 +28,6 @@ class Group extends AppModel {
         )
     );
 	
-	public function getAll() {
-		$options = array('order' => array('Group.name' => 'ASC'));
-		$data = $this->find('all', $options);
-		return $data;
-	}
-	
-	public function getOne($id) {
-		$id = (int)$id;
-		return $this->find('first', array('conditions' => array('Group.id' => $id)));
-	}
-	
 	public function saveGroup($id, $name, $description) {
 		$id = (int)$id;
 		if ($id) {
@@ -51,6 +40,17 @@ class Group extends AppModel {
 		$this->set('description', $description);
 		$this->save();
 		return $this;
+	}
+	
+	public function getAll() {
+		$options = array('order' => array('Group.name' => 'ASC'));
+		$data = $this->find('all', $options);
+		return $data;
+	}
+	
+	public function getOne($id) {
+		$id = (int)$id;
+		return $this->find('first', array('conditions' => array('Group.id' => $id)));
 	}
 	
 	public function countAll($options=array()) {
@@ -76,7 +76,7 @@ class Group extends AppModel {
 		$options['fields'] = array('id');
 		$options['joins'] = array(
 			array(
-				'table' => 'users_groups',
+				'table' => 'groups_users',
 				'alias' => 'UsersJoin',
 				'type' => 'INNER',
 				'conditions' => array(

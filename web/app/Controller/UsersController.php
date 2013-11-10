@@ -12,30 +12,51 @@ class UsersController extends AppController {
 	}
 	
 	public function edit($id=0) {
+		// Setting up the page
+		$this->setPageIcon('user');
+		$this->enablePageClass('basic-edit');
+		$this->setAdditionalCssFiles(array('basic-edit'));
+		
+		// Checking for Id
 		if ($id == 'new') {
 			$id = 0;
 		}
 		else $id = (int)$id;
-		$this->setPageIcon('user');
-		$this->enablePageClass('basic-edit');
-		$this->setAdditionalCssFiles(array('basic-edit'));
-		$this->set('user', $this->User->getOne($id));
-		$this->set('groupsList', $this->Group->getGroupsForUser($id));
 		
-		$isEdit = true;
-		if ($this->request->is('post')) {
-			$this->User->saveGroup($this->request->data['userData']);
+		// Groups for the join subset
+		$list = $this->User->Group->find('list');
+		$this->set('groups', $list);
+		
+		if (empty($this->request->data)) {
+			// Getting data
+        	$this->request->data = $this->User->findById($id);
 		}
-		else $isEdit = false;
-		
-		if ($isEdit) {
-			if (isset($this->request->data['apply'])) {
-				$this->redirect(array("controller" => "groups", "action" => "edit", $this->User->id, $this->request->data['fullname']));
+		else {
+			// Saving data
+			if (!$id) {
+				$this->User->create();
+				$this->User->save($this->request->data);
 			}
 			else {
-				return $this->redirect(array('action' => 'index'));
+				$this->User->id = $id;
+				$this->User->save($this->request->data);
+			}
+			if (isset($this->request->data['apply'])) {
+				// Redirecting for the same page (Apply)
+				$this->redirect(array('controller' => 'users', 'action' => 'edit', $this->User->id, $this->request->data['User']['username']));
+			}
+			else {
+				// Redirecting to the index
+				$this->redirect(array('controller' => 'users', 'action' => 'index'));
 			}
 		}
+		
+		// Selected groups
+		$arr = array();
+		foreach ($this->request->data['Group'] as $group) {
+			$arr[$group['id']] = 1;
+		}
+		$this->set('selectedGroups', $arr);
 	}
 	
 	public function view($id) {

@@ -2,7 +2,7 @@
 
 class GroupsController extends AppController {
 	
-	var $uses = array('Group', 'ApplicationsGroup', 'User', 'UsersGroup', 'Application');
+	var $uses = array('Group', 'User', 'UsersGroup', 'Application');
 	
 	public function index() {
 		$this->setPageIcon('group');
@@ -16,37 +16,67 @@ class GroupsController extends AppController {
 		$this->setPageIcon('group');
 		$this->enablePageClass('basic-edit');
 		$this->setAdditionalCssFiles(array('basic-edit'));
-		$this->set('group', $this->Group->getOne($id));
 		
-		$this->set('usersList', $this->User->getAllWithGroupInfo($id));
-		$this->set('applicationsList', $this->Application->getAllWithGroupInfo($id));
-		
-		$isEdit = true;
-		if ($this->request->is('post')) {
-			$group = $this->Group->saveGroup($this->request->data['id'], $this->request->data['name'], $this->request->data['description']);
-			
-			// Saving users
-			if (!isset($this->request->data['user']) || empty($this->request->data['user'])) {
-				$this->UsersGroup->deleteAllWithGroup($group->id);
-			}
-			else $this->UsersGroup->saveUsersForGroup($this->request->data['user'], $group->id);
-			
-			// Saving applications
-			if (!isset($this->request->data['application']) || empty($this->request->data['application'])) {
-				$this->ApplicationsGroup->deleteAllWithGroup($group->id);
-			}
-			else $this->ApplicationsGroup->saveAppsForGroup($this->request->data['application'], $group->id);
+		// Checking for Id
+		if ($id == 'new') {
+			$id = 0;
 		}
-		else $isEdit = false;
+		else $id = (int)$id;
 		
-		if ($isEdit) {
-			if (isset($this->request->data['apply'])) {
-				$this->redirect(array("controller" => "groups", "action" => "edit", $this->Group->id, $this->request->data['name']));
+		// Users for the join subset
+		$list = $this->Group->User->find('list');
+		$this->set('users', $list);
+		
+		// Users for the join subset
+		$list = $this->Group->User->getAllUsers();
+		$this->set('usersList', $list);
+		
+		// Applications for the join subset
+		$list = $this->Group->Application->find('list');
+		$this->set('applications', $list);
+		
+		// Applications for the join subset
+		$list = $this->Group->Application->getAllApplications();
+		debug($list);
+		$this->set('applicationsList', $list);
+		
+		if (empty($this->request->data)) {
+			// Getting data
+        	$this->request->data = $this->Group->findById($id);
+		}
+		else {
+			// Saving data
+			if (!$id) {
+				$this->Group->create();
+				$this->Group->save($this->request->data);
 			}
 			else {
-				return $this->redirect(array('action' => 'index'));
+				$this->Group->id = $id;
+				$this->Group->save($this->request->data);
+			}
+			if (isset($this->request->data['apply'])) {
+				// Redirecting for the same page (Apply)
+				$this->redirect(array('controller' => 'groups', 'action' => 'edit', $this->Group->id, $this->request->data['Group']['name']));
+			}
+			else {
+				// Redirecting to the index
+				$this->redirect(array('controller' => 'groups', 'action' => 'index'));
 			}
 		}
+		
+		// Selected users
+		$arr = array();
+		foreach ($this->request->data['User'] as $user) {
+			$arr[$user['id']] = 1;
+		}
+		$this->set('selectedUsers', $arr);
+		
+		// Selected applications
+		$arr = array();
+		foreach ($this->request->data['Application'] as $app) {
+			$arr[$app['id']] = 1;
+		}
+		$this->set('selectedApplications', $arr);
 	}
 	
 	public function view($id) {

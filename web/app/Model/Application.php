@@ -54,7 +54,8 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 		return $options;
 	}
 	
-	public function getAll() {
+	public function getAllApplications() {
+		$this->unbindModel(array('hasAndBelongsToMany' => array('Group', 'Category')));
 		$options = $this->basicOptions();
 		$data =  $this->find('all', $options);
 		return $data;
