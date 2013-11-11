@@ -16,7 +16,8 @@ class Platforms {
 	public static function count($data) {
 		$arr = array();
 		foreach ($data as $item) {
-			$icon = self::iconForPlatform($item['Application']['platform']);
+			if (!isset($item['platform'])) $item = $item['Application'];
+			$icon = self::iconForPlatform($item['platform']);
 			if (!isset($arr[$icon])) $arr[$icon] = self::nameForIconKey($icon);
 		}
 		return $arr;

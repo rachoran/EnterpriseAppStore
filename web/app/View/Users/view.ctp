@@ -13,7 +13,7 @@ $this->Html->addCrumb($user['firstname'].' '.$user['lastname'], null);
 			<p>
 				<ul id="appTablePills" class="nav nav-pills">
 					<!-- Begin pill selector -->
-					<?= $this->element('DB/platformPillSelector'); ?>
+					<?= $this->element('DB/platformPillSelector', array('data' => $apps)); ?>
 					<!-- End pill selector -->
 				</ul>
 			</p>

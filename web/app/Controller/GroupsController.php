@@ -59,7 +59,7 @@ class GroupsController extends AppController {
 			}
 			else {
 				// Redirecting to the index
-				$this->redirect(array('controller' => 'groups', 'action' => 'index'));
+				$this->redirect(array('action' => 'index'));
 			}
 		}
 		
@@ -81,7 +81,14 @@ class GroupsController extends AppController {
 	public function view($id) {
 		App::uses('Platforms', 'Lib/Platform');
 		$this->setPageIcon('group');
-		$this->set('group', $this->Group->getOne($id));
+		$this->enablePageClass('basic-edit');
+		$this->setAdditionalCssFiles(array('basic-edit'));
+		
+		$group = $this->Group->getOne($id);
+		$this->set('group', $group);
+		
+		$apps = $this->Application->getApplicationsWithGroupIds((int)$id);
+		$this->set('apps', $apps);
 	}
 	
 	public function delete($id) {

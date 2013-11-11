@@ -33,6 +33,14 @@ $this->Html->addCrumb((empty($category['Category']['name']) ? 'Create category' 
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-md-4 control-label">Applications</label>
+					<div class="col-md-8">
+						<!-- Begin applications selector -->
+						<?php echo $this->element('DB/applicationSelector'); ?>
+						<!-- End applications selector -->
+					</div>
+				</div>
+				<div class="form-group">
 					<div class="col-md-offset-4 col-md-8">
 						<input type="hidden" name="id" value="<?php echo $id; ?>" />
 						<a href="<?php echo $this->Html->url('/categories', true); ?>" class="btn btn-default">Cancel</a>

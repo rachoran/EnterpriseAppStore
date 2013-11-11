@@ -18,9 +18,9 @@
 			<td>
 				<input type="checkbox" name="data[User][User][]"<?= $checked ? ' checked="checked"' : ''; ?> id="UserUser<?= $idUser; ?>" class="form-control" value="<?= $idUser; ?>" />
 			</td>
-			<td><?= (empty($user['User']['fullname']) ? $user['User']['username'] : $user['User']['fullname'].' <small>('.$user['User']['username'].')</small>'); ?></td>
+			<td><?= $user['User']['lastname'].', '.$user['User']['firstname'].' <small>('.$user['User']['username'].')</small>'; ?></td>
 			<td class="center">
-				<img src="<?= $user['User']['gravatar_url']; ?>?s=68" alt="<?= $user['User']['fullname']; ?>" class="icon" />
+				<img src="<?= $user['User']['gravatar_url']; ?>?s=68" alt="<?= $user['User']['lastname'].', '.$user['User']['firstname']; ?>" class="icon" />
 			</td>
 		</tr>
 		<?php

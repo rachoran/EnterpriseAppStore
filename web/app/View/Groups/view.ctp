@@ -11,7 +11,7 @@ $this->Html->addCrumb($group['Group']['name'], null);
 			<p>
 				<ul id="appTablePills" class="nav nav-pills">
 					<!-- Begin pill selector -->
-					<?= $this->element('DB/platformPillSelector'); ?>
+					<?= $this->element('DB/platformPillSelector', array('data' => $group['Application'])); ?>
 					<!-- End pill selector -->
 				</ul>
 			</p>

@@ -2,6 +2,16 @@
 
 class Category extends AppModel {
 	
+	public $hasAndBelongsToMany = array(
+        'Application' => array(
+			'className' => 'Application',
+			'joinTable' => 'applications_categories',
+			'foreignKey' => 'category_id',
+			'associationForeignKey' => 'application_id',
+			'unique' => 'keepExisting',
+	    )
+    );
+
 	public $validate = array(
         'name' => array(
             'required' => array(

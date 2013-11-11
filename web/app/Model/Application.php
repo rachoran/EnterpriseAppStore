@@ -146,7 +146,7 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 				)
 			) 
 		);
-		$options['ApplicationsJoin.category_id'] = (int)$catId;
+		$options['conditions']['ApplicationsJoin.category_id'] = (int)$catId;
 		$data = $this->find('all', $options);
 		return $data;
 	}

@@ -22,12 +22,12 @@ $this->Html->addCrumb('Users', null);
 				    foreach ($users as $user) {
 				    	$user = $user['User'];
 				    ?>
-				    <tr>
+				    <tr class="clickable">
 				        <td class="icon">
 					        <img src="<?= $user['gravatar_url']; ?>?s=56" alt="<?= $user['lastname'].', '.$user['firstname']; ?>" />
 				        </td>
 				        <td class="name">
-				            <?= $this->Html->link($user['lastname'].', '.$user['firstname'], array('controller' => 'users', 'action' => 'view', $user['id'], $user['username'])); ?><br />
+				            <?= $this->Html->link($user['lastname'].', '.$user['firstname'], array('controller' => 'users', 'action' => 'view', $user['id'], $user['username']), array('class' => 'view')); ?><br />
 				            <small>Email <?php if (strlen($user['email']) > 2) echo '<a href="mailto:'.$user['email'].'" title="Email user '.$user['firstname'].' '.$user['lastname'].'">'.$user['email'].'</a>'; ?></small>
 				        </td>
 				        <td class="edit">

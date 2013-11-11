@@ -8,7 +8,7 @@
 	</thead>
 	<tbody>
 	    <?php
-	    foreach ($data as $item) {
+	    foreach ($apps as $item) {
 	    	$icon = Platforms::iconForPlatform($item['Application']['platform']);
 	    	$ext = Platforms::extensionForPlatform($item['Application']['platform']);
 	    ?>

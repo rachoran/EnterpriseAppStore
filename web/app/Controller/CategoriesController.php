@@ -19,20 +19,50 @@ class CategoriesController extends AppController {
 		$this->setAdditionalCssFiles(array('basic-edit'));
 		$this->set('category', $this->Category->getOne($id));
 		
-		$isEdit = true;
-		if ($this->request->is('post')) {
-			$this->Category->saveCategory($this->request->data['id'], $this->request->data['name'], $this->request->data['description'], $this->request->data['icon']);
+		// Checking for Id
+		if ($id == 'new') {
+			$id = 0;
 		}
-		else $isEdit = false;
+		else $id = (int)$id;
 		
-		if ($isEdit) {
+		// Applications for the join subset
+		$list = $this->Category->Application->find('list');
+		$this->set('applications', $list);
+		
+		// Applications for the join subset
+		$list = $this->Category->Application->getAllApplications();
+		$this->set('applicationsList', $list);
+		
+		if (empty($this->request->data)) {
+			// Getting data
+        	$this->request->data = $this->Category->findById($id);
+		}
+		else {
+			// Saving data
+			if (!$id) {
+				$this->Category->create();
+				$this->Category->save($this->request->data);
+			}
+			else {
+				$this->Category->id = $id;
+				$this->Category->save($this->request->data);
+			}
 			if (isset($this->request->data['apply'])) {
+				// Redirecting for the same page (Apply)
 				$this->redirect(array("controller" => "categories", "action" => "edit", $this->Category->id, $this->request->data['name']));
 			}
 			else {
-				return $this->redirect(array('action' => 'index'));
+				// Redirecting to the index
+				$this->redirect(array('action' => 'index'));
 			}
 		}
+		
+		// Selected applications
+		$arr = array();
+		foreach ($this->request->data['Application'] as $app) {
+			$arr[$app['id']] = 1;
+		}
+		$this->set('selectedApplications', $arr);
 	}
 	
 	public function view($id) {
@@ -42,7 +72,11 @@ class CategoriesController extends AppController {
 		$this->enablePageClass('basic-edit');
 		$this->setAdditionalCssFiles(array('basic-edit'));
 		$this->setAdditionalJavascriptFiles(array('application-list'));
-		$this->set('data', $this->Application->getAllForCategory($cat['Category']['id']));
+		
+		$this->set('category', $cat);
+		
+		$apps = $this->Application->getAllForCategory($id);
+		$this->set('apps', $apps);
 	}
 	
 	public function delete($id) {

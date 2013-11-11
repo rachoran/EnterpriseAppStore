@@ -20,6 +20,11 @@ function environment() {
 		$(selector).prop('checked', isOn);
 	}
 	
+	// Tables - Selecting entire rows
+	this.clickedRow = function() {
+		$(this).hide();
+	}
+	
 	// Initialization
 	this.init = function() {
 		$(function() {
@@ -36,6 +41,12 @@ function environment() {
 				$('div.tab-content').children().removeClass('active');
 				$(lastTab).addClass('active');
 			}
+			
+			// Activating cickable table rows
+			$('table tr.clickable').click(function() {
+				var href = $(this).find('a.view').prop('href');
+				if ($(this).find('a.view').prop('href')) document.location = href;
+			});
 		});
 	}
 	

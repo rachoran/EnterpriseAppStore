@@ -72,7 +72,9 @@ class UsersController extends AppController {
 		foreach ($groups as $group) {
 			$ids[] = $group['Group']['id'];
 		}
-		$this->set('data', $this->Application->getApplicationsWithGroupIds($ids));
+		
+		debug($this->Application->getApplicationsWithGroupIds($ids));
+		$this->set('apps', $this->Application->getApplicationsWithGroupIds($ids));
 	}
 	
 	public function delete($id) {

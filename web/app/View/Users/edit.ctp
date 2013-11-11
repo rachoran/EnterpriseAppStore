@@ -97,18 +97,20 @@ $changePassword = isset($id) ? 'Change ' : '';
 				</div>
 			</div>
 			<?php
-			if ($user['role'] == 'owner') {
+			// TODO: If this user is current user, they should not be able to edit
+			if ($user['role'] != 'owner') {
 			?>
 			<div class="form-group">
 				<label class="col-md-4 control-label">Role</label>
 				<div class="col-md-8">
-					<!-- <select class="form-control" name="userData[role]">
-						<option value="user">User</option>
-						<option value="developer">Developer</option>
-						<option value="admin">Administrator</option>
-					</select> -->
+					<select class="form-control" name="data[User][role]">
+						<option value="user"<?php if ($user['role'] == 'user') echo ' selected="selected"'; ?>>User</option>
+						<option value="developer"<?php if ($user['role'] == 'developer') echo ' selected="selected"'; ?>>Developer</option>
+						<option value="admin"<?php if ($user['role'] == 'admin') echo ' selected="selected"'; ?>>Administrator</option>
+					</select>
 					<?php
-					$this->Form->input('role', array('options' => $groups));
+					// TODO: Would be good to have forms helper doing this
+					//$this->Form->input('role', array('options' => $groups));
 					?>
 				</div>
 			</div>
