@@ -6,7 +6,7 @@ class DBTables {
 		return array(
 			// Applications
 			'applications' => array(
-				'table' => 'CREATE TABLE `applications` (
+				'table' => "CREATE TABLE `applications` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `identifier` varchar(150) NOT NULL,
@@ -22,33 +22,33 @@ class DBTables {
   PRIMARY KEY (`id`),
   KEY `name` (`name`,`identifier`,`platform`,`sort`),
   KEY `version` (`version`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;',
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
 				'data' => ''
 			),
 			
 			// Applications_attachments
 			'applications_attachments' => array(
-				'table' => 'CREATE TABLE `applications_attachments` (
+				'table' => "CREATE TABLE `applications_attachments` (
   `application_id` bigint(20) unsigned NOT NULL,
   `attachment_id` bigint(20) unsigned NOT NULL,
   KEY `application_id` (`application_id`,`attachment_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;',
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;",
 				'data' => ''
 			),
 			
 			// Application_groups
 			'applications_groups' => array(
-				'table' => 'CREATE TABLE `applications_groups` (
+				'table' => "CREATE TABLE `applications_groups` (
   `application_id` bigint(20) unsigned NOT NULL,
   `group_id` int(11) unsigned NOT NULL,
   KEY `application_id` (`application_id`,`group_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;',
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;",
 				'data' => ''
 			),
 			
 			// Attachments
 			'attachments' => array(
-				'table' => 'CREATE TABLE `attachments` (
+				'table' => "CREATE TABLE `attachments` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `application_id` bigint(20) unsigned DEFAULT NULL,
   `application_identifier` varchar(150) NOT NULL,
@@ -62,13 +62,13 @@ class DBTables {
   KEY `application_id` (`application_id`,`name`,`created`,`modified`),
   KEY `application_identifier` (`application_identifier`),
   KEY `application_platform` (`application_platform`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;',
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
 				'data' => ''
 			),
 			
 			// Categories
 			'categories' => array(
-				'table' => 'CREATE TABLE `categories` (
+				'table' => "CREATE TABLE `categories` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `description` text NOT NULL,
@@ -78,13 +78,13 @@ class DBTables {
   PRIMARY KEY (`id`),
   KEY `name` (`name`),
   KEY `created` (`created`,`modified`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;',
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
 				'data' => ''
 			),
 			
 			// Signings
 			'signings' => array(
-				'table' => 'CREATE TABLE `signings` (
+				'table' => "CREATE TABLE `signings` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
   `certificate` varchar(250) NOT NULL,
@@ -94,36 +94,36 @@ class DBTables {
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `created` (`created`,`modified`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;',
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
 				'data' => ''
 			),
 			
 			// Downloads
 			'downloads' => array(
-				'table' => 'CREATE TABLE `downloads` (
+				'table' => "CREATE TABLE `downloads` (
   `application_id` bigint(20) unsigned NOT NULL,
   `created` datetime NOT NULL,
   KEY `application_id` (`application_id`,`created`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;',
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;",
 				'data' => ''
 			),
 			
 			//Filetypes (mime)
 			'filetypes' => array(
-				'table' => 'CREATE TABLE `filetypes` (
+				'table' => "CREATE TABLE `filetypes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `mime` varchar(25) NOT NULL,
   `allowed` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `icon` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `mime` (`mime`,`allowed`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;',
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
 				'data' => ''
 			),
 			
 			// Groups
 			'groups' => array(
-				'table' => 'CREATE TABLE `groups` (
+				'table' => "CREATE TABLE `groups` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `description` text NOT NULL,
@@ -132,25 +132,25 @@ class DBTables {
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `name` (`name`,`created`,`modified`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;',
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
 				'data' => ''
 			),
 			
 			// History
 			'history' => array(
-				'table' => 'CREATE TABLE `history` (
+				'table' => "CREATE TABLE `history` (
   `application_id` bigint(20) unsigned NOT NULL,
   `action` varchar(3) NOT NULL,
   `created` datetime NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
   KEY `application_id` (`application_id`,`action`,`created`,`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;',
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;",
 				'data' => ''
 			),
 			
 			// Ideas
 			'ideas' => array(
-				'table' => 'CREATE TABLE `ideas` (
+				'table' => "CREATE TABLE `ideas` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `fullname` varchar(150) NOT NULL,
   `email` varchar(80) NOT NULL,
@@ -160,13 +160,13 @@ class DBTables {
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`,`area`),
   KEY `created` (`created`,`modified`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;',
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
 				'data' => ''
 			),
 			
 			// Users
 			'users' => array(
-				'table' => 'CREATE TABLE `users` (
+				'table' => "CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(40) NOT NULL,
   `email` varchar(80) NOT NULL,
@@ -174,29 +174,31 @@ class DBTables {
   `role` varchar(20) NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL,
-  `fullname` varchar(80) NOT NULL,
+  `firstname` varchar(80) NOT NULL,
+  `lastname` varchar(80) NOT NULL,
+  `company` varchar(80) NOT NULL,
   `password_token` varchar(40) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `nickname` (`username`,`email`,`password`),
   KEY `role` (`role`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8;',
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
 				'data' => ''
 			),
 			
 			// Groups_users
 			'groups_users' => array(
-				'table' => 'CREATE TABLE `users_groups` (
+				'table' => "CREATE TABLE `users_groups` (
   `user_id` int(11) unsigned NOT NULL,
   `group_id` int(11) unsigned NOT NULL,
   KEY `user_id` (`user_id`,`group_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;',
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;",
 				'data' => ''
 			),
 			
 			/*
 			// Xxxxxx
 			'xxxx' => array(
-				'table' => '',
+				'table' => "',
 				'data' => ''
 			),
 			*/
