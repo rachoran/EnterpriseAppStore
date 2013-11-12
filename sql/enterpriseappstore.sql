@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 10, 2013 at 11:59 PM
+-- Generation Time: Nov 12, 2013 at 12:55 AM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -30,7 +30,7 @@ CREATE TABLE `applications` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
   `identifier` varchar(150) NOT NULL,
-  `url` text NOT NULL,
+  `url` varchar(255) NOT NULL,
   `platform` tinyint(2) unsigned NOT NULL,
   `version` varchar(15) NOT NULL,
   `size` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -42,22 +42,18 @@ CREATE TABLE `applications` (
   PRIMARY KEY (`id`),
   KEY `name` (`name`,`identifier`,`platform`,`sort`),
   KEY `version` (`version`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=27 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `applications`
 --
 
 INSERT INTO `applications` (`id`, `name`, `identifier`, `url`, `platform`, `version`, `size`, `sort`, `config`, `location`, `created`, `modified`) VALUES
-(1, 'iDeviant', 'com.fuerteint.iDeviant', '', 0, '4.0', 1059411, 1000, '{"plist":{"CFBundleDisplayName":"iDeviant","CFBundleName":"iDeviant","DTXcode":"0501","DTSDKName":"iphoneos7.0","UISupportedInterfaceOrientations~ipad":["UIInterfaceOrientationPortrait","UIInterfaceOrientationPortraitUpsideDown","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleIcons~ipad":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["AppIcon29x29","AppIcon40x40","AppIcon60x60","AppIcon76x76"]}},"DTSDKBuild":"11B508","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"13A603","DTPlatformName":"iphoneos","CFBundleShortVersionString":"4.0","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"DTCompiler":"com.apple.compilers.llvm.clang.1_0","CFBundleExecutable":"iDeviant","UILaunchImages":[{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"LaunchImage-700-568h","UILaunchImageSize":"{320, 568}","UILaunchImageMinimumOSVersion":"7.0"}],"CFBundleResourceSpecification":"ResourceRules.plist","MinimumOSVersion":"7.0","UIDeviceFamily":[1],"UIViewControllerBasedStatusBarAppearance":false,"DTXcodeBuild":"5A2053","CFBundleIdentifier":"com.fuerteint.iDeviant","UIAppFonts":["FontAwesome.ttf"],"CFBundleSignature":"????","DTPlatformVersion":"7.0","CFBundleIcons":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["AppIcon29x29","AppIcon40x40","AppIcon60x60"]}},"LSRequiresIPhoneOS":true,"UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"DTPlatformBuild":"11B508"},"icons":["AppIcon29x29@2x.png","AppIcon29x29@2x~ipad.png","AppIcon29x29~ipad.png","AppIcon40x40@2x.png","AppIcon40x40@2x~ipad.png","AppIcon40x40~ipad.png","AppIcon60x60@2x.png"],"provisioning":"enterprise","isIcon":0,"author":"","description":"","basicApp":"1"}', 1, '2013-11-06 22:43:02', '2013-11-06 22:43:02'),
-(2, 'iJenkins', 'com.fuerteint.ijenkins', '', 0, '1.0', 301232, 1000, '{"plist":{"CFBundleName":"iJenkins","DTXcode":"0500","DTSDKName":"iphoneos7.0","DTSDKBuild":"11A4449b","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"12E55","DTPlatformName":"iphoneos","CFBundleShortVersionString":"1.0","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"CFBundleExecutable":"iJenkins","DTCompiler":"com.apple.compilers.llvm.clang.1_0","MinimumOSVersion":"6.1","CFBundleIdentifier":"com.fuerteint.ijenkins","UIAppFonts":["FontAwesome.ttf"],"DTPlatformVersion":"7.0","CFBundleIconFiles":["Icon114.png","Icon120.png"],"LSRequiresIPhoneOS":true,"CFBundleDisplayName":"iJenkins","UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleResourceSpecification":"ResourceRules.plist","CFBundleSignature":"????","DTXcodeBuild":"5A11386k","DTPlatformBuild":"11A4449b","UIDeviceFamily":[1]},"icons":[],"provisioning":"enterprise","isIcon":1}', 1, '2013-11-06 22:50:05', '2013-11-06 22:50:05'),
-(3, 'Pinpoint', 'com.fuerteint.Pinpoint', '', 0, '1.0', 65088, 1000, '{"plist":{"CFBundleName":"Pinpoint","DTXcode":"0500","DTSDKName":"iphoneos7.0","CFBundleIcons~ipad":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["AppIcon76x76"]}},"DTSDKBuild":"11A465","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"12F37","DTPlatformName":"iphoneos","CFBundleShortVersionString":"1.0","UIMainStoryboardFile":"Main","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"CFBundleExecutable":"Pinpoint","UILaunchImages":[{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"LaunchImage-700-568h","UILaunchImageSize":"{320, 568}","UILaunchImageMinimumOSVersion":"7.0"}],"UIViewControllerBasedStatusBarAppearance":false,"CFBundleIdentifier":"com.fuerteint.Pinpoint","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTPlatformVersion":"7.0","CFBundleSignature":"????","LSRequiresIPhoneOS":true,"UISupportedInterfaceOrientations":["UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleDisplayName":"Pinpoint","UISupportedInterfaceOrientations~ipad":["UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleResourceSpecification":"ResourceRules.plist","DTXcodeBuild":"5A1413","DTPlatformBuild":"11A465","MinimumOSVersion":"7.0","UIDeviceFamily":[1,2]},"icons":[],"provisioning":"enterprise","isIcon":1}', 1, '2013-11-06 22:59:05', '2013-11-06 22:59:05'),
-(4, 'iJenkins 2.0', 'com.fuerteint.ijenkins', '', 0, '2.0', 301232, 1000, '{"plist":{"CFBundleName":"iJenkins","DTXcode":"0500","DTSDKName":"iphoneos7.0","DTSDKBuild":"11A4449b","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"12E55","DTPlatformName":"iphoneos","CFBundleShortVersionString":"1.0","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"CFBundleExecutable":"iJenkins","DTCompiler":"com.apple.compilers.llvm.clang.1_0","MinimumOSVersion":"6.1","CFBundleIdentifier":"com.fuerteint.ijenkins","UIAppFonts":["FontAwesome.ttf"],"DTPlatformVersion":"7.0","CFBundleIconFiles":["Icon114.png","Icon120.png"],"LSRequiresIPhoneOS":true,"CFBundleDisplayName":"iJenkins","UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleResourceSpecification":"ResourceRules.plist","CFBundleSignature":"????","DTXcodeBuild":"5A11386k","DTPlatformBuild":"11A4449b","UIDeviceFamily":[1]},"icons":[],"provisioning":"enterprise","isIcon":1}', 1, '2013-11-06 23:04:18', '2013-11-06 23:04:18'),
-(5, 'GHUnit', 'com.fuerteint.unittest', '', 0, '1.0', 158259, 1000, '{"plist":{"CFBundleName":"GHUnit","DTXcode":"0463","DTSDKName":"iphoneos6.1","DTSDKBuild":"10B141","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"12E55","DTPlatformName":"iphoneos","TWITTER_CONSUMER_KEY":"qviFYtnlxu45G8mf1NuC6g","CFBundleShortVersionString":"1.0","TWITTER_CONSUMER_SECRET":"bc9Swfbv6mt8rKLwecYjSUUFsfgCYcxPYuKvRTrLous","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"CFBundleExecutable":"GHUnit","DTCompiler":"","UISupportedInterfaceOrientations~ipad":["UIInterfaceOrientationPortrait","UIInterfaceOrientationPortraitUpsideDown","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleIdentifier":"com.fuerteint.unittest","CFBundleResourceSpecification":"ResourceRules.plist","DTPlatformVersion":"6.1","CFBundleSignature":"????","LSRequiresIPhoneOS":true,"UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleDisplayName":"GHUnit","DTXcodeBuild":"4H1503","MinimumOSVersion":"6.1","UIDeviceFamily":[1,2],"DTPlatformBuild":"10B141"},"icons":[],"provisioning":"enterprise","isIcon":0,"author":"","description":""}', 1, '2013-11-07 00:24:22', '2013-11-07 00:24:22'),
-(6, 'Chez Lucie', 'com.fuerteint.chezlucie.enterprise', '', 0, '1.0', 1299216, 1000, '{"plist":{"CFBundleName":"PublishTheNews","DTXcode":"0500","DTSDKName":"iphoneos7.0","DTSDKBuild":"11A465","CFBundleDevelopmentRegion":"en","CFBundleVersion":"b18","BuildMachineOSBuild":"13A584","UIStatusBarHidden":false,"CFBundleShortVersionString":"1.0","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"DTPlatformName":"iphoneos","CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"CFBundleExecutable":"PublishTheNews","DTCompiler":"com.apple.compilers.llvm.clang.1_0","UIViewControllerBasedStatusBarAppearance":false,"CFBundleIdentifier":"com.fuerteint.chezlucie.enterprise","CFBundleResourceSpecification":"ResourceRules.plist","DTPlatformVersion":"7.0","CFBundleSignature":"????","CFBundleIcons":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["Icon.png","Icon@2x.png"],"UIPrerenderedIcon":true}},"LSRequiresIPhoneOS":true,"UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleDisplayName":"Chez Lucie","DTXcodeBuild":"5A1413","MinimumOSVersion":"5.1","DTPlatformBuild":"11A465","UIDeviceFamily":[1]},"icons":[],"provisioning":"enterprise","isIcon":0,"author":"aaaaaa","description":"bbbbbb"}', 1, '2013-11-07 00:26:37', '2013-11-07 00:26:37'),
-(7, 'iDeviant', 'com.fuerteint.iDeviant', '', 0, '4.0', 1059411, 1000, '{"plist":{"CFBundleDisplayName":"iDeviant","CFBundleName":"iDeviant","DTXcode":"0501","DTSDKName":"iphoneos7.0","UISupportedInterfaceOrientations~ipad":["UIInterfaceOrientationPortrait","UIInterfaceOrientationPortraitUpsideDown","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleIcons~ipad":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["AppIcon29x29","AppIcon40x40","AppIcon60x60","AppIcon76x76"]}},"DTSDKBuild":"11B508","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"13A603","DTPlatformName":"iphoneos","CFBundleShortVersionString":"4.0","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"DTCompiler":"com.apple.compilers.llvm.clang.1_0","CFBundleExecutable":"iDeviant","UILaunchImages":[{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"LaunchImage-700-568h","UILaunchImageSize":"{320, 568}","UILaunchImageMinimumOSVersion":"7.0"}],"CFBundleResourceSpecification":"ResourceRules.plist","MinimumOSVersion":"7.0","UIDeviceFamily":[1],"UIViewControllerBasedStatusBarAppearance":false,"DTXcodeBuild":"5A2053","CFBundleIdentifier":"com.fuerteint.iDeviant","UIAppFonts":["FontAwesome.ttf"],"CFBundleSignature":"????","DTPlatformVersion":"7.0","CFBundleIcons":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["AppIcon29x29","AppIcon40x40","AppIcon60x60"]}},"LSRequiresIPhoneOS":true,"UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"DTPlatformBuild":"11B508"},"icons":["AppIcon29x29@2x.png","AppIcon29x29@2x~ipad.png","AppIcon29x29~ipad.png","AppIcon40x40@2x.png","AppIcon40x40@2x~ipad.png","AppIcon40x40~ipad.png","AppIcon60x60@2x.png"],"provisioning":"enterprise","isIcon":1}', 1, '2013-11-07 15:16:54', '2013-11-07 15:16:54'),
-(8, 'iDeviant', 'com.fuerteint.iDeviant', '', 0, '4.0', 1059411, 1000, '{"plist":{"CFBundleDisplayName":"iDeviant","CFBundleName":"iDeviant","DTXcode":"0501","DTSDKName":"iphoneos7.0","UISupportedInterfaceOrientations~ipad":["UIInterfaceOrientationPortrait","UIInterfaceOrientationPortraitUpsideDown","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"CFBundleIcons~ipad":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["AppIcon29x29","AppIcon40x40","AppIcon60x60","AppIcon76x76"]}},"DTSDKBuild":"11B508","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"13A603","DTPlatformName":"iphoneos","CFBundleShortVersionString":"4.0","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"DTCompiler":"com.apple.compilers.llvm.clang.1_0","CFBundleExecutable":"iDeviant","UILaunchImages":[{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"LaunchImage-700-568h","UILaunchImageSize":"{320, 568}","UILaunchImageMinimumOSVersion":"7.0"}],"CFBundleResourceSpecification":"ResourceRules.plist","MinimumOSVersion":"7.0","UIDeviceFamily":[1],"UIViewControllerBasedStatusBarAppearance":false,"DTXcodeBuild":"5A2053","CFBundleIdentifier":"com.fuerteint.iDeviant","UIAppFonts":["FontAwesome.ttf"],"CFBundleSignature":"????","DTPlatformVersion":"7.0","CFBundleIcons":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["AppIcon29x29","AppIcon40x40","AppIcon60x60"]}},"LSRequiresIPhoneOS":true,"UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight"],"DTPlatformBuild":"11B508"},"icons":["AppIcon29x29@2x.png","AppIcon29x29@2x~ipad.png","AppIcon29x29~ipad.png","AppIcon40x40@2x.png","AppIcon40x40@2x~ipad.png","AppIcon40x40~ipad.png","AppIcon60x60@2x.png"],"provisioning":"enterprise","isIcon":0,"author":"Fuerte International","description":""}', 1, '2013-11-07 15:20:05', '2013-11-07 15:20:05'),
-(26, 'AR Garden', 'com.fuerteint.secretgarden.enterprise', '', 2, '1.0', 36907993, 1000, '{"plist":{"UIRequiredDeviceCapabilities":["armv7"],"CFBundleInfoDictionaryVersion":"6.0","UISupportedInterfaceOrientations~ipad":["UIInterfaceOrientationPortrait","UIInterfaceOrientationLandscapeLeft","UIInterfaceOrientationLandscapeRight","UIInterfaceOrientationPortraitUpsideDown"],"DTPlatformVersion":"6.1","CFBundleIconFile":"Icon.png","CFBundleName":"enterprise","DTSDKName":"iphoneos6.1","UIInterfaceOrientation":"UIInterfaceOrientationPortrait","UIStatusBarStyle":"UIStatusBarStyleDefault","LSRequiresIPhoneOS":true,"UIRequiresPersistentWiFi":false,"CFBundleDisplayName":"AR Garden","DTSDKBuild":"10B141","CFBundleShortVersionString":"1.0","CFBundleSupportedPlatforms":["iPhoneOS"],"UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait"],"BuildMachineOSBuild":"12E55","DTPlatformBuild":"10B141","CFBundlePackageType":"APPL","DTXcodeBuild":"4H1503","CFBundleDevelopmentRegion":"en","UIPrerenderedIcon":true,"CFBundleVersion":"0.12","MinimumOSVersion":"5.1","UIStatusBarHidden":true,"UIApplicationExitsOnSuspend":false,"UIDeviceFamily":[1,2],"CFBundleIdentifier":"com.fuerteint.secretgarden.enterprise","CFBundleIconFiles":["Icon.png","Icon@2x.png","Icon-72.png","Icon-144.png"],"DTXcode":"0463","CFBundleExecutable":"enterprise","Unity_LoadingActivityIndicatorStyle":"-1","DTPlatformName":"iphoneos","CFBundleResourceSpecification":"ResourceRules.plist","DTCompiler":""},"icons":["Icon-144.png","Icon-72.png","Icon.png","Icon@2x.png"],"provisioning":"enterprise","isIcon":1}', 0, '2013-11-10 23:24:28', '2013-11-10 23:24:28');
+(1, 'Betfair Casino', 'com.fuerteint.Betfair-Casino', '', 1, '', 75788533, 1000, '{"plist":{"DTPlatformBuild":"11A4449b","CFBundleName":"Betfair Casino","DTXcode":"0500","DTSDKName":"iphoneos7.0","DTSDKBuild":"11A4449b","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"12E55","UIStatusBarHidden":true,"CFBundleShortVersionString":"1.0","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"DTPlatformName":"iphoneos","CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"CFBundleExecutable":"Betfair Casino","UILaunchImages":[{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"Default","UILaunchImageSize":"{320, 568}","UILaunchImageMinimumOSVersion":"7.0"},{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"Default","UILaunchImageSize":"{320, 480}","UILaunchImageMinimumOSVersion":"7.0"}],"MinimumOSVersion":"6.1","UIDeviceFamily":[1],"UIViewControllerBasedStatusBarAppearance":false,"DTXcodeBuild":"5A11365x","CFBundleIdentifier":"com.fuerteint.Betfair-Casino","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTPlatformVersion":"7.0","CFBundleIconFiles":["AppIcon_58","AppIcon_80","AppIcon_120","AppIcon_114"],"CFBundleIcons":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["AppIcon_58","AppIcon_80","AppIcon_120","AppIcon_114"]}},"LSRequiresIPhoneOS":true,"CFBundleDisplayName":"Betfair Casino","UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait"],"CFBundleSignature":"????","CFBundleResourceSpecification":"ResourceRules.plist"},"icons":["AppIcon_120.png","AppIcon_58.png","AppIcon_80.png"],"provisioning":"enterprise","author":"","description":"","fullDescription":""}', 0, '2013-11-12 00:25:27', '2013-11-12 00:25:27'),
+(2, 'Betfair Casino', 'com.fuerteint.Betfair-Casino', '', 1, '1.0', 75788533, 1000, '{"plist":{"DTPlatformBuild":"11A4449b","CFBundleName":"Betfair Casino","DTXcode":"0500","DTSDKName":"iphoneos7.0","DTSDKBuild":"11A4449b","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"12E55","UIStatusBarHidden":true,"CFBundleShortVersionString":"1.0","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"DTPlatformName":"iphoneos","CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"CFBundleExecutable":"Betfair Casino","UILaunchImages":[{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"Default","UILaunchImageSize":"{320, 568}","UILaunchImageMinimumOSVersion":"7.0"},{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"Default","UILaunchImageSize":"{320, 480}","UILaunchImageMinimumOSVersion":"7.0"}],"MinimumOSVersion":"6.1","UIDeviceFamily":[1],"UIViewControllerBasedStatusBarAppearance":false,"DTXcodeBuild":"5A11365x","CFBundleIdentifier":"com.fuerteint.Betfair-Casino","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTPlatformVersion":"7.0","CFBundleIconFiles":["AppIcon_58","AppIcon_80","AppIcon_120","AppIcon_114"],"CFBundleIcons":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["AppIcon_58","AppIcon_80","AppIcon_120","AppIcon_114"]}},"LSRequiresIPhoneOS":true,"CFBundleDisplayName":"Betfair Casino","UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait"],"CFBundleSignature":"????","CFBundleResourceSpecification":"ResourceRules.plist"},"icons":["AppIcon_120.png","AppIcon_58.png","AppIcon_80.png"],"provisioning":"enterprise"}', 0, '2013-11-12 00:43:14', '2013-11-12 00:43:14'),
+(3, 'Betfair Casino', 'com.fuerteint.Betfair-Casino', '', 1, '1.0', 75788533, 1000, '{"plist":{"DTPlatformBuild":"11A4449b","CFBundleName":"Betfair Casino","DTXcode":"0500","DTSDKName":"iphoneos7.0","DTSDKBuild":"11A4449b","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"12E55","UIStatusBarHidden":true,"CFBundleShortVersionString":"1.0","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"DTPlatformName":"iphoneos","CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"CFBundleExecutable":"Betfair Casino","UILaunchImages":[{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"Default","UILaunchImageSize":"{320, 568}","UILaunchImageMinimumOSVersion":"7.0"},{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"Default","UILaunchImageSize":"{320, 480}","UILaunchImageMinimumOSVersion":"7.0"}],"MinimumOSVersion":"6.1","UIDeviceFamily":[1],"UIViewControllerBasedStatusBarAppearance":false,"DTXcodeBuild":"5A11365x","CFBundleIdentifier":"com.fuerteint.Betfair-Casino","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTPlatformVersion":"7.0","CFBundleIconFiles":["AppIcon_58","AppIcon_80","AppIcon_120","AppIcon_114"],"CFBundleIcons":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["AppIcon_58","AppIcon_80","AppIcon_120","AppIcon_114"]}},"LSRequiresIPhoneOS":true,"CFBundleDisplayName":"Betfair Casino","UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait"],"CFBundleSignature":"????","CFBundleResourceSpecification":"ResourceRules.plist"},"icons":["AppIcon_120.png","AppIcon_58.png","AppIcon_80.png"],"provisioning":"enterprise"}', 0, '2013-11-12 00:44:10', '2013-11-12 00:44:10'),
+(4, 'Betfair Casino', 'com.fuerteint.Betfair-Casino', '', 1, '1.0', 75788533, 1000, '{"plist":{"DTPlatformBuild":"11A4449b","CFBundleName":"Betfair Casino","DTXcode":"0500","DTSDKName":"iphoneos7.0","DTSDKBuild":"11A4449b","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"12E55","UIStatusBarHidden":true,"CFBundleShortVersionString":"1.0","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"DTPlatformName":"iphoneos","CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"CFBundleExecutable":"Betfair Casino","UILaunchImages":[{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"Default","UILaunchImageSize":"{320, 568}","UILaunchImageMinimumOSVersion":"7.0"},{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"Default","UILaunchImageSize":"{320, 480}","UILaunchImageMinimumOSVersion":"7.0"}],"MinimumOSVersion":"6.1","UIDeviceFamily":[1],"UIViewControllerBasedStatusBarAppearance":false,"DTXcodeBuild":"5A11365x","CFBundleIdentifier":"com.fuerteint.Betfair-Casino","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTPlatformVersion":"7.0","CFBundleIconFiles":["AppIcon_58","AppIcon_80","AppIcon_120","AppIcon_114"],"CFBundleIcons":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["AppIcon_58","AppIcon_80","AppIcon_120","AppIcon_114"]}},"LSRequiresIPhoneOS":true,"CFBundleDisplayName":"Betfair Casino","UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait"],"CFBundleSignature":"????","CFBundleResourceSpecification":"ResourceRules.plist"},"icons":["AppIcon_120.png","AppIcon_58.png","AppIcon_80.png"],"provisioning":"enterprise","author":"","description":"","fullDescription":""}', 0, '2013-11-12 00:44:18', '2013-11-12 00:44:18'),
+(5, 'Betfair Casino', 'com.fuerteint.Betfair-Casino', '', 1, '1.0', 75788533, 1000, '{"plist":{"DTPlatformBuild":"11A4449b","CFBundleName":"Betfair Casino","DTXcode":"0500","DTSDKName":"iphoneos7.0","DTSDKBuild":"11A4449b","CFBundleDevelopmentRegion":"en","CFBundleVersion":"1.0","BuildMachineOSBuild":"12E55","UIStatusBarHidden":true,"CFBundleShortVersionString":"1.0","CFBundlePackageType":"APPL","CFBundleSupportedPlatforms":["iPhoneOS"],"DTPlatformName":"iphoneos","CFBundleInfoDictionaryVersion":"6.0","UIRequiredDeviceCapabilities":["armv7"],"CFBundleExecutable":"Betfair Casino","UILaunchImages":[{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"Default","UILaunchImageSize":"{320, 568}","UILaunchImageMinimumOSVersion":"7.0"},{"UILaunchImageOrientation":"Portrait","UILaunchImageName":"Default","UILaunchImageSize":"{320, 480}","UILaunchImageMinimumOSVersion":"7.0"}],"MinimumOSVersion":"6.1","UIDeviceFamily":[1],"UIViewControllerBasedStatusBarAppearance":false,"DTXcodeBuild":"5A11365x","CFBundleIdentifier":"com.fuerteint.Betfair-Casino","DTCompiler":"com.apple.compilers.llvm.clang.1_0","DTPlatformVersion":"7.0","CFBundleIconFiles":["AppIcon_58","AppIcon_80","AppIcon_120","AppIcon_114"],"CFBundleIcons":{"CFBundlePrimaryIcon":{"CFBundleIconFiles":["AppIcon_58","AppIcon_80","AppIcon_120","AppIcon_114"]}},"LSRequiresIPhoneOS":true,"CFBundleDisplayName":"Betfair Casino","UISupportedInterfaceOrientations":["UIInterfaceOrientationPortrait"],"CFBundleSignature":"????","CFBundleResourceSpecification":"ResourceRules.plist"},"icons":["AppIcon_120.png","AppIcon_58.png","AppIcon_80.png"],"provisioning":"enterprise"}', 0, '2013-11-12 00:45:05', '2013-11-12 00:45:05');
 
 -- --------------------------------------------------------
 
@@ -94,9 +90,6 @@ CREATE TABLE `applications_categories` (
 -- Dumping data for table `applications_categories`
 --
 
-INSERT INTO `applications_categories` (`application_id`, `category_id`) VALUES
-(6, 2),
-(6, 3);
 
 -- --------------------------------------------------------
 
@@ -115,18 +108,6 @@ CREATE TABLE `applications_groups` (
 -- Dumping data for table `applications_groups`
 --
 
-INSERT INTO `applications_groups` (`application_id`, `group_id`) VALUES
-(1, 1),
-(1, 10),
-(2, 1),
-(2, 10),
-(3, 1),
-(3, 10),
-(5, 1),
-(5, 10),
-(6, 1),
-(6, 10),
-(26, 10);
 
 -- --------------------------------------------------------
 
@@ -149,7 +130,7 @@ CREATE TABLE `attachments` (
   KEY `application_id` (`application_id`,`name`,`created`,`modified`),
   KEY `application_identifier` (`application_identifier`),
   KEY `application_platform` (`application_platform`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `attachments`
@@ -176,7 +157,7 @@ CREATE TABLE `categories` (
   PRIMARY KEY (`id`),
   KEY `name` (`name`),
   KEY `created` (`created`,`modified`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `categories`
@@ -184,13 +165,13 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `name`, `description`, `icon`, `created`, `modified`) VALUES
 (1, 'Travel', '', 'icon-plane', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(2, 'Health', '', 'icon-ambulance', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(3, 'Photography', '', 'icon-camera', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
-(4, 'Games', '', 'icon-fighter-jet', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Health', '', 'icon-ambulance', '0000-00-00 00:00:00', '2013-11-11 16:44:16'),
+(3, 'Photography', '', 'icon-camera', '0000-00-00 00:00:00', '2013-11-11 15:15:34'),
+(4, 'Games', '', 'icon-fighter-jet', '0000-00-00 00:00:00', '2013-11-11 15:15:51'),
 (5, 'Legal', '', 'icon-legal', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (6, 'Utilities', '', 'icon-lightbulb', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (7, 'Android', 'Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.', 'icon-android', '0000-00-00 00:00:00', '2013-11-01 21:16:14'),
-(8, 'Finance', '', 'icon-money', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(8, 'Finance', '', 'icon-money', '0000-00-00 00:00:00', '2013-11-11 15:15:59'),
 (9, 'Apple', '', 'icon-apple', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
 (11, 'Retro', '', 'icon-camera-retro', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
@@ -40008,7 +39989,7 @@ CREATE TABLE `filetypes` (
   `icon` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `mime` (`mime`,`allowed`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `filetypes`
@@ -40034,15 +40015,15 @@ CREATE TABLE `groups` (
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `name` (`name`,`created`,`modified`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `groups`
 --
 
 INSERT INTO `groups` (`id`, `name`, `description`, `all_versions_available`, `created`, `modified`) VALUES
-(1, 'New group', 'Yoyoyoy', 1, '2013-11-09 17:34:19', '2013-11-10 23:14:41'),
-(10, 'Group name pyco', 'Desc', 1, '2013-11-10 13:00:44', '2013-11-10 23:31:26');
+(1, 'New group', 'Yoyoyoy', 1, '2013-11-09 17:34:19', '2013-11-11 16:46:21'),
+(10, 'Group name pyco', 'Desc', 1, '2013-11-10 13:00:44', '2013-11-11 16:45:54');
 
 -- --------------------------------------------------------
 
@@ -40063,6 +40044,7 @@ CREATE TABLE `groups_users` (
 
 INSERT INTO `groups_users` (`group_id`, `user_id`) VALUES
 (1, 2),
+(1, 4),
 (10, 2),
 (10, 4);
 
@@ -40085,6 +40067,57 @@ CREATE TABLE `history` (
 -- Dumping data for table `history`
 --
 
+INSERT INTO `history` (`application_id`, `action`, `created`, `user_id`) VALUES
+(1, 'UPL', '2013-11-12 00:20:48', 1),
+(1, 'UPL', '2013-11-12 00:25:27', 1),
+(1, 'VEW', '2013-11-12 00:25:35', 1),
+(1, 'VEW', '2013-11-12 00:26:36', 1),
+(2, 'UPL', '2013-11-12 00:23:04', 1),
+(2, 'UPL', '2013-11-12 00:43:15', 1),
+(3, 'UPL', '2013-11-12 00:44:10', 1),
+(4, 'UPL', '2013-11-12 00:44:19', 1),
+(5, 'UPL', '2013-11-12 00:45:05', 1),
+(5, 'VEW', '2013-11-12 00:45:17', 1),
+(5, 'VEW', '2013-11-12 00:45:31', 1),
+(5, 'VEW', '2013-11-12 00:46:46', 1),
+(5, 'VEW', '2013-11-12 00:46:46', 1),
+(5, 'VEW', '2013-11-12 00:48:25', 1),
+(5, 'VEW', '2013-11-12 00:48:48', 1),
+(5, 'VEW', '2013-11-12 00:49:53', 1),
+(5, 'VEW', '2013-11-12 00:50:25', 1),
+(5, 'VEW', '2013-11-12 00:50:33', 1),
+(5, 'VEW', '2013-11-12 00:50:43', 1),
+(5, 'VEW', '2013-11-12 00:51:02', 1),
+(5, 'VEW', '2013-11-12 00:51:19', 1),
+(5, 'VEW', '2013-11-12 00:53:19', 1),
+(5, 'VEW', '2013-11-12 00:53:39', 1),
+(5, 'VEW', '2013-11-12 00:54:03', 1),
+(6, 'VEW', '2013-11-11 23:17:05', 1),
+(26, 'VEW', '2013-11-11 19:40:20', 1),
+(27, 'UPL', '2013-11-11 19:41:54', 1),
+(28, 'UPL', '2013-11-11 20:46:03', 1),
+(29, 'UPL', '2013-11-11 20:55:00', 1),
+(30, 'UPL', '2013-11-11 20:55:44', 1),
+(31, 'UPL', '2013-11-11 20:56:59', 1),
+(32, 'UPL', '2013-11-11 21:03:17', 1),
+(32, 'VEW', '2013-11-11 23:10:58', 1),
+(32, 'VEW', '2013-11-11 23:11:40', 1),
+(33, 'UPL', '2013-11-11 21:06:47', 1),
+(36, 'VEW', '2013-11-11 22:46:29', 1),
+(37, 'UPL', '2013-11-11 22:45:21', 1),
+(40, 'VEW', '2013-11-11 23:06:18', 1),
+(40, 'VEW', '2013-11-11 23:10:02', 1),
+(40, 'VEW', '2013-11-11 23:11:53', 1),
+(40, 'VEW', '2013-11-11 23:13:39', 1),
+(40, 'VEW', '2013-11-11 23:13:46', 1),
+(40, 'VEW', '2013-11-11 23:14:49', 1),
+(41, 'UPL', '2013-11-11 23:20:45', 1),
+(42, 'UPL', '2013-11-11 23:21:59', 1),
+(43, 'UPL', '2013-11-11 23:23:58', 1),
+(51, 'VEW', '2013-11-12 00:04:13', 1),
+(51, 'VEW', '2013-11-12 00:04:53', 1),
+(52, 'VEW', '2013-11-12 00:08:01', 1),
+(52, 'VEW', '2013-11-12 00:09:03', 1);
 
 -- --------------------------------------------------------
 
@@ -40103,7 +40136,7 @@ CREATE TABLE `ideas` (
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`,`area`),
   KEY `created` (`created`,`modified`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `ideas`
@@ -40129,7 +40162,7 @@ CREATE TABLE `signings` (
   `modified` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `created` (`created`,`modified`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `signings`
@@ -40160,12 +40193,12 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `nickname` (`username`,`email`,`password`),
   KEY `role` (`role`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=20 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `created`, `modified`, `firstname`, `lastname`, `company`, `password_token`) VALUES
-(2, 'rafiki270', 'ondrej.rafaj@fuerteint.com', 'b50912128c8fb0ec6de1e7c2182cc3e0dffa1199', 'admin', '2013-10-26 15:19:28', '2013-11-10 22:33:21', 'Ondrej', 'Rafaj', 'Fuerte International', ''),
-(4, 'admin', 'ondrej.rafaj@gmail.com', '4be18864fd0c55b2c0ed4dea1837a8a680d0e216', 'owner', '2013-10-26 20:15:40', '2013-11-10 23:54:09', 'Super', 'Admin', 'Fuerte International', '');
+(2, 'rafiki270', 'ondrej.rafaj@fuerteint.com', '730aae4a79467b75be0d27133352d5827a6826ab', 'admin', '2013-10-26 15:19:28', '2013-11-11 16:46:35', 'Ondrej', 'Rafaj', 'Fuerte International', ''),
+(4, 'admin', 'ondrej.rafaj@gmail.com', '2e747e18fc6e382a05c8c622f6510d97ad251256', 'developer', '2013-10-26 20:15:40', '2013-11-11 15:02:49', 'Super', 'Admin', 'Fuerte International', '');

@@ -1,6 +1,6 @@
 <?php
 
-$application = $this->request->data['Application'];
+$application = isset($this->request->data['Application']) ? $this->request->data['Application'] : null;
 
 // Breadcrumbs
 $this->Html->addCrumb('Applications', '/applications');

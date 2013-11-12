@@ -163,27 +163,30 @@ class ApplicationsController extends AppController {
 			}
 		}
 		
-		if ($this->request->data['Application']['platform'] <= 7) {
-			$appType = 0;
+		if (isset($this->request->data['Application']['platform'])) {
+			if ($this->request->data['Application']['platform'] <= 7) {
+				$appType = 0;
+			}
+			else if ($this->request->data['Application']['platform'] == 8) {
+				$appType = 1;
+			}
+			else if ($this->request->data['Application']['platform'] == 9) {
+				$appType = 2;
+			}
 		}
-		else if ($this->request->data['Application']['platform'] == 8) {
-			$appType = 1;
-		}
-		else if ($this->request->data['Application']['platform'] == 9) {
-			$appType = 2;
-		}
+		else $appType = 0;
 		$this->set('appType', $appType);
 		
 		// Selected groups
 		$arr = array();
-		foreach ($this->request->data['Group'] as $group) {
+		if (isset($this->request->data['Group'])) foreach ($this->request->data['Group'] as $group) {
 			$arr[$group['id']] = 1;
 		}
 		$this->set('selectedGroups', $arr);
 		
 		// Selected categories
 		$arr = array();
-		foreach ($this->request->data['Category'] as $category) {
+		if (isset($this->request->data['Category'])) foreach ($this->request->data['Category'] as $category) {
 			$arr[$category['id']] = 1;
 		}
 		$this->set('selectedCategories', $arr);
