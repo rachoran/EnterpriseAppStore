@@ -47,12 +47,14 @@ class GroupsController extends AppController {
 			// Saving data
 			if (!$id) {
 				$this->Group->create();
-				$this->Group->save($this->request->data);
 			}
 			else {
 				$this->Group->id = $id;
-				$this->Group->save($this->request->data);
 			}
+			
+			$this->Group->save($this->request->data);
+			Error::add('Group has been saved successfully.');
+			
 			if (isset($this->request->data['apply'])) {
 				// Redirecting for the same page (Apply)
 				$this->redirect(array('controller' => 'groups', 'action' => 'edit', $this->Group->id, TextHelper::safeText($this->request->data['Group']['name'])));

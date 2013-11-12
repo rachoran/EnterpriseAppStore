@@ -104,12 +104,38 @@ ga('send', 'pageview');
 					echo $this->Html->getCrumbList($options, 'Home');
 					?>
 					<div class="main-content">
-						<!--<div class="widget">
-							<div class="alert alert-warning alert-dismissable">
-								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-								<i class="icon-exclamation-sign"></i> <strong>Welcome!</strong> This is a dashboard of the powerful admin template.
-							</div>
-						</div>-->
+						<div id="errors" class="widget">
+							<?php
+							$errors = Error::getAll();
+							if (!empty($errors)) foreach ($errors as $type=>$group) {
+								switch ($type) {
+									case Error::TypeOk:
+										$alertType = 'success';
+										$icon = 'icon-ok-circle';
+										break;
+									case Error::TypeWarning:
+										$alertType = 'warning';
+										$icon = 'icon-warning-sign';
+										break;
+									case Error::TypeError:
+										$alertType = 'danger';
+										$icon = 'icon-exclamation-sign';
+										break;
+									case Error::TypeInfo:
+										$alertType = 'info';
+										$icon = 'icon-info-sign';
+										break;
+								}
+								echo '<div class="alert alert-'.$alertType.' alert-dismissable">
+											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+								foreach ($group as $message) {
+									echo '<p><i class="'.$icon.'"></i> '.$message.'</p>';
+								}
+								echo '</div>';
+								Error::clear();
+							}
+							?>
+						</div>
 						<!-- Begin content -->
 						<?= $this->fetch('content'); ?>
 						<!-- End content -->

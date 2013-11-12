@@ -160,6 +160,8 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 	public function saveApp($appData, $confData, $file, $icon) {
 		$id = (int)$this->id;
 		$modify = false;
+		
+		// Getting config data
 		if ((bool)$id) {
 			$app = $this->getOne($id);
 			$cd = json_decode($app['Application']['config'], true);
@@ -167,6 +169,7 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 			$modify = true;
 		}
 		else {
+			// Hangling default fields for the web & appstore apps
 			if (isset($appData['Application']['type']) && $appData['Application']['type'] > 0) {
 				$appData['Application']['size'] = 0;
 				$appData['Application']['identifier'] = $appData['Application']['url'];
@@ -174,11 +177,13 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 			}
 		}
 		
+		// If new, creating info about file location
 		if (!$modify) {
 			$s = new Settings();
 			$appData['Application']['location'] = $s->get('s3Enable') ? 1 : 0;
 		}
-
+		
+		// Removing basic data from the config data
 		if (isset($confData['name'])) unset($confData['name']);
 		if (isset($confData['url'])) unset($confData['url']);
 		if (isset($confData['identifier'])) unset($confData['identifier']);
@@ -187,8 +192,10 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 		if (isset($confData['size'])) unset($confData['size']);
 		if (isset($confData['platform'])) unset($confData['platform']);
 		
+		// Creating config
 		$appData['Application']['config'] = json_encode($confData);
 		
+		// Save data
 		$this->save($appData);
 
 		// Saving files
@@ -205,6 +212,8 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 		$tempFolderPath = TMP.'1'.DS;
 		$dir = new Folder();
 		$dir->create($tempFolderPath);
+		
+		// Uploading default icon if one is being submitted
 		if ($ok && isset($appData['form']['iconFile']['tmp_name']) && $appData['form']['iconFile']['tmp_name']) {
 			move_uploaded_file($appData['form']['iconFile']['tmp_name'], $tempFolderPath.'icon');
 			$s = getimagesize($tempFolderPath.'icon');
@@ -215,7 +224,10 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 				// TODO: Display error
 			}
 		}
+		
+		// Creating default icon if one doesn't exist
 		if ($ok && !$modify) {
+			// TODO: If icon doesn't exist, create an error message
 			$defaultIcon = WWW_ROOT.'Userfiles'.DS.'Settings'.DS.'Images'.DS.'Icon';
 			if (!$icon || !file_exists($icon)) {
 				$icon = $tempFolderPath.'icon';
@@ -225,13 +237,14 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 				// TODO: Display error
 			}
 		}
+		
+		// Cleaning temp
 		$dir->delete($tempFolderPath);
 		
 		// TODO: Improve logic
 		if ($modify) return $this;
 		
-		return $ok ? $this : null;
+		return $ok ? $this : false;
 	}
-
 	
 }

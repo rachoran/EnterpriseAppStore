@@ -51,11 +51,13 @@ $id = isset($group['id']) ? (int)$group['id'] : 0;
 				    </ul>
 				    <div class="tab-content bottom-margin">
 						<div class="tab-pane active" id="tab_group_users">
+							<p>&nbsp;</p>
 							<!-- Begin user selector -->
 							<?php echo $this->element('DB/userSelector'); ?>
 							<!-- End user selector -->
 						</div>
 						<div class="tab-pane" id="tab_group_applications">
+							<p>&nbsp;</p>
 							<!-- Begin user selector -->
 							<?php echo $this->element('DB/applicationSelector'); ?>
 							<!-- End user selector -->

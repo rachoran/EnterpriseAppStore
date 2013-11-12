@@ -4,7 +4,7 @@ $('#binaryUpload').fileupload({
     url: env.baseUrl + 'applications/uploadApp',
     dataType: 'json',
     done: function (e, data) {
-		if (data.result.data.id) {
+		if (data.result.data) {
 			didUploadAppBinary = true;
 	    	
 	    	$('#appName').val(data.result.data.name);
@@ -17,6 +17,16 @@ $('#binaryUpload').fileupload({
 			$('#mainAppForm button.disabled').prop('disabled', false);
 			$('#binaryUploadWrapper, #applicationTypeWrapper').hide();
 			$('.nav.nav-tabs li, button.disabled').removeClass('disabled');
+		}
+		else {
+			if (data.result.errors.length > 0) {
+				var message = '';
+				for (i = 0; i < data.result.errors.length; i++) {
+					message = message + data.result.errors[i];
+				}
+				alert(message);
+				$('#binaryUploadProgress .progress-bar').css('width', 0 + '%');
+			}
 		}
     },
     progressall: function (e, data) {

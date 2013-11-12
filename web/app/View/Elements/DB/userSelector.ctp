@@ -1,6 +1,6 @@
 <table id="userTable" class="table table-striped table-bordered table-hover selector-table">
 	<thead>
-		<tr>/Volumes/Macintosh%20HD/Projects/Web/EnterpriseAppStore/web/app/View/Elements/DB/userSelector.ctp
+		<tr>
 			<th width="28">
 				<input type="checkbox" onchange="env.toggleAllCheckBoxes('userTable', this);" class="form-control" />
 			</th>

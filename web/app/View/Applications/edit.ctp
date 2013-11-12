@@ -149,7 +149,7 @@ echo $this->Form->create('Application', array(
 		<div class="tab-pane scrnsht" id="tab_application_screenshots">
 			<div class="padded">
 				<div class="screenshots">
-					<div class="image">
+					<!-- <div class="image">
 						<img src="<?= $this->Html->url('/', true); ?>Userfiles/Applications/test/screen.png?time=<?= time(); ?>" alt="Screenshot 1" />
 					</div>
 					<div class="image">
@@ -163,7 +163,7 @@ echo $this->Form->create('Application', array(
 					</div>
 					<div class="image">
 						<img src="<?= $this->Html->url('/', true); ?>Userfiles/Applications/test/screen.png?time=<?= time(); ?>" alt="Screenshot 5" />
-					</div>
+					</div> -->
 				</div>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Screenshot 1</label>
@@ -171,7 +171,7 @@ echo $this->Form->create('Application', array(
 						<input type="file" name="formFile[name]" class="form-control" />
 					</div>
 					<div class="col-md-1">
-						<img src="<?= $this->Html->url('/', true); ?>Userfiles/Applications/test/screen.png?time=<?= time(); ?>" alt="Screenshot 1" class="logo" />
+						<!-- <img src="<?= $this->Html->url('/', true); ?>Userfiles/Applications/test/screen.png?time=<?= time(); ?>" alt="Screenshot 1" class="logo" /> -->
 					</div>
 				</div>
 				<div class="form-group">
