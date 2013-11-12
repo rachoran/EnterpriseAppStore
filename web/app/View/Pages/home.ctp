@@ -11,7 +11,8 @@
 						<div class="value-self"><?php echo $menuCounts['applications']; ?></div>
 						<div class="value-sub">Mobile, Desktop &amp; Web</div>
 					</div>
-					<span class="dynamicsparkline">Loading..</span> </div>
+					<!-- <span class="dynamicsparkline">Loading..</span> -->
+				</div>
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
@@ -22,7 +23,8 @@
 						<div class="value-self"><?php echo $thirtyDayDownloads; ?></div>
 						<div class="value-sub">Last 30 days</div>
 					</div>
-					<span class="dynamicbars">Loading..</span> </div>
+					<!-- <span class="dynamicbars">Loading..</span> -->
+				</div>
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center hidden-md">
@@ -33,7 +35,8 @@
 						<div class="value-self"><?php echo $allDownloads; ?></div>
 						<div class="value-sub">Total</div>
 					</div>
-					<span class="dynamicsparkline">Loading..</span> </div>
+					<!-- <span class="dynamicsparkline">Loading..</span> -->
+				</div>
 			</div>
 		</div>
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
@@ -44,7 +47,8 @@
 						<div class="value-self">12</div>
 						<div class="value-sub">Users</div>
 					</div>
-					<span class="dynamicbars">Loading..</span> </div>
+					<!-- <span class="dynamicbars">Loading..</span> -->
+				</div>
 			</div>
 		</div>
 	</div>
@@ -100,7 +104,7 @@
 		</div>
 	</div>
 </div>
-<div class="row">
+<!--<div class="row">
 	<div class="col-md-8">
 		<ul class="nav nav-tabs">
 			<li class="active"><a href="#tab_pie_chart" data-toggle="tab"><i class="icon-bullseye"></i> Devices</a></li>
@@ -270,3 +274,4 @@
 		</div>
 	</div>
 </div>
+-->

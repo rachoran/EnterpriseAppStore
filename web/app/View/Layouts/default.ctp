@@ -154,7 +154,10 @@ ga('send', 'pageview');
 		</div>
 	</div>
 </div>
-<?= $this->element('Admin/configSideBar'); ?>
+<?php
+// TODO: Add configurable sidebar
+//echo $this->element('Admin/configSideBar');
+?>
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> --> 
 <script src='<?= $this->Html->url('/', true); ?>assets/js/jquery.js'></script>
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>  -->

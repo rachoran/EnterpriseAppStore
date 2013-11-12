@@ -13,10 +13,11 @@ class PagesController extends AppController {
 			return $this->redirect('/');
 		}
 		
-		
 		$this->setPageIcon('dashboard');
 		
-		$this->enableWoodWrapper();
+		// TODO: Create the woodwrapper customisable
+		//$this->enableWoodWrapper();
+		
 		$this->setAdditionalCssFiles(array('dashboard'));
 		$this->setAdditionalJavascriptFiles(array('dashboard'));
 		

@@ -95,10 +95,11 @@ function checkMenu($name, $t) {
 				<li<?= checkMenu('calendar', $this); ?>>
 					<a href="<?= $this->Html->url('/calendar', true); ?>"> <span class="badge pull-right">11</span> <i class="icon-calendar"></i> Calendar </a>
 				</li>
-				-->
+				TODO: Finish signing
 				<li<?= checkMenu('signing', $this); ?>>
 					<a href="<?= $this->Html->url('/signing', true); ?>"> <span class="badge pull-right"><?= $menuCounts['signing']; ?></span> <i class="icon-certificate"></i> Signing </a>
 				</li>
+				-->
 				<li<?= checkMenu('ideas', $this); ?>>
 					<a href="<?= $this->Html->url('/ideas', true); ?>"> <span class="badge pull-right"></span> <i class="icon-comment"></i> Ideas </a>
 				</li>
