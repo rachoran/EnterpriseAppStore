@@ -19,7 +19,8 @@ function verValCh($key, $data) {
 echo $this->Form->create('Application', array(
 	'role' => 'form',
 	'class' => 'form-horizontal',
-	'id' => 'mainAppForm'
+	'id' => 'mainAppForm',
+	'type' => 'file'
 ));
 ?>
 <div class="widget">
@@ -76,7 +77,7 @@ echo $this->Form->create('Application', array(
 				<div class="form-group type0 type1 type2">
 					<label class="col-md-4 control-label">Application icon</label>
 					<div class="col-md-7">
-						<input type="file" name="formFile[icon]" class="form-control disabled beforeUpload" />
+						<input type="file" name="iconFile" class="form-control disabled beforeUpload" />
 					</div>
 					<div class="col-md-1">
 						<!--<img src="<?= $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?= time(); ?>" alt="Application logo" class="logo" />-->
@@ -124,9 +125,15 @@ echo $this->Form->create('Application', array(
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Description</label>
+					<label class="col-md-4 control-label">Short description</label>
 					<div class="col-md-8">
 						<textarea type="text" name="formData[description]" class="form-control description" placeholder="App description"><?= verVal('description', $config); ?></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-4 control-label">Full description</label>
+					<div class="col-md-8">
+						<textarea type="text" name="formData[fullDescription]" class="form-control description large" placeholder="App description"><?= verVal('fullDescription', $config); ?></textarea>
 					</div>
 				</div>
 				<div class="form-group">

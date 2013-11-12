@@ -177,9 +177,9 @@ class ExtractApple extends Extract {
 		$this->data = $arr;
 		$this->app = $archiveFile;
 		if (isset($largestIcon['file'])) {
-			copy($largestIcon['file'], $tempPath.'icon.png');
+			copy($largestIcon['file'], $tempPath.'icon');
 		}
-		$this->icon = $tempPath.'icon.png';
+		$this->icon = $tempPath.'icon';
 		
 		return true;
 	}

@@ -22,15 +22,15 @@ class Storage {
 		$s3Enabled = $s->get('s3Enable');
 		return $s3Enabled ? STORAGE_S3 : STORAGE_LOCAL;
 	}
-	
+		
 	public static function isIconForAppWithId($id, $location) {
 		if ($location == STORAGE_LOCAL) {
-			$path = APP.'Userfiles'.DS.'Applications'.DS.$id.DS.'icon.png';
+			$path = APP.'Userfiles'.DS.'Applications'.DS.$id.DS.'icon';
 			return file_exists($path);
 		}
 		else {
 			// TODO: Finish
-			$path = md5(Configure::read('Security.salt').Configure::read('Security.cipherSeed')).DS.'Applications'.DS.$id.DS.'icon.png';
+			$path = md5(Configure::read('Security.salt').Configure::read('Security.cipherSeed')).DS.'Applications'.DS.$id.DS.'icon';
 			$s = new Settings();
 			S3::setAuth($s->get('s3AccessKey'), $s->get('s3SecretKey'));
 		}
@@ -41,11 +41,11 @@ class Storage {
 			return $path = Router::url('/').'Userfiles'.DS.'Settings'.DS.'Images'.DS.'Icon';
 		}
 		if ($location == STORAGE_LOCAL) {
-			$path = Router::url('/').'Userfiles'.DS.'Applications'.DS.$id.DS.'icon.png';
+			$path = Router::url('/').'Userfiles'.DS.'Applications'.DS.$id.DS.'icon';
 			return $path;
 		}
 		else {
-			$path = md5(Configure::read('Security.salt').Configure::read('Security.cipherSeed')).DS.'Applications'.DS.$id.DS.'icon.png';
+			$path = md5(Configure::read('Security.salt').Configure::read('Security.cipherSeed')).DS.'Applications'.DS.$id.DS.'icon';
 			$s = new Settings();
 			return 'http://'.$s->get('s3Bucket').'.s3.amazonaws.com/'.$path;
 		}

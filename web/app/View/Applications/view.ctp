@@ -46,7 +46,7 @@ $this->Html->addCrumb($data['Application']['name'], null);
 											    echo $this->Html->link(__('Install').' '.$ext, array('controller' => 'users', 'action' => 'view', $data['Application']['id']), array('class'=>'btn btn-default pull-right'));
 											}
 											?>
-											<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $data['Application']['id'], $data['Application']['name'])); ?>" class="btn btn-default pull-right" style="margin-right:6px;">
+											<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $data['Application']['id'], TextHelper::safeText($data['Application']['name']))); ?>" class="btn btn-default pull-right" style="margin-right:6px;">
 								        		<i class="fa icon-edit"><span> Edit</span></i>
 								        	</a>
 										</h1>

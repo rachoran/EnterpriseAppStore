@@ -23,7 +23,7 @@ class Application extends AppModel {
     
     // TODO: Move more stuff into the vitual fields
     public $virtualFields = array(
-    	'count' => "COUNT(Application.id)"
+    	//'count' => "COUNT(Application.id)"
 	);
 	
 	public $order = array('Application.name' => 'ASC', 'Application.created' => 'DESC');
@@ -74,6 +74,7 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 	
 	public function getAllHistoryForApp($identifier, $platform) {
 		$options = array();
+		
 		$options['order'] = array('Application.created' => 'DESC');
 		$options['conditions'] = array('Application.identifier' => $identifier, 'Application.platform' => (int)$platform);
 		$data =  $this->find('all', $options);
@@ -166,7 +167,7 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 			$modify = true;
 		}
 		else {
-			if (isset($appData['Application']['Application']['type']) && $appData['Application']['type'] > 0) {
+			if (isset($appData['Application']['type']) && $appData['Application']['type'] > 0) {
 				$appData['Application']['size'] = 0;
 				$appData['Application']['identifier'] = $appData['Application']['url'];
 				$appData['Application']['platform'] = ($appData['Application']['type'] == 1) ? 8 : 9;
@@ -199,19 +200,32 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 				// TODO: Display error
 			}
 		}
+		
+		// TODO: Use proper user Id
+		$tempFolderPath = TMP.'1'.DS;
+		$dir = new Folder();
+		$dir->create($tempFolderPath);
+		if ($ok && isset($appData['form']['iconFile']['tmp_name']) && $appData['form']['iconFile']['tmp_name']) {
+			move_uploaded_file($appData['form']['iconFile']['tmp_name'], $tempFolderPath.'icon');
+			$s = getimagesize($tempFolderPath.'icon');
+			if (!$s) {
+				$ok = true;
+			}
+			if (!Storage::saveFile($tempFolderPath.'icon', 'Applications'.DS.$this->id, false)) {
+				// TODO: Display error
+			}
+		}
 		if ($ok && !$modify) {
 			$defaultIcon = WWW_ROOT.'Userfiles'.DS.'Settings'.DS.'Images'.DS.'Icon';
 			if (!$icon || !file_exists($icon)) {
-				$dir = new Folder();
-				// TODO: Use proper user Id
-				$dir->create(TMP.'1'.DS);
-				$icon = TMP.'1'.DS.'icon.png';
+				$icon = $tempFolderPath.'icon';
 				copy($defaultIcon, $icon);
 			}
 			if (!Storage::saveFile($icon, 'Applications'.DS.$this->id, false)) {
 				// TODO: Display error
 			}
 		}
+		$dir->delete($tempFolderPath);
 		
 		// TODO: Improve logic
 		if ($modify) return $this;

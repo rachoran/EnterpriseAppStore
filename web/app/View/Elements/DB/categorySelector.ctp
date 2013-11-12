@@ -12,7 +12,7 @@
 		<?php
 		foreach ($categoriesList as $item) {
 			$idCat = (int)$item['Category']['id'];
-			$checked = isset($selectedGroups[$idCat]);
+			$checked = isset($selectedCategories[$idCat]);
 		?>
 		<tr>
 			<td>

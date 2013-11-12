@@ -149,7 +149,9 @@ class ApplicationsController extends AppController {
 			else {
 				$this->Application->id = $id;
 			}
-			$this->Application->saveApp($this->request->data, $this->request->data['formData'], null, null);
+			$appData = $this->request->data;
+			$appData['form'] = $this->request->form;
+			$this->Application->saveApp($appData, $this->request->data['formData'], null, null);
 			
 			if (isset($this->request->data['apply'])) {
 				// Redirecting for the same page (Apply)
@@ -185,7 +187,6 @@ class ApplicationsController extends AppController {
 			$arr[$category['id']] = 1;
 		}
 		$this->set('selectedCategories', $arr);
-
 		
 		$app = $this->Application->getOne($id);
 		$this->set('attachmentsList', $this->Attachment->getAllForApp($app));
