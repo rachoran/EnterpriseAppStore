@@ -4,7 +4,7 @@ App::uses('Platforms', 'Lib/Platform');
 
 class ApplicationsController extends AppController {
 	
-	var $uses = array('Application', 'ApplicationsGroup', 'Category', 'ApplicationsCategory', 'Group', 'Attachment');
+	var $uses = array('Application', 'ApplicationsGroup', 'Category', 'ApplicationsCategory', 'Group', 'Attachment', 'History');
 	
 	public function index() {
 		$this->setPageIcon('puzzle-piece');
@@ -17,7 +17,8 @@ class ApplicationsController extends AppController {
 			$this->set('data', $this->Application->searchFor($this->request->data['search']));
 		}
 		else {
-			$this->set('data', $this->Application->getAll());
+			$data = $this->Application->getAll();
+			$this->set('apps', $data);
 		}
 	}
 	
@@ -34,13 +35,15 @@ class ApplicationsController extends AppController {
 		// Starting basic info
 		$basicInfo = array();
 		$basicInfo[__('Application identifier')] = $app['Application']['identifier'];
-		$basicInfo[__('Version')] = $app['Application']['version'];
+		if (!empty($app['Application']['version'])) $basicInfo[__('Version')] = $app['Application']['version'];
 		$basicInfo[__('Created')] = date('M. jS Y, H:i', strtotime($app['Application']['created']));
 		if ($app['Application']['created'] != $app['Application']['modified']) {
 			$basicInfo[__('Last modified')] = date('M. jS Y, H:i', strtotime($app['Application']['modified']));
 		}
-		$basicInfo[__('Platform')] = $app['Application']['platform'];
-		$basicInfo[__('Filesize')] = $app['Application']['size'];
+		$basicInfo[__('Platform')] = Platforms::platformToString($app['Application']['platform']);
+		if ($app['Application']['size'] > 2) $basicInfo[__('Filesize')] = $app['Application']['size'];
+		
+		$this->History->saveHistory($id, 'VEW');
 		
 		// Parsing system files
 		$platform = $app['Application']['platform'];
@@ -110,23 +113,81 @@ class ApplicationsController extends AppController {
 		
 		$this->enableAjaxFileUpload();
 		
+		// Checking for Id
+		if (isset($this->request->data['appId'])) $ajaxId = (int)$this->request->data['appId'];
+		if (isset($ajaxId) && (bool)$ajaxId) $id = $ajaxId;
+		if ($id == 'new') {
+			$id = 0;
+		}
+		else $id = (int)$id;
+		
 		// Groups for the join subset
-		$list = $this->User->Group->find('list');
+		$list = $this->Application->Group->find('list');
 		$this->set('groups', $list);
 		
-		if ($this->request->is('post')) {
-			$app = $this->Application->saveApp($this->request->data['appData'], $this->request->data['formData'], null, null);
-			$groups = isset($this->request->data['group']) ? $this->request->data['group'] : array();
-			$this->ApplicationsGroup->saveAppToGroups($app->id, $groups);
-			$categories = isset($this->request->data['category']) ? $this->request->data['category'] : array();
-			$this->ApplicationsCategory->saveAppToCategories($app->id, $categories);
-			return $this->redirect(array('action' => 'edit', $app->id));
-		}	
-		$app = $this->Application->getOne($id);
-		$this->set('data', $app);
+		// Users for the join subset
+		$list = $this->Application->Group->find('all');
+		$this->set('groupsList', $list);
 		
-		$this->set('categoriesList', $this->Category->getAllForApp($id));
-		$this->set('groupsList', $this->Group->getAllForApp($id));
+		// Applications for the join subset
+		$list = $this->Application->Category->find('list');
+		$this->set('categories', $list);
+		
+		// Applications for the join subset
+		$list = $this->Application->Category->find('all');
+		$this->set('categoriesList', $list);
+		
+		if (empty($this->request->data)) {
+			// Getting data
+        	$this->request->data = $this->Application->findById($id);
+		}
+		else {
+			// Saving data
+			if (!$id) {
+				$this->Application->create();
+			}
+			else {
+				$this->Application->id = $id;
+			}
+			$this->Application->saveApp($this->request->data, $this->request->data['formData'], null, null);
+			
+			if (isset($this->request->data['apply'])) {
+				// Redirecting for the same page (Apply)
+				$this->redirect(array('controller' => 'applications', 'action' => 'edit', $this->Application->id, TextHelper::safeText($this->request->data['Application']['name'])));
+			}
+			else {
+				// Redirecting to the index
+				$this->redirect(array('action' => 'index'));
+			}
+		}
+		
+		if ($this->request->data['Application']['platform'] <= 7) {
+			$appType = 0;
+		}
+		else if ($this->request->data['Application']['platform'] == 8) {
+			$appType = 1;
+		}
+		else if ($this->request->data['Application']['platform'] == 9) {
+			$appType = 2;
+		}
+		$this->set('appType', $appType);
+		
+		// Selected groups
+		$arr = array();
+		foreach ($this->request->data['Group'] as $group) {
+			$arr[$group['id']] = 1;
+		}
+		$this->set('selectedGroups', $arr);
+		
+		// Selected categories
+		$arr = array();
+		foreach ($this->request->data['Category'] as $category) {
+			$arr[$category['id']] = 1;
+		}
+		$this->set('selectedCategories', $arr);
+
+		
+		$app = $this->Application->getOne($id);
 		$this->set('attachmentsList', $this->Attachment->getAllForApp($app));
 	}
 	
@@ -139,7 +200,7 @@ class ApplicationsController extends AppController {
 		$extract = null;
 		$errors = null;
 		
-		$debug = 'g'; // 'i' for iPhone & 'a' for Android or false to disable
+		$debug = false; // 'i' for iPhone & 'a' for Android or false to disable
 		
 		if ($debug) {
 			if ($debug == 'i') {
@@ -186,8 +247,9 @@ class ApplicationsController extends AppController {
 			}
 			if ($extract) {
 				if ($extract->process()) {
-					$app = $this->Application->saveApp($extract->data, $extract->data, $extract->app, $extract->icon);
+					$app = $this->Application->saveApp(array('Application'=>$extract->data), $extract->data, $extract->app, $extract->icon);
 					$extract->data['id'] = $app->id;
+					$this->History->saveHistory($app->id, 'UPL');
 					//debug($extract->data);
 					$extract->clean();
 				}

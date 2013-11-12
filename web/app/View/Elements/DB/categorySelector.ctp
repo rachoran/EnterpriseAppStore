@@ -1,10 +1,8 @@
-<?php
-
-?><table id="<?php echo $tableName; ?>" class="table table-striped table-bordered table-hover selector-table">
+<table id="categoriesTable" class="table table-striped table-bordered table-hover selector-table">
 	<thead>
 		<tr>
 			<th width="28">
-				<input type="checkbox" onchange="env.toggleAllCheckBoxes('<?php echo $tableName; ?>', this);" class="form-control" />
+				<input type="checkbox" onchange="env.toggleAllCheckBoxes('categoriesTable', this);" class="form-control" />
 			</th>
 			<th>Category name</th>
 			<th width="46">&nbsp;</th>
@@ -13,11 +11,12 @@
 	<tbody>
 		<?php
 		foreach ($categoriesList as $item) {
-			$checked = (int)$item['ApplicationsJoin']['application_id'];
+			$idCat = (int)$item['Category']['id'];
+			$checked = isset($selectedGroups[$idCat]);
 		?>
 		<tr>
 			<td>
-				<input type="checkbox" name="category[<?php echo $item['Category']['id']; ?>]"<?php echo $checked ? ' checked="checked"' : ''; ?> class="form-control" />
+				<input type="checkbox" name="data[Category][Category][]"<?php echo $checked ? ' checked="checked"' : ''; ?> id="CategoryCategory<?= $idCat; ?>" value="<?= $idCat; ?>" class="form-control" />
 			</td>
 			<td><?= $item['Category']['name']; ?></td>
 			<td class="center">

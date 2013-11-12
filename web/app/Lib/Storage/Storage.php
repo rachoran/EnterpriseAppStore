@@ -37,6 +37,9 @@ class Storage {
 	}
 	
 	public static function urlForIconForAppWithId($id, $location) {
+		if (!(bool)$id) {
+			return $path = Router::url('/').'Userfiles'.DS.'Settings'.DS.'Images'.DS.'Icon';
+		}
 		if ($location == STORAGE_LOCAL) {
 			$path = Router::url('/').'Userfiles'.DS.'Applications'.DS.$id.DS.'icon.png';
 			return $path;
@@ -57,7 +60,7 @@ class Storage {
 			else {
 				$path = WWW_ROOT.'Userfiles'.DS.$section.DS;
 			}
-	    	$dir = new Folder();
+			$dir = new Folder();
 			$dir->create($path);
 			$path .= pathinfo($file, PATHINFO_BASENAME);
 			

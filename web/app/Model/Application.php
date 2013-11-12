@@ -20,6 +20,13 @@ class Application extends AppModel {
 			'unique' => 'keepExisting',
 	    )
     );
+    
+    // TODO: Move more stuff into the vitual fields
+    public $virtualFields = array(
+    	'count' => "COUNT(Application.id)"
+	);
+	
+	public $order = array('Application.name' => 'ASC', 'Application.created' => 'DESC');
 
 	public $validate = array(
         'name' => array(
@@ -48,8 +55,6 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 		$latestCreated = '(SELECT created FROM applications '.$whereAndOrder.') AS created';
 		$options['fields'] = array('*', 'COUNT(Application.id) AS count', $latestId, $latestLocation, $latestName, $latestVersion, $latestCreated);
 		//*/
-		//$options['fields'] = array('*', 'COUNT(Application.id) AS count');
-		$options['order'] = array('Application.name' => 'ASC', 'Application.created');
 		$options['group'] = array('Application.identifier', 'Application.platform');
 		return $options;
 	}
@@ -152,33 +157,27 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 	}
 
 	public function saveApp($appData, $confData, $file, $icon) {
-		$id = isset($appData['id']) ? (int)$appData['id'] : 0;
+		$id = (int)$this->id;
 		$modify = false;
-		if ($id) {
-			$this->id = $id;
+		if ((bool)$id) {
 			$app = $this->getOne($id);
 			$cd = json_decode($app['Application']['config'], true);
 			$confData = array_merge($cd, $confData);
 			$modify = true;
 		}
 		else {
-			$this->create();
+			if (isset($appData['Application']['Application']['type']) && $appData['Application']['type'] > 0) {
+				$appData['Application']['size'] = 0;
+				$appData['Application']['identifier'] = $appData['Application']['url'];
+				$appData['Application']['platform'] = ($appData['Application']['type'] == 1) ? 8 : 9;
+			}
 		}
-		
-		$confData['isIcon'] = ($icon) ? 1 : 0;
-		if (!$modify) $this->set('name', $appData['name']);
-		if (isset($appData['url'])) $this->set('url', $appData['url']);
-		if (!$modify) $this->set('identifier', $appData['identifier']);
-		if (!$modify) $this->set('version', $appData['version']);
-		if (isset($appData['sort'])) $this->set('sort', $appData['sort']);
-		if (!$modify) $this->set('size', $appData['size']);
-		if (!$modify) $this->set('platform', $confData['platform']);
 		
 		if (!$modify) {
 			$s = new Settings();
-			$this->set('location', ($s->get('s3Enable') ? 1 : 0));
+			$appData['Application']['location'] = $s->get('s3Enable') ? 1 : 0;
 		}
-		
+
 		if (isset($confData['name'])) unset($confData['name']);
 		if (isset($confData['url'])) unset($confData['url']);
 		if (isset($confData['identifier'])) unset($confData['identifier']);
@@ -186,11 +185,11 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 		if (isset($confData['sort'])) unset($confData['sort']);
 		if (isset($confData['size'])) unset($confData['size']);
 		if (isset($confData['platform'])) unset($confData['platform']);
-		$this->set('config', json_encode($confData));
 		
+		$appData['Application']['config'] = json_encode($confData);
 		
-		$this->save();
-		
+		$this->save($appData);
+
 		// Saving files
 		$ok = true;
 		if ($file && !empty($file)) {
@@ -201,8 +200,13 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 			}
 		}
 		if ($ok && !$modify) {
-			if (!file_exists($icon)) {
-				copy(WWW_ROOT.'Userfiles'.DS.'Settings'.DS.'Images'.DS.'Icon', $icon);
+			$defaultIcon = WWW_ROOT.'Userfiles'.DS.'Settings'.DS.'Images'.DS.'Icon';
+			if (!$icon || !file_exists($icon)) {
+				$dir = new Folder();
+				// TODO: Use proper user Id
+				$dir->create(TMP.'1'.DS);
+				$icon = TMP.'1'.DS.'icon.png';
+				copy($defaultIcon, $icon);
 			}
 			if (!Storage::saveFile($icon, 'Applications'.DS.$this->id, false)) {
 				// TODO: Display error

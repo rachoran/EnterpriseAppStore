@@ -8,14 +8,14 @@ class Group extends AppModel {
 			'joinTable' => 'applications_groups',
 			'foreignKey' => 'group_id',
 			'associationForeignKey' => 'application_id',
-			'unique' => 'keepExisting',
+			'unique' => 'keepExisting'
 	    ),
         'User' => array(
 			'className' => 'User',
 			'joinTable' => 'groups_users',
 			'foreignKey' => 'group_id',
 			'associationForeignKey' => 'user_id',
-			'unique' => 'keepExisting',
+			'unique' => 'keepExisting'
 	    )
     );
     

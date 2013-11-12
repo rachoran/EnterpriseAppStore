@@ -13,7 +13,8 @@ $('#binaryUpload').fileupload({
 	    	$('#appId').val(data.result.data.id);
 	    	
 	    	$('#tab_application_basic .disabled:not(.beforeUpload)').prop('readonly', true);
-			$('#tab_application_basic .disabled.beforeUpload, button.disabled').prop('readonly', false);
+			$('#tab_application_basic .disabled.beforeUpload').prop('readonly', false);
+			$('#mainAppForm button.disabled').prop('disabled', false);
 			$('#binaryUploadWrapper, #applicationTypeWrapper').hide();
 			$('.nav.nav-tabs li, button.disabled').removeClass('disabled');
 		}
@@ -32,10 +33,12 @@ function checkFields(val) {
 		$('.type0').show();
 		
 		$('.nav.nav-tabs li, #mainAppForm button').addClass('disabled');
-		$('#mainAppForm input:not(#binaryUpload), textarea, button.disabled').prop('readonly', true);
+		$('#mainAppForm input.disabled:not(#binaryUpload), textarea.disabled').prop('readonly', true);
+		$('#mainAppForm button.disabled').prop('disabled', true);
 	}
 	else {
-		$('#mainAppForm input, textarea, button.disabled').prop('readonly', false);
+		$('#mainAppForm input, textarea').prop('readonly', false);
+		$('#mainAppForm button.disabled').prop('disabled', false);
 		$('.nav.nav-tabs li, button.disabled').removeClass('disabled');
 		
 		if (val == 1) {
@@ -50,15 +53,16 @@ function checkFields(val) {
 		}
 	}
 	if ($('#appName').val().length > 0) {
-		$('#mainAppForm input:not(.beforeUpload)').prop('readonly', true);
-		$('#mainAppForm input.beforeUpload, button.disabled, textarea.disabled, #selectedGroups input, #selectedCats input').prop('readonly', false);
+		$('#mainAppForm input.disabled').prop('readonly', true);
+		$('#mainAppForm input.beforeUpload, textarea.disabled, #selectedGroups input, #selectedCats input').prop('readonly', false);
+		$('#mainAppForm button.disabled').prop('disabled', false);
 		$('#binaryUploadWrapper, #applicationTypeWrapper').hide();
 		$('.nav.nav-tabs li, button.disabled').removeClass('disabled');
 	}
 }
 
 $(function() {
-	checkFields(0);
+	checkFields($('#appTypeSwitch').val());
 	
 	var id = $('#appId').val();
 	if (!id || id == 0) {

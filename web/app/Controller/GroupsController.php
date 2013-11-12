@@ -55,7 +55,7 @@ class GroupsController extends AppController {
 			}
 			if (isset($this->request->data['apply'])) {
 				// Redirecting for the same page (Apply)
-				$this->redirect(array('controller' => 'groups', 'action' => 'edit', $this->Group->id, $this->request->data['Group']['name']));
+				$this->redirect(array('controller' => 'groups', 'action' => 'edit', $this->Group->id, TextHelper::safeText($this->request->data['Group']['name'])));
 			}
 			else {
 				// Redirecting to the index
@@ -87,6 +87,11 @@ class GroupsController extends AppController {
 		$group = $this->Group->getOne($id);
 		$this->set('group', $group);
 		
+		// Users for the join subset
+		$list = $this->Group->User->getAllUsers();
+		$this->set('usersList', $list);
+		
+		// Applications for the join subset
 		$apps = $this->Application->getApplicationsWithGroupIds((int)$id);
 		$this->set('apps', $apps);
 	}

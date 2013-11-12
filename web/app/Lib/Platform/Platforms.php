@@ -66,7 +66,7 @@ class Platforms {
 			return 'apk';
 		}
 		elseif ($platform == 6 || $platform == 7) {
-			return 'xap';
+			return 'appx';
 		}
 		else {
 			return null;
@@ -77,7 +77,7 @@ class Platforms {
 		if ($platform <= 2) {
 			return 'apple';
 		}
-		elseif ($platform > 2 || $platform <= 5) {
+		elseif ($platform > 2 && $platform <= 5) {
 			return 'android';
 		}
 		elseif ($platform == 6 || $platform == 7) {

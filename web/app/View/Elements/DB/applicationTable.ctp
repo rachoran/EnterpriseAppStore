@@ -14,8 +14,8 @@
 	    ?>
 	    <tr class="<?= $icon; ?>">
 	        <td class="icon">
-	        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'view', $item[0]['id'], $item[0]['name'])); ?>">
-	        		<img src="<?= Storage::urlForIconForAppWithId($item[0]['id'], $item[0]['location']).'?t='.time(); ?>" alt="<?php echo $item[0]['name']; ?>" />
+	        	<a href="<?= $this->Html->url(array("controller" => 'applications', 'action' => 'view', $item[0]['id'], TextHelper::safeText($item[0]['name']))); ?>">
+	        		<img src="<?= Storage::urlForIconForAppWithId($item[0]['id'], $item[0]['location']).'?t='.time(); ?>" alt="<?= $item[0]['name']; ?>" />
 	        	</a>
 	        </td>
 	        <td class="name">
@@ -38,7 +38,7 @@
 				}
 	        	?>
 	            <i class="icon-<?= $icon ?>" style="margin-right: 6px;"></i>
-	            <?php echo $this->Html->link($item[0]['name'], array('controller' => 'applications', 'action' => 'view', $item[0]['id'])); ?>
+	            <?= $this->Html->link($item[0]['name'], array('controller' => 'applications', 'action' => 'view', $item[0]['id'], TextHelper::safeText($item['Application']['name']))); ?>
 	            <small>(Latest: <?= $item[0]['version']; ?>)</small>
 	            <br />
             	<?php
@@ -55,10 +55,10 @@
             	<?php } ?>
 	        </td>
 	        <td class="edit">
-	        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $item['Application']['id'], $item['Application']['name'])); ?>">
+	        	<a href="<?= $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $item['Application']['id'], TextHelper::safeText($item['Application']['name']))); ?>">
 	        		<i class="fa icon-edit"><span> Edit latest</span></i>
 	        	</a>
-	        	<br /><a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'delete', $item['Application']['id'], $item['Application']['name'])); ?>" onclick="return env.confirmation('Are you sure you want to delete all builds for <?php echo $item['Application']['name']; ?>?');">
+	        	<br /><a href="<?= $this->Html->url(array("controller" => 'applications', 'action' => 'delete', $item['Application']['id'], TextHelper::safeText($item['Application']['name']))); ?>" onclick="return env.confirmation('Are you sure you want to delete all builds for <?= $item['Application']['name']; ?>?');">
 	        		<i class="fa icon-ban-circle"><span> Delete all</span></i>
 	        	</a>
 	        </td>

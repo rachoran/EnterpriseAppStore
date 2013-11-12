@@ -43,7 +43,7 @@ class UsersController extends AppController {
 			}
 			if (isset($this->request->data['apply'])) {
 				// Redirecting for the same page (Apply)
-				$this->redirect(array('controller' => 'users', 'action' => 'edit', $this->User->id, $this->request->data['User']['username']));
+				$this->redirect(array('controller' => 'users', 'action' => 'edit', $this->User->id, TextHelper::safeText($this->request->data['User']['username'])));
 			}
 			else {
 				// Redirecting to the index
@@ -66,14 +66,26 @@ class UsersController extends AppController {
 		$this->setAdditionalCssFiles(array('basic-edit'));
 		$this->setAdditionalJavascriptFiles(array('application-list'));
 		
-		$this->set('user', $this->User->getOne($id));
+		// Getting basic user info data
+		$user = $this->User->getOne($id);
+		$basicInfo = array();
+		$basicInfo[__('First name')] = $user['User']['firstname'];
+		$basicInfo[__('Last name')] = $user['User']['lastname'];
+		$basicInfo[__('Username')] = $user['User']['username'];
+		$basicInfo[__('Email')] = '<a href="mailto:'.$user['User']['email'].'" title="Email '.$user['User']['firstname'].'">'.$user['User']['email'].'</a>';
+		$basicInfo[__('Company')] = $user['User']['company'];
+		$basicInfo[__('Registration date')] = $user['User']['created'];
+		$basicInfo[__('Last online')] = 'n/a';
+		$basicInfo[__('Role')] = '<strong>'.strtoupper($user['User']['role']).'</strong>';
+		$this->set('basicInfo', $basicInfo);
+		
+		// Filling apps available through groups assigned
+		$this->set('user', $user);
 		$ids = array();
 		$groups = $this->Group->getGroupsForUser($id, false);
 		foreach ($groups as $group) {
 			$ids[] = $group['Group']['id'];
 		}
-		
-		debug($this->Application->getApplicationsWithGroupIds($ids));
 		$this->set('apps', $this->Application->getApplicationsWithGroupIds($ids));
 	}
 	

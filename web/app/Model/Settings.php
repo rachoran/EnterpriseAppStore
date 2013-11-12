@@ -5,6 +5,8 @@ App::uses('File', 'Utility');
 
 class Settings {
 	
+	public $useTable = false;
+	
 	public static $settings;
 	
 	public function get($var) {

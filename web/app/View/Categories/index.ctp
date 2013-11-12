@@ -47,7 +47,8 @@ $this->Html->addCrumb('Categories', null);
 				            	array(
 				            		'controller' => 'categories',
 				            		'action' => 'view',
-									$category['Category']['id']
+									$category['Category']['id'],
+									TextHelper::safeText($category['Category']['name'])
 								),
 				            	array(
 				            		'class' => 'view'
@@ -60,11 +61,11 @@ $this->Html->addCrumb('Categories', null);
 				            <small><?php if (strlen($category['Category']['description']) > 2) echo '('.$category['Category']['description'].')'; ?></small>
 				        </td>
 				        <td class="edit">
-				        	<a href="<?= $this->Html->url(array("controller" => "categories", "action" => "edit", $category['Category']['id'], $category['Category']['name'])); ?>">
+				        	<a href="<?= $this->Html->url(array("controller" => "categories", "action" => "edit", $category['Category']['id'], TextHelper::safeText($category['Category']['name']))); ?>">
 				        		<i class="fa icon-edit"><span> Edit</span></i>
 				        	</a>
 				        	<br />
-				        	<a href="<?= $this->Html->url(array("controller" => "categories", "action" => "delete", $category['Category']['id'], $category['Category']['name'])); ?>" onclick="return env.confirmation('Are you sure you want to delete category <?= $category['Category']['name']; ?>?');">
+				        	<a href="<?= $this->Html->url(array("controller" => "categories", "action" => "delete", $category['Category']['id'], TextHelper::safeText($category['Category']['name']))); ?>" onclick="return env.confirmation('Are you sure you want to delete category <?= $category['Category']['name']; ?>?');">
 				        		<i class="fa icon-ban-circle"><span> Delete</span></i>
 				        	</a>
 				        </td>
