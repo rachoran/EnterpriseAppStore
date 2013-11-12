@@ -1,5 +1,8 @@
 Enterprise App Store
 ==================
+
+To host iOS, Android and Windows 8 apps. (at the moment the store support .ipa only, .apk support will come in a couple of days!)
+
 From Ridiculous Innovations
 ---
 
