@@ -1,6 +1,6 @@
 <?php
 
-$group = $this->request->data['Group'];
+$group = isset($this->request->data['Group']) ? $this->request->data['Group'] : null;
 
 // Breadcrumbs
 $this->Html->addCrumb('Groups', '/groups');

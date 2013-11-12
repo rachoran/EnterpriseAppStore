@@ -116,9 +116,12 @@ class ApplicationsController extends AppController {
 			}
 			$appData = $this->request->data;
 			$appData['form'] = $this->request->form;
-			$this->Application->saveApp($appData, $this->request->data['formData'], null, null);
-			
-			Error::add('Application has been saved successfully.');
+			$ok = $this->Application->saveApp($appData, $this->request->data['formData'], null, null);
+			if ($ok) Error::add('App has been successfully saved.');
+			else {
+				Error::add('Unable to save this app.', Error::TypeError);
+				return false;
+			}
 			
 			if (isset($this->request->data['apply'])) {
 				// Redirecting for the same page (Apply)

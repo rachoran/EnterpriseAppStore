@@ -6,7 +6,7 @@ $application = isset($this->request->data['Application']) ? $this->request->data
 $this->Html->addCrumb('Applications', '/applications');
 $this->Html->addCrumb((empty($application['name']) ? 'Add user' : $application['name']), null);
 
-$config = json_decode($application['config'], true);
+$config = isset($application['config']) ? json_decode($application['config'], true) : null;
 
 function verVal($key, $data) {
 	return isset($data[$key]) ? $data[$key] : '';
@@ -55,7 +55,7 @@ echo $this->Form->create('Application', array(
 							'class'=>'form-control disabled',
 							'placeholder'=>'MyApp',
 							'readonly'=>true,
-							'div'=>false
+							'required'=>true,
 						));
 						?>
 					</div>
@@ -69,7 +69,6 @@ echo $this->Form->create('Application', array(
 							'id' => 'appUrl',
 							'class'=>'form-control disabled',
 							'required'=>false,
-							'div'=>false
 						));
 						?>
 					</div>
@@ -92,7 +91,8 @@ echo $this->Form->create('Application', array(
 							'label' => false,
 							'id' => 'appIdentifier',
 							'class'=>'form-control disabled',
-							'placeholder'=>'com.example.myApp'
+							'placeholder'=>'com.example.myApp',
+							'required'=>true,
 						));
 						?>
 					</div>
@@ -113,7 +113,8 @@ echo $this->Form->create('Application', array(
 						echo $this->Form->input('version', array(
 							'label' => false,
 							'class'=>'form-control disabled',
-							'placeholder'=>'1.2.3'
+							'placeholder'=>'1.2.3',
+							'required'=>false,
 						));
 						?>
 					</div>
@@ -284,7 +285,8 @@ echo $this->Form->create('Application', array(
 							'label' => false,
 							'class'=>'form-control',
 							'placeholder'=>'Higher number = higher in the list, default 1000',
-							'default' => 1000
+							'default' => 1000,
+							'required'=>true,
 						));
 						?>
 					</div>

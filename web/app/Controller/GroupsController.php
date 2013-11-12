@@ -52,8 +52,12 @@ class GroupsController extends AppController {
 				$this->Group->id = $id;
 			}
 			
-			$this->Group->save($this->request->data);
-			Error::add('Group has been saved successfully.');
+			$ok = $this->Group->save($this->request->data, true);
+			if ($ok) Error::add('Group has been saved successfully.');
+			else {
+				Error::add('Unable to save this group.', Error::TypeError);
+				return false;
+			}
 			
 			if (isset($this->request->data['apply'])) {
 				// Redirecting for the same page (Apply)
@@ -67,14 +71,14 @@ class GroupsController extends AppController {
 		
 		// Selected users
 		$arr = array();
-		foreach ($this->request->data['User'] as $user) {
+		if (isset($this->request->data['User'])) foreach ($this->request->data['User'] as $user) {
 			$arr[$user['id']] = 1;
 		}
 		$this->set('selectedUsers', $arr);
 		
 		// Selected applications
 		$arr = array();
-		foreach ($this->request->data['Application'] as $app) {
+		if (isset($this->request->data['Application'])) foreach ($this->request->data['Application'] as $app) {
 			$arr[$app['id']] = 1;
 		}
 		$this->set('selectedApplications', $arr);

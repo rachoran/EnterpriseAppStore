@@ -46,8 +46,12 @@ class CategoriesController extends AppController {
 				$this->Category->id = $id;
 			}
 			
-			$this->Category->save($this->request->data);
-			Error::add('Category has been successfully saved.');
+			$ok = $this->Category->save($this->request->data, true);
+			if ($ok) Error::add('Category has been successfully saved.');
+			else {
+				Error::add('Unable to save this category.', Error::TypeError);
+				return false;
+			}
 			
 			if (isset($this->request->data['apply'])) {
 				// Redirecting for the same page (Apply)

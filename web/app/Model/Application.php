@@ -21,6 +21,25 @@ class Application extends AppModel {
 	    )
     );
     
+    public $validate = array(
+        'name' => array(
+            'rule'    => array('minLength', '8'),
+            'allowEmpty' => false,
+        ),
+        'url' => array(
+            'rule' => 'url',
+            'allowEmpty' => true,
+        ),
+        'identifier' => array(
+            'rule'    => array('minLength', '5'),
+            'message' => 'Minimum 5 characters long'
+        ),
+        'sort' => array(
+            'rule' => array('comparison', '<=', 99999),
+            'allowEmpty' => false
+        )
+    );
+    
     // TODO: Move more stuff into the vitual fields
     public $virtualFields = array(
     	//'count' => "COUNT(Application.id)"
@@ -28,15 +47,6 @@ class Application extends AppModel {
 	
 	public $order = array('Application.name' => 'ASC', 'Application.created' => 'DESC');
 
-	public $validate = array(
-        'name' => array(
-            'required' => array(
-                'rule' => array('notEmpty'),
-                'message' => 'Application name is required'
-            )
-        )
-    );
-    
     public function getOne($id) {
 		$this->id = $id;
         $data = $this->read(null, $id);
@@ -196,15 +206,17 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 		$appData['Application']['config'] = json_encode($confData);
 		
 		// Save data
-		$this->save($appData);
-
+		$ok = $this->save($appData, true);
+		if (!$ok) {
+			return false;
+		}
+		
 		// Saving files
-		$ok = true;
 		if ($file && !empty($file)) {
 			if (!Storage::saveFile($file, 'Applications'.DS.$this->id, true)) {
 				$this->delete($this->id);
-				$ok = false;
-				// TODO: Display error
+				Error::add('Unable to save binaries.', Error::TypeError);
+				return false;
 			}
 		}
 		
@@ -218,10 +230,11 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 			move_uploaded_file($appData['form']['iconFile']['tmp_name'], $tempFolderPath.'icon');
 			$s = getimagesize($tempFolderPath.'icon');
 			if (!$s) {
+				Error::add('Uploaded icon is not supported image file.', Error::TypeWarning);
 				$ok = true;
 			}
 			if (!Storage::saveFile($tempFolderPath.'icon', 'Applications'.DS.$this->id, false)) {
-				// TODO: Display error
+				Error::add('Unable to save uploaded icon.', Error::TypeWarning);
 			}
 		}
 		
@@ -232,9 +245,10 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 			if (!$icon || !file_exists($icon)) {
 				$icon = $tempFolderPath.'icon';
 				copy($defaultIcon, $icon);
+				Error::add('Default icon has been used.', Error::TypeInfo);
 			}
 			if (!Storage::saveFile($icon, 'Applications'.DS.$this->id, false)) {
-				// TODO: Display error
+				Error::add('Unable to save icon.', Error::TypeWarning);
 			}
 		}
 		
