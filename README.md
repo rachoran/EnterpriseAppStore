@@ -1,7 +1,14 @@
 Enterprise App Store
 ==================
 From Ridiculous Innovations
+---
 
+At the moment the databse is not cleaned, there is no authentication so if used (which is not really recommneded yet), needs http basic auth!
+We are working on the system every day so hopefully we'll have a stable version before the December 2013.
+
+License
+---
+License has not yet been finalised. The code should not be used in any way for any commercial project. Eventually this system will be probably distributed under an MIT license.
 
 Installation
 ---
@@ -24,22 +31,25 @@ Apart from that there is a few things you will have to do additionally.
 
 
 ```
-_░▒███████
-░██▓▒░░▒▓██
-██▓▒░__░▒▓██___██████
-██▓▒░____░▓███▓__░▒▓██
-██▓▒░___░▓██▓_____░▒▓██
-██▓▒░_______________░▒▓██
-_██▓▒░______________░▒▓██
-__██▓▒░____________░▒▓██
-___██▓▒░__________░▒▓██
-____██▓▒░________░▒▓██
-_____██▓▒░_____░▒▓██
-______██▓▒░__░▒▓██
-_______█▓▒░░▒▓██
-_________░▒▓██
-_______░▒▓██
-_____░▒▓██
+
+			_░▒███████
+			░██▓▒░░▒▓██
+			██▓▒░__░▒▓██___██████
+			██▓▒░____░▓███▓__░▒▓██
+			██▓▒░___░▓██▓_____░▒▓██
+			██▓▒░_______________░▒▓██
+			_██▓▒░______________░▒▓██
+			__██▓▒░____________░▒▓██
+			___██▓▒░__________░▒▓██
+			____██▓▒░________░▒▓██
+			_____██▓▒░_____░▒▓██
+			______██▓▒░__░▒▓██
+			_______█▓▒░░▒▓██
+			_________░▒▓██
+			_______░▒▓██
+			_____░▒▓██
+			
+			
 ```
 
 
