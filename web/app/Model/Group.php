@@ -21,10 +21,9 @@ class Group extends AppModel {
     
     public $validate = array(
         'name' => array(
-            'alphaNumeric' => array(
-                'rule'     => 'alphaNumeric',
-                'required' => true,
-                'message'  => 'Alphabets and numbers only'
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Group name is required'
             ),
             'between' => array(
                 'rule'    => array('between', 3, 40),

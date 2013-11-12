@@ -104,10 +104,11 @@ ga('send', 'pageview');
 					echo $this->Html->getCrumbList($options, 'Home');
 					?>
 					<div class="main-content">
-						<div id="errors" class="widget">
-							<?php
-							$errors = Error::getAll();
-							if (!empty($errors)) foreach ($errors as $type=>$group) {
+						<?php
+						$errors = Error::getAll();
+						if (!empty($errors)) {
+							echo '<div id="errors" class="widget">';
+							foreach ($errors as $type=>$group) {
 								switch ($type) {
 									case Error::TypeOk:
 										$alertType = 'success';
@@ -134,8 +135,9 @@ ga('send', 'pageview');
 								echo '</div>';
 								Error::clear();
 							}
-							?>
-						</div>
+							echo '</div>';
+						}
+						?>
 						<!-- Begin content -->
 						<?= $this->fetch('content'); ?>
 						<!-- End content -->

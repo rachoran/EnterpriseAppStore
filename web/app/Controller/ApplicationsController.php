@@ -15,15 +15,14 @@ class ApplicationsController extends AppController {
 		
 		if ($this->request->is('post')) {
 			$this->set('searchTerm', $this->request->data['search']);
-			$this->set('data', $this->Application->searchFor($this->request->data['search']));
+			$data = $this->Application->searchFor($this->request->data['search']);
 		}
 		else {
 			$data = $this->Application->getAll();
-			$this->set('apps', $data);
-			
-			if (count($data) == 0) {
-				Error::add('No applications were found', 4);
-			}
+		}
+		$this->set('apps', $data);
+		if (count($data) == 0) {
+			Error::add('No applications were found', Error::TypeInfo);
 		}
 	}
 	

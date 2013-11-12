@@ -22,6 +22,10 @@ echo $this->Form->create('Application', array(
 	'id' => 'mainAppForm',
 	'type' => 'file'
 ));
+
+if (!isset($appType)) {
+	$appType = (int)$this->request->data['Application']['type'];
+}
 ?>
 <div class="widget">
     <ul class="nav nav-tabs">
@@ -79,8 +83,16 @@ echo $this->Form->create('Application', array(
 						<input type="file" name="iconFile" class="form-control disabled beforeUpload" />
 					</div>
 					<div class="col-md-1">
-						<!--<img src="<?= $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?= time(); ?>" alt="Application logo" class="logo" />-->
+						<?php
+						if (empty($config)) {
+						?>
+						<img src="<?= $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?= time(); ?>" alt="Application logo" class="logo" />
+						<?php
+						}
+						else {
+						?>
 						<img src="<?= Storage::urlForIconForAppWithId($application['id'], $application['location']).'?t='.time(); ?>" alt="<?php echo $application['name']; ?>" class="logo" />
+						<?php } ?>
 					</div>
 				</div>
 				<div class="form-group type0">
@@ -139,7 +151,7 @@ echo $this->Form->create('Application', array(
 				</div>
 				<div class="form-group">
 					<div class="col-md-offset-4 col-md-8">
-						<input id="appId" name="appId" type="hidden" value="<?= (int)$application['id']; ?>" />
+						<input id="appId" name="appId" type="hidden" value="<?= (int)isset($application['id']) ? $application['id'] : 0; ?>" />
 						<a href="<?= $this->Html->url('/applications', true); ?>" class="btn btn-default">Cancel</a>
 						<button type="submit" name="save" class="btn btn-primary pull-right disabled">Save &amp; close</button>
 						<button type="submit" name="apply" class="btn btn-primary pull-right disabled">Apply</button>

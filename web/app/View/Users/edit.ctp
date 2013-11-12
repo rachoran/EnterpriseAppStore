@@ -9,7 +9,7 @@ $this->Html->addCrumb('Users', '/users');
 $this->Html->addCrumb((empty($user['lastname']) ? __('Add user') : __('Edit').' '.$user['firstname'].' '.$user['lastname']), null);
 
 
-$changePassword = isset($id) ? 'Change ' : '';
+$changePassword = ($id) ? 'Change ' : '';
 
 ?><div class="widget">
 	<div class="widget-content-white glossed">
@@ -30,7 +30,8 @@ $changePassword = isset($id) ? 'Change ' : '';
 						'class'=>'form-control',
 						'placeholder'=>'joedoe3330',
 						'autocomplete' => 'off',
-						'readonly' => (bool)$id
+						'readonly' => (bool)$id,
+						'required' => true
 					));
 					?>
 				</div>
@@ -42,7 +43,8 @@ $changePassword = isset($id) ? 'Change ' : '';
 					echo $this->Form->input('firstname', array(
 						'label' => false,
 						'class'=>'form-control',
-						'placeholder'=>'John'
+						'placeholder'=>'John',
+						'required' => true
 					));
 					?>
 				</div>
@@ -54,7 +56,8 @@ $changePassword = isset($id) ? 'Change ' : '';
 					echo $this->Form->input('lastname', array(
 						'label' => false,
 						'class'=>'form-control',
-						'placeholder'=>'Doe'
+						'placeholder'=>'Doe',
+						'required' => true
 					));
 					?>
 				</div>
@@ -63,10 +66,11 @@ $changePassword = isset($id) ? 'Change ' : '';
 				<label class="col-md-4 control-label">Email</label>
 				<div class="col-md-8">
 					<?php
-					echo $this->Form->input('User.email', array(
+					echo $this->Form->input('email', array(
 						'label' => false,
 						'class'=>'form-control',
-						'placeholder'=>'john.doe@example.com'
+						'placeholder'=>'john.doe@example.com',
+						'required' => true
 					));
 					?>
 				</div>

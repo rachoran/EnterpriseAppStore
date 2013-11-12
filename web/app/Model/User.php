@@ -19,8 +19,55 @@ class User extends AppModel {
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => 'A username is required'
+            ),
+            'alphaNumeric' => array(
+                'rule'     => 'alphaNumeric',
+                'required' => true,
+                'message'  => 'Alphabets and numbers only'
+            ),
+            'between' => array(
+                'rule'    => array('between', 4, 40),
+                'message' => 'Between 4 to 40 characters'
             )
-        )
+        ),
+        'firstname' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Firstname is required'
+            ),
+            'alphaNumeric' => array(
+                'rule'     => 'alphaNumeric',
+                'required' => true,
+                'message'  => 'Alphabets and numbers only'
+            ),
+            'between' => array(
+                'rule'    => array('between', 2, 40),
+                'message' => 'Between 2 to 40 characters'
+            )
+        ),
+        'lastname' => array(
+            'required' => array(
+                'rule' => array('notEmpty'),
+                'message' => 'Lastname is required'
+            ),
+            'alphaNumeric' => array(
+                'rule'     => 'alphaNumeric',
+                'required' => true,
+                'message'  => 'Alphabets and numbers only'
+            ),
+            'between' => array(
+                'rule'    => array('between', 2, 40),
+                'message' => 'Between 2 to 40 characters'
+            )
+        ),
+        'email' => array(
+        	'rule'    => array('email', true),
+			'message' => 'Please supply a valid email address.'
+        ),
+        'password' => array(
+            'rule'    => array('minLength', '8'),
+            'message' => 'Minimum 8 characters long'
+        ),
     );
     
     public function beforeSave($options = array()) {
