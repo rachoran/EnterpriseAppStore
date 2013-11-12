@@ -12,17 +12,18 @@ System is based on CakePHP 2.0 framework so please refer to the installation gui
 
 
 Apart from that there is a few things you will have to do additionally.
-1) Create your MySQL database
-2) Import database files
-3) Change database configuration in /web/app/Config/database.php
-4) Change your Salt and cipherSeed codes in /web/app/Config/core.php (Please mind that changing these on a production server will fuck up your S3 folder structure as the system is using hash of these two values to generate base folders)
-5) Set writable permissions for Apache to the following folders
+* Create your MySQL database
+* Import database files
+* Change database configuration in /web/app/Config/database.php
+* Change your Salt and cipherSeed codes in /web/app/Config/core.php (Please mind that changing these on a production server will fuck up your S3 folder structure as the system is using hash of these two values to generate base folders)
+* Set writable permissions for Apache to the following folders
    - /web/app/tmp/
    - /web/app/Userfiles/
    - /web/app/webroot/Userfiles/
-6) You should be sorted !!!
+* You should be sorted !!!
 
 
+```
 _░▒███████
 ░██▓▒░░▒▓██
 ██▓▒░__░▒▓██___██████
@@ -39,10 +40,10 @@ _______█▓▒░░▒▓██
 _________░▒▓██
 _______░▒▓██
 _____░▒▓██
+```
 
 
-
-CakePHP
+Instruction for the used version of CakePHP
 =======
 
 [![CakePHP](http://cakephp.org/img/cake-logo.png)](http://www.cakephp.org)
