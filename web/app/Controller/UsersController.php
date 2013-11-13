@@ -13,16 +13,11 @@ class UsersController extends AppController {
     	$this->layout = 'outside';
 	    if ($this->request->is('post')) {
 	        if ($this->Auth->login()) {
-	            // did they select the remember me checkbox?
-	            if ($this->request->data['User']['remember_me'] == 1) {
-	                // remove "remember me checkbox"
+	        	Error::add('You have been logged in.', Error::TypeOk);
+	        	if (isset($this->request->data['User']['remember_me']) && $this->request->data['User']['remember_me'] == 1) {
 	                unset($this->request->data['User']['remember_me']);
-	
-	                // hash the user's password
-	                $this->request->data['User']['password'] = $this->Auth->password($this->request->data['User']['password']);
-	
-	                // write the cookie
-	                $this->Cookie->write('remember_me_cookie', $this->request->data['User'], true, '1 day');
+					$this->request->data['User']['password'] = $this->Auth->password($this->request->data['User']['password']);
+					$this->Cookie->write('remember_me_cookie', $this->request->data['User'], true, '1 day');
 	            }	
 	            return $this->redirect($this->Auth->redirect());
 	        }
@@ -40,7 +35,7 @@ class UsersController extends AppController {
             $this->request->data['User']['role'] = 'user';
             if ($this->User->save($this->request->data)) {
                 Error::add('The user has been registered', Error::TypeOk);
-                return $this->redirect(array('action' => 'index'));
+                $this->login();
             }
             Error::add('The user could not be saved. Please, try again.', Error::TypeError);
         }

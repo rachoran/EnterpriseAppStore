@@ -23,6 +23,7 @@
 App::uses('Controller', 'Controller');
 App::uses('Error', 'Lib/Errors');
 App::uses('TextHelper', 'Lib/Text');
+App::uses('Me', 'Lib/User');
 
 /**
  * Application Controller

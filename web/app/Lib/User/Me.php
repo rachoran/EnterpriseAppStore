@@ -10,11 +10,12 @@ class Me {
 		
 	}
 	
-	public static function init() {
-		if (is_null(self::$instance)) {
-			self::$instance = new self();
-		}
-		return self::$instance;
+	public static function all() {
+		return $this->Session->read('Auth.User');
+	}
+			
+	public static function get($variable='id') {
+		return $this->Session->read('Auth.User.'.$variable);
 	}
 			
 }

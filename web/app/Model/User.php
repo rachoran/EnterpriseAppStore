@@ -73,12 +73,18 @@ class User extends AppModel {
             'unique' => array(
 		        'rule' => 'isUnique',
 		        'message' => 'Email is already registered'
-		    ),
+		    ) 
         ),
         'password' => array(
-            'rule'    => array('minLength', '8'),
-            'message' => 'Minimum 8 characters long'
-        ),
+            'required' => array(
+                'rule'    => array('minLength', '8'),
+				'message' => 'Minimum 8 characters long',
+            ),
+		    'identicalFieldValues' => array( 
+				'rule' => array('identicalFieldValues', 'password2' ), 
+				'message' => 'Passwords don\'t match' 
+			)
+        )
     );
     
     public function beforeSave($options = array()) {
