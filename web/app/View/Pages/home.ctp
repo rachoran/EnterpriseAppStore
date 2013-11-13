@@ -8,7 +8,7 @@
 				<div class="widget-content-blue-inner padded">
 					<div class="pre-value-block"><i class="icon-dashboard"></i> Total Apps</div>
 					<div class="value-block">
-						<div class="value-self"><?php echo $menuCounts['applications']; ?></div>
+						<div class="value-self"><?= $menuCounts['applications']; ?></div>
 						<div class="value-sub">Mobile, Desktop &amp; Web</div>
 					</div>
 					<!-- <span class="dynamicsparkline">Loading..</span> -->
@@ -20,7 +20,7 @@
 				<div class="widget-content-blue-inner padded">
 					<div class="pre-value-block"><i class="icon-cloud-download"></i> Downloads</div>
 					<div class="value-block">
-						<div class="value-self"><?php echo $thirtyDayDownloads; ?></div>
+						<div class="value-self"><?= $thirtyDayDownloads; ?></div>
 						<div class="value-sub">Last 30 days</div>
 					</div>
 					<!-- <span class="dynamicbars">Loading..</span> -->
@@ -32,7 +32,7 @@
 				<div class="widget-content-blue-inner padded">
 					<div class="pre-value-block"><i class="icon-cloud-download"></i> Downloads</div>
 					<div class="value-block">
-						<div class="value-self"><?php echo $allDownloads; ?></div>
+						<div class="value-self"><?= $allDownloads; ?></div>
 						<div class="value-sub">Total</div>
 					</div>
 					<!-- <span class="dynamicsparkline">Loading..</span> -->
@@ -44,7 +44,7 @@
 				<div class="widget-content-blue-inner padded">
 					<div class="pre-value-block"><i class="icon-user"></i> Registered</div>
 					<div class="value-block">
-						<div class="value-self">12</div>
+						<div class="value-self"><?= $menuCounts['users']; ?></div>
 						<div class="value-sub">Users</div>
 					</div>
 					<!-- <span class="dynamicbars">Loading..</span> -->
@@ -60,19 +60,19 @@
 			<div class="row">
 				<div class="col-lg-4 col-md-5 col-sm-6 bordered">
 					<div class="value-block value-bigger changed-up some-left-padding">
-						<div class="value-self"> <?php echo $downloadsYesterday; ?> <!-- <span class="changed-icon"><i class="icon-caret-up"></i></span> <span class="changed-value">+5.00%</span>  --></div>
+						<div class="value-self"> <?= $downloadsYesterday; ?> <!-- <span class="changed-icon"><i class="icon-caret-up"></i></span> <span class="changed-value">+5.00%</span>  --></div>
 						<div class="value-sub">Downloads Yesterday</div>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-3 visible-md visible-lg bordered">
 					<div class="value-block text-center">
-						<div class="value-self"><?php echo round($averageDownloads, 1); ?></div>
+						<div class="value-self"><?= round($averageDownloads, 1); ?></div>
 						<div class="value-sub">Average Per Day</div>
 					</div>
 				</div>
 				<div class="col-lg-2 col-md-3 visible-md visible-lg bordered">
 					<div class="value-block text-center">
-						<div class="value-self"><?php echo round($averageDownloads, 1); ?></div>
+						<div class="value-self"><?= round($averageDownloads, 1); ?></div>
 						<div class="value-sub">Average Per Day</div>
 					</div>
 				</div>
@@ -87,19 +87,19 @@
 	<h3 class="section-title bottom-margin"><i class="icon-bullseye"></i> Apps per platform</h3>
 	<div class="row bottom-margin per-platform-charts">
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
-			<input type="text" value="<?php echo $appsPerPlatform['iOS']; ?>" data-max="<?php echo $menuCounts['applications']; ?>" class="knob" data-fgColor="#61a9dc" data-linecap="round" data-width="150" />
+			<input type="text" value="<?= $appsPerPlatform['iOS']; ?>" data-max="<?= $menuCounts['applications']; ?>" class="knob" data-fgColor="#61a9dc" data-linecap="round" data-width="150" />
 			<p>iOS</p>
 		</div>
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
-			<input type="text" value="<?php echo $appsPerPlatform['Android']; ?>" data-max="<?php echo $menuCounts['applications']; ?>" class="knob" data-fgColor="#71c280" data-linecap="round" data-width="150" />
+			<input type="text" value="<?= $appsPerPlatform['Android']; ?>" data-max="<?= $menuCounts['applications']; ?>" class="knob" data-fgColor="#71c280" data-linecap="round" data-width="150" />
 			<p>Android</p>
 		</div>
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
-			<input type="text" value="<?php echo $appsPerPlatform['Windows8']; ?>" data-max="<?php echo $menuCounts['applications']; ?>" class="knob" data-fgColor="#df6064" data-linecap="round" data-width="150" />
+			<input type="text" value="<?= $appsPerPlatform['Windows8']; ?>" data-max="<?= $menuCounts['applications']; ?>" class="knob" data-fgColor="#df6064" data-linecap="round" data-width="150" />
 			<p>Windows 8</p>
 		</div>
 		<div class="col-lg-3 hidden-md col-sm-6 text-center">
-			<input type="text" value="<?php echo $appsPerPlatform['WebClip']; ?>" data-max="<?php echo $menuCounts['applications']; ?>" class="knob" data-fgColor="#8963ac" data-linecap="round" data-width="150" />
+			<input type="text" value="<?= $appsPerPlatform['WebClip']; ?>" data-max="<?= $menuCounts['applications']; ?>" class="knob" data-fgColor="#8963ac" data-linecap="round" data-width="150" />
 			<p>Web clips</p>
 		</div>
 	</div>

@@ -61,17 +61,11 @@ if (isset($ajaxFileUpload)) {
 <![endif]-->
 
 <title><?= $siteName; ?>: <?= $title_for_layout; ?></title>
-<script>
-<!--
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-ga('create', 'UA-45380708-1', 'appstore.ridiculous-innovations.com');
-ga('send', 'pageview');
--->
-</script>
+<!-- Begin google analytics -->
+<?php echo $this->element('Admin/ga'); ?>
+<!-- End google analytics -->
+
 </head>
 
 <body>
@@ -104,40 +98,10 @@ ga('send', 'pageview');
 					echo $this->Html->getCrumbList($options, 'Home');
 					?>
 					<div class="main-content">
-						<?php
-						$errors = Error::getAll();
-						if (!empty($errors)) {
-							echo '<div id="errors" class="widget">';
-							foreach ($errors as $type=>$group) {
-								switch ($type) {
-									case Error::TypeOk:
-										$alertType = 'success';
-										$icon = 'icon-ok-circle';
-										break;
-									case Error::TypeWarning:
-										$alertType = 'warning';
-										$icon = 'icon-warning-sign';
-										break;
-									case Error::TypeError:
-										$alertType = 'danger';
-										$icon = 'icon-exclamation-sign';
-										break;
-									case Error::TypeInfo:
-										$alertType = 'info';
-										$icon = 'icon-info-sign';
-										break;
-								}
-								echo '<div class="alert alert-'.$alertType.' alert-dismissable">
-											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
-								foreach ($group as $message) {
-									echo '<p><i class="'.$icon.'"></i> '.$message.'</p>';
-								}
-								echo '</div>';
-								Error::clear();
-							}
-							echo '</div>';
-						}
-						?>
+						<!-- Begin errors -->
+						<?php echo $this->element('Admin/errors'); ?>
+						<!-- End errors -->
+						
 						<!-- Begin content -->
 						<?= $this->fetch('content'); ?>
 						<!-- End content -->

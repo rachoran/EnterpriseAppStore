@@ -19,7 +19,7 @@
 			</td>
 			<td><?php echo $app['Application']['name']; ?> <small>(<?php echo $app['Application']['version']; ?>)</small></td>
 			<td class="center">
-				<img src="http://www.apps.ie/assets/images/developer_images/lemonsplat/CPLjobs_Android_app_icon.png" alt="<?php echo $app['Application']['name']; ?> application icon" class="icon" />
+				<img src="<?= Storage::urlForIconForAppWithId($app[0]['id'], $app[0]['location']).'?t='.time(); ?>" alt="<?= $app[0]['name']; ?>" class="icon" />
 			</td>
 		</tr>
 		<?php
@@ -27,3 +27,5 @@
 		?>
 	</tbody>
 </table>
+
+

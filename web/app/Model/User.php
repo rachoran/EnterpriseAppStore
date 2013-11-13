@@ -28,7 +28,12 @@ class User extends AppModel {
             'between' => array(
                 'rule'    => array('between', 4, 40),
                 'message' => 'Between 4 to 40 characters'
-            )
+            ),
+            'unique' => array(
+		        'rule' => 'isUnique',
+		        'message' => 'Username is already registered'
+		    ),
+    
         ),
         'firstname' => array(
             'required' => array(
@@ -61,8 +66,14 @@ class User extends AppModel {
             )
         ),
         'email' => array(
-        	'rule'    => array('email', true),
-			'message' => 'Please supply a valid email address.'
+			'required' => array(
+                'rule'    => array('email'),
+				'message' => 'Please supply a valid email address.',
+            ),
+            'unique' => array(
+		        'rule' => 'isUnique',
+		        'message' => 'Email is already registered'
+		    ),
         ),
         'password' => array(
             'rule'    => array('minLength', '8'),
@@ -110,6 +121,14 @@ class User extends AppModel {
 	
 	public function countAll() {
 		return $this->find('count');
+	}
+	
+	public function isUsername($username) {
+		return (bool)$this->find('count', array('conditions' => array('User.username' => $username)));
+	}
+	
+	public function isEmail($email) {
+		return (bool)$this->find('count', array('conditions' => array('User.email' => $email)));
 	}
 	
 	public function getAllWithGroupInfo($groupId) {

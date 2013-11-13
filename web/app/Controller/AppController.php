@@ -36,6 +36,72 @@ App::uses('TextHelper', 'Lib/Text');
 class AppController extends Controller {
 	
 	var $uses = array('Category', 'Group', 'User', 'Application', 'Settings', 'Signing');
+	
+	public $components = array(
+	    'Session',
+	    'Auth' => array(
+	        'loginRedirect' => array('controller' => 'pages', 'action' => 'index'),
+            'logoutRedirect' => array('controller' => 'users', 'action' => 'login'),
+	        'authorize' => array('Controller')
+	    ),
+	    'Cookie'
+	);
+	
+	public function beforeFilter() {
+		// Authentication - set cookie options
+	    $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
+	    $this->Cookie->httpOnly = true;
+	
+	    if (!$this->Auth->loggedIn() && $this->Cookie->read('remember_me_cookie')) {
+	        $cookie = $this->Cookie->read('remember_me_cookie');
+			
+	        $user = $this->User->find('first', array(
+	            'conditions' => array(
+	                'User.username' => $cookie['username'],
+	                'User.password' => $cookie['password']
+	            )
+	        ));
+	
+	        if ($user) {
+	        	if ($this->Auth->login($user)) {
+	        		Error::add('Login refreshed using cookies.', Error::TypeInfo);
+	        	}
+	        	else {
+		        	Error::add('Invalid cookie login.', Error::TypeError);
+		            $this->redirect('/users/logout');
+	            }
+	        }
+	    }
+	    
+	    // Page data
+		$counts = array();
+		
+		// Counting items (primarily for the left menu but used elsewhere)
+		$counts['applications'] = $this->Application->countAll();
+        $counts['users'] = $this->User->countAll();
+        $counts['groups'] = $this->Group->countAll();
+        $counts['categories'] = $this->Category->countAll();
+        $counts['signing'] = $this->Signing->countAll();
+        $this->set('menuCounts', $counts);
+		
+		// Debugging
+		$this->set('debugMySQL', $this->Settings->get('debugMySQL'));
+        
+        // Global vars
+        $siteName = $this->Settings->get('companyServerName');
+        $this->set('siteName', (empty($siteName) ? __('AppStore') : $siteName));
+    }
+
+	public function isAuthorized($user) {
+	    if (isset($user['role']) && ($user['role'] === 'owner' || $user['role'] === 'admin')) {
+	        return true;
+	    }
+		if (true) {
+			Error::add('No permissions set for '.$this->params['controller'].' / '.$this->params['action'].'.', Error::TypeInfo);
+			return true;
+		}
+	    return false;
+	}
 
 	public function enableWoodWrapper() {
 		$this->set('woodWrapper', ' wood-wrapper');
@@ -73,24 +139,5 @@ class AppController extends Controller {
 		$this->set('errors', $errors);
 		$this->render('/Api/output');
 	}
-
-	public function beforeFilter() {
-		$counts = array();
-		
-		// Counting items (primarily for the left menu but used elsewhere)
-		$counts['applications'] = $this->Application->countAll();
-        $counts['users'] = $this->User->countAll();
-        $counts['groups'] = $this->Group->countAll();
-        $counts['categories'] = $this->Category->countAll();
-        $counts['signing'] = $this->Signing->countAll();
-        $this->set('menuCounts', $counts);
-		
-		// Debugging
-		$this->set('debugMySQL', $this->Settings->get('debugMySQL'));
-        
-        // Global vars
-        $siteName = $this->Settings->get('companyServerName');
-        $this->set('siteName', (empty($siteName) ? __('AppStore') : $siteName));
-    }
 
 }

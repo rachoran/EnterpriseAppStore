@@ -4,6 +4,54 @@ class UsersController extends AppController {
 	
 	var $uses = array('User', 'Group', 'Application');
 	
+	public function beforeFilter() {
+        parent::beforeFilter();
+        $this->Auth->allow('login', 'register', 'logout');
+    }
+
+    public function login() {
+    	$this->layout = 'outside';
+	    if ($this->request->is('post')) {
+	        if ($this->Auth->login()) {
+	            // did they select the remember me checkbox?
+	            if ($this->request->data['User']['remember_me'] == 1) {
+	                // remove "remember me checkbox"
+	                unset($this->request->data['User']['remember_me']);
+	
+	                // hash the user's password
+	                $this->request->data['User']['password'] = $this->Auth->password($this->request->data['User']['password']);
+	
+	                // write the cookie
+	                $this->Cookie->write('remember_me_cookie', $this->request->data['User'], true, '1 day');
+	            }	
+	            return $this->redirect($this->Auth->redirect());
+	        }
+	        Error::add('Invalid username or password, please try again.', Error::TypeError);
+	    }
+	}
+	
+	public function register() {
+		$this->layout = 'outside';
+        if ($this->request->is('post')) {
+        	if ($this->User->isUsername($this->request->data['User']['username'])) {
+	        	
+        	}
+            $this->User->create();
+            $this->request->data['User']['role'] = 'user';
+            if ($this->User->save($this->request->data)) {
+                Error::add('The user has been registered', Error::TypeOk);
+                return $this->redirect(array('action' => 'index'));
+            }
+            Error::add('The user could not be saved. Please, try again.', Error::TypeError);
+        }
+    }
+	
+	public function logout() {
+		$this->Cookie->write('remember_me_cookie',  null);
+		Error::add('You have been successfully logged out.', Error::TypeOk);
+	    return $this->redirect($this->Auth->logout());
+	}
+
 	public function index() {
 		$this->setPageIcon('user');
 		$this->enablePageClass('basic-edit');
