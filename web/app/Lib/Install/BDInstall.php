@@ -1,6 +1,26 @@
 <?php
 
-class DBTables {
+App::uses('Model', 'Model');
+
+class BDInstall {
+	
+	public function executeQuery($query) {
+		debug($query);
+		return false;
+		
+		$model = new Model();
+		$model->query($query);
+	}
+	
+	public function install() {
+		$arr = $this->tables();
+		foreach ($arr as $name=>$sql) {
+			$this->executeQuery($sql['table']);
+			if (!empty($sql['data']) && is_array($sql['data'])) foreach ($sql['data'] as $query) {
+				$this->executeQuery($query);
+			}
+		}
+	}
 	
 	public function tables() {
 		return array(
@@ -23,7 +43,7 @@ class DBTables {
   KEY `name` (`name`,`identifier`,`platform`,`sort`),
   KEY `version` (`version`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
-				'data' => ''
+				'data' => array(),
 			),
 			
 			// Applications_attachments
@@ -33,7 +53,7 @@ class DBTables {
   `attachment_id` bigint(20) unsigned NOT NULL,
   KEY `application_id` (`application_id`,`attachment_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;",
-				'data' => ''
+				'data' => array(),
 			),
 			
 			// Application_groups
@@ -43,7 +63,7 @@ class DBTables {
   `group_id` int(11) unsigned NOT NULL,
   KEY `application_id` (`application_id`,`group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;",
-				'data' => ''
+				'data' => array(),
 			),
 			
 			// Attachments
@@ -63,7 +83,7 @@ class DBTables {
   KEY `application_identifier` (`application_identifier`),
   KEY `application_platform` (`application_platform`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
-				'data' => ''
+				'data' => array(),
 			),
 			
 			// Categories
@@ -79,7 +99,14 @@ class DBTables {
   KEY `name` (`name`),
   KEY `created` (`created`,`modified`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
-				'data' => ''
+				'data' => array(
+					"INSERT INTO `categories` (`name`, `description`, `icon`, `created`, `modified`) VALUES('Travel', '', 'icon-plane', NOW(), NOW());",
+					"INSERT INTO `categories` (`name`, `description`, `icon`, `created`, `modified`) VALUES('Health', '', 'icon-ambulance', NOW(), NOW());",
+					"INSERT INTO `categories` (`name`, `description`, `icon`, `created`, `modified`) VALUES('Photography', '', 'icon-camera', NOW(), NOW());",
+					"INSERT INTO `categories` (`name`, `description`, `icon`, `created`, `modified`) VALUES('Games', '', 'icon-fighter-jet', NOW(), NOW());",
+					"INSERT INTO `categories` (`name`, `description`, `icon`, `created`, `modified`) VALUES('Legal', '', 'icon-legal', NOW(), NOW());",
+					"INSERT INTO `categories` (`name`, `description`, `icon`, `created`, `modified`) VALUES('Utilities', '', 'icon-lightbulb', NOW(), NOW());",
+				),
 			),
 			
 			// Signings
@@ -95,7 +122,7 @@ class DBTables {
   PRIMARY KEY (`id`),
   KEY `created` (`created`,`modified`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
-				'data' => ''
+				'data' => array(),
 			),
 			
 			// Downloads
@@ -105,7 +132,7 @@ class DBTables {
   `created` datetime NOT NULL,
   KEY `application_id` (`application_id`,`created`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;",
-				'data' => ''
+				'data' => array(),
 			),
 			
 			//Filetypes (mime)
@@ -118,7 +145,7 @@ class DBTables {
   PRIMARY KEY (`id`),
   KEY `mime` (`mime`,`allowed`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
-				'data' => ''
+				'data' => array(),
 			),
 			
 			// Groups
@@ -133,7 +160,7 @@ class DBTables {
   PRIMARY KEY (`id`),
   KEY `name` (`name`,`created`,`modified`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
-				'data' => ''
+				'data' => array(),
 			),
 			
 			// History
@@ -145,7 +172,7 @@ class DBTables {
   `user_id` int(11) unsigned NOT NULL,
   KEY `application_id` (`application_id`,`action`,`created`,`user_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;",
-				'data' => ''
+				'data' => array(),
 			),
 			
 			// Ideas
@@ -161,7 +188,7 @@ class DBTables {
   PRIMARY KEY (`id`,`area`),
   KEY `created` (`created`,`modified`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
-				'data' => ''
+				'data' => array(),
 			),
 			
 			// Users
@@ -182,7 +209,9 @@ class DBTables {
   KEY `nickname` (`username`,`email`,`password`),
   KEY `role` (`role`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
-				'data' => ''
+				'data' => array(
+					"INSERT INTO `users` (`username`, `email`, `password`, `role`, `created`, `modified`, `firstname`, `lastname`, `company`, `password_token`) VALUES('admin', 'admin@example.com', '3a37e68dd29ea23ff7fc9cf009da7bef9a13a5f4', 'owner', NOW(), NOW(), 'Super', 'Admin', 'Company', '');",
+				),
 			),
 			
 			// Groups_users
@@ -192,14 +221,14 @@ class DBTables {
   `group_id` int(11) unsigned NOT NULL,
   KEY `user_id` (`user_id`,`group_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;",
-				'data' => ''
+				'data' => array(),
 			),
 			
 			/*
 			// Xxxxxx
 			'xxxx' => array(
 				'table' => "',
-				'data' => ''
+				'data' => array(),
 			),
 			*/
 		);

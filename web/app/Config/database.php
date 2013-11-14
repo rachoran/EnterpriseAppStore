@@ -1,4 +1,5 @@
 <?php
+
 class DATABASE_CONFIG {
 
 	public $default = array(
@@ -9,4 +10,5 @@ class DATABASE_CONFIG {
 		'password' => '',
 		'database' => 'enterpriseappstore',
 	);
+	
 }
