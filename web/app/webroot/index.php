@@ -38,6 +38,14 @@ if (!defined('DS')) {
  *
  */
 
+if (!defined('ROOT')) {
+	define('ROOT', dirname(dirname(dirname(__FILE__))));
+}
+
+/**
+ * Checking if tmp folder is writable and serving a user friendly error if it is not!
+ *
+ */	
 if (!is_writable(dirname(dirname(__FILE__)).DS.'tmp')) {
 	require(dirname(dirname(__FILE__)).DS.'Dummy'.DS.'tmpLocked.php');
 	exit();
