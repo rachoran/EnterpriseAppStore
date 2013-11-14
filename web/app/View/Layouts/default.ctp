@@ -80,7 +80,7 @@ if (isset($ajaxFileUpload)) {
 					<div class="page-header">
 						<div class="header-links hidden-xs">
 							<!--<a href="notifications.html"><i class="icon-comments"></i> User Alerts</a>-->
-							<a href="<?= $this->Html->url('/users/myaccount', true); ?>"><i class="icon-cog"></i> My Account</a>
+							<a href="<?= $this->Html->url('/users/account', true); ?>"><i class="icon-cog"></i> My Account</a>
 							<a href="<?= $this->Html->url('/users/logout', true); ?>"><i class="icon-signout"></i> Logout</a>
 						</div>
 						<h1><i class="icon-<?= (isset($pageIcon)) ? $pageIcon : 'exclamation-sign';  ?>"></i> <?= $title_for_layout; ?></h1>

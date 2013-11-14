@@ -24,7 +24,7 @@ $this->Html->addCrumb($user['firstname'].' '.$user['lastname'], null);
 							</h1>
 						</td>
 						<td style="vertical-align:middle; text-align:center; width:120px;">
-							<a href="<?php echo $this->Html->url(array("controller" => 'users', 'action' => 'edit', $user['id'], $user['username'])); ?>" class="btn btn-default" style="margin-right:6px;">
+							<a href="<?= $this->Html->url(array("controller" => 'users', 'action' => 'edit', $user['id'], $user['username'])); ?>" class="btn btn-default" style="margin-right:6px;">
 				        		<i class="fa icon-edit"><span> Edit</span></i>
 				        	</a>
 						</td>

@@ -60,6 +60,62 @@ class UsersController extends AppController {
 		$this->set('users', $this->User->getAllUsers());
 	}
 	
+	public function account() {
+		// Setting up the page
+		$this->setPageIcon('user');
+		$this->enablePageClass('basic-edit');
+		$this->setAdditionalCssFiles(array('basic-edit'));
+		
+		// Checking for Id
+		$id = $this->Auth->user('id');
+		
+		// Groups for the join subset
+		$list = $this->User->Group->find('list');
+		$this->set('groups', $list);
+		
+		$ok = false;
+		$user = $this->User->findById($id);
+		if (empty($this->request->data)) {
+			// Getting data
+        	$this->request->data = $user;
+		}
+		else {
+			// Saving data
+			$this->User->id = $id;
+			
+			if (empty($this->request->data['User']['password'])) {
+				$this->request->data['User']['password'] = $user['User']['password'];
+				$this->request->data['User']['password2'] = $user['User']['password'];
+			}
+			$ok = $this->User->save($this->request->data, true);
+			if ($ok) {
+				Error::add('Account has been successfully saved.');
+				$this->Session->write('Auth', $this->User->read(null, $this->Auth->User('id')));
+				if (isset($this->request->data['apply'])) {
+					// Redirecting for the same page (Apply)
+					$this->redirect(array('controller' => 'users', 'action' => 'edit', $this->User->id, TextHelper::safeText($this->request->data['User']['username'])));
+				}
+				else {
+					// Redirecting to the index
+					$this->redirect(array('controller' => 'users', 'action' => 'index'));
+				}
+			}
+			else {
+				Error::add('Unable to save this account.', Error::TypeError);
+			}
+		}
+		
+		// Selected groups
+		$arr = array();
+		if (isset($this->request->data['Group'])) foreach ($this->request->data['Group'] as $group) {
+			if (!is_array($group)) $arr[(int)$group] = 1;
+			else $arr[$group['id']] = 1;
+		}
+		$this->set('selectedGroups', $arr);
+		
+		return $ok;
+	}
+	
 	public function edit($id=0) {
 		// Setting up the page
 		$this->setPageIcon('user');
@@ -77,9 +133,10 @@ class UsersController extends AppController {
 		$this->set('groups', $list);
 		
 		$ok = false;
+		$user = $this->User->findById($id);
 		if (empty($this->request->data)) {
 			// Getting data
-        	$this->request->data = $this->User->findById($id);
+        	$this->request->data = $user;
 		}
 		else {
 			// Saving data
@@ -90,6 +147,10 @@ class UsersController extends AppController {
 				$this->User->id = $id;
 			}
 			
+			if (empty($this->request->data['User']['password'])) {
+				$this->request->data['User']['password'] = $user['User']['password'];
+				$this->request->data['User']['password2'] = $user['User']['password'];
+			}
 			$ok = $this->User->save($this->request->data, true);
 			if ($ok) {
 				Error::add('User has been successfully saved.');

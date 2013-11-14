@@ -71,7 +71,7 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'root',
 		'password' => '',
-		'database' => 'testdb',
+		'database' => 'enterpriseappstore',
 	);
 
 	public $test = array(
