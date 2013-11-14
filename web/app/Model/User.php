@@ -3,6 +3,8 @@
 App::uses('AuthComponent', 'Controller/Component');
 
 class User extends AppModel {
+	
+	public $dontEncodePassword = false;
     
 	public $hasAndBelongsToMany = array(
         'Group' => array(
@@ -88,7 +90,7 @@ class User extends AppModel {
     );
     
     public function beforeSave($options = array()) {
-	    if (isset($this->data[$this->alias]['password'])) {
+	    if (isset($this->data[$this->alias]['password']) && !$this->dontEncodePassword) {
 	        $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
 	    }
 	    return true;

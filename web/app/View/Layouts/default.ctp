@@ -85,12 +85,14 @@ if (isset($ajaxFileUpload)) {
 						</div>
 						<h1><i class="icon-<?= (isset($pageIcon)) ? $pageIcon : 'exclamation-sign';  ?>"></i> <?= $title_for_layout; ?></h1>
 					</div>
-					<!--<ol class="breadcrumb">
+					<!--
+					<ol class="breadcrumb">
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Bread</a></li>
 						<li><a href="#">Crumbs</a></li>
 						<li class="active">Example</li>
-					</ol>-->
+					</ol>
+					-->
 					<?php
 					$options = array();
 					$options['class'] = 'breadcrumb';

@@ -111,7 +111,7 @@ class InstallController extends Controller {
 		$t[] = array(__('Amazon S3 storage'), $ok, 1, 'To use S3 or SMS notifications internet connection needs to be available for the server.');
 		
 		// Testing Access to Twilio SMS gate
-		$t[] = array(__('SMS notifications'), $ok, 1, 'To use S3 or SMS notifications internet connection needs to be available for the server.');
+		$t[] = array(__('SMS notifications (Twillio)'), $ok, 1, 'To use S3 or SMS notifications internet connection needs to be available for the server.');
 		
 		$data['tests'] = $t;
 		return $data;

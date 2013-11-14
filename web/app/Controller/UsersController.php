@@ -86,19 +86,13 @@ class UsersController extends AppController {
 			if (empty($this->request->data['User']['password'])) {
 				$this->request->data['User']['password'] = $user['User']['password'];
 				$this->request->data['User']['password2'] = $user['User']['password'];
+				$this->User->dontEncodePassword = true;
 			}
 			$ok = $this->User->save($this->request->data, true);
 			if ($ok) {
 				Error::add('Account has been successfully saved.');
 				$this->Session->write('Auth', $this->User->read(null, $this->Auth->User('id')));
-				if (isset($this->request->data['apply'])) {
-					// Redirecting for the same page (Apply)
-					$this->redirect(array('controller' => 'users', 'action' => 'edit', $this->User->id, TextHelper::safeText($this->request->data['User']['username'])));
-				}
-				else {
-					// Redirecting to the index
-					$this->redirect(array('controller' => 'users', 'action' => 'index'));
-				}
+				$this->redirect(array('controller' => 'users', 'action' => 'account'));
 			}
 			else {
 				Error::add('Unable to save this account.', Error::TypeError);
@@ -150,6 +144,7 @@ class UsersController extends AppController {
 			if (empty($this->request->data['User']['password'])) {
 				$this->request->data['User']['password'] = $user['User']['password'];
 				$this->request->data['User']['password2'] = $user['User']['password'];
+				$this->User->dontEncodePassword = true;
 			}
 			$ok = $this->User->save($this->request->data, true);
 			if ($ok) {

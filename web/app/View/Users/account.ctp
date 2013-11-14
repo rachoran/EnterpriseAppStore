@@ -104,6 +104,7 @@ $this->Html->addCrumb(__('My account'), null);
 						'label' => false,
 						'class'=>'form-control',
 						'placeholder'=>'mySup3rS3cr3tP4ssw0rd',
+						'type' => 'password',
 						'autocomplete' => 'off'
 					));
 					?>
