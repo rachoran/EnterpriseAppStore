@@ -31,7 +31,7 @@ $this->Html->addCrumb('Categories', null);
 				        </td>
 				    </tr>-->
 				    <?php
-				    foreach ($categories as $category) {
+				    if (!empty($categories)) foreach ($categories as $category) {
 						$count = (int)$category[0]['appsCount'];   
 						if ($count == 0) {
 							$style = ' style="color:#999;"';
@@ -70,6 +70,15 @@ $this->Html->addCrumb('Categories', null);
 				        	</a>
 				        </td>
 				    </tr>
+				    <?php
+				    }
+				    else {
+				    ?>
+					<tr>
+						<td colspan="4" height="120" valign="middle" align="center" class="empty-cell">
+							<p style="margin-top:45px;">No categories were found.</p>
+						</td>
+					</tr>
 				    <?php
 				    }
 				    unset($categories);

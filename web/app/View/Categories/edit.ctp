@@ -25,11 +25,11 @@ $this->Html->addCrumb((empty($category['Category']['name']) ? 'Create category' 
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-4 control-label">Icon</label>
+					<label class="col-md-4 control-label">Icon code</label>
 					<div class="col-md-8">
 						<input type="text" name="icon" class="form-control icon pull-right" placeholder="icon-camera-retro" value="<?php echo $category['Category']['icon']; ?>" />
 						<i class="fa <?php echo $category['Category']['icon']; ?> pull-left icon-preview"></i>
-						<small><a href="http://fontawesome.io/3.2.1/icons/" target="_blank">Font Awesome icon list</a></small>
+						<small><a href="http://fontawesome.io/3.2.1/icons/" target="_blank">Font Awesome icon code's list</a></small>
 					</div>
 				</div>
 				<div class="form-group">

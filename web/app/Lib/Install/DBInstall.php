@@ -88,7 +88,7 @@ class DATABASE_CONFIG {
 		'login' => '".$dbConf['login']."',
 		'password' => '".$dbConf['password']."',
 		'database' => '".$dbConf['database']."',
-		'prefix' => 'testing_',
+		'prefix' => 'zztest_',
 		//'encoding' => 'utf8',
 	);
 }";
@@ -105,18 +105,36 @@ class DATABASE_CONFIG {
 	public $prefix = '';
 	public $queryCount = 0;
 	
-	public function install($prefix=null) {
+	public function install($prefix='') {
 		$this->prefix = $prefix;
 		$arr = $this->tables();
+		
+		// Getting existig tables
+		App::uses('ConnectionManager', 'Model');
+		$db = ConnectionManager::getDataSource('default');
+		$tables = $db->listSources();
+		
+		// Installing the DB
 		foreach ($arr as $name=>$sql) {
-			if (empty($this->prefix)) Error::add(__('Installing table').': '.$name, Error::TypeInfo);
-			$this->executeQuery($sql['table']);
-			if (!empty($sql['data']) && is_array($sql['data'])) foreach ($sql['data'] as $query) {
-				$this->executeQuery($query);
+			$ok = true;
+			foreach ($tables as $table) {
+				if ($table == $this->prefix.$name) {
+					$ok = false;
+				}
+			}
+			if ($ok) {
+				// For debugging purposes only, enable by changing next false to true
+				if (empty($this->prefix) && false) {
+					Error::add(__('Installing table').': '.$name, Error::TypeInfo);
+				}
+				$this->executeQuery($sql['table']);
+				if (!empty($sql['data']) && is_array($sql['data'])) foreach ($sql['data'] as $query) {
+					$this->executeQuery($query);
+				}
 			}
 		}
 		if (empty($this->prefix)) {
-			$this->install('testing_');
+			$this->install('zztest_');
 			Error::add(__('Number of executed queries').': '.$this->queryCount, Error::TypeInfo);
 		}
 		return true;
@@ -152,6 +170,16 @@ class DATABASE_CONFIG {
   `application_id` bigint(20) unsigned NOT NULL,
   `attachment_id` bigint(20) unsigned NOT NULL,
   KEY `application_id` (`application_id`,`attachment_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;",
+				'data' => array(),
+			),
+			
+			// Applications_attachments
+			'applications_categories' => array(
+				'table' => "CREATE TABLE `".$this->prefix."applications_categories` (
+  `application_id` bigint(20) unsigned NOT NULL,
+  `category_id` int(11) unsigned NOT NULL,
+  KEY `application_id` (`application_id`,`category_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;",
 				'data' => array(),
 			),
@@ -260,7 +288,9 @@ class DATABASE_CONFIG {
   PRIMARY KEY (`id`),
   KEY `name` (`name`,`created`,`modified`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8;",
-				'data' => array(),
+				'data' => array(
+					"INSERT INTO `".$this->prefix."groups` (`name`, `description`, `all_versions_available`, `created`, `modified`) VALUES ('Clients', '', '1', NOW(), NOW());"
+				),
 			),
 			
 			// History
@@ -316,7 +346,7 @@ class DATABASE_CONFIG {
 			
 			// Groups_users
 			'groups_users' => array(
-				'table' => "CREATE TABLE `".$this->prefix."users_groups` (
+				'table' => "CREATE TABLE `".$this->prefix."groups_users` (
   `user_id` int(11) unsigned NOT NULL,
   `group_id` int(11) unsigned NOT NULL,
   KEY `user_id` (`user_id`,`group_id`)

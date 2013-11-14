@@ -53,7 +53,7 @@ $id = isset($group['id']) ? (int)$group['id'] : 0;
 						<div class="tab-pane active" id="tab_group_users">
 							<p>&nbsp;</p>
 							<!-- Begin user selector -->
-							<?php echo $this->element('DB/userSelector'); ?>
+							<?php echo $this->element('DB/userSelector', array('userOnly' => true)); ?>
 							<!-- End user selector -->
 						</div>
 						<div class="tab-pane" id="tab_group_applications">

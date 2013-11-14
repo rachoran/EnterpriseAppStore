@@ -24,6 +24,7 @@ App::uses('Controller', 'Controller');
 App::uses('Error', 'Lib/Errors');
 App::uses('TextHelper', 'Lib/Text');
 App::uses('Me', 'Lib/User');
+App::uses('Install', 'Lib/Install');
 
 /**
  * Application Controller
@@ -49,6 +50,11 @@ class AppController extends Controller {
 	);
 	
 	public function beforeFilter() {
+		// Installation check
+		if (!Install::isInstallLocked()) {
+			$this->redirect('/install');
+		}
+		
 		// Authentication - set cookie options
 	    $this->Cookie->key = 'qSI232qs*&sXOw!adre@34SAv!@*(XSL#$%)asGb$@11~_+!@#HKis~#^';
 	    $this->Cookie->httpOnly = true;

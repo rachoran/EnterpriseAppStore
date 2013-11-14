@@ -10,7 +10,7 @@
 	</thead>
 	<tbody>
 		<?php
-		foreach ($applicationsList as $app) {
+		if (!empty($applicationsList)) foreach ($applicationsList as $app) {
 			$checked = isset($selectedApplications[$app['Application']['id']]);
 		?>
 		<tr>
@@ -24,7 +24,14 @@
 		</tr>
 		<?php
 		}
-		?>
+	    else {
+	    ?>
+		<tr>
+			<td colspan="3" height="60" valign="middle" align="center">
+				<p style="margin-top:15px;">No applications were found. Create one <a href="<?= $this->Html->url(array("controller" => 'applications', 'action' => 'edit', 'new')); ?>" title="">here</a> first.</p>
+			</td>
+		</tr>
+	    <?php } ?>
 	</tbody>
 </table>
 

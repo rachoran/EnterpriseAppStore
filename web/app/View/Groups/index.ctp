@@ -19,6 +19,8 @@ $this->Html->addCrumb('Groups', null);
 				    </tr>
 				</thead>
 				<tbody>
+					<!--
+					TODO: Plan group for all users properly
 					<tr>
 				        <td class="icon"><span class="label label-<?= $labelType; ?>"><?= $menuCounts['users']; ?></span></td>
 				        <td class="icon"><span class="label label-<?= $labelType; ?>"><?= $menuCounts['applications']; ?></span></td>
@@ -32,7 +34,8 @@ $this->Html->addCrumb('Groups', null);
 				        	</a>
 				        </td>
 				    </tr>
-				    <?php foreach ($groups as $group) { ?>
+				    -->
+				    <?php if (!empty($groups)) foreach ($groups as $group) { ?>
 				    <tr class="clickable">
 				        <td class="icon"><span class="label label-default"><?= count($group['User']); ?></span></td>
 				        <td class="icon"><span class="label label-default"><?= count($group['Application']); ?></span></td>
@@ -50,6 +53,15 @@ $this->Html->addCrumb('Groups', null);
 				        	</a>
 				        </td>
 				    </tr>
+				    <?php
+				    }
+				    else {
+				    ?>
+					<tr>
+						<td colspan="4" height="120" valign="middle" align="center" class="empty-cell">
+							<p style="margin-top:45px;">No groups were found.</p>
+						</td>
+					</tr>
 				    <?php
 				    }
 				    unset($groups);

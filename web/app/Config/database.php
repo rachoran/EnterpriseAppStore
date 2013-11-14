@@ -71,7 +71,7 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'root',
 		'password' => '',
-		'database' => 'enterpriseappstore',
+		'database' => 'testdb',
 	);
 
 	public $test = array(
@@ -80,8 +80,8 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'root',
 		'password' => '',
-		'database' => 'enterpriseappstore',
-		'prefix' => 'testing_',
+		'database' => 'testdb',
+		'prefix' => 'zztest_',
 		//'encoding' => 'utf8',
 	);
 }

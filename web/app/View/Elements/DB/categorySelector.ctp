@@ -10,7 +10,7 @@
 	</thead>
 	<tbody>
 		<?php
-		foreach ($categoriesList as $item) {
+		if (!empty($categoriesList)) foreach ($categoriesList as $item) {
 			$idCat = (int)$item['Category']['id'];
 			$checked = isset($selectedCategories[$idCat]);
 		?>
@@ -25,6 +25,13 @@
 		</tr>
 		<?php
 		}
-		?>
+	    else {
+	    ?>
+		<tr>
+			<td colspan="3" height="60" valign="middle" align="center">
+				<p style="margin-top:15px;">No categories were found. Create one <a href="<?= $this->Html->url(array("controller" => 'categories', 'action' => 'edit', 'new')); ?>" title="">here</a> first.</p>
+			</td>
+		</tr>
+	    <?php } ?>
 	</tbody>
 </table>

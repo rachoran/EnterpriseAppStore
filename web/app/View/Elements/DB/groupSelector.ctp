@@ -9,7 +9,7 @@
 	</thead>
 	<tbody>
 		<?php
-		foreach ($groups as $idGroup=>$name) {
+		if (!empty($groups)) foreach ($groups as $idGroup=>$name) {
 			$checked = isset($selectedGroups[$idGroup]);
 		?>
 		<tr>
@@ -20,6 +20,13 @@
 		</tr>
 		<?php
 		}
-		?>
+	    else {
+	    ?>
+		<tr>
+			<td colspan="3" height="60" valign="middle" align="center">
+				<p style="margin-top:15px;">No groups were found. Create one <a href="<?= $this->Html->url(array("controller" => 'groups', 'action' => 'edit', 'new')); ?>" title="">here</a> first.</p>
+			</td>
+		</tr>
+	    <?php } ?>
 	</tbody>
 </table>

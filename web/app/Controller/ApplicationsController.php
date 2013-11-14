@@ -5,7 +5,7 @@ App::uses('ApplicationsDataHelper', 'Lib/Data/Helpers');
 
 class ApplicationsController extends AppController {
 	
-	var $uses = array('Application', 'ApplicationsGroup', 'Category', 'ApplicationsCategory', 'Group', 'Attachment', 'History');
+	var $uses = array('Application', 'Category', 'Group', 'Attachment', 'History');
 	
 	public function index() {
 		$this->setPageIcon('puzzle-piece');
@@ -21,9 +21,6 @@ class ApplicationsController extends AppController {
 			$data = $this->Application->getAll();
 		}
 		$this->set('apps', $data);
-		if (count($data) == 0) {
-			Error::add('No applications were found', Error::TypeInfo);
-		}
 	}
 	
 	public function view($id) {

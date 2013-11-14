@@ -9,7 +9,6 @@ class InstallController extends Controller {
 	
 	public function beforeFilter() {
         parent::beforeFilter();
-        //$this->Auth->allow('index', 'info', 'database', 'permissions', 'success');
     }
     
     protected function currentPage($no=null) {
@@ -20,7 +19,16 @@ class InstallController extends Controller {
     }
     
     protected function checkPage($no) {
-	    $page = $this->currentPage($no);
+	    $this->currentPage($no);
+	    if (Install::isInstallLocked()) {
+		    if ($this->Session->read('Install.currentPage') && ($no == 4)) {
+			    
+		    }
+		    else {
+			    Error::add('Installation process has been finished, you are not allowed to access this section.', Error::TypeError);
+			    $this->redirect(array('controller' => 'install', 'action' => 'locked'));
+		    }
+	    }
 	    $page = $no;
 	    $data = array();
 	    if ($page == 0) {
@@ -50,6 +58,12 @@ class InstallController extends Controller {
     public function index() {
     	$this->checkPage(0);
 		$this->layout = 'outside';
+	}
+	
+    public function locked() {
+	    $this->set('siteName', 'Ridiculous Innovations - Enterprise AppStore');
+	    $this->set('debugMySQL', false);
+    	$this->layout = 'outside';
 	}
 	
     public function info() {
@@ -166,8 +180,8 @@ class InstallController extends Controller {
 					$db = ConnectionManager::getDataSource('default');
 					$tables = $db->listSources();
 					if (count($tables) > 0) {
-						Error::add('Database contains conflicting tables.', Error::TypeError);
-						$dbOk = false;
+						Error::add('Database contains conflicting tables.', Error::TypeWarning);
+						//$dbOk = false;
 					}
 					else {
 						Error::add('Database configuration works fine.');
@@ -185,7 +199,7 @@ class InstallController extends Controller {
 			}
 		}
 		$this->set('db', $db);
-		$this->set('dbFileNotWritable', Install::isFileWritable('Config/database.php'));
+		$this->set('dbFileNotWritable', !Install::isFileWritable('Config/database.php'));
 		
 		return $data;
 	}
@@ -195,16 +209,14 @@ class InstallController extends Controller {
 		App::uses('ConnectionManager', 'Model');
 		$db = ConnectionManager::getDataSource('default');
 		$tables = $db->listSources();
-		if (count($tables) == 0) {
-			$install = new DBInstall();
-			$ok = $install->install();
-			if ($ok) {
-				Error::add('Database has been installed correctly.');
-				$this->redirect(array('controller' => 'install', 'action' => 'success'));
-			}
-			else {
-				Error::add('There was a problem installing the database.', Error::TypeError);
-			}
+		$install = new DBInstall();
+		$ok = $install->install();
+		if ($ok) {
+			Error::add('Database has been installed correctly.');
+			Install::lockInstall();
+		}
+		else {
+			Error::add('There was a problem installing the database.', Error::TypeError);
 		}
 	}
 	

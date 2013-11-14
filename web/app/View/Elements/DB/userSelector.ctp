@@ -10,9 +10,17 @@
 	</thead>
 	<tbody>
 		<?php
+		$x = 0;
 		foreach ($usersList as $user) {
 			$idUser = $user['User']['id'];
 			$checked = isset($selectedUsers[$idUser]);
+			$ok = true;
+			if (isset($userOnly)) {
+				$r = $user['User']['role'];
+				if ($r == 'admin' || $r == 'owner') $ok = false;
+			}
+			if ($ok) {
+				$x++;
 		?>
 		<tr>
 			<td>
@@ -24,7 +32,15 @@
 			</td>
 		</tr>
 		<?php
+			}
 		}
-		?>
+	    if ($x == 0) {
+	    ?>
+		<tr>
+			<td colspan="3" height="60" valign="middle" align="center">
+				<p style="margin-top:15px;">No users were found. Create one <a href="<?= $this->Html->url(array("controller" => 'users', 'action' => 'edit', 'new')); ?>" title="">here</a> first.</p>
+			</td>
+		</tr>
+	    <?php } ?>
 	</tbody>
 </table>

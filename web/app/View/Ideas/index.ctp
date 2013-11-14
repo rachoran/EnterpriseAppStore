@@ -1,7 +1,7 @@
 <?php
 
 // Breadcrumbs
-$this->Html->addCrumb('Ideas', '/ideas');
+$this->Html->addCrumb('Ideas');
 
 
 ?><div class="widget">

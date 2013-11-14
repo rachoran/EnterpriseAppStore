@@ -8,7 +8,7 @@
 	</thead>
 	<tbody>
 	    <?php
-	    foreach ($apps as $item) {
+	    if (!empty($apps)) foreach ($apps as $item) {
 	    	$icon = Platforms::iconForPlatform($item['Application']['platform']);
 	    	$ext = Platforms::extensionForPlatform($item['Application']['platform']);
 	    ?>
@@ -65,6 +65,17 @@
 	    </tr>
 	    <?php
 	    }
+	    else {
+	    ?>
+		<tr>
+			<td colspan="3" height="120" valign="middle" align="center" class="empty-cell">
+				<p style="margin-top:45px;">No applications were found.</p>
+			</td>
+		</tr>
+	    <?php } ?>
+	</tbody>
+		<?php
+	    //}
 	    unset($items);
 	    ?>
 	</tbody>

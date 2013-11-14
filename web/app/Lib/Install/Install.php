@@ -6,6 +6,15 @@ class Install {
 	const DBConnectionFailed = 1;
 	const DBConnectionBadDb = 2;
 	
+	public static function isInstallLocked() {
+		return file_exists(APP.'Userfiles'.DS.'install.lock');
+	}
+	
+	public static function lockInstall() {
+		$file = new File(APP.'Userfiles'.DS.'install.lock', true, 0644);
+		return $file->write('sorry mate!');
+	}
+	
 	public static function isShellMethod($methodName) {
 		return (bool)@shell_exec('which '.$methodName);
 	}

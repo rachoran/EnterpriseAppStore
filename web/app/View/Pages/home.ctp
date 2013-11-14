@@ -8,7 +8,7 @@
 				<div class="widget-content-blue-inner padded">
 					<div class="pre-value-block"><i class="icon-dashboard"></i> Total Apps</div>
 					<div class="value-block">
-						<div class="value-self"><?= $menuCounts['applications']; ?></div>
+						<div class="value-self"><?= (int)$menuCounts['applications']; ?></div>
 						<div class="value-sub">Mobile, Desktop &amp; Web</div>
 					</div>
 					<!-- <span class="dynamicsparkline">Loading..</span> -->
@@ -53,6 +53,9 @@
 		</div>
 	</div>
 </div>
+<?php
+if ((int)$allDownloads > 0) {
+?>
 <div class="widget">
 	<h3 class="section-title"><i class="icon-bar-chart"></i> Downloads</h3>
 	<div class="widget-content-white">
@@ -83,6 +86,7 @@
 		</div>
 	</div>
 </div>
+<?php } ?>
 <div class="widget">
 	<h3 class="section-title bottom-margin"><i class="icon-bullseye"></i> Apps per platform</h3>
 	<div class="row bottom-margin per-platform-charts">
@@ -94,14 +98,14 @@
 			<input type="text" value="<?= $appsPerPlatform['Android']; ?>" data-max="<?= $menuCounts['applications']; ?>" class="knob" data-fgColor="#71c280" data-linecap="round" data-width="150" />
 			<p>Android</p>
 		</div>
-		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
+		<!--<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<input type="text" value="<?= $appsPerPlatform['Windows8']; ?>" data-max="<?= $menuCounts['applications']; ?>" class="knob" data-fgColor="#df6064" data-linecap="round" data-width="150" />
 			<p>Windows 8</p>
 		</div>
 		<div class="col-lg-3 hidden-md col-sm-6 text-center">
 			<input type="text" value="<?= $appsPerPlatform['WebClip']; ?>" data-max="<?= $menuCounts['applications']; ?>" class="knob" data-fgColor="#8963ac" data-linecap="round" data-width="150" />
 			<p>Web clips</p>
-		</div>
+		</div>-->
 	</div>
 </div>
 <!--<div class="row">

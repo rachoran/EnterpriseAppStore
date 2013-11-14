@@ -65,7 +65,7 @@ class CategoriesController extends AppController {
 		
 		// Selected applications
 		$arr = array();
-		foreach ($this->request->data['Application'] as $app) {
+		if (!empty($this->request->data['Application'])) foreach ($this->request->data['Application'] as $app) {
 			$arr[$app['id']] = 1;
 		}
 		$this->set('selectedApplications', $arr);

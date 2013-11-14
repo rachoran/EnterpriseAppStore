@@ -13,7 +13,12 @@ h2 {
 	margin-top: 3px;
 	padding-left: 15px;
 }
-
+td.empty-cell {
+	background-image: url(../images/start-here.png);
+	background-repeat: no-repeat;
+	background-position: right top;
+	background-size:200px 60px;
+}
 .rounded-border {
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;

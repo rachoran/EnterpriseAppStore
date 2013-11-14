@@ -8,7 +8,7 @@
 	</thead>
 	<tbody>
 	    <?php
-	    foreach ($usersList as $user) {
+	    if (!empty($usersList)) foreach ($usersList as $user) {
 	    	$user = $user['User'];
 	    ?>
 	    <tr class="clickable">
@@ -35,6 +35,15 @@
 	        	?>
 	        </td>
 	    </tr>
+	    <?php
+	    }
+	    else {
+	    ?>
+		<tr>
+			<td colspan="4" height="120" valign="middle" align="center" class="empty-cell">
+				<p style="margin-top:45px;">No users were found.</p>
+			</td>
+		</tr>
 	    <?php
 	    }
 	    unset($users);

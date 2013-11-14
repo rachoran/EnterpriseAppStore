@@ -51,7 +51,7 @@ function checkMenu($name, $t) {
 					<a href="<?= $this->Html->url('/users', true); ?>"> <span class="badge pull-right"><?= $menuCounts['users']; ?></span> <i class="icon-user"></i> Users </a>
 				</li>
 				<li<?= checkMenu('groups', $this); ?>>
-					<a href="<?= $this->Html->url('/groups', true); ?>"> <span class="badge pull-right"><?= ($menuCounts['groups'] + 1); ?></span> <i class="icon-group"></i> Groups </a>
+					<a href="<?= $this->Html->url('/groups', true); ?>"> <span class="badge pull-right"><?= ($menuCounts['groups'] + 0); ?></span> <i class="icon-group"></i> Groups </a>
 				</li>
 				<li<?= checkMenu('categories', $this); ?>>
 					<a href="<?= $this->Html->url('/categories', true); ?>"> <span class="badge pull-right"><?= $menuCounts['categories']; ?></span> <i class="icon-list-ul"></i> Categories </a>
