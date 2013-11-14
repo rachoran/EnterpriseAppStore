@@ -20,7 +20,6 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
  
-
 /**
  * Use the DS to separate the directories in other defines
  */
@@ -38,9 +37,12 @@ if (!defined('DS')) {
  * The full path to the directory which holds "app", WITHOUT a trailing DS.
  *
  */
-if (!defined('ROOT')) {
-	define('ROOT', dirname(dirname(dirname(__FILE__))));
+
+if (!is_writable(dirname(dirname(__FILE__)).DS.'tmp')) {
+	require(dirname(dirname(__FILE__)).DS.'Dummy'.DS.'tmpLocked.php');
+	exit();
 }
+
 
 /**
  * The actual directory name for the "app".
