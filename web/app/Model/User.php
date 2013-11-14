@@ -129,6 +129,10 @@ class User extends AppModel {
 		return $this->find('count');
 	}
 	
+	public function checkForDefaultUser() {
+		return (bool)$this->find('count', array('conditions' => array('User.username' => 'admin', 'User.password' => '3a37e68dd29ea23ff7fc9cf009da7bef9a13a5f4')));
+	}
+	
 	public function isUsername($username) {
 		return (bool)$this->find('count', array('conditions' => array('User.username' => $username)));
 	}

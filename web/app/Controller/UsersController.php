@@ -13,6 +13,12 @@ class UsersController extends AppController {
     	$this->layout = 'outside';
 	    if ($this->request->is('post')) {
 	        if ($this->Auth->login()) {
+	        	$user = $this->Session->read('Auth.User');
+	        	if (isset($user['role']) && ($user['role'] === 'owner' || $user['role'] === 'admin')) {
+	        		if ($this->User->checkForDefaultUser()) {
+		        		Error::add('<strong>Security!</strong> Please change the default user\'s (admin) password!', Error::TypeWarning);
+	        		}
+	        	}
 	        	Error::add('You have been logged in.', Error::TypeOk);
 	        	if (isset($this->request->data['User']['remember_me']) && $this->request->data['User']['remember_me'] == 1) {
 	                unset($this->request->data['User']['remember_me']);

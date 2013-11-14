@@ -29,5 +29,5 @@
 
 <p>
 	<a href="<?= $this->Html->url('/install/info', true); ?>" title="<?= __('Previous step'); ?>" class="btn btn-default"><?= __('Back'); ?></a>
-	<a href="<?= $data['result'] ? $this->Html->url('/install/databse', true) : '#'; ?>" title="<?= __('Next step'); ?>" class="btn btn-primary pull-right<?php if (!$data['result']) echo ' disabled'; ?>"><?= __('Next'); ?></a>
+	<a href="<?= $data['result'] ? $this->Html->url('/install/database', true) : '#'; ?>" title="<?= __('Next step'); ?>" class="btn btn-primary pull-right<?php if (!$data['result']) echo ' disabled'; ?>"><?= __('Next'); ?></a>
 </p>

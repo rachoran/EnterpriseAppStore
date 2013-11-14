@@ -1,13 +1,15 @@
 <?php
 
+App::uses('Controller', 'Controller');
+App::uses('Error', 'Lib/Errors');
 App::uses('Install', 'Lib/Install');
-App::uses('BDInstall', 'Lib/Install');
+App::uses('DBInstall', 'Lib/Install');
 
-class InstallController extends AppController {
+class InstallController extends Controller {
 	
 	public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('index', 'info', 'database', 'permissions', 'success');
+        //$this->Auth->allow('index', 'info', 'database', 'permissions', 'success');
     }
     
     protected function currentPage($no=null) {
@@ -34,12 +36,14 @@ class InstallController extends AppController {
 		    $data = $this->checkDatabase();
 	    }
 	    else if ($page == 4) {
-		    
+		    $this->installDB();
 	    }
 	    if (!empty($data) && !$data['result']) {
 	    	Error::add('Please fix all the issuer marked in red before you can continue.', Error::TypeWarning);
 	    }
 	    $this->set('data', $data);
+	    $this->set('siteName', 'Ridiculous Innovations - Enterprise AppStore');
+	    $this->set('debugMySQL', false);
 	    return true;
     }
 
@@ -66,6 +70,7 @@ class InstallController extends AppController {
     public function success() {
     	$this->checkPage(4);
 		$this->layout = 'outside';
+		Error::add('Login to the system with username <strong>admin</strong> and password <strong>password</strong>!');
 	}
 	
 	// Checks on page 1
@@ -134,9 +139,73 @@ class InstallController extends AppController {
 	// Checks on page 3
 	protected function checkDatabase() {
 		$data = array();
-		$data['result'] = false;
+		$data['result'] = true;
 		$data['tests'] = array();
+		
+		$dbOk = false;
+		if ($this->request->is('post')) {
+			$this->Session->write('Install.DBConfig', $this->request->data['db']);
+			if (isset($this->request->data['go']) && (int)$this->request->data['go'] == 1) {
+				$this->redirect(array('controller' => 'install', 'action' => 'success'));
+			}
+			else {
+				$connectionStatus = Install::isMySQLCool($this->request->data['db']);
+				$dbOk = ($connectionStatus == Install::DBConnectionOk);
+			
+				if (!$dbOk) {
+					if ($connectionStatus == Install::DBConnectionFailed) {
+						Error::add('Database connection credentials are not correct.', Error::TypeError);
+					}
+					else {
+						Error::add('Database name is not correct.', Error::TypeError);
+					}
+				}
+				else {
+					DBInstall::createDatabaseConfigurationFile($this->request->data['db']);
+					App::uses('ConnectionManager', 'Model');
+					$db = ConnectionManager::getDataSource('default');
+					$tables = $db->listSources();
+					if (count($tables) > 0) {
+						Error::add('Database contains conflicting tables.', Error::TypeError);
+						$dbOk = false;
+					}
+					else {
+						Error::add('Database configuration works fine.');
+					}
+				}
+			}
+		}
+		$this->set('dbOk', $dbOk);
+		$db = $this->Session->read('Install.DBConfig');
+		if (empty($db)) {
+			$db = Install::databaseConfiguration();
+			if (empty($db)) $db = array('login'=>'', 'password'=>'', 'host'=>'', 'database'=>'');
+			else {
+				Error::add('Database configuration file already existed so we have pre-filed the information for you.', Error::TypeInfo);
+			}
+		}
+		$this->set('db', $db);
+		$this->set('dbFileNotWritable', Install::isFileWritable('Config/database.php'));
+		
 		return $data;
+	}
+	
+	// Install db on page 4
+	protected function installDB() {
+		App::uses('ConnectionManager', 'Model');
+		$db = ConnectionManager::getDataSource('default');
+		$tables = $db->listSources();
+		if (count($tables) == 0) {
+			$install = new DBInstall();
+			$ok = $install->install();
+			if ($ok) {
+				Error::add('Database has been installed correctly.');
+				$this->redirect(array('controller' => 'install', 'action' => 'success'));
+			}
+			else {
+				Error::add('There was a problem installing the database.', Error::TypeError);
+			}
+		}
 	}
 	
 }
