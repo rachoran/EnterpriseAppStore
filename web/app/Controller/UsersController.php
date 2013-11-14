@@ -122,6 +122,8 @@ class UsersController extends AppController {
 		}
 		else $id = (int)$id;
 		
+		$this->set('userId', $this->Auth->User('id'));
+		
 		// Groups for the join subset
 		$list = $this->User->Group->find('list');
 		$this->set('groups', $list);

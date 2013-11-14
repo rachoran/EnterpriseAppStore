@@ -14,23 +14,25 @@ $this->Html->addCrumb($group['Group']['name'], null);
 		    </ul>
 		    <div class="tab-content bottom-margin">
 				<div class="tab-pane active" id="tab_group_users">
-					<p>&nbsp;</p>
-					<!-- Begin user selector -->
-					<?= $this->element('DB/userTable'); ?>
-					<!-- End user selector -->
+					<div class="padded">
+						<!-- Begin user selector -->
+						<?= $this->element('DB/userTable'); ?>
+						<!-- End user selector -->
+					</div>
 				</div>
 				<div class="tab-pane" id="tab_group_applications">
-					<p>&nbsp;</p>
-					<p>
-						<ul id="appTablePills" class="nav nav-pills" style="margin-left:12px;">
-							<!-- Begin pill selector -->
-							<?= $this->element('DB/platformPillSelector', array('data' => $group['Application'])); ?>
-							<!-- End pill selector -->
-						</ul>
-					</p>
-					<!-- Begin pill selector -->
-					<?= $this->element('DB/applicationTable'); ?>
-					<!-- End pill selector -->
+					<div class="padded">
+						<p>
+							<ul id="appTablePills" class="nav nav-pills" style="margin-left:12px;">
+								<!-- Begin pill selector -->
+								<?= $this->element('DB/platformPillSelector', array('data' => $group['Application'])); ?>
+								<!-- End pill selector -->
+							</ul>
+						</p>
+						<!-- Begin pill selector -->
+						<?= $this->element('DB/applicationTable'); ?>
+						<!-- End pill selector -->
+					</div>
 				</div>
 		    </div>
 		</div>
