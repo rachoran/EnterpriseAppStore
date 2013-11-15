@@ -218,8 +218,10 @@ class ApplicationsController extends AppController {
 			if ($extract) {
 				if ($extract->process()) {
 					$app = $this->Application->saveApp(array('Application'=>$extract->data), $extract->data, $extract->app, $extract->icon);
-					$extract->data['id'] = $app->id;
-					$this->History->saveHistory($app->id, 'UPL');
+					$extract->data['id'] = (int)$this->Application->getLastInsertId();
+					if ((bool)$extract->data['id']) {
+						$this->History->saveHistory($extract->data['id'], 'UPL');
+					}
 					//debug($extract->data);
 					$extract->clean();
 				}

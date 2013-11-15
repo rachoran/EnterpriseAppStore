@@ -4,6 +4,7 @@ $('#binaryUpload').fileupload({
     url: env.baseUrl + 'applications/uploadApp',
     dataType: 'json',
     done: function (e, data) {
+    	alert(':)');
 		if (data.result.data) {
 			didUploadAppBinary = true;
 	    	
@@ -15,10 +16,13 @@ $('#binaryUpload').fileupload({
 	    	$('#tab_application_basic .disabled:not(.beforeUpload)').prop('readonly', true);
 			$('#tab_application_basic .disabled.beforeUpload').prop('readonly', false);
 			$('#mainAppForm button.disabled').prop('disabled', false);
-			$('#binaryUploadWrapper, #applicationTypeWrapper').hide();
+			$('#binaryUploadWrapper, #applicationTypeWrapper').delay(1000).hide('fast');
 			$('.nav.nav-tabs li, button.disabled').removeClass('disabled');
+			
+			$('#binaryUploadProgress .progress-bar').css('width', '100%');
 		}
 		else {
+			alert(JSON.stringify(e));
 			if (data.result.errors.length > 0) {
 				var message = '';
 				for (i = 0; i < data.result.errors.length; i++) {
@@ -31,6 +35,7 @@ $('#binaryUpload').fileupload({
     },
     progressall: function (e, data) {
         var progress = parseInt(data.loaded / data.total * 100, 10);
+        progress *= 0.80;
         $('#binaryUploadProgress .progress-bar').css('width', progress + '%');
     }
 }).error(function (jqXHR, textStatus, errorThrown) {

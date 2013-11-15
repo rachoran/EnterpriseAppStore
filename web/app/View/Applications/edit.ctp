@@ -43,9 +43,12 @@ if (!isset($appType)) {
 					<div class="col-md-8">
 						<select name="data[Application][type]" id="appTypeSwitch" class="form-control">
 							<option value="0"<?php if ($appType == 0) echo ' selected="selected"'; ?>>Native mobile app (.ipa or .apk)</option>
+							<!--
+							TODO: Enable iTunes, Play links, Mobile Web apps and iOS Web Clips
 							<option value="1"<?php if ($appType == 1) echo ' selected="selected"'; ?>>iTunes or Google Play link</option>
 							<option value="2"<?php if ($appType == 2) echo ' selected="selected"'; ?>>Mobile Web</option>
-							<!-- <option value="3">iOS Web Clip</option> -->
+							<option value="3">iOS Web Clip</option>
+							-->
 						</select>
 					</div>
 				</div>
@@ -140,13 +143,13 @@ if (!isset($appType)) {
 				<div class="form-group">
 					<label class="col-md-4 control-label">Short description</label>
 					<div class="col-md-8">
-						<textarea type="text" name="formData[description]" class="form-control description" placeholder="App description"><?= verVal('description', $config); ?></textarea>
+						<textarea type="text" name="formData[description]" class="form-control description" placeholder="Short description / perex"><?= verVal('description', $config); ?></textarea>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Full description</label>
 					<div class="col-md-8">
-						<textarea type="text" name="formData[fullDescription]" class="form-control description large" placeholder="App description"><?= verVal('fullDescription', $config); ?></textarea>
+						<textarea type="text" name="formData[fullDescription]" class="form-control description large" placeholder="Full app description"><?= verVal('fullDescription', $config); ?></textarea>
 					</div>
 				</div>
 				<div class="form-group">

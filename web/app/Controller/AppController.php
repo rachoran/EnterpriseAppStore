@@ -50,6 +50,9 @@ class AppController extends Controller {
 	);
 	
 	public function beforeFilter() {
+		// Disabe User Agent checks to avoid logout of ajax requests
+		Configure::write('Session.checkAgent', false);
+		
 		// Installation check
 		if (!Install::isInstallLocked()) {
 			$this->redirect('/install');

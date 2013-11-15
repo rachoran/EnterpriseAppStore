@@ -101,11 +101,11 @@ if ((int)$allDownloads > 0) {
 		<!--<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<input type="text" value="<?= $appsPerPlatform['Windows8']; ?>" data-max="<?= $menuCounts['applications']; ?>" class="knob" data-fgColor="#df6064" data-linecap="round" data-width="150" />
 			<p>Windows 8</p>
-		</div>
+		</div>-->
 		<div class="col-lg-3 hidden-md col-sm-6 text-center">
 			<input type="text" value="<?= $appsPerPlatform['WebClip']; ?>" data-max="<?= $menuCounts['applications']; ?>" class="knob" data-fgColor="#8963ac" data-linecap="round" data-width="150" />
 			<p>Web clips</p>
-		</div>-->
+		</div>
 	</div>
 </div>
 <!--<div class="row">
