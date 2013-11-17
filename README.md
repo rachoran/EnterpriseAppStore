@@ -37,7 +37,7 @@ Apart from that there is a few things you will have to do additionally.
 * If you plan to upload Android apps, you will need to install Java on the server
 * Uploading iOS apps requires a python script
 * Create your MySQL database
-* Import database files
+* Try to go to the web url and go through the installation process (or Import database files)
 * Change database configuration in /web/app/Config/database.php
 * Change your Salt and cipherSeed codes in /web/app/Config/core.php (Please mind that changing these on a production server will fuck up your S3 folder structure as the system is using hash of these two values to generate base folders)
 * Set writable permissions for Apache to the following folders
