@@ -1,12 +1,12 @@
 Enterprise App Store
 ==================
 
-To host iOS, Android and Windows 8 apps. (at the moment the store support .ipa only, .apk support will come in a couple of days!)
+To host iOS, Android and Windows 8 apps. Please remember, this is a development version only!!!!!!
 
 From Ridiculous Innovations
 ---
 
-At the moment the databse is not cleaned, there is no authentication so if used (which is not really recommneded yet), needs http basic auth!
+At the moment the databse is not cleaned and the authentication, at least user roles, are far from bulletproof.
 We are working on the system every day so hopefully we'll have a stable version before the December 2013.
 
 License
@@ -22,6 +22,10 @@ System is based on CakePHP 2.0 framework so please refer to the installation gui
 
 
 Apart from that there is a few things you will have to do additionally.
+
+* If you plan to upload Android apps, you will need to install Java on the server
+* Uploading iOS apps requires a python script
+
 * Create your MySQL database
 * Import database files
 * Change database configuration in /web/app/Config/database.php
