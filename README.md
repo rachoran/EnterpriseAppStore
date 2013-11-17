@@ -9,8 +9,13 @@ From Ridiculous Innovations
 At the moment the databse is not cleaned and the authentication, at least user roles, are far from bulletproof.
 We are working on the system every day so hopefully we'll have a stable version before the December 2013.
 
+Home page:
 <img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen1.jpg" alt="Home page" />
+
+Applications list:
 <img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen2.jpg" alt="Applications page" />
+
+Settings page:
 <img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen3.jpg" alt="Settings page" />
 
 
