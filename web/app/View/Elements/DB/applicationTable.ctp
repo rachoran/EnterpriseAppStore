@@ -58,9 +58,15 @@
 	        	<a href="<?= $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $item['Application']['id'], TextHelper::safeText($item['Application']['name']))); ?>">
 	        		<i class="fa icon-edit"><span> Edit latest</span></i>
 	        	</a>
+	        	<?php
+	        	if (Me::minAdmin()) {
+	        	?>
 	        	<br /><a href="<?= $this->Html->url(array("controller" => 'applications', 'action' => 'deleteAll', $item['Application']['id'], TextHelper::safeText($item['Application']['name']))); ?>" onclick="return env.confirmation('Are you sure you want to delete all builds for <?= $item['Application']['name']; ?>?');">
 	        		<i class="fa icon-ban-circle"><span> Delete all</span></i>
 	        	</a>
+	        	<?php
+	        	}
+	        	?>
 	        </td>
 	    </tr>
 	    <?php
