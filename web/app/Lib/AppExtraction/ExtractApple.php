@@ -162,6 +162,7 @@ class ExtractApple extends Extract {
 		$output = shell_exec('python ./normalize');
 		chdir($origPath);
 		
+		// Serching for the biggest icon
 		$largestIcon = array();
 		foreach ($iconPaths as $icon) {
 			$size = getimagesize($icon);
@@ -176,10 +177,14 @@ class ExtractApple extends Extract {
 		// Processing values
 		$this->data = $arr;
 		$this->app = $archiveFile;
+		
+		// Processing biggest icon
 		if (isset($largestIcon['file'])) {
-			copy($largestIcon['file'], $tempPath.'icon');
+			if (copy($largestIcon['file'], $tempPath.'icon')) {
+				$this->icon = $tempPath.'icon';
+			}
+			
 		}
-		$this->icon = $tempPath.'icon';
 		
 		return true;
 	}

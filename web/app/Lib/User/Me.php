@@ -1,21 +1,33 @@
 <?php
 
-App::uses('SessionComponent', 'Controller/Component');
+App::uses('AuthComponent', 'Controller/Component');
+
 
 class Me {
 	
-	private static $instance;
+	protected static $componentCollection;
+	protected static $auth;
 	
-	private function __construct() {
-		
+	protected static function checkcomponentCollection() {
+		if (!self::$componentCollection || !self::$auth) {
+			self::$componentCollection = new ComponentCollection();
+			self::$auth = new AuthComponent(self::$componentCollection);
+		}
 	}
 	
 	public static function all() {
-		return $this->Session->read('Auth.User');
+		self::checkcomponentCollection();
+		return self::$auth->user();
+	}
+			
+	public static function id() {
+		self::checkcomponentCollection();
+		return self::$auth->user('id');
 	}
 			
 	public static function get($variable='id') {
-		return $this->Session->read('Auth.User.'.$variable);
+		self::checkcomponentCollection();
+		return self::$auth->user($variable);
 	}
 			
 }

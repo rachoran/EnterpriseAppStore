@@ -170,7 +170,7 @@ class ApplicationsController extends AppController {
 		$extract = null;
 		$errors = null;
 		
-		$debug = false; // 'i' for iPhone & 'a' for Android or false to disable
+		$debug = 'a2'; // 'i' for iPhone & 'a' for Android or false to disable
 		
 		if ($debug) {
 			if ($debug == 'i') {
@@ -194,6 +194,22 @@ class ApplicationsController extends AppController {
 				$file['type'] = 'application/octet-stream';
 				$file['tmp_name'] = 'debug';
 				$file['path'] = APP.DS.'Dummy'.DS.'Garden.ipa';
+				$file['size'] = 1234124;
+				$file['error'] = null;
+			}
+			elseif ($debug == 'a') {
+				$file['name'] = '60.apk';
+				$file['type'] = 'application/octet-stream';
+				$file['tmp_name'] = 'debug';
+				$file['path'] = APP.DS.'Dummy'.DS.'60.apk';
+				$file['size'] = 1234124;
+				$file['error'] = null;
+			}
+			elseif ($debug == 'a2') {
+				$file['name'] = 'RemoveYa-debug.apk';
+				$file['type'] = 'application/octet-stream';
+				$file['tmp_name'] = 'debug';
+				$file['path'] = APP.DS.'Dummy'.DS.'RemoveYa-debug.apk';
 				$file['size'] = 1234124;
 				$file['error'] = null;
 			}

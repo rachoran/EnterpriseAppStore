@@ -1,5 +1,8 @@
 <?php
 
+App::uses('Me', 'Lib/User');
+
+
 abstract class Extract {
 
 	protected $file = null;
@@ -22,8 +25,8 @@ abstract class Extract {
     }
     
     protected function tempPath() {
-    	// TODO: Use user ID instead
-    	$path = TMP.'1'.DS;
+    	$userId = (int)Me::id();
+    	$path = TMP.$userId.DS;
     	$dir = new Folder();
 		$dir->create($path);
 	    return $path;
