@@ -3,9 +3,59 @@
 App::uses('Platforms', 'Lib/Platform');
 App::uses('ApplicationsDataHelper', 'Lib/Data/Helpers');
 
+
 class ApplicationsController extends AppController {
 	
 	var $uses = array('Application', 'Category', 'Group', 'Attachment', 'History');
+	
+	public function iOSInstall($id) {
+		
+	}
+	
+	public function download($id) {
+		$app = $this->Application->getOne($id);
+		debug(Me::role());
+		die();
+		if ($app['Application']['id']) {
+			// TODO: Enable S3 support
+			$ext = ($app['Application']['platform'] <= 2) ? 'ipa' : 'apk';
+			$path = 'Userfiles'.DS.'Applications'.DS.$app['Application']['id'].DS.'app.'.$ext;
+			$options = array('download' => true);
+			$options['name'] = TextHelper::safeText($app['Application']['name']).'.'.$ext;
+			if ($app['Application']['platform'] <= 2) {
+				$this->response->type(array('ipa' => 'application/octet-stream'));
+			}
+			else {
+		    	$this->response->type(array('apk' => 'application/vnd.android.package-archive'));
+		    }
+		    
+		    $this->response->file($path, $options);
+		    return $this->response;
+		}
+		else {
+			return $this->redirect(array('action' => 'index'));
+		}
+	}
+
+	public function delete($id) {
+		if ($this->Application->deleteApp($id)) {
+			Error::add('Application has been deleted.', Error::TypeOk);
+		}
+		else {
+			Error::add('Application can not be deleted.', Error::TypeError);
+		}
+		return $this->redirect(array('action' => 'index'));
+	}
+	
+	public function deleteAll($id) {
+		if ($this->Application->deleteAllApps($id)) {
+			Error::add('All applications have been deleted.', Error::TypeOk);
+		}
+		else {
+			Error::add('Application can not be deleted.', Error::TypeError);
+		}
+		return $this->redirect(array('action' => 'index'));
+	}
 	
 	public function index() {
 		$this->setPageIcon('puzzle-piece');
@@ -192,7 +242,7 @@ class ApplicationsController extends AppController {
 		$extract = null;
 		$errors = null;
 		
-		$debug = 'a'; // 'i' for iPhone & 'a' for Android or false to disable
+		$debug = false; // 'i' for iPhone & 'a' for Android or false to disable
 		
 		if ($debug) {
 			if ($debug == 'i') {
@@ -248,7 +298,6 @@ class ApplicationsController extends AppController {
 					
 				}
 				else {
-					die($extract);
 					$extract = null;
 					// TODO: Error message goes here!
 				}

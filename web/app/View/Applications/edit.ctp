@@ -306,6 +306,8 @@ if (!isset($appType)) {
 						?>
 					</div>
 				</div>
+				<!--
+				TODO: Enable following features
 				<div class="form-group">
 					<label class="col-md-4 control-label">Application is enabled</label>
 					<div class="col-md-1">
@@ -350,6 +352,7 @@ if (!isset($appType)) {
 						<button type="submit" name="apply" class="btn btn-primary pull-right disabled">Apply</button>
 					</div>
 				</div>
+				-->
 			</div>
 		</div>
     </div>

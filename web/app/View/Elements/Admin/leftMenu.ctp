@@ -47,12 +47,18 @@ function checkMenu($name, $t) {
 					</ul>
 					-->
 				</li>
+				<?php
+				if (Me::minAdmin()) {
+				?>
 				<li<?= checkMenu('users', $this); ?>>
 					<a href="<?= $this->Html->url('/users', true); ?>"> <span class="badge pull-right"><?= $menuCounts['users']; ?></span> <i class="icon-user"></i> Users </a>
 				</li>
 				<li<?= checkMenu('groups', $this); ?>>
 					<a href="<?= $this->Html->url('/groups', true); ?>"> <span class="badge pull-right"><?= ($menuCounts['groups'] + 0); ?></span> <i class="icon-group"></i> Groups </a>
 				</li>
+				<?php
+				}
+				?>
 				<li<?= checkMenu('categories', $this); ?>>
 					<a href="<?= $this->Html->url('/categories', true); ?>"> <span class="badge pull-right"><?= $menuCounts['categories']; ?></span> <i class="icon-list-ul"></i> Categories </a>
 				</li>
@@ -77,9 +83,15 @@ function checkMenu($name, $t) {
 					</ul>
 				</li>
 				-->
+				<?php
+				if (Me::minAdmin()) {
+				?>
 				<li<?= checkMenu('settings', $this); ?>>
 					<a href="<?= $this->Html->url('/settings', true); ?>"> <i class="icon-cogs"></i> Settings </a>
 				</li>
+				<?php
+				}
+				?>
 				<!--
 				TODO: Create analytics
 				<li<?= checkMenu('analytics', $this); ?>>

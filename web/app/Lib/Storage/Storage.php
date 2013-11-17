@@ -9,6 +9,8 @@ For S3 usage please refer to:
 
 App::uses('Settings', 'Model');
 App::import('Vendor/S3', 'S3');
+App::uses('Me', 'Lib/User');
+
 
 // TODO: Add ftp support
 define('STORAGE_LOCAL', 0);
@@ -22,6 +24,10 @@ class Storage {
 		$s3Enabled = $s->get('s3Enable');
 		return $s3Enabled ? STORAGE_S3 : STORAGE_LOCAL;
 	}
+	
+	private static function folder() {
+		return md5(Configure::read('Security.salt').Configure::read('Security.cipherSeed'));
+	}
 		
 	public static function isIconForAppWithId($id, $location) {
 		if ($location == STORAGE_LOCAL) {
@@ -30,7 +36,7 @@ class Storage {
 		}
 		else {
 			// TODO: Finish
-			$path = md5(Configure::read('Security.salt').Configure::read('Security.cipherSeed')).DS.'Applications'.DS.$id.DS.'icon';
+			$path = self::folder().DS.'Applications'.DS.$id.DS.'icon';
 			$s = new Settings();
 			S3::setAuth($s->get('s3AccessKey'), $s->get('s3SecretKey'));
 		}
@@ -45,7 +51,7 @@ class Storage {
 			return $path;
 		}
 		else {
-			$path = md5(Configure::read('Security.salt').Configure::read('Security.cipherSeed')).DS.'Applications'.DS.$id.DS.'icon';
+			$path = self::folder().DS.'Applications'.DS.$id.DS.'icon';
 			$s = new Settings();
 			return 'http://'.$s->get('s3Bucket').'.s3.amazonaws.com/'.$path;
 		}
@@ -69,7 +75,7 @@ class Storage {
 		else {
 			$s = new Settings();
 			S3::setAuth($s->get('s3AccessKey'), $s->get('s3SecretKey'));
-			$ok = S3::putObject(S3::inputFile($file, false), $s->get('s3Bucket'), md5(Configure::read('Security.salt').Configure::read('Security.cipherSeed')).DS.$section.DS.pathinfo($file, PATHINFO_BASENAME), ($protected ? S3::ACL_PRIVATE : S3::ACL_PUBLIC_READ));
+			$ok = S3::putObject(S3::inputFile($file, false), $s->get('s3Bucket'), self::folder().DS.$section.DS.pathinfo($file, PATHINFO_BASENAME), ($protected ? S3::ACL_PRIVATE : S3::ACL_PUBLIC_READ));
 		}
 		return $ok;
 	}
@@ -78,17 +84,23 @@ class Storage {
 		// TODO: Finish
 		if (Storage::usedStorage() == STORAGE_LOCAL) {
 			if ($protected) {
-				$path = APP.'Userfiles'.DS.$section.DS;
+				$path = APP.'Userfiles'.DS.$section.DS.$file;
 			}
 			else {
-				$path = WWW_ROOT.'Userfiles'.DS.$section.DS;
+				$path = WWW_ROOT.'Userfiles'.DS.$section.DS.$file;
 			}
-			$file = new File($path);
-			$file->delete();
+			if (is_dir($path)) {
+				$dir = new Folder($path);
+				$dir->delete();
+			}
+			else {
+				$file = new File($path);
+				$file->delete();
+			}
 		}
 		else {
 			S3::setAuth($s->get('s3AccessKey'), $s->get('s3SecretKey'));
-			$file = md5(Configure::read('Security.salt').Configure::read('Security.cipherSeed')).DS.$section.DS.$file;
+			$file = self::folder().DS.$section.DS.$file;
 			S3::deleteObject($s->get('s3Bucket'), $file);
 		}
 	}

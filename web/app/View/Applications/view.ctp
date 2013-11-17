@@ -32,23 +32,33 @@ $this->Html->addCrumb($data['Application']['name'], null);
 											?>
 											<i class="icon-<?= $icon; ?>" style="margin-left:12px; margin-right:24px;"></i>
 											<?= $data['Application']['name']; ?>
-											<?php
-											$iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
-											$iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
-											$iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
-											$Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
-											$webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
-											
-											if ($iPod || $iPhone || $iPad) {
-											    echo $this->Html->link(__('Install').' '.$ext, array('controller' => 'users', 'action' => 'view', $data['Application']['id']), array('class'=>'btn btn-default pull-right'));
-											}
-											elseif ($Android) {
-											    echo $this->Html->link(__('Install').' '.$ext, array('controller' => 'users', 'action' => 'view', $data['Application']['id']), array('class'=>'btn btn-default pull-right'));
-											}
-											?>
+											<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'delete', $data['Application']['id'], TextHelper::safeText($data['Application']['name']))); ?>" onclick="return env.confirmation('Are you sure you want to delete all builds for <?= $data['Application']['name']; ?>?');" class="btn btn-default pull-right" style="margin-right:6px;">
+								        		<i class="fa icon-ban-circle"><span> Delete</span></i>
+								        	</a>
 											<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $data['Application']['id'], TextHelper::safeText($data['Application']['name']))); ?>" class="btn btn-default pull-right" style="margin-right:6px;">
 								        		<i class="fa icon-edit"><span> Edit</span></i>
 								        	</a>
+											<?php
+											$iPod = stripos($_SERVER['HTTP_USER_AGENT'], "iPod");
+											$iPhone = stripos($_SERVER['HTTP_USER_AGENT'], "iPhone");
+											$iPad = stripos($_SERVER['HTTP_USER_AGENT'], "iPad");
+											$Android = stripos($_SERVER['HTTP_USER_AGENT'], "Android");
+											$webOS = stripos($_SERVER['HTTP_USER_AGENT'], "webOS");
+											
+											if ($iPod || $iPhone || $iPad) {
+											    echo $this->Html->link(__('Install').' '.$ext, array('controller' => 'users', 'action' => 'iOSInstall', $data['Application']['id']), array('class'=>'btn btn-default pull-right'));
+											}
+											elseif ($Android) {
+											    echo $this->Html->link(__('Install').' '.$ext, array('controller' => 'users', 'action' => 'download', $data['Application']['id']), array('class'=>'btn btn-default pull-right'));
+											}
+											else {
+												?>
+											<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'download', $data['Application']['id'], TextHelper::safeText($data['Application']['name']))); ?>" class="btn btn-default pull-right" style="margin-right:6px;">
+								        		<i class="fa icon-mobile-phone"><span> Download</span></i>
+								        	</a>
+												<?php
+											}
+											?>											
 										</h1>
 									</td>
 								</tr>

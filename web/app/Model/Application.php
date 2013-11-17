@@ -2,6 +2,7 @@
 
 App::uses('Storage', 'Lib/Storage');
 
+
 class Application extends AppModel {
 	
 	public $hasAndBelongsToMany = array(
@@ -53,6 +54,38 @@ class Application extends AppModel {
         return $data;
 	}
 	
+    public function deleteApp($id) {
+    	$id = (int)$id;
+    	$ok = false;
+    	$app = $this->getOne($id);
+    	if (isset($app['Application']['id'])) {
+			$ok = $this->delete($id);
+			if ($ok && ($app['Application']['platform'] <= 5)) {
+				Storage::deleteFile('', 'Applications'.DS.$id, true);
+				Storage::deleteFile('', 'Applications'.DS.$id, false);
+			}
+		}
+        return $ok;
+	}
+	
+	public function deleteAllApps($id) {
+    	$id = (int)$id;
+    	$app = $this->getOne($id);
+    	$ok = false;
+    	$app = $this->getOne($id);
+    	if (isset($app['Application']['id'])) {
+	    	$arr = $this->getAllHistoryForApp($app['Application']['identifier'], $app['Application']['platform']);
+	    	$ok = true;
+	    	foreach ($arr as $app) {
+		    	if (!$this->deleteApp($app['Application']['id'])) {
+			    	$ok = false;
+		    	}
+	    	}
+	    	
+	    }
+		return $ok;
+	}
+	
 	public function basicOptions() {
 		$options = array();
 		// TODO: Optimize
@@ -84,7 +117,6 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 	
 	public function getAllHistoryForApp($identifier, $platform) {
 		$options = array();
-		
 		$options['order'] = array('Application.created' => 'DESC');
 		$options['conditions'] = array('Application.identifier' => $identifier, 'Application.platform' => (int)$platform);
 		$data =  $this->find('all', $options);
@@ -221,7 +253,7 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 		}
 		
 		// TODO: Use proper user Id
-		$tempFolderPath = TMP.'1'.DS;
+		$tempFolderPath = TMP.Me::id().DS;
 		$dir = new Folder();
 		$dir->create($tempFolderPath);
 		

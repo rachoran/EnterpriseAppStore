@@ -116,8 +116,7 @@ $changePassword = ($id) ? 'Change ' : '';
 				</div>
 			</div>
 			<?php
-			// TODO: If this user is current user, they should not be able to edit
-			if ($user['role'] != 'owner' && $user['id'] != $userId) {
+			if (Me::minAdmin()) {
 			?>
 			<div class="form-group">
 				<label class="col-md-4 control-label">Role</label>

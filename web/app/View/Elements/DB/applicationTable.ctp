@@ -21,20 +21,20 @@
 	        <td class="name">
 	        	<?php
 	        	//Detect special conditions devices
-				$iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
-				$iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
-				$iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
-				$Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
-				$webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
-				
+				$iPod = stripos($_SERVER['HTTP_USER_AGENT'], "iPod");
+				$iPhone = stripos($_SERVER['HTTP_USER_AGENT'], "iPhone");
+				$iPad = stripos($_SERVER['HTTP_USER_AGENT'], "iPad");
+				$Android = stripos($_SERVER['HTTP_USER_AGENT'], "Android");
+				$webOS = stripos($_SERVER['HTTP_USER_AGENT'], "webOS");
+											
 				if ($iPod || $iPhone || $iPad) {
-				    echo $this->Html->link(__('Install latest'), array('controller' => 'users', 'action' => 'view', $item[0]['id']), array('class'=>'btn btn-default pull-right'));
+				    echo $this->Html->link(__('Install latest'), array('controller' => 'applications', 'action' => 'iOSInstall', $item[0]['id'], TextHelper::safeText($item['Application']['name'])), array('class'=>'btn btn-default pull-right'));
 				}
 				elseif ($Android) {
-				    echo $this->Html->link(__('Install latest'), array('controller' => 'users', 'action' => 'view', $item[0]['id']), array('class'=>'btn btn-default pull-right'));
+				    echo $this->Html->link(__('Install latest'), array('controller' => 'applications', 'action' => 'download', $item[0]['id'], TextHelper::safeText($item['Application']['name'])), array('class'=>'btn btn-default pull-right'));
 				}
 				else {
-					echo $this->Html->link(__('Download latest'), array('controller' => 'users', 'action' => 'view', $item[0]['id']), array('class'=>'btn btn-default pull-right'));
+					echo $this->Html->link(__('Download latest'), array('controller' => 'applications', 'action' => 'download', $item[0]['id'], TextHelper::safeText($item['Application']['name'])), array('class'=>'btn btn-default pull-right'));
 				}
 	        	?>
 	            <i class="icon-<?= $icon ?>" style="margin-right: 6px;"></i>
@@ -58,7 +58,7 @@
 	        	<a href="<?= $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $item['Application']['id'], TextHelper::safeText($item['Application']['name']))); ?>">
 	        		<i class="fa icon-edit"><span> Edit latest</span></i>
 	        	</a>
-	        	<br /><a href="<?= $this->Html->url(array("controller" => 'applications', 'action' => 'delete', $item['Application']['id'], TextHelper::safeText($item['Application']['name']))); ?>" onclick="return env.confirmation('Are you sure you want to delete all builds for <?= $item['Application']['name']; ?>?');">
+	        	<br /><a href="<?= $this->Html->url(array("controller" => 'applications', 'action' => 'deleteAll', $item['Application']['id'], TextHelper::safeText($item['Application']['name']))); ?>" onclick="return env.confirmation('Are you sure you want to delete all builds for <?= $item['Application']['name']; ?>?');">
 	        		<i class="fa icon-ban-circle"><span> Delete all</span></i>
 	        	</a>
 	        </td>

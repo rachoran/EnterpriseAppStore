@@ -4,8 +4,7 @@ $('#binaryUpload').fileupload({
     url: env.baseUrl + 'applications/uploadApp',
     dataType: 'json',
     done: function (e, data) {
-    	alert(':)');
-		if (data.result.data) {
+    	if (data.result.data && data.result.data.id) {
 			didUploadAppBinary = true;
 	    	
 	    	$('#appName').val(data.result.data.name);
@@ -20,6 +19,8 @@ $('#binaryUpload').fileupload({
 			$('.nav.nav-tabs li, button.disabled').removeClass('disabled');
 			
 			$('#binaryUploadProgress .progress-bar').css('width', '100%');
+			
+			window.location.replace(env.baseUrl + 'applications/edit/' + data.result.data.id + '/');
 		}
 		else {
 			alert(JSON.stringify(e));
