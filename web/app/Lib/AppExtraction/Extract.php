@@ -5,7 +5,7 @@ App::uses('Me', 'Lib/User');
 
 abstract class Extract {
 
-	protected $file = null;
+	public $file = null;
 	public $data = null;
 	public $icon = null;
 	public $app = null;
@@ -28,7 +28,8 @@ abstract class Extract {
     	$userId = (int)Me::id();
     	$path = TMP.$userId.DS;
     	$dir = new Folder();
-		$dir->create($path);
+		$dir->delete($path);
+    	$dir->create($path);
 	    return $path;
     }
     

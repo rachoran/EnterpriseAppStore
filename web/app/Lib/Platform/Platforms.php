@@ -35,7 +35,7 @@ class Platforms {
 				return __('iOS Universal App');
 				break;
 			case 3:
-				return __('Android Phone');
+				return __('Android');
 				break;
 			case 4:
 				return __('Android Tablet');

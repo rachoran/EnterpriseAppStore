@@ -11,7 +11,28 @@ class ApplicationsDataHelper {
 			$basicInfo[__('Last modified')] = date('M. jS Y, H:i', strtotime($app['Application']['modified']));
 		}
 		$basicInfo[__('Platform')] = Platforms::platformToString($app['Application']['platform']);
-		if ($app['Application']['size'] > 2) $basicInfo[__('Filesize')] = $app['Application']['size'];
+		
+		App::uses('CakeNumber', 'Utility');
+		if ($app['Application']['size'] > 2) $basicInfo[__('Filesize')] = CakeNumber::toReadableSize($app['Application']['size']);
+		return $basicInfo;
+	}
+	
+	public static function prepareBasicInfoForAndroid($data, $platform, $basicInfo) {
+		if (isset($data['version-code'])) {
+			$basicInfo[__('Version code')] = $data['version-code'];
+		}
+		if (isset($data['install-location'])) {
+			$basicInfo[__('Install location')] = $data['install-location'];
+		}
+		if (isset($data['min-sdk-version'])) {
+			$basicInfo[__('Min SDK version')] = $data['min-sdk-version'];
+		}
+		if (isset($data['target-sdk-version'])) {
+			$basicInfo[__('Target SDK version')] = $data['target-sdk-version'];
+		}
+		if (isset($data['large-heap'])) {
+			$basicInfo[__('Large heap')] = $data['large-heap'] ? 'Yes' : 'No';
+		}		
 		return $basicInfo;
 	}
 	

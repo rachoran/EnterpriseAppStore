@@ -41,11 +41,12 @@ class ApplicationsController extends AppController {
 		
 		// Parsing system files
 		$platform = $app['Application']['platform'];
+		
+		App::uses('InfoPlistTemplateParser', 'Lib/Parsing');
+		$data = json_decode($app['Application']['config'], true);
 		if ($platform <= Platforms::iOSUniversal) {
 			// iOS
-			App::uses('InfoPlistTemplateParser', 'Lib/Parsing');
 			$parser = new InfoPlistTemplateParser();
-			$data = json_decode($app['Application']['config'], true);
 			$parsed = $parser->processArray($data['plist']);
 			$this->set('appSystemInfo', $parsed);
 			
@@ -53,6 +54,27 @@ class ApplicationsController extends AppController {
 		}
 		else {
 			// Android
+			$basicInfo = ApplicationsDataHelper::prepareBasicInfoForAndroid($data, $platform, $basicInfo);
+			
+			$parsed = array();
+			if (isset($data['screen-sizes'])) {
+				if (isset($data['screen-sizes']['resizeable'])) {
+					$parsed['Resizeable'] = $data['screen-sizes']['resizeable'] ? 'Yes' : 'No';
+					unset($data['screen-sizes']['resizeable']);
+				}
+				foreach ($data['screen-sizes'] as $k=>$v) {
+					$k = ucfirst(preg_replace('/screens/si', ' screen', $k));
+					$parsed[$k] = $v ? 'Yes' : 'No';
+				}
+			}
+			if (isset($data['permissions'])) {
+				$s = '';
+				foreach ($data['permissions'] as $k=>$v) {
+					$s .= implode(' ', explode('_', ucfirst($v))).'<br />';
+				}
+				$parsed['Permissions'] = $s;
+			}
+			$this->set('appSystemInfo', $parsed);
 		}
 		
 		// Setting basic info
@@ -170,7 +192,7 @@ class ApplicationsController extends AppController {
 		$extract = null;
 		$errors = null;
 		
-		$debug = 'a2'; // 'i' for iPhone & 'a' for Android or false to disable
+		$debug = 'a'; // 'i' for iPhone & 'a' for Android or false to disable
 		
 		if ($debug) {
 			if ($debug == 'i') {
@@ -198,10 +220,10 @@ class ApplicationsController extends AppController {
 				$file['error'] = null;
 			}
 			elseif ($debug == 'a') {
-				$file['name'] = '60.apk';
+				$file['name'] = 'iDeviant.apk';
 				$file['type'] = 'application/octet-stream';
 				$file['tmp_name'] = 'debug';
-				$file['path'] = APP.DS.'Dummy'.DS.'60.apk';
+				$file['path'] = APP.DS.'Dummy'.DS.'iDeviant.apk';
 				$file['size'] = 1234124;
 				$file['error'] = null;
 			}
@@ -238,7 +260,6 @@ class ApplicationsController extends AppController {
 					if ((bool)$extract->data['id']) {
 						$this->History->saveHistory($extract->data['id'], 'UPL');
 					}
-					//debug($extract->data);
 					$extract->clean();
 				}
 				$errors = $extract->errors;

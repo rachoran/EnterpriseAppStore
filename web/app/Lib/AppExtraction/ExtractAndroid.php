@@ -105,11 +105,17 @@ class ExtractAndroid extends Extract {
 		
 		// Un-archiving app
 		$appContentPath = $tempPath.DS.'app'.DS;
-		$shellOut = shell_exec('java -jar ../bin/apktool.jar d -f '.$archiveFile.' '.$appContentPath);
-		$resContentPath = $appContentPath.'res'.DS;
+		// TODO: Put apktool or other tool back to the game
+		//$shellOut = passthru('../bin/apktool d -f '.$archiveFile.' '.$appContentPath);
+		$resContentPath = $appContentPath.'res'.DS;		
+		shell_exec('unzip '.$archiveFile.' -d '.$appContentPath.'');
 		
 		// Getting manifest file
-		$manifest = file_get_contents($appContentPath.'AndroidManifest.xml');
+		// TODO: Stop using AXMLPrinter2 as the manifest file should be already decompiled
+		//$manifest = file_get_contents($appContentPath.'AndroidManifest.xml');
+		$manifest = shell_exec('java -jar ../bin/AXMLPrinter2.jar '.$appContentPath.'AndroidManifest.xml > '.$appContentPath.'manifest.xml');
+		//file_put_contents('./manifest.xml', $manifest);
+		$manifest = file_get_contents($appContentPath.'manifest.xml');
 		if (empty($manifest)) {
 			$this->raiseError('Unable to process '.$this->file['name'].' due to a missing application manifest file.');
 			return false;
@@ -117,7 +123,7 @@ class ExtractAndroid extends Extract {
 		$xml = $this->xml2array($manifest);
 		
 		// Getting bundle Id
-		$arr['bundleIdentifier'] = $xml['attributes']['PACKAGE'];
+		$arr['identifier'] = $xml['attributes']['PACKAGE'];
 		
 		// Getting other info
 		$arr['version'] = $xml['attributes']['ANDROID:VERSIONNAME'];
@@ -129,27 +135,28 @@ class ExtractAndroid extends Extract {
 		
 		// Digging out icons
 		if (isset($temp['attributes']['ANDROID:ICON'])) {
-			$iconCode = $temp['attributes']['ANDROID:ICON'];
-			$iconCode = array_pop(explode('/', $iconCode));
+			// TODO: When decompiled, get the icon name from the strings file
+			//$iconCode = array_pop(explode('/', $temp['attributes']['ANDROID:ICON']));
+			$iconCode = 'ic_launcher';
 			$file = $resContentPath.'drawable-xhdpi'.DS.$iconCode.'.png';
 			$icon = null;
 			if (file_exists($file)) {
-				
+				$icon = $file;
 			}
 			else {
 				$file = $resContentPath.'drawable-hdpi'.DS.$iconCode.'.png';
 				if (file_exists($file)) {
-					$this->icon
+					$icon = $file;
 				}
 				else {
 					$file = $resContentPath.'drawable-mdpi'.DS.$iconCode.'.png';
 					if (file_exists($file)) {
-						
+						$icon = $file;
 					}
 					else {
 						$file = $resContentPath.'drawable-ldpi'.DS.$iconCode.'.png';
 						if (file_exists($file)) {
-							
+							$icon = $file;
 						}
 					}
 				}
@@ -171,8 +178,12 @@ class ExtractAndroid extends Extract {
 		// SDK info
 		$temp = $this->getTag('USES-SDK', $xml);
 		if (!empty($temp)) {
-			$arr['min-sdk-version'] = $temp['attributes']['ANDROID:MINSDKVERSION'];
-			$arr['target-sdk-version'] = $temp['attributes']['ANDROID:TARGETSDKVERSION'];
+			if ($temp['attributes']['ANDROID:MINSDKVERSION']) {
+				$arr['min-sdk-version'] = $temp['attributes']['ANDROID:MINSDKVERSION'];
+			}
+			if (isset($temp['attributes']['ANDROID:TARGETSDKVERSION'])) {
+				$arr['target-sdk-version'] = $temp['attributes']['ANDROID:TARGETSDKVERSION'];
+			}
 		}
 		
 		// Screen sizes
@@ -182,6 +193,8 @@ class ExtractAndroid extends Extract {
 			$screen = strtolower(preg_replace('/ANDROID\:/si', '', $key));
 			$arr['screen-sizes'][$screen] = $value;
 		}
+		// TODO: Check for platform properly
+		$arr['platform'] = 3;
 		
 		// Permissions
 		$temp = $this->getAllTags('USES-PERMISSION', $xml);
@@ -193,6 +206,8 @@ class ExtractAndroid extends Extract {
 		}
 		
 		// Getting application name
+		// TODO: Get application name from the strings file + get all other app names for other languages into $arr['localized'] = array('it'=>'AppName', 'es'=>'AppName', 'cz'=>'AppName', 'ch'=>'AppName'); where the AppName is a localized app name and the key is the country code. When decompiled, the localized files are in res/values-xxx, the one from values without the country code will be always the main one
+		/*
 		$stringsFile = $resContentPath.'values'.DS.'strings.xml';
 		$strings = file_get_contents($stringsFile);
 		if (empty($strings)) {
@@ -208,12 +223,15 @@ class ExtractAndroid extends Extract {
 				break;
 			}
 		}
+		//*/
 		
 		// If there is no app name
 		if (!isset($arr['name']) || empty($arr['name'])) {
-			$this->raiseError('Unable to process '.$this->file['name'].' due to a missing application name.');
-			return false;
+			$arr['name'] = (string)pathinfo($this->file['name'], PATHINFO_FILENAME);
 		}
+		
+		// Adding the entire Manifest xml
+		//$arr['manifest'] = $xml;
 		
 		// Processing values
 		$this->data = $arr;
