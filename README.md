@@ -9,6 +9,12 @@ From Ridiculous Innovations
 At the moment the databse is not cleaned and the authentication, at least user roles, are far from bulletproof.
 We are working on the system every day so hopefully we'll have a stable version before the December 2013.
 
+<img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen1.jpg" alt="Home page" />
+<img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen2.jpg" alt="Applications page" />
+<img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen3.jpg" alt="Settings page" />
+
+
+
 License
 ---
 License has not yet been finalised. The code should not be used in any way for any commercial project. Eventually this system will be probably distributed under an MIT license.
