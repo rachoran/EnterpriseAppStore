@@ -25,7 +25,6 @@ Apart from that there is a few things you will have to do additionally.
 
 * If you plan to upload Android apps, you will need to install Java on the server
 * Uploading iOS apps requires a python script
-
 * Create your MySQL database
 * Import database files
 * Change database configuration in /web/app/Config/database.php
