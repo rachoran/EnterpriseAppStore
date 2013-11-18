@@ -3,8 +3,6 @@ Enterprise App Store
 
 To host iOS, Android and Windows 8 apps. Please remember, this is a development version only!!!!!!
 
-From Ridiculous Innovations
----
 
 At the moment the databse is not cleaned and the authentication, at least user roles, are far from bulletproof.
 We are working on the system every day so hopefully we'll have a stable version before the December 2013.
