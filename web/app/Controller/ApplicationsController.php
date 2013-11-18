@@ -8,12 +8,24 @@ class ApplicationsController extends AppController {
 	
 	var $uses = array('Application', 'Category', 'Group', 'Attachment', 'History');
 	
-	public function iOSInstall($id) {
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow('distributionplist');
+		//debug('Yoyoyooyoyoyoo');
 		
 	}
 	
-	public function distributionPlist($id) {
+	public function distributionplist($id) {
+		$this->layout = 'ajax';
+		//$this->response->type(array('plist' => 'text/plain'));
+		$this->response->header(array('Content-type: text/plain'));
+		$app = $this->Application->getOne($id);
+		$this->set('app', $app);
+		//$this->set('largeIcon', 'yoyoyoyo1');
+		//$this->set('smallIcon', 'yoyoyoyo2');
 		
+		// TODO: Add shine effect for the app to the admin panel
+		$this->set('needsShine', false);
 	}
 	
 	public function download($id) {
@@ -38,7 +50,7 @@ class ApplicationsController extends AppController {
 			return $this->redirect(array('action' => 'index'));
 		}
 	}
-
+	
 	public function delete($id) {
 		if ($this->Application->deleteApp($id)) {
 			Error::add('Application has been deleted.', Error::TypeOk);

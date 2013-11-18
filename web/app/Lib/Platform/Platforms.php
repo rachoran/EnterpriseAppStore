@@ -23,6 +23,18 @@ class Platforms {
 		return $arr;
 	}
 	
+	public static function iOS($platform) {
+		return ($platform <= self::iOSUniversal);
+	}
+	
+	public static function Android($platform) {
+		return ($platform == self::AndroidPhone || $platform == self::AndroidTablet || $platform == self::AndroidUniversal);
+	}
+	
+	public static function Win8($platform) {
+		return ($platform == self::Win8Phone || $platform == self::Win8Tablet);
+	}
+	
 	public static function platformToString($platform) {
 		switch($platform) {
 			case 0:

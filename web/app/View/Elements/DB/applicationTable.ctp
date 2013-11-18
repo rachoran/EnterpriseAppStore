@@ -29,13 +29,6 @@
             	<?php
             	if ($ext) {
             	?>
-	            <!--<small style="margin-right: 12px;">
-	            	<strong>Download: </strong>
-	            	<a href="" title="Download app">
-	            		<?= $ext; ?>
-	            		<i class="fa icon-cloud-download"></i>
-	            	</a>
-	            </small>-->
 	            <small style="margin-right: 12px;"><strong>Builds:</strong> <?= $item[0]['count']; ?> </small>
             	<?php } ?>
 	        </td>

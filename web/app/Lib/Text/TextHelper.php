@@ -2,6 +2,10 @@
 
 class TextHelper {
 	
+	public static function escape($text) {
+		return htmlentities($text);
+	}
+	
 	/**
     * Converts all special characters including spaces to - (dash/high fan) 
     * output is lowecased

@@ -1,5 +1,6 @@
 <?php
-if (!isset($id)) $id = $item['Application']['id'];
+$item = $item['Application'];
+if (!isset($id)) $id = $item['id'];
 
 //Detect special conditions devices
 $iPod = stripos($_SERVER['HTTP_USER_AGENT'], "iPod");
@@ -9,12 +10,20 @@ $Android = stripos($_SERVER['HTTP_USER_AGENT'], "Android");
 $webOS = stripos($_SERVER['HTTP_USER_AGENT'], "webOS");
 							
 if ($iPod || $iPhone || $iPad) {
-    echo $this->Html->link(__('Install latest'), array('controller' => 'applications', 'action' => 'iOSInstall', $id, TextHelper::safeText($item['Application']['name'])), array('class'=>'btn btn-default pull-right'));
+	if (Platform::iOS($item['platform'])) {
+    //echo $this->Html->link(__('Install latest'), array('controller' => 'applications', 'action' => 'iOSInstall', $id, TextHelper::safeText($item['name'])), array('class'=>'btn btn-default pull-right'));
+    ?>
+    <a href="itms-services://?action=download-manifest&url=<?= urlencode($this->Html->url(array("controller" => 'applications', 'action' => 'distributionplist', $id, TextHelper::safeText($item['name']).'.plist'), true)); ?>" class="btn btn-default pull-right">
+    <!--<a href="itms-services://?action=download-manifest&url=<?= urlencode($this->Html->url('/38.plist', true)); ?>" class="btn btn-default pull-right">-->
+	    <?= __('Install latest'); ?>
+    </a>
+    <?php
+    }
 }
-elseif ($Android) {
-    echo $this->Html->link(__('Install latest'), array('controller' => 'applications', 'action' => 'download', $id, TextHelper::safeText($item['Application']['name'])), array('class'=>'btn btn-default pull-right'));
+elseif ($Android && Platform::Android($item['platform'])) {
+    echo $this->Html->link(__('Install latest'), array('controller' => 'applications', 'action' => 'download', $id, TextHelper::safeText($item['name'])), array('class'=>'btn btn-default pull-right'));
 }
 else {
-	echo $this->Html->link(__('Download latest'), array('controller' => 'applications', 'action' => 'download', $id, TextHelper::safeText($item['Application']['name'])), array('class'=>'btn btn-default pull-right'));
+	echo $this->Html->link(__('Download latest'), array('controller' => 'applications', 'action' => 'download', $id, TextHelper::safeText($item['name'])), array('class'=>'btn btn-default pull-right'));
 }
 ?>
