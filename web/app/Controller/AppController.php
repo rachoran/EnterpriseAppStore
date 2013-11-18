@@ -37,7 +37,7 @@ App::uses('Install', 'Lib/Install');
  */
 class AppController extends Controller {
 	
-	var $uses = array('Category', 'Group', 'User', 'Application', 'Settings', 'Signing');
+	var $uses = array('Category', 'Group', 'User', 'Application', 'Settings', 'Signing', 'Apikey');
 	
 	public $components = array(
 	    'Session',
@@ -92,6 +92,7 @@ class AppController extends Controller {
         $counts['groups'] = $this->Group->countAll();
         $counts['categories'] = $this->Category->countAll();
         $counts['signing'] = $this->Signing->countAll();
+        $counts['apikeys'] = $this->Apikey->countAll();
         $this->set('menuCounts', $counts);
 		
 		// Debugging

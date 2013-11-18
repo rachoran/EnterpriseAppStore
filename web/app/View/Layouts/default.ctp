@@ -72,7 +72,7 @@ if (isset($ajaxFileUpload)) {
 <div class="all-wrapper">
 	<div class="row">
 		<!-- Begin left menu -->
-		<?= $this->element('Admin/leftMenu'); ?>
+		<?= $this->element('Menu/leftMenu'); ?>
 		<!-- End left menu -->
 		<div class="col-md-9">
 			<div class="content-wrapper<?php if (isset($woodWrapper)) echo $woodWrapper; if (isset($pageClass)) echo $pageClass; ?>">

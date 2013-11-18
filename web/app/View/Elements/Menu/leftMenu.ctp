@@ -2,6 +2,7 @@
 
 // Supply active class to the right menu
 function checkMenu($name, $t) {
+	// debug($name);
 	return (strtolower($t->name) == $name) ? " class='current'" : '';
 }
 
@@ -83,15 +84,9 @@ function checkMenu($name, $t) {
 					</ul>
 				</li>
 				-->
-				<?php
-				if (Me::minAdmin()) {
-				?>
-				<li<?= checkMenu('settings', $this); ?>>
-					<a href="<?= $this->Html->url('/settings', true); ?>"> <i class="icon-cogs"></i> Settings </a>
-				</li>
-				<?php
-				}
-				?>
+				<!-- Begin Settings -->
+				<?= $this->element('Menu/Sections/settings'); ?>
+				<!-- End Settings -->
 				<!--
 				TODO: Create analytics
 				<li<?= checkMenu('analytics', $this); ?>>

@@ -354,10 +354,24 @@ class DATABASE_CONFIG {
 				'data' => array(),
 			),
 			
+			// Api keys
+			'apikeys' => array(
+				'table' => "CREATE TABLE `apikeys` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `key` varchar(40) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `key` (`key`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;",
+				'data' => array(),
+			),
+			
 			/*
 			// Xxxxxx
 			'xxxx' => array(
-				'table' => "',
+				'table' => "",
 				'data' => array(),
 			),
 			*/

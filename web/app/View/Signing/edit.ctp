@@ -5,7 +5,7 @@ $id = (int)$signing['Signing']['id'];
 
 // Breadcrumbs
 $this->Html->addCrumb('Signing', '/signing');
-$this->Html->addCrumb((empty($group['Signing']['name']) ? 'Create signing' : $group['Signing']['name']), null);
+$this->Html->addCrumb((empty($signing['Signing']['name']) ? 'Create signing' : $signing['Signing']['name']), null);
 
 
 ?><div class="widget">

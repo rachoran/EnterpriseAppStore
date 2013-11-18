@@ -10,14 +10,12 @@ class ApplicationsController extends AppController {
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
+		// TODO: Allow upload as well if API token is OK
 		$this->Auth->allow('distributionplist');
-		//debug('Yoyoyooyoyoyoo');
-		
 	}
 	
 	public function distributionplist($id) {
 		$this->layout = 'ajax';
-		//$this->response->type(array('plist' => 'text/plain'));
 		$this->response->header(array('Content-type: text/plain'));
 		$app = $this->Application->getOne($id);
 		$this->set('app', $app);

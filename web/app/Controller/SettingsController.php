@@ -16,5 +16,5 @@ class SettingsController extends AppController {
 		}
 		$this->set('settings', $this->Settings->settings());
 	}
-	
+		
 }
