@@ -9,6 +9,17 @@ From Ridiculous Innovations
 At the moment the databse is not cleaned and the authentication, at least user roles, are far from bulletproof.
 We are working on the system every day so hopefully we'll have a stable version before the December 2013.
 
+Home page:
+<img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen1.jpg" alt="Home page" />
+
+Applications list:
+<img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen2.jpg" alt="Applications page" />
+
+Settings page:
+<img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen3.jpg" alt="Settings page" />
+
+
+
 License
 ---
 License has not yet been finalised. The code should not be used in any way for any commercial project. Eventually this system will be probably distributed under an MIT license.
@@ -26,7 +37,7 @@ Apart from that there is a few things you will have to do additionally.
 * If you plan to upload Android apps, you will need to install Java on the server
 * Uploading iOS apps requires a python script
 * Create your MySQL database
-* Import database files
+* Try to go to the web url and go through the installation process (or Import database files)
 * Change database configuration in /web/app/Config/database.php
 * Change your Salt and cipherSeed codes in /web/app/Config/core.php (Please mind that changing these on a production server will fuck up your S3 folder structure as the system is using hash of these two values to generate base folders)
 * Set writable permissions for Apache to the following folders
