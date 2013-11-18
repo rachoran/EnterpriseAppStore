@@ -194,24 +194,9 @@ $this->Html->addCrumb($data['Application']['name'], null);
 								        	</a>
 								        </td>
 								        <td class="name">
-								        	<?php
-								        	//Detect special conditions devices
-											$iPod    = stripos($_SERVER['HTTP_USER_AGENT'],"iPod");
-											$iPhone  = stripos($_SERVER['HTTP_USER_AGENT'],"iPhone");
-											$iPad    = stripos($_SERVER['HTTP_USER_AGENT'],"iPad");
-											$Android = stripos($_SERVER['HTTP_USER_AGENT'],"Android");
-											$webOS   = stripos($_SERVER['HTTP_USER_AGENT'],"webOS");
-											
-											if ($iPod || $iPhone || $iPad) {
-											    echo $this->Html->link(__('Install build'), array('controller' => 'users', 'action' => 'view', $item['Application']['id']), array('class'=>'btn btn-default pull-right'));
-											}
-											elseif ($Android) {
-											    echo $this->Html->link(__('Install build'), array('controller' => 'users', 'action' => 'view', $item['Application']['id']), array('class'=>'btn btn-default pull-right'));
-											}
-											else {
-												echo $this->Html->link(__('Download build'), array('controller' => 'users', 'action' => 'view', $item['Application']['id']), array('class'=>'btn btn-default pull-right'));
-											}
-											?>
+											<!-- Begin download/install -->
+											<?= $this->element('Admin/installButton', array('item'=>$item)); ?>
+											<!-- End download/install -->
 								            <i class="icon-<?= $icon ?>" style="margin-right: 6px;"></i>
 								            <?php echo $this->Html->link($item['Application']['name'], array('controller' => 'applications', 'action' => 'view', $item['Application']['id'])); ?>
 								            <?= $current; ?>

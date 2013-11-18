@@ -12,10 +12,12 @@ class ApplicationsController extends AppController {
 		
 	}
 	
+	public function distributionPlist($id) {
+		
+	}
+	
 	public function download($id) {
 		$app = $this->Application->getOne($id);
-		debug(Me::role());
-		die();
 		if ($app['Application']['id']) {
 			// TODO: Enable S3 support
 			$ext = ($app['Application']['platform'] <= 2) ? 'ipa' : 'apk';

@@ -344,6 +344,7 @@ if (!isset($appType)) {
 						<small style="color: #999;">This app will be available to every user.</small>
 					</div>
 				</div>
+				-->
                 <p>&nbsp;</p>
 				<div class="form-group">
 					<div class="col-md-offset-4 col-md-8">
@@ -352,7 +353,6 @@ if (!isset($appType)) {
 						<button type="submit" name="apply" class="btn btn-primary pull-right disabled">Apply</button>
 					</div>
 				</div>
-				-->
 			</div>
 		</div>
     </div>

@@ -47,10 +47,18 @@ class Application extends AppModel {
 	);
 	
 	public $order = array('Application.name' => 'ASC', 'Application.created' => 'DESC');
-
-    public function getOne($id) {
-		$this->id = $id;
+	
+    public function getAppleInstallLink($id) {
+		$this->id = (int)$id;
         $data = $this->read(null, $id);
+        return $data;
+	}
+	
+    public function getOne($id) {
+		$this->id = (int)$id;
+        $data = $this->read(null, $id);
+        //debug($data);
+        //debug(Me::all());
         return $data;
 	}
 	
