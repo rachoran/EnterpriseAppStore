@@ -18,7 +18,7 @@ $this->Html->addCrumb('Signing', null);
 				    </tr>
 				</thead>
 				<tbody>
-				    <?php foreach ($signings as $signing) { ?>
+				    <?php if (!empty($signings)) foreach ($signings as $signing) { ?>
 				    <tr>
 				        <td class="name">
 				            <?= $signing['Signing']['name']; //$this->Html->link($signing['Signing']['name'], array('controller' => 'signing', 'action' => 'view', $signing['Signing']['id'])); ?><br />
@@ -57,6 +57,15 @@ $this->Html->addCrumb('Signing', null);
 				        	</a>
 				        </td>
 				    </tr>
+				    <?php
+				    }
+				    else {
+				    ?>
+					<tr>
+						<td colspan="4" height="120" valign="middle" align="center" class="empty-cell">
+							<p style="margin-top:45px;">No iOS certificates were found.</p>
+						</td>
+					</tr>
 				    <?php
 				    }
 				    unset($signings);
