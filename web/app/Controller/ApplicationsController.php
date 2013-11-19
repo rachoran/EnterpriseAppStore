@@ -19,8 +19,8 @@ class ApplicationsController extends AppController {
 		$this->response->header(array('Content-type: text/plain'));
 		$app = $this->Application->getOne($id);
 		$this->set('app', $app);
-		//$this->set('largeIcon', 'yoyoyoyo1');
-		//$this->set('smallIcon', 'yoyoyoyo2');
+		$this->set('largeIcon', Storage::urlForIconForAppWithId($app['Application']['id'], $app['Application']['location']));
+		$this->set('smallIcon', Storage::urlForIconForAppWithId($app['Application']['id'], $app['Application']['location']));
 		
 		// TODO: Add shine effect for the app to the admin panel
 		$this->set('needsShine', false);
@@ -40,7 +40,6 @@ class ApplicationsController extends AppController {
 			else {
 		    	$this->response->type(array('apk' => 'application/vnd.android.package-archive'));
 		    }
-		    
 		    $this->response->file($path, $options);
 		    return $this->response;
 		}

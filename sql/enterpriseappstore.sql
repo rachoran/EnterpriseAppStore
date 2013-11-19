@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 17, 2013 at 10:29 PM
+-- Generation Time: Nov 19, 2013 at 01:04 PM
 -- Server version: 5.1.44
 -- PHP Version: 5.3.1
 
@@ -22,9 +22,35 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `apikeys`
+--
+
+DROP TABLE IF EXISTS `apikeys`;
+CREATE TABLE `apikeys` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `key` varchar(40) NOT NULL,
+  `created` datetime NOT NULL,
+  `modified` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `key` (`key`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `apikeys`
+--
+
+INSERT INTO `apikeys` (`id`, `name`, `key`, `created`, `modified`) VALUES
+(2, 'New key 2', '98926ec6364f29c3103f4ef5eb1589b74af790fe', '2013-11-18 22:50:43', '2013-11-18 22:54:19'),
+(5, 'Another key', 'f545bd0ad93e20e957b14d5c867c5aab03ac95aa', '2013-11-18 23:05:56', '2013-11-18 23:05:56');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `applications`
 --
 
+DROP TABLE IF EXISTS `applications`;
 CREATE TABLE `applications` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -65,6 +91,7 @@ INSERT INTO `applications` (`id`, `name`, `identifier`, `url`, `platform`, `vers
 -- Table structure for table `applications_attachments`
 --
 
+DROP TABLE IF EXISTS `applications_attachments`;
 CREATE TABLE `applications_attachments` (
   `application_id` bigint(20) unsigned NOT NULL,
   `attachment_id` bigint(20) unsigned NOT NULL,
@@ -82,6 +109,7 @@ CREATE TABLE `applications_attachments` (
 -- Table structure for table `applications_categories`
 --
 
+DROP TABLE IF EXISTS `applications_categories`;
 CREATE TABLE `applications_categories` (
   `application_id` bigint(20) unsigned NOT NULL,
   `category_id` int(11) unsigned NOT NULL,
@@ -102,7 +130,17 @@ INSERT INTO `applications_categories` (`application_id`, `category_id`) VALUES
 (27, 7),
 (27, 8),
 (27, 9),
-(27, 11);
+(27, 11),
+(38, 1),
+(38, 2),
+(38, 3),
+(38, 4),
+(38, 5),
+(38, 6),
+(38, 7),
+(38, 8),
+(38, 9),
+(38, 11);
 
 -- --------------------------------------------------------
 
@@ -110,6 +148,7 @@ INSERT INTO `applications_categories` (`application_id`, `category_id`) VALUES
 -- Table structure for table `applications_groups`
 --
 
+DROP TABLE IF EXISTS `applications_groups`;
 CREATE TABLE `applications_groups` (
   `application_id` bigint(20) unsigned NOT NULL,
   `group_id` int(11) unsigned NOT NULL,
@@ -121,7 +160,8 @@ CREATE TABLE `applications_groups` (
 --
 
 INSERT INTO `applications_groups` (`application_id`, `group_id`) VALUES
-(27, 10);
+(27, 10),
+(38, 10);
 
 -- --------------------------------------------------------
 
@@ -129,6 +169,7 @@ INSERT INTO `applications_groups` (`application_id`, `group_id`) VALUES
 -- Table structure for table `attachments`
 --
 
+DROP TABLE IF EXISTS `attachments`;
 CREATE TABLE `attachments` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `application_id` bigint(20) unsigned DEFAULT NULL,
@@ -159,6 +200,7 @@ INSERT INTO `attachments` (`id`, `application_id`, `application_identifier`, `ap
 -- Table structure for table `categories`
 --
 
+DROP TABLE IF EXISTS `categories`;
 CREATE TABLE `categories` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -193,6 +235,7 @@ INSERT INTO `categories` (`id`, `name`, `description`, `icon`, `created`, `modif
 -- Table structure for table `downloads`
 --
 
+DROP TABLE IF EXISTS `downloads`;
 CREATE TABLE `downloads` (
   `application_id` bigint(20) unsigned NOT NULL,
   `created` datetime NOT NULL,
@@ -39992,6 +40035,7 @@ INSERT INTO `downloads` (`application_id`, `created`) VALUES
 -- Table structure for table `filetypes`
 --
 
+DROP TABLE IF EXISTS `filetypes`;
 CREATE TABLE `filetypes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `mime` varchar(25) NOT NULL,
@@ -40015,6 +40059,7 @@ INSERT INTO `filetypes` (`id`, `mime`, `allowed`, `icon`) VALUES
 -- Table structure for table `groups`
 --
 
+DROP TABLE IF EXISTS `groups`;
 CREATE TABLE `groups` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL,
@@ -40039,6 +40084,7 @@ INSERT INTO `groups` (`id`, `name`, `description`, `all_versions_available`, `cr
 -- Table structure for table `groups_users`
 --
 
+DROP TABLE IF EXISTS `groups_users`;
 CREATE TABLE `groups_users` (
   `group_id` int(11) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
@@ -40059,6 +40105,7 @@ INSERT INTO `groups_users` (`group_id`, `user_id`) VALUES
 -- Table structure for table `history`
 --
 
+DROP TABLE IF EXISTS `history`;
 CREATE TABLE `history` (
   `application_id` bigint(20) unsigned NOT NULL,
   `action` varchar(3) NOT NULL,
@@ -40132,6 +40179,7 @@ INSERT INTO `history` (`application_id`, `action`, `created`, `user_id`) VALUES
 (25, 'VEW', '2013-11-17 21:32:43', 1),
 (26, 'UPL', '2013-11-17 18:59:35', 1),
 (26, 'VEW', '2013-11-17 18:59:54', 1),
+(26, 'VEW', '2013-11-18 14:46:19', 1),
 (27, 'UPL', '2013-11-17 19:14:44', 1),
 (28, 'UPL', '2013-11-17 19:23:11', 1),
 (29, 'UPL', '2013-11-17 19:25:55', 1),
@@ -40142,10 +40190,32 @@ INSERT INTO `history` (`application_id`, `action`, `created`, `user_id`) VALUES
 (34, 'UPL', '2013-11-17 19:28:03', 1),
 (34, 'VEW', '2013-11-17 22:00:40', 1),
 (35, 'UPL', '2013-11-17 19:31:38', 1),
+(35, 'VEW', '2013-11-18 20:43:02', 1),
 (36, 'UPL', '2013-11-17 19:38:04', 1),
 (37, 'UPL', '2013-11-17 19:41:41', 1),
 (38, 'UPL', '2013-11-17 19:42:18', 1),
 (38, 'VEW', '2013-11-17 22:09:41', 1),
+(38, 'VEW', '2013-11-18 09:07:44', 1),
+(38, 'VEW', '2013-11-18 09:08:40', 1),
+(38, 'VEW', '2013-11-18 09:11:54', 1),
+(38, 'VEW', '2013-11-18 09:12:43', 1),
+(38, 'VEW', '2013-11-18 09:12:54', 1),
+(38, 'VEW', '2013-11-18 09:31:10', 1),
+(38, 'VEW', '2013-11-18 09:32:01', 1),
+(38, 'VEW', '2013-11-18 15:03:27', 1),
+(38, 'VEW', '2013-11-18 15:03:46', 1),
+(38, 'VEW', '2013-11-18 15:04:07', 1),
+(38, 'VEW', '2013-11-18 16:32:52', 1),
+(38, 'VEW', '2013-11-18 16:34:38', 1),
+(38, 'VEW', '2013-11-18 17:16:05', 1),
+(38, 'VEW', '2013-11-18 17:18:47', 1),
+(38, 'VEW', '2013-11-18 17:19:34', 1),
+(38, 'VEW', '2013-11-18 17:19:51', 1),
+(38, 'VEW', '2013-11-18 17:24:25', 1),
+(38, 'VEW', '2013-11-18 17:37:47', 1),
+(38, 'VEW', '2013-11-18 17:38:55', 1),
+(38, 'VEW', '2013-11-18 17:39:05', 1),
+(38, 'VEW', '2013-11-18 17:39:36', 1),
 (39, 'UPL', '2013-11-17 19:43:29', 1),
 (39, 'VEW', '2013-11-17 19:43:36', 1),
 (39, 'VEW', '2013-11-17 21:30:50', 1);
@@ -40156,6 +40226,7 @@ INSERT INTO `history` (`application_id`, `action`, `created`, `user_id`) VALUES
 -- Table structure for table `ideas`
 --
 
+DROP TABLE IF EXISTS `ideas`;
 CREATE TABLE `ideas` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `fullname` varchar(150) NOT NULL,
@@ -40181,6 +40252,7 @@ INSERT INTO `ideas` (`id`, `fullname`, `email`, `area`, `message`, `created`, `m
 -- Table structure for table `signings`
 --
 
+DROP TABLE IF EXISTS `signings`;
 CREATE TABLE `signings` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(150) NOT NULL,
@@ -40198,7 +40270,7 @@ CREATE TABLE `signings` (
 --
 
 INSERT INTO `signings` (`id`, `name`, `certificate`, `password`, `provisioning`, `created`, `modified`) VALUES
-(1, 'Fuerte Enterprise', 'EnterpriseCertificate.p12', 'aaaaaa', 'General_Enterprise.mobileprovision', '0000-00-00 00:00:00', '2013-11-03 12:55:42');
+(1, 'Fuerte Enterprise', 'EnterpriseCertificate.p12', 'aaaaaa', 'General_Enterprise.mobileprovision', '0000-00-00 00:00:00', '2013-11-18 22:38:06');
 
 -- --------------------------------------------------------
 
@@ -40206,6 +40278,7 @@ INSERT INTO `signings` (`id`, `name`, `certificate`, `password`, `provisioning`,
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(40) NOT NULL,
@@ -40221,11 +40294,12 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   KEY `nickname` (`username`,`email`,`password`),
   KEY `role` (`role`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `role`, `created`, `modified`, `firstname`, `lastname`, `company`, `password_token`) VALUES
-(2, 'rafiki270', 'ondrej.rafaj@gmail.com', '2d653906a6243a4c0bf66f65df00efdeddfac53d', 'developer', '2013-11-13 18:30:08', '2013-11-17 19:44:00', 'Ondrej', 'Rafaj', 'Fuerte International', '');
+(2, 'rafiki270', 'ondrej.rafaj@gmail.com', '2d653906a6243a4c0bf66f65df00efdeddfac53d', 'owner', '2013-11-13 18:30:08', '2013-11-17 19:44:00', 'Ondrej', 'Rafaj', 'Fuerte International', ''),
+(8, 'jakubrafaj', 'jakub.rafaj@fuerteint.com', '2d653906a6243a4c0bf66f65df00efdeddfac53d', 'admin', '2013-11-19 09:05:28', '2013-11-19 09:05:28', 'Jakub', 'Rafaj', 'Fuerte International', '');

@@ -46,7 +46,7 @@ function verValCh($key, $settings) {
 									<input type="file" name="file[logo]" class="form-control" accept="image/*"  />
 								</div>
 								<div class="col-md-2">
-									<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Settings/Images/Logo?time=<?php echo time(); ?>" alt="Company logo" class="logo" />
+									<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Settings/Images/Logo?time=<?php echo time(); ?>" alt="Company logo" class="logo" style="max-width:180px; margin-top:6px;" />
 								</div>
 							</div>
 							<div class="form-group">
@@ -55,7 +55,7 @@ function verValCh($key, $settings) {
 									<input type="file" name="file[icon]" class="form-control" accept="image/*"  />
 								</div>
 								<div class="col-md-1">
-									<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?php echo time(); ?>" alt="Touch icon" class="logo" />
+									<img src="<?php echo $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?php echo time(); ?>" alt="Touch icon" class="logo" style="max-width:120px; margin-top:6px;" />
 								</div>
 							</div>
 							<div class="form-group">

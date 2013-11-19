@@ -89,12 +89,12 @@ if (!isset($appType)) {
 						<?php
 						if (empty($config)) {
 						?>
-						<img src="<?= $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?= time(); ?>" alt="Application logo" class="logo" />
+						<img src="<?= $this->Html->url('/', true); ?>Userfiles/Settings/Images/Icon?time=<?= time(); ?>" alt="Application logo" class="logo" style="max-width:120px; margin-top:6px;" />
 						<?php
 						}
 						else {
 						?>
-						<img src="<?= Storage::urlForIconForAppWithId($application['id'], $application['location']).'?t='.time(); ?>" alt="<?php echo $application['name']; ?>" class="logo" />
+						<img src="<?= Storage::urlForIconForAppWithId($application['id'], $application['location']).'?t='.time(); ?>" alt="<?php echo $application['name']; ?>" class="logo" style="max-width:120px; margin-top:6px;" />
 						<?php } ?>
 					</div>
 				</div>

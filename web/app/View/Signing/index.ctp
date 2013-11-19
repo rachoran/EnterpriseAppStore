@@ -14,7 +14,6 @@ $this->Html->addCrumb('Signing', null);
 				<thead>
 				    <tr>
 				        <th class="name">Name</th>
-				        <th class="edit">Edit</th>
 				    </tr>
 				</thead>
 				<tbody>
@@ -31,12 +30,11 @@ $this->Html->addCrumb('Signing', null);
 				            		<?= $signing['Signing']['certificate']; ?>
 				            		<i class="fa icon-cloud-download"></i>
 				            	</a>
-				            </small>
 				            <?php
 			            	}
 			            	if (!empty($signing['Signing']['provisioning'])) {
 			            	?>
-				            <small class="col-md-5">
+			            		<br />
 				            	<strong>Provisioning: </strong>
 				            	<a href="<?= $this->Html->url(array("controller" => 'signing', "action" => "downloadProv", $signing['Signing']['id'])); ?>" title="Download provisioning">
 				            		<?= $signing['Signing']['provisioning']; ?>
@@ -46,15 +44,9 @@ $this->Html->addCrumb('Signing', null);
 				            <?php
 				            }
 				            ?>
-				        </td>
-				        <td class="edit">
-				        	<a href="<?= $this->Html->url(array("controller" => 'signing', "action" => "edit", $signing['Signing']['id'], $signing['Signing']['name'])); ?>">
-				        		<i class="fa icon-edit"><span> Edit</span></i>
-				        	</a>
-				        	<br />
-				        	<a href="<?= $this->Html->url(array("controller" => 'signing', "action" => "delete", $signing['Signing']['id'], $signing['Signing']['name'])); ?>" onclick="return env.confirmation('Are you sure you want to delete signing <?php echo $signing['Signing']['name']; ?>?');">
-				        		<i class="fa icon-ban-circle"><span> Delete</span></i>
-				        	</a>
+							<!-- Begin Edit & delete buttons -->
+							<?= $this->element('Admin/Tables/edit', array('controller'=>'signing', 'item'=>$signing['Signing'])); ?>
+							<!-- End Edit & delete buttons -->
 				        </td>
 				    </tr>
 				    <?php

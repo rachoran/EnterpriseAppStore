@@ -15,7 +15,6 @@ $this->Html->addCrumb('Groups', null);
 				        <th class="icon">Users</th>
 				        <th class="icon">Apps</th>
 				        <th class="name">Name</th>
-				        <th class="edit">Edit</th>
 				    </tr>
 				</thead>
 				<tbody>
@@ -40,17 +39,11 @@ $this->Html->addCrumb('Groups', null);
 				        <td class="icon"><span class="label label-default"><?= count($group['User']); ?></span></td>
 				        <td class="icon"><span class="label label-default"><?= count($group['Application']); ?></span></td>
 				        <td class="name">
+							<!-- Begin Edit & delete buttons -->
+							<?= $this->element('Admin/Tables/edit', array('controller'=>'groups', 'item'=>$group['Group'])); ?>
+							<!-- End Edit & delete buttons -->
 				            <?= $this->Html->link($group['Group']['name'], array('controller' => 'groups', 'action' => 'view', $group['Group']['id'], TextHelper::safeText($group['Group']['name'])), array('class' => 'view')); ?><br />
 				            <small><?php if (strlen($group['Group']['description']) > 2) echo '('.$group['Group']['description'].')'; ?></small>
-				        </td>
-				        <td class="edit">
-				        	<a href="<?= $this->Html->url(array('controller' => 'groups', 'action' => 'edit', $group['Group']['id'], TextHelper::safeText($group['Group']['name']))); ?>">
-				        		<i class="fa icon-edit"><span> Edit</span></i>
-				        	</a>
-				        	<br />
-				        	<a href="<?= $this->Html->url(array('controller' => 'groups', 'action' => 'delete', $group['Group']['id'], TextHelper::safeText($group['Group']['name']))); ?>" onclick="return env.confirmation('Are you sure you want to delete group <?= $group['Group']['name']; ?>?');">
-				        		<i class="fa icon-ban-circle"><span> Delete</span></i>
-				        	</a>
 				        </td>
 				    </tr>
 				    <?php

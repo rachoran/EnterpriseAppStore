@@ -33,18 +33,15 @@
             	<?php } ?>
 	        </td>
 	        <td class="edit">
-	        	<a href="<?= $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $item['Application']['id'], TextHelper::safeText($item['Application']['name']))); ?>">
+	        	<a href="<?= $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $item['Application']['id'], TextHelper::safeText($item['Application']['name']))); ?>" class="btn pull-right">
 	        		<i class="fa icon-edit"><span> Edit latest</span></i>
 	        	</a>
-	        	<?php
-	        	if (Me::minAdmin()) {
-	        	?>
-	        	<br /><a href="<?= $this->Html->url(array("controller" => 'applications', 'action' => 'deleteAll', $item['Application']['id'], TextHelper::safeText($item['Application']['name']))); ?>" onclick="return env.confirmation('Are you sure you want to delete all builds for <?= $item['Application']['name']; ?>?');">
+	        	<br />
+	        	<?php if (Me::minAdmin()) { ?>
+	        	<a href="<?= $this->Html->url(array("controller" => 'applications', 'action' => 'deleteAll', $item['Application']['id'], TextHelper::safeText($item['Application']['name']))); ?>" class="btn pull-right" onclick="return env.confirmation('Are you sure you want to delete all builds for <?= $item['Application']['name']; ?>?');">
 	        		<i class="fa icon-ban-circle"><span> Delete all</span></i>
 	        	</a>
-	        	<?php
-	        	}
-	        	?>
+	        	<?php } ?>
 	        </td>
 	    </tr>
 	    <?php

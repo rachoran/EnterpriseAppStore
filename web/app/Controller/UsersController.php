@@ -88,7 +88,7 @@ class UsersController extends AppController {
 				$this->request->data['User']['password2'] = $user['User']['password'];
 				$this->User->dontEncodePassword = true;
 			}
-			$ok = $this->User->save($this->request->data, true);
+			$ok = $this->User->saveUser($this->request->data);
 			if ($ok) {
 				Error::add('Account has been successfully saved.');
 				$this->Session->write('Auth', $this->User->read(null, $this->Auth->User('id')));

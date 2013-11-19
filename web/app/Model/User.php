@@ -162,7 +162,12 @@ class User extends AppModel {
 		$data = $this->addGravatars($data);
 		return $data;
 	}
-		
+	
+	public function saveUser($data) {
+		// TODO:Check if users saving only stuff they allowed to!
+		return $this->User->save($data, true);
+	}
+	
 	public function getUsersWithGroupId($groupId) {
 		$options['joins'] = array(
 		    array('table' => 'groups_users',

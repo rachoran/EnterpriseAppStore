@@ -14,22 +14,9 @@ $this->Html->addCrumb('Categories', null);
 				    <tr>
 				        <th class="icon">&nbsp;</th>
 				        <th class="name">Name</th>
-				        <th class="edit">Edit</th>
 				    </tr>
 				</thead>
 				<tbody>
-				    <!--<tr>
-				        <td class="icon"><i class="fa icon-sort-by-attributes"></i></td>
-				        <td class="name">
-				            <?= $this->Html->link('Uncategorised apps', array('controller' => 'categories', 'action' => 'view', 0)); ?>
-				            <span class="label label-default"><?= 23; ?></span>
-				            <br />
-				            <small></small>
-				        </td>
-				        <td class="edit">
-				        	&nbsp;
-				        </td>
-				    </tr>-->
 				    <?php
 				    if (!empty($categories)) foreach ($categories as $category) {
 						$count = (int)$category[0]['appsCount'];   
@@ -41,6 +28,9 @@ $this->Html->addCrumb('Categories', null);
 				    <tr class="clickable"<?= $style; ?>>
 				        <td class="icon"><i class="fa <?= $category['Category']['icon']; ?>"></i></td>
 				        <td class="name">
+							<!-- Begin Edit & delete buttons -->
+							<?= $this->element('Admin/Tables/edit', array('controller'=>'categories', 'item'=>$category['Category'])); ?>
+							<!-- End Edit & delete buttons -->
 				            <?php
 				            if ($count > 0) echo $this->Html->link(
 				            	$category['Category']['name'],
@@ -59,15 +49,6 @@ $this->Html->addCrumb('Categories', null);
 				             <span class="label label-default"><?= $count; ?></span>
 				            <br />
 				            <small><?php if (strlen($category['Category']['description']) > 2) echo '('.$category['Category']['description'].')'; ?></small>
-				        </td>
-				        <td class="edit">
-				        	<a href="<?= $this->Html->url(array("controller" => "categories", "action" => "edit", $category['Category']['id'], TextHelper::safeText($category['Category']['name']))); ?>">
-				        		<i class="fa icon-edit"><span> Edit</span></i>
-				        	</a>
-				        	<br />
-				        	<a href="<?= $this->Html->url(array("controller" => "categories", "action" => "delete", $category['Category']['id'], TextHelper::safeText($category['Category']['name']))); ?>" onclick="return env.confirmation('Are you sure you want to delete category <?= $category['Category']['name']; ?>?');">
-				        		<i class="fa icon-ban-circle"><span> Delete</span></i>
-				        	</a>
 				        </td>
 				    </tr>
 				    <?php
