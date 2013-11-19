@@ -20,7 +20,7 @@ Settings page:
 
 License
 ---
-License has not yet been finalised. The code should not be used in any way for any commercial project. Eventually this system will be probably distributed under an MIT license.
+License has not yet been finalised. The code should not be used in any way for any commercial project at the moment until a final stable version will be released by the end of this year, this version will contain all the neccessary unite tests to make sure the code will stay stable for good :). Eventually this system will be probably distributed under an MIT license, but any suggestions on this matter will be welcome.
 
 Installation
 ---
