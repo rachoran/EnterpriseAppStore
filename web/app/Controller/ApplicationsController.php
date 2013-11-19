@@ -10,8 +10,17 @@ class ApplicationsController extends AppController {
 	
 	public function beforeFilter() {
 		parent::beforeFilter();
-		// TODO: Allow upload as well if API token is OK
-		$this->Auth->allow('distributionplist');
+		if (isset($this->request->query['key']) && $this->Apikey->isKeyValid($this->request->query['key']) && !Me::id()) {
+			$this->Auth->allow('distributionplist', 'uploadApp');
+			debug($this->request->query);
+			die();
+		}
+		if (isset($this->request->query['key']) && $this->Apikey->isKeyValid($this->request->query['key']) && !Me::id()) {
+			$this->Auth->allow('distributionplist', 'uploadApp');
+		}
+		else {
+			$this->Auth->allow('distributionplist');
+		}
 	}
 	
 	public function distributionplist($id) {

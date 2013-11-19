@@ -20,6 +20,11 @@ class Apikey extends AppModel {
 		return $this->find('first', array('conditions' => array('Apikey.id' => $id)));
 	}
 	
+	public function isKeyValid($key) {
+		$key = TextHelper::safeText($key);
+		return (bool)$this->find('count', array('conditions' => array('Apikey.key' => $key)));
+	}
+	
 	public function saveKey($key) {
 		$id = isset($key['id']) ? (int)$key['id'] : 0;
 		if ($id) {
