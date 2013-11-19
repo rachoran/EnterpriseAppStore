@@ -7,6 +7,8 @@ To host iOS, Android and Windows 8 apps. Please remember, this is a development 
 At the moment the databse is not cleaned and the authentication, at least user roles, are far from bulletproof.
 We are working on the system every day so hopefully we'll have a stable version before the December 2013.
 
+The code should not be used in any way for any commercial project at the moment until a final stable version will be released by the end of this year, this version will contain all the neccessary unit tests to make sure the code will stay stable for good :).
+
 Home page:
 <img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen1.jpg" alt="Home page" />
 
@@ -20,7 +22,7 @@ Settings page:
 
 License
 ---
-License has not yet been finalised. The code should not be used in any way for any commercial project at the moment until a final stable version will be released by the end of this year, this version will contain all the neccessary unite tests to make sure the code will stay stable for good :). Eventually this system will be probably distributed under an MIT license, but any suggestions on this matter will be welcome.
+License has not yet been finalised. Eventually this system will be probably distributed under an MIT license, but any suggestions on this matter will be welcome.
 
 Installation
 ---
