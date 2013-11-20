@@ -4,6 +4,16 @@ class SigningController extends AppController {
 
 	var $uses = array('Signing');
 	
+	public function isAuthorized($user) {
+	    if (Me::minAdmin()) {
+	        return true;
+	    }
+		else {
+			Error::add('You are not authorized to access this section.', Error::TypeError);
+			return false;
+		}
+	}
+	
 	public function index() {
         $ex = shell_exec('which codesign');
         if (empty($ex)) {

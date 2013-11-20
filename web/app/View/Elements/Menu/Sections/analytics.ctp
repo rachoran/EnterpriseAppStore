@@ -1,3 +1,4 @@
+<?php if (Me::minAdmin()) { ?>
 <!--
 TODO: Create analytics
 <li<?= checkMenu('analytics', $this); ?>>
@@ -10,3 +11,4 @@ TODO: Create analytics
 	</ul>
 </li>
 -->
+<?php } ?>

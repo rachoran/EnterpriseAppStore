@@ -6,6 +6,16 @@ class PagesController extends AppController {
 
 	public $uses = array('Download', 'Application');
 
+	public function isAuthorized($user) {
+	    if (Me::minUser()) {
+	        return true;
+	    }
+		else {
+			Error::add('You are not authorized to access this section.', Error::TypeError);
+			return false;
+		}
+	}
+	
 	public function display() {
 		$path = func_get_args();
 		$count = count($path);

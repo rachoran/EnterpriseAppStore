@@ -3,7 +3,7 @@
 class Idea extends AppModel {
 	
 	public $validate = array(
-        'fullname' => array(
+        'name' => array(
             'required' => array(
                 'rule' => array('notEmpty'),
                 'message' => 'User name is required'
@@ -20,6 +20,13 @@ class Idea extends AppModel {
                 'rule' => array('notEmpty'),
                 'message' => 'Message is required'
             )
+        )
+    );
+	
+	public $paginate = array(
+        'limit' => 5,
+        'order' => array(
+            'Idea.created' => 'ASC'
         )
     );
 	
@@ -40,7 +47,7 @@ class Idea extends AppModel {
 		else {
 			$this->create();
 		}
-		$this->set('fullname', $idea['fullname']);
+		$this->set('name', $idea['name']);
 		$this->set('email', $idea['email']);
 		$this->set('area', $idea['area']);
 		$this->set('message', $idea['message']);

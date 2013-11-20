@@ -4,6 +4,16 @@ class UsersController extends AppController {
 	
 	var $uses = array('User', 'Group', 'Application');
 	
+	public function isAuthorized($user) {
+	    if (Me::minAdmin()) {
+	        return true;
+	    }
+		else {
+			Error::add('You are not authorized to access this section.', Error::TypeError);
+			return false;
+		}
+	}
+	
 	public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('login', 'register', 'logout');
@@ -207,10 +217,11 @@ class UsersController extends AppController {
 	}
 	
 	public function delete($id) {
-		$this->setPageIcon('user');
-		$user = $this->User->getOne($id);
-		if ($user['User']['role'] != 'owner') {
-			$this->User->delete((int)$id);
+		if ($this->User->deleteUser($id)) {
+			Error::add('User has been deleted.');
+		}
+		else {
+			Error::add('Unable to delete user.', Error::TypeError);
 		}
 		return $this->redirect(array('action' => 'index'));
 	}

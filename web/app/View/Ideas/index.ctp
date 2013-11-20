@@ -1,47 +1,61 @@
 <?php
 
 // Breadcrumbs
-$this->Html->addCrumb('Ideas');
-
+$this->Html->addCrumb('Ideas', null);
 
 ?><div class="widget">
 	<div class="widget-content-white glossed">
 		<div class="padded">
-			<form action="<?php echo $this->Html->url(array("controller" => "ideas", "action" => "index")); ?>" method="post" role="form" class="form-horizontal">
-				<h3 class="form-title form-title-first"><i class="icon-comment"></i> Do you have an idea for improvement?</h3>
-				<div class="form-group">
-					<label class="col-md-4 control-label">Full Name</label>
-					<div class="col-md-8">
-						<input type="text" name="idea[fullname]" class="form-control" placeholder="John Doe" value="<?php echo $idea['fullname']; ?>" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-4 control-label">Email</label>
-					<div class="col-md-8">
-						<input type="text" name="idea[email]" class="form-control" placeholder="john.doe@example.com" value="<?php echo $idea['email']; ?>" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-4 control-label">Area of suggestions</label>
-					<div class="col-md-8">
-						<?php
-						$options = array(1=>'Usability improvement', 2=>'HTML & CSS', 3=>'PHP', 4=>'Other');
-						echo $this->Form->input('idea[area]', array('name'=>'idea[area]', 'label' => false, 'options' => $options, 'class'=>'form-control', 'empty' => '(choose one)', 'value'=>(int)$idea['area']));
-						?>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-md-4 control-label">Message</label>
-					<div class="col-md-8">
-						<textarea type="text" name="idea[message]" class="form-control description large" placeholder="It would be great if this site could make me a coffee"><?php echo $idea['message']; ?></textarea>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-md-offset-4 col-md-8">
-						<button type="submit" class="btn btn-primary pull-right">Submit</button>
-					</div>
-				</div>
-			</form>
+			<div class="paging pull-left">
+				<?php
+				echo $this->Paginator->numbers(array('first' => __('First'), 'last' => __('Last'), 'separator' => ''));
+				?>
+			</div>
+			<p>
+				<a href="<?= $this->Html->url(array('controller' => 'ideas', 'action' => 'edit', 'new')); ?>" class="btn btn-primary pull-right new">New idea <i class="fa icon-plus"></i></a>
+			</p>
+			<table class="table table-striped table-bordered table-hover">
+				<thead>
+				    <tr>
+				        <th class="name">Name</th>
+				        <th class="name">Email</th>
+				        <th class="name">Action</th>
+				    </tr>
+				</thead>
+				<tbody>
+				    <?php if (!empty($data)) foreach ($data as $item) { ?>
+				    <tr class="clickable">
+				        <td style="border-bottom: dotted 1px #ddd;"><?= $item['Idea']['name']; ?></td>
+				        <td style="border-bottom: dotted 1px #ddd;"><?= $item['Idea']['email']; ?></td>
+				        <td style="border-bottom: dotted 1px #ddd;">
+							<a href="<?= $this->Html->url(array('controller' => 'ideas', 'action' => 'delete', $item['Idea']['id'], TextHelper::safeText($item['Idea']['name']))); ?>" class="btn pull-right" onclick="return env.confirmation('Are you sure you want to delete <?= $item['Idea']['name']; ?>?');">
+								<i class="fa icon-ban-circle"><span> Delete</span></i>
+							</a>
+				        </td>
+				    </tr>
+				    <tr>
+				    	<td colspan="3" style=" border: none; border-bottom: 2px solid #ddd;"><small><?= $item['Idea']['message']; ?></small></td>
+				    </tr>
+				    <?php
+				    }
+				    else {
+				    ?>
+					<tr>
+						<td colspan="4" height="120" valign="middle" align="center" class="empty-cell">
+							<p style="margin-top:45px;">No ideas were submitted yet.</p>
+						</td>
+					</tr>
+				    <?php
+				    }
+				    unset($items);
+				    ?>
+				</tbody>
+			</table>
+			<div class="paging">
+				<?php
+				echo $this->Paginator->numbers(array('first' => __('First'), 'last' => __('Last'), 'separator' => ''));
+				?>
+			</div>
 		</div>
 	</div>
 </div>

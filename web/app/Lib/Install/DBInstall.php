@@ -309,7 +309,7 @@ class DATABASE_CONFIG {
 			'ideas' => array(
 				'table' => "CREATE TABLE `".$this->prefix."ideas` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `fullname` varchar(150) NOT NULL,
+  `name` varchar(150) NOT NULL,
   `email` varchar(80) NOT NULL,
   `area` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `message` text NOT NULL,

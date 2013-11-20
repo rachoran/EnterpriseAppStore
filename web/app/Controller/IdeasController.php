@@ -2,9 +2,39 @@
 
 class IdeasController extends AppController {
 	
-	var $helpers = array('Form');
+	public $helpers = array('Form');
+	
+	public $components = array('Paginator');
+
+    public $paginate = array(
+        'limit' => 5,
+        'order' => array(
+            'Idea.created' => 'ASC'
+        )
+    );
+	
+	public function isAuthorized($user) {
+	    if (Me::minUser()) {
+	        return true;
+	    }
+		else {
+			Error::add('You are not authorized to access this section.', Error::TypeError);
+			return false;
+		}
+	}
 	
 	public function index() {
+		$this->setPageIcon('comments');
+		
+		/* Prepare the data to be paginated with the paginator component */
+		$data = $this->paginate('Idea');
+		
+		/* Prepare the data to be sent to the view */
+		$this->set(compact('page', 'subpage', 'title_for_layout', 'data'));
+
+	}
+	
+	public function edit() {
 		$this->setPageIcon('comment');
 		$this->enablePageClass('basic-edit');
 		
@@ -16,7 +46,7 @@ class IdeasController extends AppController {
 			}
 		}
 		if (!$idea) {
-			$idea = array('fullname'=>'', 'email'=>'', 'area'=>'0', 'message'=>'');
+			$idea = array('name'=>Me::get('firstname').' '.Me::get('lastname'), 'email'=>Me::get('email'), 'area'=>'0', 'message'=>'');
 		}
 		$this->set('idea', $idea);
 	}

@@ -33,6 +33,7 @@ class Group extends AppModel {
     );
 	
 	public function saveGroup($id, $name, $description) {
+		if (!Me::minAdmin()) return false;
 		$id = (int)$id;
 		if ($id) {
 			$this->id = $id;
@@ -113,5 +114,14 @@ class Group extends AppModel {
 		$options['order'] = array('Group.name' => 'ASC');
 		return $this->find('all', $options);
 	}
-
+	
+	public function deleteGroup($id) {
+		if (!Me::minAdmin()) return false;
+		$group = $this->getOne($id);
+		if (isset($group['Group'])) {
+			return $this->delete((int)$id);
+		}
+		return false;
+	}
+	
 }

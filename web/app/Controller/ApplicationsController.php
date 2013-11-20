@@ -8,6 +8,16 @@ class ApplicationsController extends AppController {
 	
 	var $uses = array('Application', 'Category', 'Group', 'Attachment', 'History');
 	
+	public function isAuthorized($user) {
+	    if (Me::minUser()) {
+	        return true;
+	    }
+		else {
+			Error::add('You are not authorized to access this section.', Error::TypeError);
+			return false;
+		}
+	}
+	
 	public function beforeFilter() {
 		parent::beforeFilter();
 		if (isset($this->request->query['key']) && $this->Apikey->isKeyValid($this->request->query['key']) && !Me::id()) {

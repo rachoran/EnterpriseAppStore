@@ -135,3 +135,29 @@ div.screenshots .image img {
 	overflow: hidden;
 }
 
+/* Pagination */
+.paging {
+	padding-top: 12px;
+	padding-bottom: 12px;
+}
+.paging span {
+	margin-left: 3px;
+	margin-right: 3px;
+}
+.paging span:hover {
+	background-color: rgba(166,166,166,0.10);
+}
+.paging span.current {
+	padding-top: 3px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-bottom: 3px;
+	border: dotted 1px rgba(220,220,220,0.79);
+}
+.paging span a {
+	padding-top: 3px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-bottom: 3px;
+	border: dotted 1px rgba(220,220,220,0.79);
+}

@@ -37,7 +37,7 @@ App::uses('Install', 'Lib/Install');
  */
 class AppController extends Controller {
 	
-	var $uses = array('Category', 'Group', 'User', 'Application', 'Settings', 'Signing', 'Apikey');
+	var $uses = array('Category', 'Group', 'User', 'Application', 'Settings', 'Signing', 'Apikey', 'Idea');
 	
 	public $components = array(
 	    'Session',
@@ -93,6 +93,9 @@ class AppController extends Controller {
         $counts['categories'] = $this->Category->countAll();
         $counts['signing'] = $this->Signing->countAll();
         $counts['apikeys'] = $this->Apikey->countAll();
+        if (Me::minAdmin()) {
+        	$counts['ideas'] = $this->Idea->countAll();
+        }
         $this->set('menuCounts', $counts);
 		
 		// Debugging
@@ -104,14 +107,13 @@ class AppController extends Controller {
     }
 
 	public function isAuthorized($user) {
-	    if (isset($user['role']) && ($user['role'] === 'owner' || $user['role'] === 'admin')) {
+	    if (Me::minAdmin()) {
 	        return true;
 	    }
-		if (true) {
+		else {
 			Error::add('No permissions set for '.$this->params['controller'].' / '.$this->params['action'].'.', Error::TypeInfo);
-			return true;
+			return false;
 		}
-	    return false;
 	}
 
 	public function enableWoodWrapper() {

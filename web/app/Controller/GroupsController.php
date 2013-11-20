@@ -4,6 +4,16 @@ class GroupsController extends AppController {
 	
 	var $uses = array('Group', 'User', 'UsersGroup', 'Application');
 	
+	public function isAuthorized($user) {
+	    if (Me::minDev()) {
+	        return true;
+	    }
+		else {
+			Error::add('You are not authorized to access this section.', Error::TypeError);
+			return false;
+		}
+	}
+
 	public function index() {
 		$this->setPageIcon('group');
 		$this->enablePageClass('basic-edit');
@@ -103,7 +113,7 @@ class GroupsController extends AppController {
 	}
 	
 	public function delete($id) {
-		$this->Group->delete((int)$id);
+		$this->Group->deleteGROUP((int)$id);
 		return $this->redirect(array('action' => 'index'));
 	}
 	

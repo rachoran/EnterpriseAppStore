@@ -6,6 +6,16 @@ class CategoriesController extends AppController {
 
 	var $uses = array('Category', 'Application');
 	
+	public function isAuthorized($user) {
+	    if (Me::minUser()) {
+	        return true;
+	    }
+		else {
+			Error::add('You are not authorized to access this section.', Error::TypeError);
+			return false;
+		}
+	}
+	
 	public function index() {
 		$this->setPageIcon('list-ul');
 		$this->enablePageClass('basic-edit');

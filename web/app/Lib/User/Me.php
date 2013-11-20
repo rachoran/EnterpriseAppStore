@@ -48,7 +48,7 @@ class Me {
 			
 	public static function minUser() {
 		$role = self::roleNo();
-		return ($role == 0);
+		return ($role >= 0);
 	}
 			
 	public static function minDev() {

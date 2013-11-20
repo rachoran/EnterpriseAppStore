@@ -121,6 +121,7 @@ class User extends AppModel {
 	}
 	
 	public function getAllUsers() {
+		if (!Me::minAdmin()) return false;
 		$this->unbindModel(array('hasAndBelongsToMany' => array('Group')));
 		$data =  $this->find('all', array('order' => array('User.lastname' => 'ASC', 'User.firstname' => 'ASC')));
 		$data = $this->addGravatars($data);
@@ -164,7 +165,7 @@ class User extends AppModel {
 	}
 	
 	public function saveUser($data) {
-		// TODO:Check if users saving only stuff they allowed to!
+		if (!Me::minAdmin()) return false;
 		return $this->User->save($data, true);
 	}
 	
@@ -185,6 +186,15 @@ class User extends AppModel {
 		$data = $this->find('all', $options);
 		$data = $this->addGravatars($data);
 		return $data;
+	}
+	
+	public function deleteUser($id) {
+		if (!Me::minAdmin()) return false;
+		$user = $this->getOne($id);
+		if (isset($user['User']['role']) && $user['User']['role'] != 'owner' && $user['User']['id'] != Me::id()) {
+			return $this->delete((int)$id);
+		}
+		return false;
 	}
 	
 }

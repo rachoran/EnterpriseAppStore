@@ -57,12 +57,11 @@ class Application extends AppModel {
     public function getOne($id) {
 		$this->id = (int)$id;
         $data = $this->read(null, $id);
-        //debug($data);
-        //debug(Me::all());
         return $data;
 	}
 	
     public function deleteApp($id) {
+    	if (!Me::minDev()) return false;
     	$id = (int)$id;
     	$ok = false;
     	$app = $this->getOne($id);
@@ -77,6 +76,7 @@ class Application extends AppModel {
 	}
 	
 	public function deleteAllApps($id) {
+		if (!Me::minDev()) return false;
     	$id = (int)$id;
     	$app = $this->getOne($id);
     	$ok = false;
@@ -208,6 +208,7 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 	}
 
 	public function saveApp($appData, $confData, $file, $icon) {
+		if (!Me::minDev()) return false;
 		$id = (int)$this->id;
 		$modify = false;
 		
