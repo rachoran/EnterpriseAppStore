@@ -1,7 +1,7 @@
-<?php
+<div id="errors"><?php
 $errors = Error::getAll();
 if (!empty($errors)) {
-	echo '<div id="errors" class="widget">';
+	echo '<div class="widget">';
 	foreach ($errors as $type=>$group) {
 		switch ($type) {
 			case Error::TypeOk:
@@ -31,4 +31,4 @@ if (!empty($errors)) {
 	}
 	echo '</div>';
 }
-?>
+?></div>

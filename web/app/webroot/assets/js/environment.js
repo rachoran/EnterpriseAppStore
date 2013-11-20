@@ -13,6 +13,13 @@ function environment() {
 		}
 	}
 	
+	// Error messages
+	this.showError = function(message) {
+		$('#errors').hide();
+		$('#errors').html('<div class="widget"><div class="alert alert-danger alert-dismissable "><p><i class="icon-exclamation-sign"></i>' + message + '</p></div></div>');
+		$('#errors').show(500);
+	}
+	
 	// Forms - Checkboxes
 	this.toggleAllCheckBoxes = function(selector, masterCheckbox) {
 		var isOn = $(masterCheckbox).is(':checked');

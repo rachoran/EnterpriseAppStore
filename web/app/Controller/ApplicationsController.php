@@ -12,11 +12,6 @@ class ApplicationsController extends AppController {
 		parent::beforeFilter();
 		if (isset($this->request->query['key']) && $this->Apikey->isKeyValid($this->request->query['key']) && !Me::id()) {
 			$this->Auth->allow('distributionplist', 'uploadApp');
-			debug($this->request->query);
-			die();
-		}
-		if (isset($this->request->query['key']) && $this->Apikey->isKeyValid($this->request->query['key']) && !Me::id()) {
-			$this->Auth->allow('distributionplist', 'uploadApp');
 		}
 		else {
 			$this->Auth->allow('distributionplist');
@@ -210,7 +205,6 @@ class ApplicationsController extends AppController {
 				Error::add('Unable to save this app.', Error::TypeError);
 				return false;
 			}
-			
 			if (isset($this->request->data['apply'])) {
 				// Redirecting for the same page (Apply)
 				$this->redirect(array('controller' => 'applications', 'action' => 'edit', $this->Application->id, TextHelper::safeText($this->request->data['Application']['name'])));
@@ -325,13 +319,19 @@ class ApplicationsController extends AppController {
 			if ($extract) {
 				if ($extract->process()) {
 					$app = $this->Application->saveApp(array('Application'=>$extract->data), $extract->data, $extract->app, $extract->icon);
-					$extract->data['id'] = (int)$this->Application->getLastInsertId();
-					if ((bool)$extract->data['id']) {
-						$this->History->saveHistory($extract->data['id'], 'UPL');
+					if (!$app) {
+						$errors = array('Unable to process the app');
+						$extract = null;
 					}
-					$extract->clean();
+					else {
+						$extract->data['id'] = (int)$this->Application->getLastInsertId();
+						if ((bool)$extract->data['id']) {
+							$this->History->saveHistory($extract->data['id'], 'UPL');
+						}
+						$extract->clean();
+						$errors = $extract->errors;
+					}
 				}
-				$errors = $extract->errors;
 			}
 			else {
 				$errors = array('Unable to process the app');

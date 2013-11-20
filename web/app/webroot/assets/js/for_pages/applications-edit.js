@@ -4,7 +4,7 @@ $('#binaryUpload').fileupload({
     url: env.baseUrl + 'applications/uploadApp',
     dataType: 'json',
     done: function (e, data) {
-    	if (data.result.data && data.result.data.id) {
+	    if (data.result.data && data.result.data.id) {
 			didUploadAppBinary = true;
 	    	
 	    	$('#appName').val(data.result.data.name);
@@ -23,13 +23,13 @@ $('#binaryUpload').fileupload({
 			window.location.replace(env.baseUrl + 'applications/edit/' + data.result.data.id + '/');
 		}
 		else {
-			alert(JSON.stringify(e));
 			if (data.result.errors.length > 0) {
 				var message = '';
 				for (i = 0; i < data.result.errors.length; i++) {
 					message = message + data.result.errors[i];
 				}
-				alert(message);
+				//alert(message);
+				env.showError(message);
 				$('#binaryUploadProgress .progress-bar').css('width', 0 + '%');
 			}
 		}

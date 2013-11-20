@@ -255,7 +255,7 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 		if ($file && !empty($file)) {
 			if (!Storage::saveFile($file, 'Applications'.DS.$this->id, true)) {
 				$this->delete($this->id);
-				Error::add('Unable to save binaries.', Error::TypeError);
+				//Error::add('Unable to save binaries.', Error::TypeError);
 				return false;
 			}
 		}
@@ -270,11 +270,11 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 			move_uploaded_file($appData['form']['iconFile']['tmp_name'], $tempFolderPath.'icon');
 			$s = getimagesize($tempFolderPath.'icon');
 			if (!$s) {
-				Error::add('Uploaded icon is not supported image file.', Error::TypeWarning);
+				//Error::add('Uploaded icon is not supported image file.', Error::TypeWarning);
 				$ok = true;
 			}
 			if (!Storage::saveFile($tempFolderPath.'icon', 'Applications'.DS.$this->id, false)) {
-				Error::add('Unable to save uploaded icon.', Error::TypeWarning);
+				//Error::add('Unable to save uploaded icon.', Error::TypeWarning);
 			}
 		}
 		
@@ -285,10 +285,10 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 			if (!$icon || !file_exists($icon)) {
 				$icon = $tempFolderPath.'icon';
 				copy($defaultIcon, $icon);
-				Error::add('Default icon has been used.', Error::TypeInfo);
+				//Error::add('Default icon has been used.', Error::TypeInfo);
 			}
 			if (!Storage::saveFile($icon, 'Applications'.DS.$this->id, false)) {
-				Error::add('Unable to save icon.', Error::TypeWarning);
+				//Error::add('Unable to save icon.', Error::TypeWarning);
 			}
 		}
 		

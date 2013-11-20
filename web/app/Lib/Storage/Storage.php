@@ -75,7 +75,7 @@ class Storage {
 		else {
 			$s = new Settings();
 			S3::setAuth($s->get('s3AccessKey'), $s->get('s3SecretKey'));
-			$ok = S3::putObject(S3::inputFile($file, false), $s->get('s3Bucket'), self::folder().DS.$section.DS.pathinfo($file, PATHINFO_BASENAME), ($protected ? S3::ACL_PRIVATE : S3::ACL_PUBLIC_READ));
+			$ok = @S3::putObject(S3::inputFile($file, false), $s->get('s3Bucket'), self::folder().DS.$section.DS.pathinfo($file, PATHINFO_BASENAME), ($protected ? S3::ACL_PRIVATE : S3::ACL_PUBLIC_READ));
 		}
 		return $ok;
 	}
