@@ -108,17 +108,34 @@ if (isset($ajaxFileUpload)) {
 						<?= $this->fetch('content'); ?>
 						<!-- End content -->
 						
-						<?php if ($debugMySQL) { ?>
+						<?php if ($debugMySQL && Me::minOwner()) { ?>
 						<div class="widget cake-sql-log">
 							<?= $this->element('sql_dump'); ?>
 						</div>
 						<?php } ?>
-						
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<!--
+<div class="row">
+		<div class="col-md-3">
+		
+		</div>
+		<div class="col-md-9">
+			<div class="content-wrapper">
+				<div class="content-inner">
+					<div class="wrapper footer">
+						<span class="pull-left">Copyright &copy; <?= date('Y'); ?> <a href="http://www.ridiculous-innovations.com/" title="We are RoboCop!">Ridiculous Innovations</a></span>
+						<span class="pull-right">Development partner <a href="http://www.fuerteint.com/" title="Mobile development agency">Fuerte International</a></span>
+						&nbsp;
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+-->
 </div>
 <?php
 // TODO: Add configurable sidebar

@@ -25,17 +25,19 @@ $(function() {
 		success: function(json) {
 			$('#areachart p').remove();
 			var chartData = JSON.parse(json);
-			var morris_area_options = {
+			var options = {
 				element: 'areachart',
 				behaveLikeLine: true,
 				data: chartData.data,
 				xkey: "x",
-				ykeys: ["a", "b", "c", "d"],
-				labels: ["iOS", "Android", "Windows 8", "Web Clips"],
+				//ykeys: ["a", "b", "c", "d"],
+				ykeys: ["a", "b"],
+				//labels: ["iOS", "Android", "Windows 8", "Web Clips"],
+				labels: ["iOS", "Android"],
 				lineColors: ["#61a9dc", "#71c280", "#df6064", "#8963ac", "#1abc9c", "#34495e", "#9b59b6", "#e74c3c"]
 			};
 			
-			Morris.Area(morris_area_options);
+			Morris.Area(options);
 		}
 	});
 		

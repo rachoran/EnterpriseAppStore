@@ -105,19 +105,12 @@ class ApplicationsController extends AppController {
 		$this->setAdditionalCssFiles(array('basic-edit'));
 		$this->setAdditionalJavascriptFiles(array('application-list'));
 		
+		$groupIds = Me::groupIds();
 		if ($this->request->is('post')) {
 			$this->set('searchTerm', $this->request->data['search']);
-			$data = $this->Application->searchFor($this->request->data['search']);
+			$data = $this->Application->searchFor($this->request->data['search'], $groupIds);
 		}
 		else {
-			if (Me::isUser()) {
-				$groups = $this->Group->getGroupsForUser(Me::id(), false);
-				$groupIds = array();
-				foreach ($groups as $group) {
-					$groupIds[] = $group['Group']['id'];
-				}
-			}
-			else $groupIds = null;
 			$data = $this->Application->getAll($groupIds);
 		}
 		$this->set('apps', $data);
@@ -181,14 +174,7 @@ class ApplicationsController extends AppController {
 		$this->set('basicInfo', $basicInfo);
 		
 		// History
-		if (Me::isUser()) {
-			$groups = $this->Group->getGroupsForUser(Me::id(), false);
-			$groupIds = array();
-			foreach ($groups as $group) {
-				$groupIds[] = $group['Group']['id'];
-			}
-		}
-		else $groupIds = null;
+		$groupIds = Me::groupIds();
 		$apps = $this->Application->getAllHistoryForApp($app['Application']['identifier'], $app['Application']['platform'], $groupIds);
 		$this->set('appsList', $apps);
 		

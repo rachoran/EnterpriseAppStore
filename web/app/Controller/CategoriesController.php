@@ -8,7 +8,7 @@ class CategoriesController extends AppController {
 	
 	public function isAuthorized($user) {
 	    $ok = false;
-	    if (Me::minUser()) {
+	    if (Me::minDev()) {
 	    	$a = strtolower($this->params['action']);
 	    	if ($a == 'edit' || $a == 'delete') {
 	        	$ok = Me::minDev();

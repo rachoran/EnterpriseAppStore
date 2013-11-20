@@ -87,7 +87,8 @@ class AppController extends Controller {
 		$counts = array();
 		
 		// Counting items (primarily for the left menu but used elsewhere)
-		$counts['applications'] = $this->Application->countAll();
+		$groupIds = Me::groupIds();
+		$counts['applications'] = $this->Application->countAll($groupIds);
         $counts['users'] = $this->User->countAll();
         $counts['groups'] = $this->Group->countAll();
         $counts['categories'] = $this->Category->countAll();

@@ -1,6 +1,8 @@
 <?php
 
 App::uses('AuthComponent', 'Controller/Component');
+App::uses('AppModel', 'Model');
+App::uses('Group', 'Model');
 
 
 class Me {
@@ -89,6 +91,20 @@ class Me {
 	public static function get($variable='id') {
 		self::checkcomponentCollection();
 		return self::$auth->user($variable);
+	}
+	
+	private static $groupIdsCache;
+	
+	public static function groupIds() {
+		if (self::minDev()) return null;
+		if (!empty(self::$groupIdsCache)) return self::$groupIdsCache;
+		$group = new Group();
+		$groups = $group->getGroupsForUser(self::id(), false);
+		self::$groupIdsCache = array();
+		foreach ($groups as $group) {
+			self::$groupIdsCache[] = $group['Group']['id'];
+		}
+		return self::$groupIdsCache;
 	}
 			
 }

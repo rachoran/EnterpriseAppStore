@@ -14,7 +14,7 @@ class AdminApiController extends AppController {
 		}
 	}
 	
-	/* Add slash (/) to uncomment this method
+	//* Add slash (/) to uncomment this method
 	// This method is designed for testing only, do not ever leave uncommented on a production server
 	public function generateDummyAppsAndDownloads() {
 		$x = 0;
@@ -22,7 +22,7 @@ class AdminApiController extends AppController {
 			for ($d = 0; $d <= 24; $d++) {
 				$rand = rand(5, 25);
 				for ($r = 0; $r <= $rand; $r++) {
-					$this->Download->saveDownload(2, (time() - $this->Download->daysToSeconds($d)));
+					$this->Download->saveDownload(1, (time() - $this->Download->daysToSeconds($d)));
 					$x++;
 				}
 			}

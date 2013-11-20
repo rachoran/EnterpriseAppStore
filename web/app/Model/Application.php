@@ -134,9 +134,7 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 		return $data;
 	}
 	
-	public function getAllHistoryForApp($identifier, $platform, $groupIds=null) {
-		$options = array();
-		$options['conditions'] = array('Application.identifier' => $identifier, 'Application.platform' => (int)$platform);
+	private function checkOptionsForUser($options, $groupIds) {
 		if (Me::isUser()) {
 			$options['joins'] = array(
 			    array('table' => 'applications_groups',
@@ -149,20 +147,29 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 			);
 			$options['conditions']['GroupJoin.group_id'] = $groupIds;
 		}
-$options['order'] = array('Application.created' => 'DESC');
+		return $options;
+	}
+	
+	public function getAllHistoryForApp($identifier, $platform, $groupIds=null) {
+		$options = array();
+		$options['conditions'] = array('Application.identifier' => $identifier, 'Application.platform' => (int)$platform);
+		$options = $this->checkOptionsForUser($options, $groupIds);
+		$options['order'] = array('Application.created' => 'DESC');
 		$data =  $this->find('all', $options);
 		return $data;
 	}
 	
-	public function searchFor($term) {
+	public function searchFor($term, $groupIds=null) {
 		$options = $this->basicOptions();
 		$options['conditions'] = array('Application.name LIKE \'%'.$term.'%\'');
+		$options = $this->checkOptionsForUser($options, $groupIds);
 		$data =  $this->find('all', $options);
 		return $data;
 	}
 	
-	public function countAll() {
+	public function countAll($groupIds=null) {
 		$options = array();
+		$options = $this->checkOptionsForUser($options, $groupIds);
 		$options['group'] = array('Application.identifier', 'Application.platform');
 		return $this->find('count', $options);
 	}
