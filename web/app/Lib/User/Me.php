@@ -66,6 +66,26 @@ class Me {
 		return ($role >= 3);
 	}
 			
+	public static function isUser() {
+		$role = self::roleNo();
+		return ($role == 0);
+	}
+			
+	public static function isDev() {
+		$role = self::roleNo();
+		return ($role == 1);
+	}
+			
+	public static function isAdmin() {
+		$role = self::roleNo();
+		return ($role == 2);
+	}
+			
+	public static function isOwner() {
+		$role = self::roleNo();
+		return ($role == 3);
+	}
+			
 	public static function get($variable='id') {
 		self::checkcomponentCollection();
 		return self::$auth->user($variable);

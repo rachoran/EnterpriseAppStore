@@ -5,7 +5,7 @@ class SigningController extends AppController {
 	var $uses = array('Signing');
 	
 	public function isAuthorized($user) {
-	    if (Me::minAdmin()) {
+	    if (Me::minDev()) {
 	        return true;
 	    }
 		else {

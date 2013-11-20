@@ -7,13 +7,20 @@ class CategoriesController extends AppController {
 	var $uses = array('Category', 'Application');
 	
 	public function isAuthorized($user) {
+	    $ok = false;
 	    if (Me::minUser()) {
-	        return true;
+	    	$a = strtolower($this->params['action']);
+	    	if ($a == 'edit' || $a == 'delete') {
+	        	$ok = Me::minDev();
+	        }
+	        else {
+		        return true;
+	        }
 	    }
-		else {
+		if (!$ok) {
 			Error::add('You are not authorized to access this section.', Error::TypeError);
-			return false;
 		}
+		return $ok;
 	}
 	
 	public function index() {

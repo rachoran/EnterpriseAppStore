@@ -43,7 +43,7 @@ class Application extends AppModel {
     
     // TODO: Move more stuff into the vitual fields
     public $virtualFields = array(
-    	//'count' => "COUNT(Application.id)"
+    	//'virtual' => "SUBSTR(MIN(CONCAT(LPAD(UNIX_TIMESTAMP(`created`), 15, '0'), `name`)), 16)"
 	);
 	
 	public $order = array('Application.name' => 'ASC', 'Application.created' => 'DESC');
@@ -89,7 +89,6 @@ class Application extends AppModel {
 			    	$ok = false;
 		    	}
 	    	}
-	    	
 	    }
 		return $ok;
 	}
@@ -97,7 +96,6 @@ class Application extends AppModel {
 	public function basicOptions() {
 		$options = array();
 		// TODO: Optimize
-		//*
 $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Application.platform ORDER BY created DESC LIMIT 1';
 		$latestId = '(SELECT id FROM applications '.$whereAndOrder.') AS id';
 		$latestLocation = '(SELECT location FROM applications '.$whereAndOrder.') AS location';
@@ -105,13 +103,26 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 		$latestVersion = '(SELECT version FROM applications '.$whereAndOrder.') AS version';
 		$latestCreated = '(SELECT created FROM applications '.$whereAndOrder.') AS created';
 		$options['fields'] = array('*', 'COUNT(Application.id) AS count', $latestId, $latestLocation, $latestName, $latestVersion, $latestCreated);
-		//*/
 		$options['group'] = array('Application.identifier', 'Application.platform');
 		return $options;
 	}
 	
-	public function getAll() {
+	public function getAll($groupIds=null) {
 		$options = $this->basicOptions();
+		if (Me::isUser()) {
+			$options['joins'] = array(
+			    array('table' => 'applications_groups',
+			        'alias' => 'GroupJoin',
+			        'type' => 'RIGHT',
+			        'conditions' => array(
+			            'Application.id = GroupJoin.application_id'
+			        )
+			    )
+			);
+			$options['conditions'] = array(
+			    'GroupJoin.group_id' => $groupIds,
+			);
+		}
 		$data =  $this->find('all', $options);
 		return $data;
 	}
@@ -123,10 +134,22 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 		return $data;
 	}
 	
-	public function getAllHistoryForApp($identifier, $platform) {
+	public function getAllHistoryForApp($identifier, $platform, $groupIds=null) {
 		$options = array();
-		$options['order'] = array('Application.created' => 'DESC');
 		$options['conditions'] = array('Application.identifier' => $identifier, 'Application.platform' => (int)$platform);
+		if (Me::isUser()) {
+			$options['joins'] = array(
+			    array('table' => 'applications_groups',
+			        'alias' => 'GroupJoin',
+			        'type' => 'RIGHT',
+			        'conditions' => array(
+			            'Application.id = GroupJoin.application_id'
+			        )
+			    )
+			);
+			$options['conditions']['GroupJoin.group_id'] = $groupIds;
+		}
+$options['order'] = array('Application.created' => 'DESC');
 		$data =  $this->find('all', $options);
 		return $data;
 	}

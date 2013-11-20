@@ -7,7 +7,9 @@ $this->Html->addCrumb('Categories', null);
 	<div class="widget-content-white glossed">
 		<div class="padded">
 			<p>
+				<?php if (Me::minAdmin()) { ?>
 				<a href="<?= $this->Html->url(array('controller' => 'categories', 'action' => 'edit', 'new')); ?>" class="btn btn-primary pull-right new">New category <i class="fa icon-plus"></i></a>
+				<?php } ?>
 			</p>
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
@@ -21,16 +23,21 @@ $this->Html->addCrumb('Categories', null);
 				    if (!empty($categories)) foreach ($categories as $category) {
 						$count = (int)$category[0]['appsCount'];   
 						if ($count == 0) {
-							$style = ' style="color:#999;"';
+							$style = ' style="color:#AAA;"';
+							$styleBadge = ' style="background-color:#AAA;"';
 						}
-						else $style = '';
+						else {
+							$style = '';
+							$styleBadge = '';
+						}
 				    ?>
 				    <tr class="clickable"<?= $style; ?>>
 				        <td class="icon"><i class="fa <?= $category['Category']['icon']; ?>"></i></td>
 				        <td class="name">
 							<!-- Begin Edit & delete buttons -->
-							<?= $this->element('Admin/Tables/edit', array('controller'=>'categories', 'item'=>$category['Category'])); ?>
+							<?php if (Me::minDev()) echo $this->element('Admin/Tables/edit', array('controller'=>'categories', 'item'=>$category['Category'])); ?>
 							<!-- End Edit & delete buttons -->
+							<span class="label label-default"<?= $styleBadge; ?>><?= $count; ?></span>
 				            <?php
 				            if ($count > 0) echo $this->Html->link(
 				            	$category['Category']['name'],
@@ -46,7 +53,6 @@ $this->Html->addCrumb('Categories', null);
 				            );
 				            else echo $category['Category']['name'];
 				            ?>
-				             <span class="label label-default"><?= $count; ?></span>
 				            <br />
 				            <small><?php if (strlen($category['Category']['description']) > 2) echo '('.$category['Category']['description'].')'; ?></small>
 				        </td>
@@ -56,7 +62,7 @@ $this->Html->addCrumb('Categories', null);
 				    else {
 				    ?>
 					<tr>
-						<td colspan="4" height="120" valign="middle" align="center" class="empty-cell">
+						<td colspan="4" height="120" valign="middle" align="center"<?php if (Me::minDev()) echo ' class="empty-cell"'; ?>>
 							<p style="margin-top:45px;">No categories were found.</p>
 						</td>
 					</tr>

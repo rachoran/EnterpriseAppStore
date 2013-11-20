@@ -32,12 +32,14 @@ $this->Html->addCrumb($data['Application']['name'], null);
 											?>
 											<i class="icon-<?= $icon; ?>" style="margin-left:12px; margin-right:24px;"></i>
 											<?= $data['Application']['name']; ?>
+											<?php if (Me::minDev()) { ?>
 											<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'delete', $data['Application']['id'], TextHelper::safeText($data['Application']['name']))); ?>" onclick="return env.confirmation('Are you sure you want to delete all builds for <?= $data['Application']['name']; ?>?');" class="btn btn-default pull-right" style="margin-right:6px;">
 								        		<i class="fa icon-ban-circle"><span> Delete</span></i>
 								        	</a>
-											<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $data['Application']['id'], TextHelper::safeText($data['Application']['name']))); ?>" class="btn btn-default pull-right" style="margin-right:6px;">
+											<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $data['Application']['id'], TextHelper::safeText($data['Application']['name']))); ?>" class="btn btn-default pull-right" style="margin-right:6px;margin-left:6px;">
 								        		<i class="fa icon-edit"><span> Edit</span></i>
 								        	</a>
+								        	<?php } ?>
 											<!-- Begin download/install button -->
 											<?= $this->element('Admin/installButton', array('item'=>$data, 'id'=>$data['Application']['id'])); ?>
 											<!-- End download/install button -->
@@ -154,70 +156,9 @@ $this->Html->addCrumb($data['Application']['name'], null);
 				<div class="widget">
 					<div class="widget-content-white glossed">
 						<div class="padded">
-							<table id="appTable" class="table table-striped table-bordered table-hover selector-table">
-								<thead>
-								    <tr>
-								        <th class="icon">&nbsp;</th>
-								        <th class="name">Versions</th>
-								        <th class="edit">Action</th>
-								    </tr>
-								</thead>
-								<tbody>
-								    <?php
-								    foreach ($appsList as $item) {
-								    	$icon = Platforms::iconForPlatform($item['Application']['platform']);
-								    	$ext = Platforms::extensionForPlatform($item['Application']['platform']);
-										$current = ($data['Application']['id'] == $item['Application']['id']) ? ' <small>(Current build)</small>' : '';
-								    ?>
-								    <tr class="<?= $icon; ?>">
-								        <td class="icon">
-								        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'view', $item['Application']['id'], $item['Application']['name'])); ?>">
-								        		<img src="<?= Storage::urlForIconForAppWithId($item['Application']['id'], $item['Application']['location']).'?t='.time(); ?>" alt="<?php echo $item['Application']['name']; ?>" />
-								        	</a>
-								        </td>
-								        <td class="name">
-											<!-- Begin download/install -->
-											<?= $this->element('Admin/installButton', array('item'=>$item)); ?>
-											<!-- End download/install -->
-								            <i class="icon-<?= $icon ?>" style="margin-right: 6px;"></i>
-								            <?php echo $this->Html->link($item['Application']['name'], array('controller' => 'applications', 'action' => 'view', $item['Application']['id'])); ?>
-								            <?= $current; ?>
-								            <br />
-							            	<?php
-							            	if ($ext) {
-							            	?>
-								            <!--<small style="margin-right: 12px;">
-								            	<strong>Download: </strong>
-								            	<a href="" title="Download app">
-								            		<?= $ext; ?>
-								            		<i class="fa icon-cloud-download"></i>
-								            	</a>
-								            </small>-->
-								            <small style="margin-right: 12px;"><strong>Date:</strong> <?= $item['Application']['created']; ?> </small>
-							            	<?php
-							            	}	
-							            	?>
-								        </td>
-								        <td class="edit">
-								        	<?php
-								        	//echo $this->Html->link(__('Edit'), array('controller' => 'users', 'action' => 'view', $item['Application']['id']), array('class'=>'btn btn-default'));
-								        	//echo $this->Html->link(__('Delete'), array('controller' => 'users', 'action' => 'view', $item['Application']['id']), array('class'=>'btn btn-default'));
-								        	?>
-								        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'edit', $item['Application']['id'], $item['Application']['name'])); ?>">
-								        		<i class="fa icon-edit"><span> Edit</span></i>
-								        	</a>
-								        	<br />
-								        	<a href="<?php echo $this->Html->url(array("controller" => 'applications', 'action' => 'delete', $item['Application']['id'], $item['Application']['name'])); ?>" onclick="return env.confirmation('Are you sure you want to delete user <?php echo $item['Application']['name']; ?>?');">
-								        		<i class="fa icon-ban-circle"><span> Delete</span></i>
-								        	</a>
-								        </td>
-								    </tr>
-								    <?php
-								    }
-								    unset($items);
-								    ?>
-								</tbody>
-							</table>
+							<!-- Begin pill selector -->
+							<?= $this->element('DB/applicationTable', array('apps' => $appsList)); ?>
+							<!-- End pill selector -->
 						</div>
 					</div>
 				</div>

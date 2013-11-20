@@ -35,7 +35,7 @@ class Category extends AppModel {
 	
 	public function getAllWithInfo() {
 		$options = array();
-		$options['fields'] = array('*', 'count(ApplicationsJoin.application_id) AS appsCount');
+		$options['fields'] = array('*', 'count(ApplicationsJoin.application_id) AS appsCount', '(count(ApplicationsJoin.application_id) > 0) AS topCat');
 		$options['joins'] = array(
 			array(
 				'table' => 'applications_categories',
@@ -46,8 +46,12 @@ class Category extends AppModel {
 				)
 			) 
 		);
+		if (Me::isUser()) {
+			// TODO: Only show categories containing apps
+			//$options['conditions'] = array('appsCount > 0');
+		}
 		$options['group'] = array('Category.id');
-		$options['order'] = array('Category.name' => 'asc');
+		$options['order'] = array('topCat' => 'DESC', 'Category.name' => 'ASC');
 		$data = $this->find('all', $options);
 		return $data;
 	}

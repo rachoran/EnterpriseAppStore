@@ -105,7 +105,6 @@ class User extends AppModel {
 	}
 	
 	public function getOne($id) {
-		$this->id = $id;
         $data = $this->read(null, $id);
         unset($data['User']['password']);	
         unset($data['User']['password_token']);

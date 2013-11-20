@@ -19,7 +19,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
 					<key>kind</key>
 					<string>software-package</string>
 					<key>url</key>
-					<string><?= $this->Html->url('/applications/download/'.$app['id'].'/'.TextHelper::safeText($app['name']).'.ipa', true); ?></string>
+					<string><?= $this->Html->url('/applications/install/'.$app['id'].'/'.TextHelper::safeText($app['name']).'.ipa', true); ?></string>
 				</dict>
 				<?php if (isset($largeIcon)) {  ?><dict>
 					<key>kind</key>

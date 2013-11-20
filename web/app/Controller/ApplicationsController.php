@@ -9,13 +9,20 @@ class ApplicationsController extends AppController {
 	var $uses = array('Application', 'Category', 'Group', 'Attachment', 'History');
 	
 	public function isAuthorized($user) {
+	    $ok = false;
 	    if (Me::minUser()) {
-	        return true;
+	    	$a = strtolower($this->params['action']);
+	    	if ($a == 'delete' || $a == 'deleteall' || $a == 'edit' || $a == 'uploadapp') {
+	        	$ok = Me::minAdmin();
+	        }
+	        else {
+		        return true;
+	        }
 	    }
-		else {
+		if (!$ok) {
 			Error::add('You are not authorized to access this section.', Error::TypeError);
-			return false;
 		}
+		return $ok;
 	}
 	
 	public function beforeFilter() {
@@ -40,9 +47,15 @@ class ApplicationsController extends AppController {
 		$this->set('needsShine', false);
 	}
 	
-	public function download($id) {
+	public function download($id, $name) {
 		$app = $this->Application->getOne($id);
 		if ($app['Application']['id']) {
+			if ($name == 'install') {
+				$this->History->saveHistory($id, 'INS');
+			}
+			else {
+				$this->History->saveHistory($id, 'DWN');
+			}
 			// TODO: Enable S3 support
 			$ext = ($app['Application']['platform'] <= 2) ? 'ipa' : 'apk';
 			$path = 'Userfiles'.DS.'Applications'.DS.$app['Application']['id'].DS.'app.'.$ext;
@@ -60,6 +73,10 @@ class ApplicationsController extends AppController {
 		else {
 			return $this->redirect(array('action' => 'index'));
 		}
+	}
+	
+	public function install($id) {
+		return $this->download($id, 'install');
 	}
 	
 	public function delete($id) {
@@ -93,7 +110,15 @@ class ApplicationsController extends AppController {
 			$data = $this->Application->searchFor($this->request->data['search']);
 		}
 		else {
-			$data = $this->Application->getAll();
+			if (Me::isUser()) {
+				$groups = $this->Group->getGroupsForUser(Me::id(), false);
+				$groupIds = array();
+				foreach ($groups as $group) {
+					$groupIds[] = $group['Group']['id'];
+				}
+			}
+			else $groupIds = null;
+			$data = $this->Application->getAll($groupIds);
 		}
 		$this->set('apps', $data);
 	}
@@ -156,7 +181,15 @@ class ApplicationsController extends AppController {
 		$this->set('basicInfo', $basicInfo);
 		
 		// History
-		$apps = $this->Application->getAllHistoryForApp($app['Application']['identifier'], $app['Application']['platform']);
+		if (Me::isUser()) {
+			$groups = $this->Group->getGroupsForUser(Me::id(), false);
+			$groupIds = array();
+			foreach ($groups as $group) {
+				$groupIds[] = $group['Group']['id'];
+			}
+		}
+		else $groupIds = null;
+		$apps = $this->Application->getAllHistoryForApp($app['Application']['identifier'], $app['Application']['platform'], $groupIds);
 		$this->set('appsList', $apps);
 		
 		// Attachments

@@ -33,8 +33,8 @@ $this->Html->addCrumb('Users', null);
 				        	<?php } ?>
 				            <?php
 				            echo $this->Html->link($user['lastname'].', '.$user['firstname'], array('controller' => 'users', 'action' => 'view', $user['id'], $user['username']), array('class' => 'view'));
-				            if ($user['role'] != 'owner') {
-					            echo '<small>('.__('Owner').')</small>';
+				            if ($user['role'] == 'owner') {
+					            echo ' <small>('.__('Owner').')</small>';
 					        }
 				            ?><br />
 				            <small>Email <?php if (strlen($user['email']) > 2) echo '<a href="mailto:'.$user['email'].'" title="Email user '.$user['firstname'].' '.$user['lastname'].'">'.$user['email'].'</a>'; ?></small>

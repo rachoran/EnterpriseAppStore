@@ -28,7 +28,6 @@ function checkMenu($name, $t) {
 				<?= $this->element('Menu/Sections/home'); ?>
 				<?= $this->element('Menu/Sections/applications'); ?>
 				<?= $this->element('Menu/Sections/users'); ?>
-				<?= $this->element('Menu/Sections/groups'); ?>
 				<?= $this->element('Menu/Sections/categories'); ?>
 				<?= $this->element('Menu/Sections/groups'); ?>
 				<?= $this->element('Menu/Sections/settings'); ?>

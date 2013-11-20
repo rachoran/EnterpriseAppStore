@@ -19,8 +19,7 @@ class History extends AppModel {
 		$this->create();
 		$this->set('application_id', (int)$appId);
 		$this->set('action', strtoupper(substr($action, 0, 3)));
-		// TODO: Use proper user id
-		$this->set('user_id', (int)1);
+		$this->set('user_id', Me::id());
 		$this->save();
 		return $this;
 	}

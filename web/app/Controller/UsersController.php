@@ -5,13 +5,20 @@ class UsersController extends AppController {
 	var $uses = array('User', 'Group', 'Application');
 	
 	public function isAuthorized($user) {
-	    if (Me::minAdmin()) {
-	        return true;
+	    $ok = true;
+	    if (!Me::minAdmin()) {
+	    	$a = strtolower($this->params['action']);
+	    	if ($a == 'account') {
+	        	$ok = Me::minUser();
+	        }
+	        else {
+		        return false;
+	        }
 	    }
-		else {
+		if (!$ok) {
 			Error::add('You are not authorized to access this section.', Error::TypeError);
-			return false;
 		}
+		return $ok;
 	}
 	
 	public function beforeFilter() {
@@ -77,14 +84,14 @@ class UsersController extends AppController {
 		$this->setAdditionalCssFiles(array('basic-edit'));
 		
 		// Checking for Id
-		$id = $this->Auth->user('id');
+		$id = Me::id();
 		
 		// Groups for the join subset
 		$list = $this->User->Group->find('list');
 		$this->set('groups', $list);
 		
 		$ok = false;
-		$user = $this->User->findById($id);
+		$user = $this->User->getOne($id);
 		if (empty($this->request->data)) {
 			// Getting data
         	$this->request->data = $user;

@@ -1,4 +1,11 @@
+<?php if (Me::minDev()) { ?>
+<!--
+<li<?= checkMenu('signing', $this); ?>>
+	<a href="<?= $this->Html->url('/signing', true); ?>"> <span class="badge pull-right"><?= ($menuCounts['signing'] + 0); ?></span> <i class="icon-certificate"></i> Signing </a>
+</li>
+-->
 <?php
+}
 if (Me::minAdmin()) {
 ?>
 <li<?php echo checkMenu('settings', $this); echo checkMenu('signing', $this); echo checkMenu('apikeys', $this); ?>>
