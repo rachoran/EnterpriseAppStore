@@ -1,13 +1,13 @@
 Enterprise App Store
 ==================
 
-To host iOS, Android and Windows 8 apps. Please remember, this is a development version only!!!!!!
+To host iOS and Android apps (will be adding Windows 8 phone, desktop and tablet soon!). Please remember, this is a development version only!!!!!!
 
 
-At the moment the databse is not cleaned and the authentication, at least user roles, are far from bulletproof.
+At the moment the databse is not cleaned and been working on the authentication but haven't done any proper testing yet so it won't be probably completely bulletproof.
 We are working on the system every day so hopefully we'll have a stable version before the December 2013.
 
-The code should not be used in any way for any commercial project at the moment until a final stable version will be released by the end of this year, this version will contain all the neccessary unit tests to make sure the code will stay stable for good :).
+The code should not be used in any way for any commercial project at the moment until a final stable version will be released by the end of this year, that version will contain all the neccessary unit tests to make sure the code will stay stable for good :).
 
 Home page:
 <img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen1.jpg" alt="Home page" />
