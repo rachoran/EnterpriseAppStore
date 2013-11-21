@@ -14,7 +14,7 @@ class AdminApiController extends AppController {
 		}
 	}
 	
-	//* Add slash (/) to uncomment this method
+	/* Add slash (/) to uncomment this method
 	// This method is designed for testing only, do not ever leave uncommented on a production server
 	public function generateDummyAppsAndDownloads() {
 		$x = 0;
@@ -30,6 +30,11 @@ class AdminApiController extends AppController {
 		die('Generated: '.$x);
 	}
 	//*/
+	
+	public function calendarData($days=15) {
+		$data = array();
+		$this->outputApi($data, false);
+	}
 	
 	public function platformDownloads($days=15) {
 		$data = $this->Download->dataForChartForLastNumberOfDaysWithInfo(12);

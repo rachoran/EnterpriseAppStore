@@ -3,7 +3,7 @@
 class CalendarController extends AppController {
 	
 	public function isAuthorized($user) {
-	    if (Me::minDev()) {
+	    if (Me::minUser()) {
 	        return true;
 	    }
 		else {

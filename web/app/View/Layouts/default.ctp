@@ -108,7 +108,7 @@ if (isset($ajaxFileUpload)) {
 						<?= $this->fetch('content'); ?>
 						<!-- End content -->
 						
-						<?php if ($debugMySQL && Me::minOwner()) { ?>
+						<?php if ($debugMySQL) { ?>
 						<div class="widget cake-sql-log">
 							<?= $this->element('sql_dump'); ?>
 						</div>

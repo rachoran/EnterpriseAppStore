@@ -71,7 +71,7 @@ class AppController extends Controller {
 	                'User.password' => $cookie['password']
 	            )
 	        ));
-	
+			
 	        if ($user) {
 	        	if ($this->Auth->login($user)) {
 	        		Error::add('Login refreshed using cookies.', Error::TypeInfo);
