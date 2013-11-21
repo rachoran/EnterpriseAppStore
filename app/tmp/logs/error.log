@@ -1,0 +1,295 @@
+2013-11-20 22:18:31 Error: [MissingControllerException] Controller class UserfilesController could not be found.
+Exception Attributes: array (
+  'class' => 'UserfilesController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/Userfiles/Applications/test/screen.png?time=1384985911
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-20 22:31:17 Error: [MissingControllerException] Controller class UserfilesController could not be found.
+Exception Attributes: array (
+  'class' => 'UserfilesController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/Userfiles/Applications/test/screen.png?time=1384986677
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-20 22:33:52 Error: Fatal Error (1): Class 'Group' not found in [/Projects/Web/EnterpriseAppStore/web/app/Lib/User/Me.php, line 99]
+2013-11-20 22:33:52 Error: [FatalErrorException] Class 'Group' not found
+Request URL: /EnterpriseAppStore/web/applications
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Error/ErrorHandler.php(205): ErrorHandler::handleFatalError(1, 'Class 'Group' n...', '/Projects/Web/E...', 99)
+#1 [internal function]: ErrorHandler::handleError(1, 'Class 'Group' n...', '/Projects/Web/E...', 99, Array)
+#2 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 1, 'Class 'Group' n...', '/Projects/Web/E...', 99, Array)
+#3 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-11-20 22:34:23 Error: Fatal Error (1): Class 'AppModel' not found in [/Projects/Web/EnterpriseAppStore/web/app/Model/Group.php, line 3]
+2013-11-20 22:34:23 Error: [FatalErrorException] Class 'AppModel' not found
+Request URL: /EnterpriseAppStore/web/applications
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Error/ErrorHandler.php(205): ErrorHandler::handleFatalError(1, 'Class 'AppModel...', '/Projects/Web/E...', 3)
+#1 [internal function]: ErrorHandler::handleError(1, 'Class 'AppModel...', '/Projects/Web/E...', 3, Array)
+#2 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 1, 'Class 'AppModel...', '/Projects/Web/E...', 3, Array)
+#3 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-11-20 22:44:55 Error: Fatal Error (64): Cannot redeclare checkMenu() (previously declared in /Projects/Web/EnterpriseAppStore/web/app/View/Elements/Menu/leftMenu.ctp:4) in [/Projects/Web/EnterpriseAppStore/web/app/View/Elements/Menu/leftMenu.ctp, line 7]
+2013-11-20 22:44:55 Error: [FatalErrorException] Cannot redeclare checkMenu() (previously declared in /Projects/Web/EnterpriseAppStore/web/app/View/Elements/Menu/leftMenu.ctp:4)
+Request URL: /EnterpriseAppStore/web/applications
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Error/ErrorHandler.php(205): ErrorHandler::handleFatalError(64, 'Cannot redeclar...', '/Projects/Web/E...', 7)
+#1 [internal function]: ErrorHandler::handleError(64, 'Cannot redeclar...', '/Projects/Web/E...', 7, Array)
+#2 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Core/App.php(931): call_user_func('ErrorHandler::h...', 64, 'Cannot redeclar...', '/Projects/Web/E...', 7, Array)
+#3 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Core/App.php(904): App::_checkFatalError()
+#4 [internal function]: App::shutdown()
+#5 {main}
+2013-11-20 23:00:22 Error: [MissingControllerException] Controller class AssetsController could not be found.
+Exception Attributes: array (
+  'class' => 'AssetsController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/assets/js/jquery-1.10.2.min.map
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-20 23:02:12 Error: [MissingControllerException] Controller class AssetsController could not be found.
+Exception Attributes: array (
+  'class' => 'AssetsController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/assets/js/jquery-1.10.2.min.map
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-20 23:03:00 Error: [MissingControllerException] Controller class AssetsController could not be found.
+Exception Attributes: array (
+  'class' => 'AssetsController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/assets/js/jquery-1.10.2.min.map
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-20 23:04:48 Error: [MissingControllerException] Controller class AssetsController could not be found.
+Exception Attributes: array (
+  'class' => 'AssetsController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/assets/js/jquery-1.10.2.min.map
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-20 23:06:52 Error: [MissingActionException] Action AdminApiController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminApiController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/adminapi
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminApiController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-20 23:52:47 Error: [MissingActionException] Action AdminApiController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminApiController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/adminapi/
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminApiController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-21 00:20:07 Error: [MissingControllerException] Controller class AssetsController could not be found.
+Exception Attributes: array (
+  'class' => 'AssetsController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/assets/js/jquery-1.10.2.min.map
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-21 09:16:03 Error: [MissingControllerException] Controller class AssetsController could not be found.
+Exception Attributes: array (
+  'class' => 'AssetsController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/assets/js/jquery-1.10.2.min.map
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-21 09:16:18 Error: [MissingControllerException] Controller class AssetsController could not be found.
+Exception Attributes: array (
+  'class' => 'AssetsController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/assets/js/jquery-1.10.2.min.map
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-21 09:19:36 Error: [MissingControllerException] Controller class AssetsController could not be found.
+Exception Attributes: array (
+  'class' => 'AssetsController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/assets/js/jquery-1.10.2.min.map
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-21 09:19:45 Error: [MissingControllerException] Controller class AssetsController could not be found.
+Exception Attributes: array (
+  'class' => 'AssetsController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/assets/js/jquery-1.10.2.min.map
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-21 09:19:50 Error: [MissingControllerException] Controller class AssetsController could not be found.
+Exception Attributes: array (
+  'class' => 'AssetsController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/assets/js/jquery-1.10.2.min.map
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-21 09:19:53 Error: [MissingControllerException] Controller class AssetsController could not be found.
+Exception Attributes: array (
+  'class' => 'AssetsController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/assets/js/jquery-1.10.2.min.map
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-21 09:20:08 Error: [MissingControllerException] Controller class AssetsController could not be found.
+Exception Attributes: array (
+  'class' => 'AssetsController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/assets/js/jquery-1.10.2.min.map
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-21 09:33:57 Error: [MissingControllerException] Controller class AssetsController could not be found.
+Exception Attributes: array (
+  'class' => 'AssetsController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/assets/js/jquery-1.10.2.min.map
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-21 09:34:34 Error: [MissingControllerException] Controller class AssetsController could not be found.
+Exception Attributes: array (
+  'class' => 'AssetsController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/assets/js/jquery-1.10.2.min.map
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-21 09:36:26 Error: [MissingActionException] Action AdminApiController::calendarData() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminApiController',
+  'action' => 'calendarData',
+)
+Request URL: /EnterpriseAppStore/web/AdminApi/calendarData
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminApiController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-21 09:37:13 Error: [MissingActionException] Action AdminApiController::calendarData() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminApiController',
+  'action' => 'calendarData',
+)
+Request URL: /EnterpriseAppStore/web/AdminApi/calendarData
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminApiController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-21 09:37:32 Error: [MissingActionException] Action AdminApiController::calendarData() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminApiController',
+  'action' => 'calendarData',
+)
+Request URL: /EnterpriseAppStore/web/AdminApi/calendarData
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminApiController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-21 09:37:41 Error: [MissingActionException] Action AdminApiController::calendarData() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminApiController',
+  'action' => 'calendarData',
+)
+Request URL: /EnterpriseAppStore/web/AdminApi/calendarData
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminApiController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-21 16:09:27 Error: [MissingActionException] Action AdminApiController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'AdminApiController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/adminapi/
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AdminApiController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
+2013-11-21 18:36:09 Error: [PDOException] SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'user_id' cannot be null
+Request URL: /EnterpriseAppStore/web/applications/view/1/ijenkins
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Model/Datasource/DboSource.php(460): PDOStatement->execute(Array)
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Model/Datasource/DboSource.php(426): DboSource->_execute('INSERT INTO `en...', Array)
+#2 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Model/Datasource/DboSource.php(1004): DboSource->execute('INSERT INTO `en...')
+#3 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Model/Model.php(1827): DboSource->create(Object(History), Array, Array)
+#4 /Projects/Web/EnterpriseAppStore/web/app/Model/History.php(23): Model->save()
+#5 /Projects/Web/EnterpriseAppStore/web/app/Controller/ApplicationsController.php(133): History->saveHistory('1', 'VEW')
+#6 [internal function]: ApplicationsController->view('1', 'ijenkins')
+#7 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Controller/Controller.php(490): ReflectionMethod->invokeArgs(Object(ApplicationsController), Array)
+#8 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#9 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(ApplicationsController), Object(CakeRequest), Object(CakeResponse))
+#10 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#11 {main}
+2013-11-21 19:19:23 Error: [MissingControllerException] Controller class UserfilesController could not be found.
+Exception Attributes: array (
+  'class' => 'UserfilesController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/Userfiles/Applications/test/screen.png?time=1385061563
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-21 19:53:48 Error: [MissingControllerException] Controller class EnterpriseAppStoreController could not be found.
+Exception Attributes: array (
+  'class' => 'EnterpriseAppStoreController',
+  'plugin' => NULL,
+)
+Request URL: /EnterpriseAppStore/web/EnterpriseAppStore/
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#1 {main}
+2013-11-21 19:54:24 Error: [MissingActionException] Action AppController::index() could not be found.
+Exception Attributes: array (
+  'controller' => 'AppController',
+  'action' => 'index',
+)
+Request URL: /EnterpriseAppStore/web/app/
+Stack Trace:
+#0 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(187): Controller->invokeAction(Object(CakeRequest))
+#1 /Projects/Web/EnterpriseAppStore/web/lib/Cake/Routing/Dispatcher.php(162): Dispatcher->_invoke(Object(AppController), Object(CakeRequest), Object(CakeResponse))
+#2 /Projects/Web/EnterpriseAppStore/web/app/webroot/index.php(121): Dispatcher->dispatch(Object(CakeRequest), Object(CakeResponse))
+#3 {main}
