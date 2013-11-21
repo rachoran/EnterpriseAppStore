@@ -81,7 +81,7 @@ function verValCh($key, $settings) {
 				</div>
 			</div>
 			
-			<div class="accordion-group widget-content-white glossed">
+			<!--<div class="accordion-group widget-content-white glossed">
 				<div class="padded">
 					<div class="accordion-heading">
 						<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#invitation-message">
@@ -107,7 +107,7 @@ function verValCh($key, $settings) {
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>-->
 						
 			<div class="accordion-group widget-content-white glossed">
 				<div class="padded">
@@ -119,12 +119,12 @@ function verValCh($key, $settings) {
 					<div id="user-self-registration" class="accordion-body collapse in">
 						<div class="accordion-inner">
 							<div class="form-group">
-								<label class="col-md-3 control-label">Allow user registrations</label>
+								<label class="col-md-3 control-label">Disable user registrations</label>
 								<div class="col-md-1">
-									<input type="checkbox" name="settings[sefRegAllow]"<?php echo verValCh('sefRegAllow', $s); ?> class="form-control" />
+									<input type="checkbox" name="settings[sefRegDisable]"<?php echo verValCh('sefRegDisable', $s); ?> class="form-control" />
 								</div>
 								<div class="col-md-6">
-									<span>Allow users to register without an invitation</span>
+									<span>Disable user registrations</span>
 								</div>
 							</div>
 							<div class="form-group">

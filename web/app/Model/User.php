@@ -1,6 +1,8 @@
 <?php
 
 App::uses('AuthComponent', 'Controller/Component');
+App::uses('Settings', 'Model');
+
 
 class User extends AppModel {
 	
@@ -75,19 +77,39 @@ class User extends AppModel {
             'unique' => array(
 		        'rule' => 'isUnique',
 		        'message' => 'Email is already registered'
-		    ) 
+		    ),
+		    'isEmailAllowed' => array(
+				'rule' => array('isEmailAllowed'), 
+				'message' => 'Email is not registered with an allowed domain.' 
+			)
         ),
         'password' => array(
             'required' => array(
                 'rule'    => array('minLength', '8'),
 				'message' => 'Minimum 8 characters long',
             ),
-		    'identicalFieldValues' => array( 
-				'rule' => array('identicalFieldValues', 'password2' ), 
+		    'identicalFieldValues' => array(
+				'rule' => array('identicalFieldValues', 'password2'), 
 				'message' => 'Passwords don\'t match' 
 			)
         )
     );
+    
+    public function isEmailAllowed($field=array()) {
+    	$settings = new Settings();
+    	$emails = $settings->get('sefRegDomains');
+    	if (!empty($emails)) {
+	    	foreach(preg_split("/((\r?\n)|(\r\n?))/", $emails) as $line) {
+		    	$domain = trim($line);
+		    	$domain = preg_replace('/\./si', '\.', $domain);
+		    	if (preg_match('/'.$domain.'/si', $field['email'])) {
+			    	return true;
+		    	}
+	    	}
+	    	return false;
+    	}
+    	else return true;
+    }
     
     public function beforeSave($options = array()) {
 	    if (isset($this->data[$this->alias]['password']) && !$this->dontEncodePassword) {

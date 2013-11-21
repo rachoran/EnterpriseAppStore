@@ -81,13 +81,7 @@ if (isset($cssFiles)) foreach ($cssFiles as $file) { ?>
 			
 							<!-- Begin content -->
 							<?= $this->fetch('content'); ?>
-							<!-- End content -->
-			
-							<?php if ($debugMySQL) { ?>
-								<div class="widget cake-sql-log">
-									<?= $this->element('sql_dump'); ?>
-								</div>
-							<?php } ?>
+							<!-- End content -->			
 						</div>
 					</div>
 				</div>

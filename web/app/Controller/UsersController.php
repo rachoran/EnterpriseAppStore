@@ -2,7 +2,7 @@
 
 class UsersController extends AppController {
 	
-	var $uses = array('User', 'Group', 'Application');
+	var $uses = array('User', 'Group', 'Application', 'Settings');
 	
 	public function isAuthorized($user) {
 	    $ok = true;
@@ -23,7 +23,12 @@ class UsersController extends AppController {
 	
 	public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('login', 'register', 'logout');
+        if ($this->Settings->get('sefRegDisable')) {
+        	$this->Auth->allow('login', 'logout');
+        }
+        else {
+	        $this->Auth->allow('login', 'register', 'logout');
+        }
     }
 
     public function login() {
@@ -42,13 +47,17 @@ class UsersController extends AppController {
 					$this->request->data['User']['password'] = $this->Auth->password($this->request->data['User']['password']);
 					$this->Cookie->write('remember_me_cookie', $this->request->data['User'], true, '1 day');
 	            }	
-	            return $this->redirect($this->Auth->redirect());
+	            return $this->redirect($this->Auth->redirect('/'));
 	        }
 	        Error::add('Invalid username or password, please try again.', Error::TypeError);
 	    }
+	    $this->set('disableRegistration', $this->Settings->get('sefRegDisable'));
 	}
 	
 	public function register() {
+		if ($this->Settings->get('sefRegDisable')) {
+			return $this->redirect($this->Auth->redirect('/'));
+		}
 		$this->layout = 'outside';
         if ($this->request->is('post')) {
         	if ($this->User->isUsername($this->request->data['User']['username'])) {

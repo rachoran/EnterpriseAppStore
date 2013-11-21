@@ -24,5 +24,7 @@
 		</div>
 	</div>
 	<button type="submit" class="btn btn-primary btn-lg"><?= __('Sign in'); ?></button>
+	<?php if (!$disableRegistration) { ?>
 	<a href="<?= $this->Html->url('/users/register', true); ?>" class="btn btn-link"><?= __('Register'); ?></a>
+	<?php } ?>
 <?php echo $this->Form->end(); ?>
