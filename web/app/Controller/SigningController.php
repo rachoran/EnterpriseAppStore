@@ -37,10 +37,10 @@ class SigningController extends AppController {
 		
 		if ($isEdit) {
 			if (isset($this->request->data['apply'])) {
-				$this->redirect(array("controller" => "signing", "action" => "edit", $this->Signing->id, $this->request->data['formData']['name']));
+				$this->redirect(array('controller' => 'signing', 'action' => 'edit', $this->Signing->id, $this->request->data['formData']['name']));
 			}
 			else {
-				return $this->redirect(array('action' => 'index'));
+				$this->redirect(array('controller' => 'signing', 'action' => 'view', $this->Signing->id, $this->request->data['formData']['name']));
 			}
 		}
 	}

@@ -182,8 +182,8 @@ class UsersController extends AppController {
 					$this->redirect(array('controller' => 'users', 'action' => 'edit', $this->User->id, TextHelper::safeText($this->request->data['User']['username'])));
 				}
 				else {
-					// Redirecting to the index
-					$this->redirect(array('controller' => 'users', 'action' => 'index'));
+					// Redirecting to the view
+					$this->redirect(array('controller' => 'users', 'action' => 'view', $this->User->id, TextHelper::safeText($this->request->data['User']['username'])));
 				}
 			}
 			else {

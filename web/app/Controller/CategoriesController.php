@@ -72,11 +72,11 @@ class CategoriesController extends AppController {
 			
 			if (isset($this->request->data['apply'])) {
 				// Redirecting for the same page (Apply)
-				$this->redirect(array("controller" => "categories", "action" => "edit", $this->Category->id, TextHelper::safeText($this->request->data['name'])));
+				$this->redirect(array('controller' => 'categories', 'action' => 'edit', $this->Category->id, TextHelper::safeText($this->request->data['name'])));
 			}
 			else {
-				// Redirecting to the index
-				$this->redirect(array('action' => 'index'));
+				// Redirecting to the view
+				$this->redirect(array('controller' => 'categories', 'action' => 'view', $this->Category->id, TextHelper::safeText($this->request->data['name'])));
 			}
 		}
 		

@@ -74,8 +74,8 @@ class GroupsController extends AppController {
 				$this->redirect(array('controller' => 'groups', 'action' => 'edit', $this->Group->id, TextHelper::safeText($this->request->data['Group']['name'])));
 			}
 			else {
-				// Redirecting to the index
-				$this->redirect(array('action' => 'index'));
+				// Redirecting to the view
+				$this->redirect(array('controller' => 'groups', 'action' => 'view', $this->Group->id, TextHelper::safeText($this->request->data['Group']['name'])));
 			}
 		}
 		

@@ -143,6 +143,7 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 			    'GroupJoin.group_id' => $groupIds,
 			);
 		}
+		$options['limit'] = 100;
 		$data =  $this->find('all', $options);
 		return $data;
 	}

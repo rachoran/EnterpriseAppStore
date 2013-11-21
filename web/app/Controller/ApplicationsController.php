@@ -240,7 +240,7 @@ class ApplicationsController extends AppController {
 			}
 			else {
 				// Redirecting to the index
-				$this->redirect(array('action' => 'index'));
+				$this->redirect(array('controller' => 'applications', 'action' => 'view', $this->Application->id, TextHelper::safeText($this->request->data['Application']['name'])));
 			}
 		}
 		
