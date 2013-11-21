@@ -1,6 +1,4 @@
 .DS_Store
-
-
 /app/Userfiles/*
 /app/webroot/Userfiles/*
 /app/tmp/*
