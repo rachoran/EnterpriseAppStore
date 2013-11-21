@@ -1,7 +1,6 @@
-/web/app/tmp/cache/
 
-/web/app/tmp/logs/error.log
+/app/tmp/
 
 .DS_Store
 
-/web/app/Userfiles/Applications/
+/app/Userfiles/
