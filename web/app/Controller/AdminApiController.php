@@ -33,6 +33,21 @@ class AdminApiController extends AppController {
 	
 	public function calendarData($days=15) {
 		$data = array();
+		$apps = $this->Application->getAllForCalendar(Me::groupIds());
+		foreach ($apps as $app) {
+			$time = strtotime($app['Application']['created']);
+			$data[] = array(
+				'title' => $app['Application']['name'].' ('.$app['Application']['version'].')',
+				'start'=> $time,
+				'end'=> ($time + (60 * 10)),
+				'url'=>Router::url(array(
+					'controller'=>'applications',
+					'action'=>'view',
+					(int)$app['Application']['id'],
+					TextHelper::safeText($app['Application']['name'])
+				)
+			));
+		}
 		$this->outputApi($data, false);
 	}
 	

@@ -127,6 +127,26 @@ $whereAndOrder = 'WHERE identifier = Application.identifier AND platform = Appli
 		return $data;
 	}
 	
+	public function getAllForCalendar($groupIds=null) {
+		$options = array();
+		if (Me::isUser()) {
+			$options['joins'] = array(
+			    array('table' => 'applications_groups',
+			        'alias' => 'GroupJoin',
+			        'type' => 'RIGHT',
+			        'conditions' => array(
+			            'Application.id = GroupJoin.application_id'
+			        )
+			    )
+			);
+			$options['conditions'] = array(
+			    'GroupJoin.group_id' => $groupIds,
+			);
+		}
+		$data =  $this->find('all', $options);
+		return $data;
+	}
+	
 	public function getAllApplications() {
 		$this->unbindModel(array('hasAndBelongsToMany' => array('Group', 'Category')));
 		$options = $this->basicOptions();

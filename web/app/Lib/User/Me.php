@@ -100,6 +100,7 @@ class Me {
 		if (!empty(self::$groupIdsCache)) return self::$groupIdsCache;
 		$group = new Group();
 		$groups = $group->getGroupsForUser(self::id(), false);
+		//debug(self::id());
 		self::$groupIdsCache = array();
 		foreach ($groups as $group) {
 			self::$groupIdsCache[] = $group['Group']['id'];

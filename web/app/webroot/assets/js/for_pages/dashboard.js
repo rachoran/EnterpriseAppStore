@@ -23,8 +23,7 @@ $(function() {
 		type: 'GET',
 		url: env.baseUrl + 'AdminApi/platformDownloads',
 		success: function(json) {
-			alert(json);
-			//$('#areachart p').remove();
+			$('#areachart p').remove();
 			var chartData = JSON.parse(json);
 			var options = {
 				element: 'areachart',
