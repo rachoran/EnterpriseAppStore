@@ -285,7 +285,7 @@ class ApplicationsController extends AppController {
 		$extract = null;
 		$errors = null;
 		
-		$debug = 'a2'; // 'i' for iPhone & 'a' for Android or false to disable
+		$debug = false; // 'i' for iPhone & 'a' for Android or false to disable
 		
 		if ($debug) {
 			if ($debug == 'i') {
