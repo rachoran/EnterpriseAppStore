@@ -24,12 +24,11 @@ class User extends AppModel {
                 'rule' => array('notEmpty'),
                 'message' => 'A username is required'
             ),
-            'alphaNumeric' => array(
-                'rule'     => 'alphaNumeric',
-                'required' => true,
-                'message'  => 'Alphabets and numbers only'
-            ),
-            'between' => array(
+            'name' => array(
+	            'rule'    => array('minLength', '4'),
+	            'allowEmpty' => false,
+	        ),
+	        'between' => array(
                 'rule'    => array('between', 4, 40),
                 'message' => 'Between 4 to 40 characters'
             ),
