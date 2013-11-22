@@ -6,7 +6,7 @@ App::uses('ApplicationsDataHelper', 'Lib/Data/Helpers');
 
 class ApplicationsController extends AppController {
 	
-	var $uses = array('Application', 'Category', 'Group', 'Attachment', 'History');
+	var $uses = array('Application', 'Category', 'Group', 'Attachment', 'History', 'Download');
 	
 	public function isAuthorized($user) {
 	    $ok = false;
@@ -50,6 +50,7 @@ class ApplicationsController extends AppController {
 	public function download($id, $name) {
 		$app = $this->Application->getOne($id);
 		if ($app['Application']['id']) {
+			$this->Download->saveDownload($app['Application']['id'];
 			if ($name == 'install') {
 				$this->History->saveHistory($id, 'INS');
 			}

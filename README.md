@@ -19,16 +19,16 @@ Settings page:
 <img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen3.jpg" alt="Settings page" />
 
 Builds calendar page:
-<img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen4.jpg" alt="Settings page" />
+<img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen4.jpg" alt="Builds calendar page" />
 
 Categories page:
-<img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen5.jpg" alt="Settings page" />
+<img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen5.jpg" alt="Categories page" />
 
 Groups page:
-<img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen6.jpg" alt="Settings page" />
+<img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen6.jpg" alt="Groups page" />
 
 Edit group page:
-<img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen7.jpg" alt="Settings page" />
+<img src="https://raw.github.com/Ridiculous-Innovations/EnterpriseAppStore/master/_orig/screens/screen7.jpg" alt="Edit group page" />
 
 
 
