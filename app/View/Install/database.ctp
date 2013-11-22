@@ -21,6 +21,11 @@
 		<input type="text" name="db[database]" placeholder="corporate_appstore_db" value="<?= $db['database']; ?>" class="form-control" />
 	</div>
 	
+	<!--<div class="form-group">
+		<label><?= __('Install test tables'); ?></label>
+		<input type="checkbox" name="db[test]" value="1"<?= isset($db['test']) ? ' checked="checked"' : ''; ?> class="form-control" />
+	</div>-->
+	
 	<p>&nbsp;</p>
 	
 	<?php

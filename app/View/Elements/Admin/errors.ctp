@@ -22,7 +22,7 @@ if (!empty($errors)) {
 				break;
 		}
 		echo '<div class="alert alert-'.$alertType.' alert-dismissable">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+					<!--<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>-->';
 		foreach ($group as $message) {
 			echo '<p><i class="'.$icon.'"></i> '.$message.'</p>';
 		}

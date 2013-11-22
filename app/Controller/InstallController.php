@@ -4,6 +4,8 @@ App::uses('Controller', 'Controller');
 App::uses('Error', 'Lib/Errors');
 App::uses('Install', 'Lib/Install');
 App::uses('DBInstall', 'Lib/Install');
+App::uses('Folder', 'Utility');
+
 
 class InstallController extends Controller {
 	
@@ -44,47 +46,54 @@ class InstallController extends Controller {
 		    $data = $this->checkDatabase();
 	    }
 	    else if ($page == 4) {
+	    	$this->installFiles();
 		    $this->installDB();
 	    }
 	    if (!empty($data) && !$data['result']) {
-	    	Error::add('Please fix all the issuer marked in red before you can continue.', Error::TypeWarning);
+	    	Error::add('Please fix all the issues marked in red before you can continue.', Error::TypeWarning);
 	    }
 	    $this->set('data', $data);
 	    $this->set('siteName', 'Ridiculous Innovations - Enterprise AppStore');
 	    $this->set('debugMySQL', false);
 	    return true;
     }
+    
+    public function setVariables() {
+		$this->layout = 'install';
+	    $logoData = chunk_split(base64_encode(file_get_contents(APP.'Data'.DS.'Settings'.DS.'Images'.DS.'Logo')));
+	    $this->set('logoData', $logoData);
+    }
 
     public function index() {
+    	$this->setVariables();
     	$this->checkPage(0);
-		$this->layout = 'outside';
 	}
 	
     public function locked() {
+    	$this->setVariables();
 	    $this->set('siteName', 'Ridiculous Innovations - Enterprise AppStore');
 	    $this->set('debugMySQL', false);
-    	$this->layout = 'outside';
 	}
 	
     public function info() {
+    	$this->setVariables();
     	$this->checkPage(1);
-		$this->layout = 'outside';
 	}
 	
     public function permissions() {
+    	$this->setVariables();
     	$this->checkPage(2);
-		$this->layout = 'outside';
 	}
 	
     public function database() {
+    	$this->setVariables();
     	$this->checkPage(3);
-		$this->layout = 'outside';
 	}
 	
     public function success() {
+    	$this->setVariables();
     	$this->checkPage(4);
-		$this->layout = 'outside';
-		Error::add('Login to the system with username <strong>admin</strong> and password <strong>password</strong>!');
+		Error::add('Login to the system with username <strong>admin</strong> and password is <strong>password</strong>!');
 	}
 	
 	// Checks on page 1
@@ -92,27 +101,46 @@ class InstallController extends Controller {
 		$data = array();
 		$data['result'] = true;
 		$t = array();
+		$s = array();
 		
 		$ok = false;
 		
+		$mac = @preg_match('/Mac\ OS\ X/si', $_SERVER['HTTP_USER_AGENT']);
+		$ok = $mac;
+		$s[] = array(__('Mac OS'), $ok, 1, 'Mac OS is required for some of the resigning functionality.');
+		
+		$ok = Install::isShellMethod('python');
+		$s[] = array(__('Python'), $ok, 1, 'Python is required for the iOS functionality.');
+		
 		// Testing iOS resigning
-		$ok = @preg_match('/Mac\ OS\ X/si', $_SERVER['HTTP_USER_AGENT']);
+		$ok = $mac;
 		if ($ok) {
 			$ok = Install::isShellMethod('codesign');
+			if ($ok) {
+				$ok = Install::isShellMethod('python');
+			}		
 		}
 		$t[] = array(__('iOS resigning'), $ok, 1, 'To use iOS resigning locally, you need to be running this system on an Apple Mac machine with the latest XCode + it\'s command line tools.');
 		
 		// Testing Android resigning
+		$ok = Install::isShellMethod('java');
+		$s[] = array(__('Java'), $ok, 1, 'To use Android functionality, you need Java SE to be installed on this machine.');
+		if ($ok) {
+			$ok = Install::isShellMethod('jarsigner');
+		}
+		$t[] = array(__('Android resigning'), $ok, 1, 'To use Android resigning locally, you need Java SE to be installed on this machine.');
+		
 		$ok = Install::isShellMethod('jarsigner');
-		$t[] = array(__('Android resigning'), $ok, 1, 'To use Android resigning locally, you need Java SE installed on your machine.');
+		$s[] = array(__('jar Signer'), $ok, 1, 'jarsigner is required for the iOS functionality.');
 		
 		// Testing connection to S3 bucket
 		$ok = Install::isS3Available();
 		$t[] = array(__('Amazon S3 storage'), $ok, 1, 'To use S3 or SMS notifications internet connection needs to be available for the server.');
 		
 		// Testing Access to Twilio SMS gate
-		$t[] = array(__('SMS notifications (Twillio)'), $ok, 1, 'To use S3 or SMS notifications internet connection needs to be available for the server.');
+		//$t[] = array(__('SMS notifications (Twillio)'), $ok, 1, 'To use S3 or SMS notifications internet connection needs to be available for the server.');
 		
+		$data['software'] = $s;
 		$data['tests'] = $t;
 		return $data;
 	}
@@ -155,7 +183,6 @@ class InstallController extends Controller {
 		$data = array();
 		$data['result'] = true;
 		$data['tests'] = array();
-		
 		$dbOk = false;
 		if ($this->request->is('post')) {
 			$this->Session->write('Install.DBConfig', $this->request->data['db']);
@@ -202,6 +229,14 @@ class InstallController extends Controller {
 		$this->set('dbFileNotWritable', !Install::isFileWritable('Config/database.php'));
 		
 		return $data;
+	}
+	
+	// Install default files on page 4
+	protected function installFiles() {
+    	if (!WWW_ROOT.'Userfiles'.DS.'Settings'.DS.'Images'.DS.'Logo') {
+	    	$folder = new Folder(APP.'Data'.DS.'Settings');
+			$folder->copy(WWW_ROOT.'Userfiles'.DS.'Settings');
+    	}
 	}
 	
 	// Install db on page 4

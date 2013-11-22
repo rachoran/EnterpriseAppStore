@@ -5,6 +5,29 @@
 <table class="table table-striped table-bordered table-hover selector-table">
 	<thead>
 		<tr>
+			<th>Functionality</th>
+			<th width="10%" align="center">Result</th>
+		</tr>
+	</thead>
+	<tbody>
+		<? 
+		foreach ($data['software'] as $test) {
+			$icon = ($test[1] ? 'check' : 'exclamation-sign');
+			$color = ($test[1] ? '#85B200' : ((bool)$test[2] ? '#FF9326' : '#D90000'));
+		?>
+		<tr>
+			<td><i class="icon-info-sign"></i> &nbsp; <?= $test[0]; ?></td>
+			<td align="center"><strong style="color:<?= $color; ?>;"><i class="icon-<?= $icon; ?>"></i></strong></td>
+		</tr>
+		<?php } ?>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<table class="table table-striped table-bordered table-hover selector-table">
+	<thead>
+		<tr>
 			<th>Feature</th>
 			<th width="10%" align="center">Result</th>
 		</tr>

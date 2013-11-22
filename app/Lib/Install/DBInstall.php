@@ -134,8 +134,8 @@ class DATABASE_CONFIG {
 			}
 		}
 		if (empty($this->prefix)) {
-			$this->install('zztest_');
-			Error::add(__('Number of executed queries').': '.$this->queryCount, Error::TypeInfo);
+			//$this->install('zztest_');
+			//Error::add(__('Number of executed queries').': '.$this->queryCount, Error::TypeInfo);
 		}
 		return true;
 	}

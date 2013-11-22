@@ -47,7 +47,7 @@ if (!defined('ROOT')) {
  *
  */	
 if (!is_writable(dirname(dirname(__FILE__)).DS.'tmp')) {
-	require(dirname(dirname(__FILE__)).DS.'Dummy'.DS.'tmpLocked.php');
+	require(dirname(dirname(__FILE__)).DS.'Data'.DS.'tmp_locked.php');
 	exit();
 }
 
