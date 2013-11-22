@@ -107,6 +107,9 @@ class ExtractAndroid extends Extract {
 		$appContentPath = $tempPath.DS.'app'.DS;
 		// TODO: Put apktool or other tool back to the game
 		//$shellOut = passthru('../bin/apktool d -f '.$archiveFile.' '.$appContentPath);
+		//$shellOut = passthru('python ../bin/unpackapk.py');
+		//die($shellOut);
+		
 		$resContentPath = $appContentPath.'res'.DS;		
 		shell_exec('unzip '.$archiveFile.' -d '.$appContentPath.'');
 		
@@ -126,9 +129,15 @@ class ExtractAndroid extends Extract {
 		$arr['identifier'] = $xml['attributes']['PACKAGE'];
 		
 		// Getting other info
-		$arr['version'] = $xml['attributes']['ANDROID:VERSIONNAME'];
-		$arr['version-code'] = $xml['attributes']['ANDROID:VERSIONCODE'];
-		$arr['install-location'] = $xml['attributes']['ANDROID:INSTALLLOCATION'];
+		if (isset($xml['attributes']['ANDROID:VERSIONNAME'])) {
+			$arr['version'] = $xml['attributes']['ANDROID:VERSIONNAME'];
+		}
+		if (isset($xml['attributes']['ANDROID:VERSIONCODE'])) {
+			$arr['version-code'] = $xml['attributes']['ANDROID:VERSIONCODE'];
+		}
+		if (isset($xml['attributes']['ANDROID:INSTALLLOCATION'])) {
+			$arr['install-location'] = $xml['attributes']['ANDROID:INSTALLLOCATION'];
+		}
 		
 		// Application info
 		$temp = $this->getTag('APPLICATION', $xml);

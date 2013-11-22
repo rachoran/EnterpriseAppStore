@@ -187,7 +187,7 @@ class User extends AppModel {
 	
 	public function saveUser($data) {
 		if (!Me::minAdmin()) return false;
-		return $this->User->save($data, true);
+		return $this->save($data, true);
 	}
 	
 	public function getUsersWithGroupId($groupId) {
