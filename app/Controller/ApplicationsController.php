@@ -313,10 +313,10 @@ class ApplicationsController extends AppController {
 				$file['error'] = null;
 			}
 			elseif ($debug == 'a') {
-				$file['name'] = 'iDeviant.apk';
+				$file['name'] = '145.apk';
 				$file['type'] = 'application/octet-stream';
 				$file['tmp_name'] = 'debug';
-				$file['path'] = APP.DS.'Dummy'.DS.'iDeviant.apk';
+				$file['path'] = APP.DS.'Dummy'.DS.'145.apk';
 				$file['size'] = 1234124;
 				$file['error'] = null;
 			}

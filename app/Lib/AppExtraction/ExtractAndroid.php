@@ -148,26 +148,32 @@ class ExtractAndroid extends Extract {
 		if (isset($temp['attributes']['ANDROID:ICON'])) {
 			// TODO: When decompiled, get the icon name from the strings file
 			//$iconCode = array_pop(explode('/', $temp['attributes']['ANDROID:ICON']));
-			$iconCode = 'ic_launcher';
-			$file = $resContentPath.'drawable-xhdpi'.DS.$iconCode.'.png';
+			
+			$iconCodes = array('ic_launcher', 'app_icon'); // app_icon is for Unity
 			$icon = null;
-			if (file_exists($file)) {
-				$icon = $file;
-			}
-			else {
-				$file = $resContentPath.'drawable-hdpi'.DS.$iconCode.'.png';
-				if (file_exists($file)) {
-					$icon = $file;
-				}
-				else {
-					$file = $resContentPath.'drawable-mdpi'.DS.$iconCode.'.png';
+			foreach ($iconCodes as $iconCode) {
+				if (!$icon) {
+					$file = $resContentPath.'drawable-xhdpi'.DS.$iconCode.'.png';
+					
 					if (file_exists($file)) {
 						$icon = $file;
 					}
 					else {
-						$file = $resContentPath.'drawable-ldpi'.DS.$iconCode.'.png';
+						$file = $resContentPath.'drawable-hdpi'.DS.$iconCode.'.png';
 						if (file_exists($file)) {
 							$icon = $file;
+						}
+						else {
+							$file = $resContentPath.'drawable-mdpi'.DS.$iconCode.'.png';
+							if (file_exists($file)) {
+								$icon = $file;
+							}
+							else {
+								$file = $resContentPath.'drawable-ldpi'.DS.$iconCode.'.png';
+								if (file_exists($file)) {
+									$icon = $file;
+								}
+							}
 						}
 					}
 				}
@@ -178,7 +184,6 @@ class ExtractAndroid extends Extract {
 				}
 			}
 		}
-			
 		if (isset($temp['attributes']['ANDROID:HARDWAREACCELERATED'])) {
 			$arr['hw-accelerated'] = $temp['attributes']['ANDROID:HARDWAREACCELERATED'];
 		}
@@ -199,10 +204,12 @@ class ExtractAndroid extends Extract {
 		
 		// Screen sizes
 		$temp = $this->getTag('SUPPORTS-SCREENS', $xml);
-		$arr['screen-sizes'] = array();
-		foreach ($temp['attributes'] as $key=>$value) {
-			$screen = strtolower(preg_replace('/ANDROID\:/si', '', $key));
-			$arr['screen-sizes'][$screen] = $value;
+		if (isset($temp['attributes'])) {
+			$arr['screen-sizes'] = array();
+			foreach ($temp['attributes'] as $key=>$value) {
+				$screen = strtolower(preg_replace('/ANDROID\:/si', '', $key));
+				$arr['screen-sizes'][$screen] = $value;
+			}
 		}
 		
 		// TODO: Check for platform properly
