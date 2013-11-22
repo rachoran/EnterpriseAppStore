@@ -24,7 +24,7 @@ class Application extends AppModel {
     
     public $validate = array(
         'name' => array(
-            'rule'    => array('minLength', '8'),
+            'rule'    => array('minLength', '1'),
             'allowEmpty' => false,
         ),
         'url' => array(
@@ -32,7 +32,7 @@ class Application extends AppModel {
             'allowEmpty' => true,
         ),
         'identifier' => array(
-            'rule'    => array('minLength', '5'),
+            'rule'    => array('minLength', '3'),
             'message' => 'Minimum 5 characters long'
         ),
         'sort' => array(

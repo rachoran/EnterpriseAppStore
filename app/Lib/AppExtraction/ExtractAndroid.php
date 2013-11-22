@@ -104,7 +104,7 @@ class ExtractAndroid extends Extract {
 		$arr['size'] = filesize($archiveFile);
 		
 		// Un-archiving app
-		$appContentPath = $tempPath.DS.'app'.DS;
+		$appContentPath = $tempPath.'app'.DS;
 		// TODO: Put apktool or other tool back to the game
 		//$shellOut = passthru('../bin/apktool d -f '.$archiveFile.' '.$appContentPath);
 		//$shellOut = passthru('python ../bin/unpackapk.py');
@@ -116,11 +116,13 @@ class ExtractAndroid extends Extract {
 		// Getting manifest file
 		// TODO: Stop using AXMLPrinter2 as the manifest file should be already decompiled
 		//$manifest = file_get_contents($appContentPath.'AndroidManifest.xml');
-		$manifest = shell_exec('java -jar ../bin/AXMLPrinter2.jar '.$appContentPath.'AndroidManifest.xml > '.$appContentPath.'manifest.xml');
+		$manifest = passthru('java -jar ../bin/AXMLPrinter2.jar "'.$appContentPath.'AndroidManifest.xml" > "'.$appContentPath.'manifest.xml"');
+		//$manifest = passthru('which java');
 		//file_put_contents('./manifest.xml', $manifest);
 		$manifest = file_get_contents($appContentPath.'manifest.xml');
+		
 		if (empty($manifest)) {
-			$this->raiseError('Unable to process '.$this->file['name'].' due to a missing application manifest file.');
+			$this->raiseError('Unable to process '.$this->file['name'].' due to a missing or corrupted application manifest file.');
 			return false;
 		}
 		$xml = $this->xml2array($manifest);
@@ -202,6 +204,7 @@ class ExtractAndroid extends Extract {
 			$screen = strtolower(preg_replace('/ANDROID\:/si', '', $key));
 			$arr['screen-sizes'][$screen] = $value;
 		}
+		
 		// TODO: Check for platform properly
 		$arr['platform'] = 3;
 		
@@ -238,7 +241,7 @@ class ExtractAndroid extends Extract {
 		if (!isset($arr['name']) || empty($arr['name'])) {
 			$arr['name'] = (string)pathinfo($this->file['name'], PATHINFO_FILENAME);
 		}
-		
+				
 		// Adding the entire Manifest xml
 		//$arr['manifest'] = $xml;
 		
