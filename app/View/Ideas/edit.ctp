@@ -8,7 +8,7 @@ $this->Html->addCrumb('New idea', null);
 ?><div class="widget">
 	<div class="widget-content-white glossed">
 		<div class="padded">
-			<form action="<?php echo $this->Html->url(array("controller" => "ideas", "action" => "index")); ?>" method="post" role="form" class="form-horizontal">
+			<form action="<?php echo $this->Html->url(array('controller' => 'ideas', 'action' => 'edit')); ?>" method="post" role="form" class="form-horizontal">
 				<h3 class="form-title form-title-first"><i class="icon-comment"></i> Do you have an idea for improvement?</h3>
 				<div class="form-group">
 					<label class="col-md-4 control-label">Full Name</label>

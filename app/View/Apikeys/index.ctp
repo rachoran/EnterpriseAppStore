@@ -8,7 +8,7 @@ $this->Html->addCrumb('API Keys', null);
 	<div class="widget-content-white glossed">
 		<div class="padded">
 			<p>
-				<a href="<?php echo $this->Html->url(array('controller' => 'apikeys', 'action' => 'edit', 'new')); ?>" class="btn btn-primary pull-right new">Add key <i class="fa icon-plus"></i></a>
+				<a href="<?php echo $this->Html->url(array('controller' => 'apikeys', 'action' => 'edit', 'new')); ?>" class="btn btn-primary pull-right new">Create API key <i class="fa icon-plus"></i></a>
 			</p>
 			<table class="table table-striped table-bordered table-hover">
 				<thead>
