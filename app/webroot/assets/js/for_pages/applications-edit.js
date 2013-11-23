@@ -19,6 +19,7 @@ $('#binaryUpload').fileupload({
 			$('.nav.nav-tabs li, button.disabled').removeClass('disabled');
 			
 			$('#binaryUploadProgress .progress-bar').css('width', '100%');
+			$('#appName').prop('readonly', false);
 			
 			window.location.replace(env.baseUrl + 'applications/edit/' + data.result.data.id + '/');
 		}
@@ -74,6 +75,7 @@ function checkFields(val) {
 		$('#mainAppForm button.disabled').prop('disabled', false);
 		$('#binaryUploadWrapper, #applicationTypeWrapper').hide();
 		$('.nav.nav-tabs li, button.disabled').removeClass('disabled');
+		$('#appName').prop('readonly', false);
 	}
 }
 

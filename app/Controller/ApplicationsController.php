@@ -50,7 +50,7 @@ class ApplicationsController extends AppController {
 	public function download($id, $name) {
 		$app = $this->Application->getOne($id);
 		if ($app['Application']['id']) {
-			$this->Download->saveDownload($app['Application']['id'];
+			$this->Download->saveDownload($app['Application']['id']);
 			if ($name == 'install') {
 				$this->History->saveHistory($id, 'INS');
 			}
