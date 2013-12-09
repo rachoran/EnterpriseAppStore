@@ -1,6 +1,8 @@
 Enterprise App Store
 ==================
 
+We are looking for alpha testers!!!! HELP US DEBUG THE FEATUREAS AND FUNCTIONALITY!!!!
+
 To host iOS and Android apps (will be adding Windows 8 phone, desktop and tablet soon!). Please remember, this is a development version only!!!!!!
 
 
