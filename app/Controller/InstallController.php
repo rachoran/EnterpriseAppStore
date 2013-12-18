@@ -46,6 +46,12 @@ class InstallController extends Controller {
 		    $data = $this->checkDatabase();
 	    }
 	    else if ($page == 4) {
+	    	$configDir = APP.'Config'.DS;
+			$dbFile = $configDir.'database.php';
+			if (!file_exists($dbFile)) {
+				Error::add('Database configuration file doesn\'t exist yet.', Error::TypeError);
+				$this->redirect(array('controller' => 'install', 'action' => 'database'));
+			}
 	    	$this->installFiles();
 		    $this->installDB();
 	    }
@@ -185,6 +191,7 @@ class InstallController extends Controller {
 		$data['tests'] = array();
 		$dbOk = false;
 		if ($this->request->is('post')) {
+			if (empty($this->request->data['db']['host'])) $this->request->data['db']['host'] = 'localhost';
 			$this->Session->write('Install.DBConfig', $this->request->data['db']);
 			if (isset($this->request->data['go']) && (int)$this->request->data['go'] == 1) {
 				$this->redirect(array('controller' => 'install', 'action' => 'success'));
@@ -202,18 +209,34 @@ class InstallController extends Controller {
 					}
 				}
 				else {
-					DBInstall::createDatabaseConfigurationFile($this->request->data['db']);
-					App::uses('ConnectionManager', 'Model');
-					$db = ConnectionManager::getDataSource('default');
-					$tables = $db->listSources();
-					if (count($tables) > 0) {
-						Error::add('Database contains conflicting tables.', Error::TypeWarning);
-						//$dbOk = false;
+					$ok = true;
+					$configDir = APP.'Config'.DS;
+					$dbFile = $configDir.'database.php';
+					if (file_exists($dbFile)) {
+						if (!is_writable($dbFile)) {
+							 $ok = false;
+							 Error::add(__("Can't save database configuration into: \"").$dbFile.'". '.__('Please follow the instructions on the bottom of this page.'), Error::TypeError);
+						}
 					}
-					else {
-						Error::add('Database configuration works fine.');
+					else if (!is_writable($configDir)) {
+						 $ok = false;
+						 Error::add(__("Can't save database configuration into: \"").$configDir.'". '.__('Please follow the instructions on the bottom of this page.'), Error::TypeError);
+					}
+					if ($ok) {
+						DBInstall::createDatabaseConfigurationFile($this->request->data['db']);
+						App::uses('ConnectionManager', 'Model');
+						$db = ConnectionManager::getDataSource('default');
+						$tables = $db->listSources();
+						if (count($tables) > 0) {
+							Error::add('Database contains conflicting tables.', Error::TypeWarning);
+							//$dbOk = false;
+						}
+						else {
+							Error::add('Database configuration works fine.', Error::TypeOk);
+						}
 					}
 				}
+				
 			}
 		}
 		$this->set('dbOk', $dbOk);

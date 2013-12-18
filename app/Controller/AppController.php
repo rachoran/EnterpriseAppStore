@@ -55,7 +55,7 @@ class AppController extends Controller {
 		
 		// Installation check
 		if (!Install::isInstallLocked()) {
-			$this->redirect('/install');
+			$this->redirect(array('controller' => 'install', 'action' => 'index'));
 		}
 		
 		// Authentication - set cookie options
