@@ -63,7 +63,7 @@ if (isset($ajaxFileUpload)) {
 <title><?= $siteName; ?>: <?= $title_for_layout; ?></title>
 
 <!-- Begin google analytics -->
-<?php echo $this->element('Admin/ga'); ?>
+<?= $this->element('Admin/ga'); ?>
 <!-- End google analytics -->
 
 </head>
@@ -101,7 +101,7 @@ if (isset($ajaxFileUpload)) {
 					?>
 					<div class="main-content">
 						<!-- Begin errors -->
-						<?php echo $this->element('Admin/errors'); ?>
+						<?= $this->element('Admin/errors'); ?>
 						<!-- End errors -->
 						
 						<!-- Begin content -->

@@ -10,7 +10,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<? 
+		<?php
 		foreach ($data['software'] as $test) {
 			$icon = ($test[1] ? 'check' : 'exclamation-sign');
 			$color = ($test[1] ? '#85B200' : ((bool)$test[2] ? '#FF9326' : '#D90000'));
@@ -33,7 +33,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<? 
+		<?php
 		foreach ($data['tests'] as $test) {
 			$icon = ($test[1] ? 'check' : 'exclamation-sign');
 			$color = ($test[1] ? '#85B200' : ((bool)$test[2] ? '#FF9326' : '#D90000'));
