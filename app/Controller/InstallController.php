@@ -49,7 +49,7 @@ class InstallController extends Controller {
 	    	$configDir = APP.'Config'.DS;
 			$dbFile = $configDir.'database.php';
 			if (!file_exists($dbFile)) {
-				Error::add('Database configuration file doesn\'t exist yet.', Error::TypeError);
+				Error::add('Database configuration file doesn\'t exist and needs to created manually.', Error::TypeError);
 				$this->redirect(array('controller' => 'install', 'action' => 'database'));
 			}
 	    	$this->installFiles();
@@ -209,34 +209,8 @@ class InstallController extends Controller {
 					}
 				}
 				else {
-					$ok = true;
-					$configDir = APP.'Config'.DS;
-					$dbFile = $configDir.'database.php';
-					if (file_exists($dbFile)) {
-						if (!is_writable($dbFile)) {
-							 $ok = false;
-							 Error::add(__("Can't save database configuration into: \"").$dbFile.'". '.__('Please follow the instructions on the bottom of this page.'), Error::TypeError);
-						}
-					}
-					else if (!is_writable($configDir)) {
-						 $ok = false;
-						 Error::add(__("Can't save database configuration into: \"").$configDir.'". '.__('Please follow the instructions on the bottom of this page.'), Error::TypeError);
-					}
-					if ($ok) {
-						DBInstall::createDatabaseConfigurationFile($this->request->data['db']);
-						App::uses('ConnectionManager', 'Model');
-						$db = ConnectionManager::getDataSource('default');
-						$tables = $db->listSources();
-						if (count($tables) > 0) {
-							Error::add('Database contains conflicting tables.', Error::TypeWarning);
-							//$dbOk = false;
-						}
-						else {
-							Error::add('Database configuration works fine.', Error::TypeOk);
-						}
-					}
+					Error::add('Database connection details are OK.', Error::TypeOk);
 				}
-				
 			}
 		}
 		$this->set('dbOk', $dbOk);
@@ -262,19 +236,99 @@ class InstallController extends Controller {
     	}
 	}
 	
+	private function isDbOk(&$exception=null) {
+		try {
+			App::uses('ConnectionManager', 'Model');
+			$db = ConnectionManager::getDataSource('default');
+			return true;
+		}
+		catch (Exception $e) {
+			$error = $e;
+			return false;
+		}
+	}
+	
+	private function createConfigFile() {
+		if (file_exists($dbFile)) {
+			if (!is_writable($dbFile)) {
+				 $dbOk = false;
+				 Error::add(__("Can't save database configuration into: \"").$dbFile.'". '.__('Please follow the instructions on the bottom of this page.'), Error::TypeInfo);
+			}
+			else {
+				try {
+					App::uses('ConnectionManager', 'Model');
+					$db = ConnectionManager::getDataSource('default');
+				}
+				catch (Exception $e) {
+					Error::add('Database configuration file already exists but the configuration is not correct.', Error::TypeInfo);
+					if ($e->getMessage() == 'Database connection "Mysql" is missing, or could not be created.') {
+						Error::add(__('You might want check: ').'<a href="http://stackoverflow.com/a/1318934/182551" target="_blank">StackOverflow.com Sockets issue</a>', Error::TypeInfo);
+						if (is_writable($dbFile)) {
+							Error::add('The configuration file is writable by the system and will be over-written if modified manually.', Error::TypeInfo);
+						}
+					}
+					$dbOk = false;
+				}
+			}
+		}
+		elseif (!is_writable($configDir)) {
+			 $dbOk = false;
+			 Error::add(__("Can't save database configuration into: \"").$configDir.'". '.__('Please follow the instructions on the bottom of this page.'), Error::TypeWarning);
+		}
+		else if (is_writable($configDir) || is_writable($dbFile)) {
+			DBInstall::createDatabaseConfigurationFile($this->request->data['db']);
+		}
+	}
+	
 	// Install db on page 4
 	protected function installDB() {
-		App::uses('ConnectionManager', 'Model');
-		$db = ConnectionManager::getDataSource('default');
-		$tables = $db->listSources();
-		$install = new DBInstall();
-		$ok = $install->install();
-		if ($ok) {
-			Error::add('Database has been installed correctly.');
-			Install::lockInstall();
+		$dbOk = true;
+		
+		$configDir = APP.'Config'.DS;
+		$dbFile = $configDir.'database.php';
+		
+		$this->isDbOk($e);
+		if (!$e) {
+			$this->createConfigFile();
 		}
+		
 		else {
-			Error::add('There was a problem installing the database.', Error::TypeError);
+			try {
+				App::uses('ConnectionManager', 'Model');
+				$db = ConnectionManager::getDataSource('default');
+				$tables = $db->listSources();
+				if (count($tables) > 0) {
+					Error::add('Database contains conflicting tables.', Error::TypeWarning);
+					$dbOk = false;
+				}
+			}
+			catch (Exception $e) {
+				Error::add('There was a problem. ('.$e->getMessage().')', Error::TypeError);
+				if ($e->getMessage() == 'Database connection "Mysql" is missing, or could not be created.') {
+					Error::add(__('You might want check: ').'<a href="http://stackoverflow.com/a/1318934/182551" target="_blank">StackOverflow.com Sockets issue</a>', Error::TypeInfo);
+					if (is_writable($dbFile)) {
+						Error::add('The configuration file is writable by the system and will be over-written if modified manually.', Error::TypeInfo);
+					}
+				}
+				$dbOk = false;
+			}
+			if ($dbOk) {
+				App::uses('ConnectionManager', 'Model');
+				$db = ConnectionManager::getDataSource('default');
+				$tables = $db->listSources();
+				$install = new DBInstall();
+				$ok = $install->install();
+				if ($ok) {
+					Error::add('Database has been installed correctly.');
+					Install::lockInstall();
+				}
+				else {
+					Error::add('There was a problem installing the database.', Error::TypeError);
+				}
+			}
+			else {
+				$this->redirect(array('controller' => 'install', 'action' => 'database'));
+			}
 		}
 	}
 	

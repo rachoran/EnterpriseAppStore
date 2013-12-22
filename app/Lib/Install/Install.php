@@ -38,10 +38,14 @@ class Install {
 	}
 	
 	public static function databaseConfiguration() {
-		if (file_exists(APP.'Config'.DS.'database.php')) {
-			App::uses('ConnectionManager', 'Model');
-			$dataSource = ConnectionManager::getDataSource('default');
-			return $dataSource->config;
+		$configFile = APP.'Config'.DS.'database.php';
+		if (file_exists($configFile)) {
+			//App::uses('ConnectionManager', 'Model');
+			//$dataSource = ConnectionManager::getDataSource('default');
+			//return $dataSource->config;
+			require_once($configFile);
+			$dbConn = new DATABASE_CONFIG();
+			return $dbConn->default;
 		}
 		else return null;
 	}

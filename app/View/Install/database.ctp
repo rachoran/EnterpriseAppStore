@@ -45,6 +45,7 @@ class DATABASE_CONFIG {
 		'login' => '<?= $db['login']; ?>',
 		'password' => '<?= $db['password']; ?>',
 		'database' => '<?= $db['database']; ?>',
+		//'unix_socket' => '/var/mysql/mysql.sock', // Might be needed if the mysql socket is not set properly
 	);
 	
 }</textarea>
